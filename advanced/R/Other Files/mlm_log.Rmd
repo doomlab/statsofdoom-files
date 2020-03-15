@@ -1,0 +1,223 @@
+---
+title: "MLM Logistic Regression"
+author: "Erin M. Buchanan"
+date: "9/3/2019"
+output: slidy_presentation
+---
+
+```{r setup}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+library(RCurl)
+library(lme4)
+
+##graph clean up code
+cleanup = theme(panel.grid.major = element_blank(), 
+              panel.grid.minor = element_blank(), 
+              panel.background = element_blank(), 
+              axis.line = element_line(colour = "black"), 
+              legend.key = element_rect(fill = "white"),
+              text = element_text(size = 15))
+```
+
+## About the Video
+
+- This video covers multilevel logistic regression, assuming you understand a few things:
+  - You know a little bit about logistic regression.
+  - You know a little bit about multilevel models.
+  - You know a good bit about R. 
+  
+## About the Video
+
+- If those aren't true, try checking out:
+  - MLM Videos: I have a few lectures, workshop, and examples: https://www.youtube.com/channel/UCMdihazndR0f9XBoSXWqnYg/search?view_as=subscriber&query=multilevel
+  - Logistic Videos: Lectures and examples: https://www.youtube.com/channel/UCMdihazndR0f9XBoSXWqnYg/search?view_as=subscriber&query=logistic
+  - Learn R: See week 1 software overview: http://statstools.com/learn/advanced-statistics/
+
+## About the Data
+
+- We are going to use data from a project that's currently under review about reporting rates of outliers.
+- You can find it and the preprint linked to our Open Science page: https://osf.io/52mqw/.
+
+## Load the Data
+
+```{r}
+data_url <- getURL("https://raw.githubusercontent.com/doomlab/Outliers/master/paper/outliers%20complete.csv")
+master <- read.csv(text = data_url)
+names(master)
+```
+
+## General Steps
+
+- Data screening
+  - Accuracy
+  - Missing
+  - Outliers*
+  - Assumptions:
+    - Independence 
+    - Multicollinearity
+    - DV Ratios
+
+## Data Screening
+
+- Accuracy + missing data 
+- Outliers?
+
+```{r}
+##clean up the mention column 
+master$mention.outliers = factor(master$mention.outliers,
+                      levels = c("no", "yes"),
+                      labels = c("No", "Yes"))
+
+summary(master$mention.outliers)
+```
+
+## Assumptions
+
+- Multicollinearity
+- DV Ratios
+
+```{r}
+summary(master$mention.outliers)
+
+table(master$Type, master$mention.outliers)
+
+table(master$time.pulled, master$mention.outliers)
+```
+
+## Assumptions
+
+- Independence: in this dataset we have both `Journal` and `Article` as structured variables. 
+- We can control for the non-independence by using a multilevel model. 
+
+## Visualize the Data
+
+```{r}
+##create a data frame of the percentages by time and type
+outsummary = table(master$mention.outliers, master$time.pulled, master$Type)
+outsummary = as.data.frame(outsummary)
+colnames(outsummary) = c("mention.outliers", "time.pulled", "Type", "Freq")
+
+outpercent = as.data.frame(group_by(outsummary, time.pulled, Type) %>%
+  mutate(percent = Freq/sum(Freq)*100))
+
+outpercent
+```
+
+## Visualize the Data
+
+```{r}
+#look at just outliers
+graphdata = subset(outpercent, mention.outliers == "Yes")
+
+#calculate CIs to add to graph
+graphdata$sample = as.data.frame(table(master$time.pulled, master$Type))$Freq
+graphdata$SE = sqrt(graphdata$percent*(100-graphdata$percent)/graphdata$sample)
+
+#make the ggplot
+dotplot = ggplot(graphdata, aes(Type, percent, color = time.pulled))
+dotplot = dotplot +
+  geom_pointrange(aes(ymin=percent-1.96*SE, ymax=percent+1.96*SE)) + 
+  xlab("Field of Journal") +
+  ylab("Percent of Outlier Mentions") + 
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_color_manual(name = "Year", 
+                     values = c("black", "gray")) + 
+  coord_cartesian(ylim = c(0,75)) + 
+  cleanup
+
+dotplot
+```
+
+## MLM Step 1 
+
+- A completely null model, no effects or random effects 
+
+```{r}
+m1 <- glm(mention.outliers ~ 1,
+          family = binomial(link="logit"),
+          data = master)
+
+summary(m1)
+```
+
+## MLM Step 2
+
+- Switch to `glmer`, add random intercept(s) 
+
+```{r}
+m2 <- glmer(mention.outliers ~ 1 + (1 | Journal), 
+            data = master, 
+            family = binomial(link="logit"),
+            control = glmerControl(optimizer = "bobyqa"),
+            nAGQ = 0)
+
+summary(m2)
+```
+
+## MLM Step 2.1
+
+- Add a second random intercept
+
+```{r}
+m2.1 <- glmer(mention.outliers ~ 1 + (1 | Journal) + (1 | article), 
+            data = master, 
+            family = binomial(link="logit"),
+            control = glmerControl(optimizer = "bobyqa"),
+            nAGQ = 0)
+
+summary(m2.1)
+```
+
+## MLM Comparison
+
+```{r}
+m1$aic
+AIC(logLik(m2))
+AIC(logLik(m2.1))
+```
+
+## MLM Step 3 
+
+- Add fixed effects
+
+```{r}
+m3 <- glmer(mention.outliers ~ year + (1 | Journal) + (1 | article),
+            data = master, 
+            family = binomial(link="logit"),
+            control = glmerControl(optimizer = "bobyqa"),
+            nAGQ = 0)
+
+summary(m3)
+
+AIC(logLik(m2.1))
+AIC(logLik(m3))
+```
+
+## MLM Step 4
+
+- Add random slopes (if you want!)
+
+```{r}
+m4 <- glmer(mention.outliers ~ year + (year | Journal) + (1 | article),
+            data = master, 
+            family = binomial(link="logit"),
+            control = glmerControl(optimizer = "bobyqa"),
+            nAGQ = 0)
+
+summary(m4)
+
+AIC(logLik(m3))
+AIC(logLik(m4))
+```
+
+## Why not?
+
+```{r}
+dotplot
+```
+
+## Thanks for watching!
+
+- Check out these materials: https://osf.io/afqp9/ -> Advanced Stats -> R -> Other Files 

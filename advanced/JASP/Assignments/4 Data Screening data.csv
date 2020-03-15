@@ -1,0 +1,39 @@
+Gender,Information,likeability,externalatt,interalatt,ovcompt,selfesteem,negmood
+male,info poor,96,7,8,15,2.839420986,2
+male,info rich,88,6,6,12,5.69468379,3
+male,info rich,78,6,5,11,2.367363675,2
+female,info rich,76,9,8,17,9.313225746,2
+female,info rich,90,8,7,15,2.839420986,6
+male,info poor,96,5,7,12,2.158924997,4
+male,info rich,88,7,5, ,2.839420986,2
+female,info rich,68,7,8,15,4.411435079,6
+male,info poor,80,8,9,17,1.628894627,11
+male,info rich,84,8,8,16,4.806828389,2
+female,info rich,94,8,7,15,2.839420986,3
+female,info poor,0,7,6,13,9.313225746,6
+female,info poor,86,6,5,11,4.806828389,3
+female,info poor,70,7,7,14,4.045557736,2
+ ,info rich,68,7,7,14,4.806828389,7
+male,info poor,88,8,7,15,5.69468379,2
+female,info poor,76,8,7,15,1.967151357,12
+female,info poor,100,8,8,16,0.904382075,2
+male,info rich,90,7,6,13,1.790847697, 
+ ,info poor,80,8,3,11,1.21899442,4
+male,info rich,52,8,8,16,4.045557736,2
+male,info poor,96,7,4,11,6.191736422,4
+male,info poor,94,5,8,13,6.191736422,2
+female,info rich,78,8,8,16,4.806828389,2
+male,info poor,92,8,6,14,7.304631415,7
+female,info poor,64,5,6,11,1.343916379,7
+female,info poor,78,8,8,16,3.707221314,3
+female,info rich,68,7,6,13,1.104622125,2
+male,info rich,78,8,8,16,0.904382075,2
+female,info rich,58,6,7,13,2.839420986,9
+female,info poor,80,9,9,18,6.191736422,2
+female,info rich,92,8,8,16,2.158924997,7
+male,info poor,96,7,5,12,0.389416118,6
+male,info rich,94,7,4,11,4.045557736,2
+female,info poor,90,8,6,14,3.707221314,8
+ ,info rich,82,7,7,14,1.628894627,5
+male,info rich,74,9,8,17,0.904382075,6
+female,info rich,86,7,7,14,7.3,2

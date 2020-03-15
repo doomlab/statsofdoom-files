@@ -1,0 +1,172 @@
+Permutation Tests
+========================================================
+author: Dr. Erin M. Buchanan
+date: 05/26/2017
+autosize: true
+font-family: 'Arial'
+autosize: true
+
+Background Information
+========================================================
+
+Information taken from Howell's website covering permutation tests.
+http://www.uvm.edu/~dhowell/StatPages/Permutation%20Anova/PermTestsAnova.html
+
+- Random Selection and Assignment 
+- Assumptions
+- Null Hypothesis
+
+Random Selection and Assignment
+========================================================
+- Random Sampling 
+  - Drawing randomly from our intended population
+  - Very important for NHST, but often brushed aside
+  - For permutation tests, no concern about populations, thus, who cares?
+  - Very different thinking than NHST
+- Random Assignment
+  - Both types of testing should use random assignment when possible
+  - Rules out other interpretations
+
+Assumptions
+========================================================
+- Normality and Homogeneity/scedasticity
+  - We assume that our populations are normal and homogeneous in NHST
+  - Or at least that the CLT will help with sampling distributions
+  - But what if we don't assume there's a population at all?
+- Parameter estimation
+  - Goal of NHST is to estimate parameters and test if they are different
+  - The goal of permutation tests is to test if effects are different 
+
+Null Hypotheses
+========================================================
+- Traditional NHST
+  - Two groups means will come from the same population, and thus, have the same mean. 
+  - But I thought we said we don't care about populations?
+- Permutation test
+  - "The null hypothesis, no matter what test statistic is used, is that there is no differential effect of the treatments for any of the subjects." (Edgington, 1986, p. 531)
+  - We can still use the frankenstein reject-this to accept-that significance testing ideas.
+
+So how does it work?
+========================================================  
+- Basic logic
+  - Real data tested with levels/conditions
+  - Data are randomized (randomly shuffled) 
+  - Randomized data tested
+  - How often does our randomized data statistic exceed the real data statistic? 
+  - Notice we do **not** compare our data to some theorized null distribution
+  
+An example
+========================================================
+- Faculty evaluations
+  - I have taught both with SPSS and R.
+  - Is there a difference in my faculty evaluation based on program?
+  - Please note, I cheated a bit (people dislike stats either way). 
+
+Assumptions
+========================================================
+- Assumptions?
+  - Is there any reason to believe in a population?
+  - How homogeneous and/or normal is this data anyway?
+
+Assumptions
+========================================================
+- Means
+```{r}
+permdata = read.csv("perm data.csv")
+round(tapply(permdata$rating, permdata$class, mean), 2)
+```
+
+- Standard Deviations
+```{r}
+round(tapply(permdata$rating, permdata$class, sd), 2)
+```
+
+Assumptions
+========================================================
+- R Distribution
+
+```{r}
+hist(permdata[permdata$class == "r", "rating"])
+```
+
+Assumptions
+========================================================
+- SPSS Distribution
+
+```{r}
+hist(permdata[permdata$class == "spss", "rating"])
+```
+
+Traditional NHST
+========================================================
+- Independent t-Test
+```{r}
+t.test(permdata$rating ~ permdata$class, 
+       var.equal = T,
+       paired = F)
+```
+
+Permutation Test
+========================================================
+- Independent t-Test using lmp()
+  - Perm options: Exact, Prob, SPR
+```{r}
+library(lmPerm)
+output = lmp(permdata$rating ~ permdata$class, 
+    perm = "Exact", 
+    seqs = F)
+summary(output)
+```
+
+Permutation Test
+========================================================
+- Independent t-Test using aovp()
+```{r}
+output = aovp(permdata$rating ~ permdata$class, 
+    perm = "Exact",
+    seqs = F)
+summary(output)
+```
+
+Traditional NHST
+========================================================
+- Two-Way ANOVA
+Means:
+```{r}
+round(tapply(permdata$rating, list(permdata$class, permdata$student), mean), 2)
+```
+Standard Deviations:
+```{r}
+round(tapply(permdata$rating, list(permdata$class, permdata$student), sd), 2)
+```
+
+Traditional NHST
+========================================================
+- Two-Way ANOVA
+```{r}
+library(ez)
+options(scipen = 999)
+permdata$partno = 1:nrow(permdata)
+ezANOVA(data = permdata,
+        wid = partno,
+        dv = rating,
+        between = .(class,student),
+        type = 3,
+        detailed = T)
+```
+
+Permutation Test
+========================================================
+- Two-Way ANOVA
+```{r}
+output = aovp(permdata$rating ~ permdata$class*permdata$student,
+              perm = "Exact", 
+              seqs = F)
+summary(output)
+```
+
+Summary
+========================================================
+- A difference in focus
+  - Calculation of population versus understanding your sample
+- Remember randomization changes each time

@@ -1,0 +1,1001 @@
+﻿region,marital,ed,retire,gender,tollfree,equip,callcard,wireless,multline,voice,pager,internet,callid,callwait,forward,confer,ebill,custcat,churn
+Zone 2,Married,College degree,No,Male,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,Basic service,Yes
+Zone 3,Married,Post-undergraduate degree,No,Male,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,Yes
+Zone 3,Married,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,No,Yes,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 2,Married,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,Yes,No,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,Plus service,No
+Zone 3,Married,High school degree,No,Female,No,No,Yes,No,Yes,No,No,Yes,No,Yes,No,No,Yes,E-service,Yes
+Zone 2,Unmarried,High school degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Married,College degree,No,Male,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Did not complete high school,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Unmarried,College degree,No,Female,No,Yes,No,No,No,No,Yes,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 3,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,High school degree,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Married,College degree,No,Female,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 2,Unmarried,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Married,Post-undergraduate degree,No,Male,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,No,E-service,No
+Zone 3,Unmarried,High school degree,No,Male,Yes,Yes,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,High school degree,No,Female,Yes,No,No,No,No,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Married,College degree,No,Male,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Unmarried,Some college,No,Female,No,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,No,No,No,E-service,Yes
+Zone 1,Married,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,Basic service,No
+Zone 3,Unmarried,Post-undergraduate degree,No,Female,No,Yes,Yes,Yes,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Married,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Total service,No
+Zone 3,Married,Did not complete high school,No,Male,No,No,No,No,Yes,No,No,No,Yes,No,Yes,No,No,Plus service,No
+Zone 1,Married,High school degree,No,Female,No,No,No,No,No,No,No,No,Yes,No,No,No,No,Basic service,No
+Zone 2,Married,College degree,No,Female,No,Yes,No,No,Yes,No,No,Yes,No,No,No,Yes,Yes,E-service,No
+Zone 1,Married,Did not complete high school,No,Female,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 1,Married,Post-undergraduate degree,No,Male,Yes,No,Yes,Yes,Yes,Yes,No,Yes,No,No,Yes,Yes,Yes,Total service,No
+Zone 1,Married,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Post-undergraduate degree,No,Male,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,No,E-service,No
+Zone 2,Married,Some college,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Married,College degree,No,Male,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 2,Unmarried,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Total service,No
+Zone 1,Married,High school degree,No,Male,Yes,No,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Did not complete high school,No,Female,Yes,No,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 2,Unmarried,High school degree,Yes,Female,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,High school degree,No,Male,No,No,No,No,No,No,No,No,Yes,No,No,No,No,Basic service,No
+Zone 1,Married,College degree,No,Male,No,Yes,No,Yes,Yes,Yes,Yes,Yes,No,No,No,Yes,Yes,Total service,Yes
+Zone 1,Married,College degree,No,Female,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,No,Yes,No,Plus service,No
+Zone 1,Married,College degree,No,Male,No,Yes,Yes,No,Yes,Yes,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 1,Married,College degree,No,Male,Yes,No,Yes,No,Yes,No,No,Yes,No,Yes,No,No,Yes,E-service,No
+Zone 3,Married,College degree,No,Male,No,Yes,Yes,Yes,Yes,No,Yes,Yes,No,Yes,No,Yes,Yes,Total service,Yes
+Zone 3,Married,High school degree,No,Female,No,Yes,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 1,Unmarried,High school degree,No,Female,Yes,No,Yes,Yes,No,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Plus service,Yes
+Zone 2,Married,High school degree,No,Male,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Basic service,Yes
+Zone 1,Married,High school degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 3,Unmarried,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 1,Married,High school degree,No,Male,Yes,No,No,No,No,No,No,No,No,Yes,No,No,No,Basic service,No
+Zone 1,Unmarried,Some college,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,No,No,No,Yes,Basic service,No
+Zone 2,Married,High school degree,No,Female,Yes,Yes,No,No,No,No,Yes,Yes,Yes,No,No,Yes,No,Basic service,Yes
+Zone 3,Unmarried,Some college,No,Female,No,No,No,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Married,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,High school degree,No,Female,Yes,No,Yes,Yes,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,College degree,No,Female,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 2,Married,High school degree,No,Female,Yes,No,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 2,Married,High school degree,No,Female,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 3,Unmarried,High school degree,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Married,College degree,No,Female,No,Yes,Yes,No,Yes,No,Yes,Yes,Yes,No,No,Yes,No,Total service,No
+Zone 2,Unmarried,High school degree,No,Male,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Married,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,Some college,No,Female,Yes,No,No,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Did not complete high school,Yes,Male,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,Some college,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,College degree,No,Female,No,Yes,Yes,Yes,No,No,No,Yes,Yes,No,No,Yes,Yes,Basic service,Yes
+Zone 1,Married,High school degree,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,College degree,No,Female,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 1,Unmarried,Some college,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,Post-undergraduate degree,No,Female,No,Yes,No,Yes,Yes,Yes,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 2,Married,High school degree,No,Male,Yes,No,Yes,Yes,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,High school degree,No,Male,No,Yes,No,No,No,No,Yes,Yes,No,No,No,No,Yes,Basic service,No
+Zone 1,Married,Some college,No,Male,No,No,No,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 2,Unmarried,High school degree,Yes,Male,No,No,No,No,No,No,No,No,No,No,No,Yes,No,Basic service,No
+Zone 1,Unmarried,Did not complete high school,No,Female,Yes,No,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Married,Post-undergraduate degree,No,Female,Yes,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,No,Yes,No,No,No,No,No,No,No,No,No,Yes,No,Basic service,Yes
+Zone 3,Married,High school degree,No,Male,Yes,No,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,Yes
+Zone 2,Unmarried,Some college,No,Female,Yes,No,Yes,No,No,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,College degree,No,Female,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,No,E-service,No
+Zone 2,Married,High school degree,No,Male,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,No
+Zone 1,Unmarried,Some college,No,Male,No,Yes,No,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Married,College degree,No,Male,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,Yes,Total service,Yes
+Zone 2,Unmarried,Post-undergraduate degree,No,Female,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,College degree,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,No,No,Plus service,No
+Zone 3,Married,Post-undergraduate degree,No,Male,No,Yes,No,No,Yes,No,Yes,Yes,No,No,No,No,Yes,E-service,No
+Zone 2,Unmarried,College degree,No,Female,Yes,No,No,No,No,No,No,No,No,Yes,No,No,No,Basic service,No
+Zone 3,Married,Post-undergraduate degree,No,Female,No,Yes,Yes,Yes,Yes,Yes,No,Yes,No,No,No,Yes,Yes,E-service,No
+Zone 3,Unmarried,Post-undergraduate degree,No,Female,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Married,High school degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,Yes
+Zone 2,Unmarried,Post-undergraduate degree,No,Male,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,No,No,Yes,Total service,Yes
+Zone 1,Married,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,Did not complete high school,No,Female,Yes,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,Yes
+Zone 2,Married,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,Plus service,Yes
+Zone 3,Unmarried,High school degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,Yes,No,No,No,E-service,No
+Zone 1,Unmarried,Some college,No,Male,No,Yes,Yes,No,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Married,Some college,No,Female,No,Yes,Yes,No,Yes,No,No,No,Yes,No,Yes,Yes,Yes,Plus service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 1,Married,College degree,No,Female,No,Yes,No,No,Yes,No,Yes,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 2,Unmarried,Some college,No,Female,No,No,No,No,Yes,No,No,No,Yes,No,No,Yes,Yes,E-service,No
+Zone 2,Unmarried,Some college,No,Female,Yes,No,No,Yes,Yes,No,No,No,No,No,Yes,Yes,Yes,E-service,Yes
+Zone 1,Unmarried,High school degree,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,Some college,No,Female,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 1,Unmarried,College degree,No,Male,No,No,No,No,No,Yes,No,Yes,No,No,No,No,Yes,Basic service,No
+Zone 2,Married,High school degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 3,Married,College degree,No,Female,No,No,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 2,Married,College degree,No,Female,Yes,Yes,No,No,Yes,No,No,No,No,No,No,No,No,E-service,Yes
+Zone 2,Unmarried,Did not complete high school,No,Female,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,Basic service,No
+Zone 2,Unmarried,College degree,No,Male,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 1,Unmarried,High school degree,No,Female,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,Some college,No,Female,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,High school degree,No,Female,No,No,No,No,No,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,Yes,Yes,Yes,No,No,No,No,Yes,No,No,Yes,No,No,Basic service,Yes
+Zone 2,Unmarried,High school degree,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,High school degree,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,Did not complete high school,No,Male,Yes,No,No,No,No,No,No,No,No,No,No,Yes,No,Basic service,No
+Zone 1,Married,Post-undergraduate degree,No,Male,No,Yes,No,Yes,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 3,Married,High school degree,No,Male,No,No,No,No,No,No,No,Yes,No,No,Yes,No,Yes,Basic service,Yes
+Zone 2,Unmarried,High school degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 3,Unmarried,High school degree,No,Female,No,Yes,Yes,Yes,No,Yes,No,Yes,Yes,No,No,Yes,Yes,Total service,No
+Zone 2,Married,College degree,No,Male,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 3,Married,Some college,No,Female,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,No,E-service,Yes
+Zone 2,Married,Did not complete high school,No,Female,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Married,Did not complete high school,No,Male,Yes,No,Yes,Yes,Yes,No,No,No,No,No,Yes,Yes,No,Plus service,Yes
+Zone 2,Married,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 1,Married,High school degree,No,Male,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Married,Post-undergraduate degree,No,Female,No,Yes,Yes,No,Yes,Yes,No,Yes,No,No,Yes,No,Yes,E-service,Yes
+Zone 2,Unmarried,Post-undergraduate degree,No,Male,Yes,Yes,Yes,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Female,No,No,No,No,No,Yes,No,Yes,No,No,No,No,Yes,Basic service,No
+Zone 2,Unmarried,College degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,Post-undergraduate degree,No,Male,No,No,Yes,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,High school degree,No,Female,Yes,Yes,Yes,No,Yes,No,Yes,No,No,Yes,Yes,No,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,Post-undergraduate degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Married,High school degree,No,Male,Yes,No,Yes,No,Yes,No,No,No,No,Yes,No,Yes,No,Plus service,No
+Zone 1,Married,College degree,No,Female,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Married,Did not complete high school,Yes,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Unmarried,Did not complete high school,No,Female,Yes,Yes,Yes,Yes,No,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,Post-undergraduate degree,No,Female,Yes,Yes,Yes,Yes,No,No,No,Yes,No,No,Yes,Yes,Yes,Basic service,No
+Zone 2,Married,Post-undergraduate degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Married,Some college,No,Female,No,Yes,No,No,Yes,No,No,Yes,Yes,No,Yes,No,No,E-service,Yes
+Zone 3,Married,High school degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,Yes,No,E-service,No
+Zone 1,Unmarried,High school degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Married,High school degree,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Unmarried,College degree,No,Female,Yes,Yes,Yes,No,Yes,No,No,Yes,Yes,Yes,No,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Total service,No
+Zone 3,Unmarried,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,Yes,No,Yes,Total service,No
+Zone 3,Unmarried,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 1,Married,High school degree,No,Female,Yes,No,Yes,No,No,Yes,No,Yes,Yes,Yes,No,Yes,No,Plus service,No
+Zone 2,Unmarried,College degree,No,Male,No,Yes,Yes,No,No,No,No,Yes,No,No,Yes,No,Yes,Basic service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Married,College degree,No,Female,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 3,Unmarried,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,Some college,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,High school degree,Yes,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,Plus service,No
+Zone 1,Unmarried,Post-undergraduate degree,No,Female,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 1,Married,High school degree,No,Male,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,No,E-service,No
+Zone 3,Married,College degree,No,Male,No,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Total service,Yes
+Zone 3,Married,High school degree,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,Some college,No,Male,No,Yes,No,No,No,Yes,No,No,No,Yes,No,No,Yes,Basic service,No
+Zone 1,Unmarried,College degree,No,Male,No,Yes,No,Yes,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 2,Married,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Married,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,Basic service,No
+Zone 2,Married,High school degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Unmarried,College degree,No,Female,No,Yes,No,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 3,Unmarried,High school degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 3,Unmarried,High school degree,No,Male,Yes,No,No,No,No,No,Yes,Yes,No,No,No,Yes,No,Basic service,Yes
+Zone 1,Unmarried,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,Yes,No,No,Yes,No,Plus service,No
+Zone 3,Married,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,No,No,Total service,Yes
+Zone 3,Unmarried,College degree,No,Female,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 1,Unmarried,College degree,No,Female,No,Yes,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 2,Married,High school degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Unmarried,High school degree,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,Basic service,No
+Zone 3,Married,Some college,No,Male,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,No,E-service,No
+Zone 2,Married,High school degree,No,Male,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 3,Unmarried,Some college,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,No
+Zone 3,Married,Some college,No,Female,No,No,No,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,No
+Zone 1,Married,College degree,No,Male,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 3,Married,High school degree,No,Female,Yes,No,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,College degree,No,Female,Yes,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,No,No,Plus service,Yes
+Zone 2,Married,High school degree,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,Some college,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Total service,No
+Zone 1,Unmarried,Some college,No,Female,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,No,E-service,Yes
+Zone 1,Unmarried,Some college,No,Male,Yes,No,Yes,No,Yes,Yes,No,No,No,Yes,No,Yes,No,Plus service,No
+Zone 3,Married,Some college,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 1,Married,High school degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 2,Unmarried,High school degree,No,Male,No,Yes,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Married,Some college,No,Male,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Female,No,No,No,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,No
+Zone 3,Unmarried,College degree,No,Female,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,No,Yes,Yes,No,Total service,No
+Zone 1,Unmarried,Some college,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Unmarried,College degree,No,Male,Yes,No,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Married,Some college,No,Female,No,Yes,No,No,Yes,No,No,Yes,No,Yes,No,Yes,No,E-service,No
+Zone 2,Married,Some college,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Married,College degree,No,Male,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,Yes
+Zone 2,Married,Some college,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Married,High school degree,Yes,Female,No,No,Yes,No,Yes,No,No,No,No,Yes,No,Yes,No,Plus service,No
+Zone 1,Married,Some college,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Unmarried,College degree,No,Female,Yes,No,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,College degree,No,Female,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,High school degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Unmarried,College degree,No,Male,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,Yes
+Zone 3,Married,High school degree,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,Yes,Basic service,Yes
+Zone 2,Unmarried,Some college,No,Male,No,No,No,No,Yes,No,No,Yes,No,No,Yes,Yes,Yes,E-service,No
+Zone 2,Unmarried,College degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Unmarried,Some college,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Married,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,Yes,Yes,Yes,No,No,Plus service,No
+Zone 3,Married,Post-undergraduate degree,No,Male,Yes,Yes,No,No,Yes,Yes,No,Yes,No,Yes,Yes,No,Yes,Total service,Yes
+Zone 2,Married,Some college,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 3,Unmarried,High school degree,No,Male,No,Yes,No,Yes,No,No,No,No,No,No,No,No,Yes,Basic service,No
+Zone 1,Unmarried,High school degree,No,Female,No,No,Yes,No,No,No,No,No,Yes,No,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,Post-undergraduate degree,No,Female,Yes,Yes,No,No,Yes,Yes,Yes,No,No,No,Yes,No,Yes,Total service,No
+Zone 3,Unmarried,Some college,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,No
+Zone 3,Married,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 1,Unmarried,Some college,No,Male,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,Yes
+Zone 2,Married,College degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Unmarried,College degree,No,Female,Yes,Yes,Yes,Yes,No,No,No,Yes,No,Yes,Yes,No,No,Basic service,No
+Zone 3,Unmarried,Some college,No,Male,Yes,No,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 2,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Did not complete high school,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Unmarried,College degree,No,Male,No,No,No,No,No,No,No,No,No,No,No,Yes,No,Basic service,No
+Zone 1,Unmarried,Some college,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,Yes,No,No,E-service,No
+Zone 2,Married,College degree,No,Male,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Married,College degree,No,Male,No,Yes,Yes,No,No,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Unmarried,High school degree,No,Female,No,No,No,No,No,No,No,No,No,Yes,No,No,No,Basic service,No
+Zone 3,Married,Some college,No,Male,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Married,High school degree,No,Female,Yes,No,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Unmarried,Did not complete high school,Yes,Male,Yes,No,Yes,No,Yes,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,Did not complete high school,No,Male,No,No,No,No,Yes,No,No,Yes,No,No,Yes,Yes,No,E-service,Yes
+Zone 3,Unmarried,Some college,No,Female,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,High school degree,No,Female,Yes,No,Yes,No,Yes,Yes,No,No,Yes,No,Yes,Yes,No,Plus service,Yes
+Zone 2,Unmarried,High school degree,No,Male,Yes,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Unmarried,High school degree,No,Female,No,No,No,No,No,No,No,No,No,Yes,No,No,No,Basic service,No
+Zone 3,Married,Some college,No,Female,Yes,No,Yes,No,No,No,No,No,No,No,Yes,Yes,No,Basic service,No
+Zone 2,Married,College degree,No,Female,No,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,No,No,E-service,No
+Zone 1,Unmarried,College degree,No,Male,No,Yes,No,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,No
+Zone 2,Married,Did not complete high school,No,Female,Yes,No,Yes,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Yes,Total service,No
+Zone 1,Married,Post-undergraduate degree,No,Male,No,Yes,No,Yes,Yes,Yes,No,Yes,Yes,No,No,No,Yes,E-service,Yes
+Zone 1,Unmarried,High school degree,No,Female,No,No,Yes,No,Yes,No,No,Yes,No,No,No,No,No,E-service,No
+Zone 3,Unmarried,College degree,No,Male,No,Yes,Yes,No,No,Yes,No,Yes,No,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 2,Married,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,Yes,Yes,No,No,Plus service,No
+Zone 2,Unmarried,College degree,No,Female,No,Yes,No,No,Yes,Yes,No,Yes,No,No,Yes,No,Yes,E-service,Yes
+Zone 3,Married,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,High school degree,No,Male,No,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,No,Yes,Total service,No
+Zone 3,Unmarried,Some college,No,Male,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Total service,Yes
+Zone 1,Unmarried,Did not complete high school,No,Female,Yes,No,Yes,No,Yes,Yes,Yes,No,No,Yes,Yes,Yes,No,Total service,No
+Zone 2,Unmarried,High school degree,No,Female,No,No,Yes,No,No,No,No,Yes,No,Yes,No,Yes,Yes,Basic service,No
+Zone 2,Unmarried,Some college,No,Female,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,Yes,Plus service,No
+Zone 3,Married,High school degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Married,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,Yes,No,No,No,Basic service,No
+Zone 1,Married,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,No,Yes,Yes,No,Plus service,No
+Zone 2,Married,High school degree,No,Male,Yes,No,No,No,Yes,No,No,No,Yes,Yes,No,Yes,No,Plus service,No
+Zone 1,Married,Some college,No,Male,No,No,Yes,No,No,No,No,No,Yes,Yes,Yes,No,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Female,No,No,No,No,No,No,No,No,Yes,No,No,No,No,Basic service,No
+Zone 2,Unmarried,Did not complete high school,No,Female,No,No,No,No,Yes,No,No,No,Yes,Yes,No,Yes,No,Plus service,No
+Zone 1,Unmarried,College degree,No,Male,No,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,No,No,No,Yes,E-service,No
+Zone 1,Unmarried,Some college,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,High school degree,No,Male,Yes,No,Yes,No,Yes,No,No,No,No,No,Yes,No,No,E-service,No
+Zone 1,Unmarried,Did not complete high school,No,Female,No,No,Yes,No,Yes,No,No,No,No,Yes,No,No,No,E-service,No
+Zone 1,Unmarried,Some college,No,Female,Yes,No,Yes,No,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,College degree,No,Male,No,No,No,No,Yes,No,No,No,No,Yes,Yes,No,No,Plus service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,No,No,Yes,No,No,Basic service,No
+Zone 1,Unmarried,Post-undergraduate degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Married,Post-undergraduate degree,No,Male,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,Some college,No,Female,Yes,No,No,No,No,No,Yes,No,No,No,Yes,Yes,No,Plus service,Yes
+Zone 1,Unmarried,Some college,Yes,Female,No,Yes,Yes,Yes,Yes,No,No,Yes,No,No,No,Yes,No,E-service,No
+Zone 1,Married,High school degree,No,Male,No,No,No,No,No,No,No,No,Yes,No,Yes,Yes,No,Plus service,No
+Zone 2,Married,College degree,No,Female,Yes,No,Yes,Yes,No,No,No,Yes,Yes,No,Yes,Yes,No,Plus service,No
+Zone 1,Married,Did not complete high school,No,Female,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Married,Some college,Yes,Female,Yes,No,No,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,High school degree,No,Male,Yes,Yes,Yes,No,Yes,No,No,No,No,Yes,No,No,No,E-service,No
+Zone 3,Married,Some college,No,Male,Yes,Yes,Yes,No,No,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Total service,No
+Zone 1,Married,Post-undergraduate degree,Yes,Male,No,No,Yes,No,Yes,No,No,No,No,No,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,College degree,No,Female,No,No,Yes,No,Yes,No,No,Yes,No,No,No,No,No,E-service,Yes
+Zone 1,Unmarried,College degree,No,Female,Yes,No,Yes,Yes,Yes,No,No,Yes,Yes,Yes,No,Yes,No,Plus service,No
+Zone 2,Married,Some college,No,Male,Yes,Yes,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Unmarried,Some college,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,Yes,No,No,No,No,No,No,No,Yes,No,No,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Male,No,No,Yes,No,No,Yes,No,No,No,No,No,No,Yes,Basic service,No
+Zone 1,Unmarried,Some college,No,Male,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Married,High school degree,No,Female,No,Yes,No,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 3,Married,Did not complete high school,Yes,Female,Yes,No,Yes,No,Yes,No,No,No,Yes,No,Yes,No,No,Plus service,No
+Zone 1,Married,High school degree,No,Male,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Yes,Plus service,No
+Zone 1,Married,High school degree,No,Male,No,Yes,No,No,Yes,No,No,No,No,No,No,No,Yes,E-service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,Yes,No,E-service,No
+Zone 2,Unmarried,Some college,No,Female,No,Yes,No,No,No,No,No,Yes,No,No,No,Yes,Yes,Basic service,Yes
+Zone 1,Married,College degree,No,Male,Yes,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,Total service,Yes
+Zone 1,Married,Some college,No,Male,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 2,Unmarried,High school degree,Yes,Female,Yes,Yes,Yes,No,No,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Plus service,No
+Zone 3,Unmarried,High school degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,Yes
+Zone 2,Married,Some college,No,Male,No,Yes,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,College degree,No,Male,No,Yes,No,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 1,Unmarried,Post-undergraduate degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,Yes,E-service,Yes
+Zone 1,Married,College degree,No,Female,No,Yes,No,No,Yes,No,No,No,No,No,No,No,No,E-service,Yes
+Zone 1,Married,Some college,No,Male,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Married,Did not complete high school,No,Female,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Unmarried,Some college,No,Male,No,Yes,Yes,Yes,No,No,No,Yes,No,No,Yes,Yes,Yes,Basic service,Yes
+Zone 1,Married,Some college,No,Female,No,No,Yes,No,No,Yes,No,Yes,Yes,No,Yes,No,No,Plus service,Yes
+Zone 2,Married,High school degree,No,Female,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,Yes
+Zone 3,Married,High school degree,No,Female,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,No,Yes,No,Yes,Total service,Yes
+Zone 1,Married,Post-undergraduate degree,No,Female,No,Yes,No,No,No,Yes,No,No,No,No,No,No,No,Basic service,Yes
+Zone 3,Unmarried,Some college,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,Did not complete high school,No,Male,Yes,No,Yes,No,Yes,No,No,No,No,Yes,No,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Male,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 1,Married,College degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Total service,Yes
+Zone 3,Unmarried,College degree,No,Male,No,No,No,No,No,No,No,No,No,No,Yes,No,No,Basic service,No
+Zone 1,Married,Did not complete high school,No,Male,No,No,Yes,No,Yes,No,No,No,No,Yes,No,Yes,No,Plus service,No
+Zone 3,Married,College degree,No,Female,Yes,Yes,No,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 1,Unmarried,High school degree,No,Male,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Female,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Yes,Total service,Yes
+Zone 3,Unmarried,Post-undergraduate degree,No,Female,No,Yes,No,No,No,No,No,Yes,No,Yes,No,No,No,Basic service,No
+Zone 3,Unmarried,Some college,No,Male,No,Yes,Yes,No,No,No,Yes,No,No,No,Yes,No,Yes,Basic service,No
+Zone 3,Married,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,No,No,No,Yes,No,Basic service,No
+Zone 1,Unmarried,Some college,No,Female,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Total service,No
+Zone 2,Married,Did not complete high school,No,Male,No,Yes,Yes,No,Yes,No,No,No,No,No,No,No,Yes,E-service,No
+Zone 1,Unmarried,High school degree,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Married,High school degree,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,No,Yes,No,Plus service,No
+Zone 2,Married,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,High school degree,Yes,Male,Yes,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Married,College degree,No,Female,Yes,No,No,No,Yes,No,No,No,Yes,No,No,Yes,No,Plus service,No
+Zone 1,Married,College degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Total service,No
+Zone 2,Unmarried,College degree,No,Male,No,Yes,No,No,No,No,No,Yes,No,No,No,Yes,Yes,Basic service,No
+Zone 3,Unmarried,High school degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Unmarried,High school degree,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Post-undergraduate degree,No,Male,No,Yes,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 2,Unmarried,High school degree,Yes,Female,No,No,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 2,Unmarried,Some college,No,Female,Yes,No,No,No,No,No,No,No,No,Yes,Yes,Yes,No,Plus service,Yes
+Zone 3,Married,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Married,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 3,Married,College degree,No,Male,Yes,No,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Married,High school degree,Yes,Female,Yes,No,Yes,No,Yes,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,Some college,Yes,Female,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,Basic service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,Yes,Yes,Yes,Yes,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 2,Married,College degree,No,Female,No,No,No,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Unmarried,Some college,No,Male,Yes,No,Yes,No,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,Some college,No,Female,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 1,Unmarried,Some college,No,Female,No,Yes,No,No,Yes,No,No,No,No,No,Yes,Yes,Yes,E-service,No
+Zone 1,Married,Did not complete high school,No,Male,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Male,Yes,No,Yes,Yes,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,Yes,No,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 3,Married,Some college,No,Female,Yes,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Unmarried,College degree,No,Male,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 1,Unmarried,Some college,No,Female,Yes,No,Yes,No,No,No,Yes,No,No,Yes,Yes,No,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Married,College degree,No,Female,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Total service,Yes
+Zone 3,Unmarried,High school degree,No,Male,Yes,No,Yes,No,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,Some college,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,Yes,No,Basic service,No
+Zone 1,Married,Some college,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,College degree,No,Male,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,No,Yes,Total service,No
+Zone 3,Married,Did not complete high school,No,Male,Yes,No,No,No,No,No,No,No,No,Yes,No,Yes,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Unmarried,College degree,No,Male,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,No,No,Yes,No,Yes,Total service,No
+Zone 2,Unmarried,Some college,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,High school degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,High school degree,No,Male,Yes,No,Yes,No,Yes,No,Yes,Yes,No,Yes,No,No,Yes,E-service,No
+Zone 1,Married,Post-undergraduate degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Unmarried,High school degree,No,Male,Yes,Yes,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Married,High school degree,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,Yes,Basic service,No
+Zone 3,Unmarried,High school degree,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Unmarried,College degree,No,Female,No,Yes,No,No,Yes,No,Yes,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 2,Married,College degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,Some college,No,Female,No,No,No,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Unmarried,Some college,No,Male,Yes,Yes,Yes,No,Yes,No,Yes,Yes,No,No,No,No,No,E-service,No
+Zone 2,Married,High school degree,No,Female,Yes,No,Yes,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Male,No,No,Yes,No,No,No,No,No,No,Yes,No,No,No,Basic service,No
+Zone 3,Married,College degree,No,Female,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,Yes,Total service,No
+Zone 3,Married,Some college,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,No,No,Plus service,No
+Zone 3,Married,High school degree,No,Female,No,Yes,Yes,Yes,Yes,Yes,No,Yes,No,No,Yes,No,Yes,E-service,No
+Zone 2,Married,High school degree,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 2,Married,Did not complete high school,Yes,Male,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Married,Post-undergraduate degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Unmarried,High school degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Total service,No
+Zone 3,Unmarried,Some college,No,Female,Yes,No,Yes,No,No,No,No,Yes,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,Post-undergraduate degree,No,Male,No,Yes,No,Yes,Yes,Yes,Yes,Yes,No,No,No,Yes,Yes,Total service,Yes
+Zone 2,Unmarried,Did not complete high school,No,Female,Yes,No,Yes,Yes,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Unmarried,Did not complete high school,Yes,Female,Yes,Yes,Yes,Yes,No,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Plus service,No
+Zone 3,Married,Some college,No,Female,Yes,No,Yes,No,No,No,No,Yes,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,Some college,No,Male,No,No,No,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Unmarried,Some college,No,Male,Yes,No,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,High school degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,No,No,Yes,No,Yes,Yes,No,No,No,No,Yes,Yes,No,Plus service,No
+Zone 3,Married,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,High school degree,No,Female,Yes,No,Yes,No,Yes,No,No,No,Yes,No,No,Yes,No,Plus service,No
+Zone 3,Married,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Unmarried,Some college,No,Male,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 3,Unmarried,Some college,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,College degree,No,Female,Yes,No,No,No,Yes,Yes,No,Yes,Yes,Yes,No,No,No,E-service,No
+Zone 2,Married,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 3,Unmarried,Some college,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,Yes
+Zone 2,Unmarried,Post-undergraduate degree,No,Female,No,Yes,No,Yes,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 1,Unmarried,Some college,Yes,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Unmarried,High school degree,No,Female,No,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,No,No,Plus service,No
+Zone 3,Unmarried,Post-undergraduate degree,No,Female,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,No,No,No,Yes,E-service,No
+Zone 3,Married,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Married,Post-undergraduate degree,No,Female,Yes,Yes,Yes,No,Yes,No,No,No,No,Yes,No,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Male,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 2,Unmarried,High school degree,No,Female,No,Yes,No,No,No,Yes,Yes,No,Yes,No,No,No,Yes,Basic service,Yes
+Zone 3,Unmarried,Did not complete high school,No,Female,No,No,No,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Married,Some college,No,Female,No,Yes,No,No,No,Yes,No,Yes,No,No,No,No,Yes,Basic service,No
+Zone 3,Unmarried,Some college,No,Female,Yes,No,No,No,No,No,No,No,Yes,Yes,Yes,No,No,Plus service,No
+Zone 2,Married,College degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,High school degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Married,College degree,No,Male,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 1,Married,Did not complete high school,No,Male,Yes,No,Yes,No,Yes,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Married,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Unmarried,College degree,No,Male,Yes,No,Yes,Yes,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,High school degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Married,High school degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Unmarried,High school degree,No,Male,No,Yes,No,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 1,Married,Some college,No,Female,No,Yes,Yes,No,Yes,Yes,No,Yes,No,Yes,No,No,Yes,E-service,No
+Zone 2,Unmarried,High school degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Married,Post-undergraduate degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Unmarried,College degree,No,Male,Yes,No,Yes,No,No,No,No,No,No,No,No,Yes,No,Basic service,No
+Zone 1,Unmarried,College degree,No,Female,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,Yes,No,No,Yes,Yes,No,No,No,Plus service,No
+Zone 3,Unmarried,High school degree,No,Male,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Married,High school degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Unmarried,Did not complete high school,Yes,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,No,No,Plus service,No
+Zone 3,Married,College degree,No,Male,Yes,Yes,No,No,No,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,No,No,Yes,No,No,Basic service,No
+Zone 3,Married,High school degree,No,Male,Yes,No,No,Yes,No,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,College degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Married,College degree,No,Female,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Married,Some college,No,Male,No,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,No,Yes,Yes,Total service,No
+Zone 1,Married,High school degree,No,Male,Yes,No,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,Plus service,Yes
+Zone 1,Married,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Some college,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 2,Unmarried,High school degree,Yes,Male,No,No,No,No,No,No,No,No,No,No,No,Yes,No,Basic service,No
+Zone 3,Unmarried,High school degree,No,Female,Yes,Yes,Yes,No,Yes,No,No,No,No,No,No,No,Yes,E-service,Yes
+Zone 1,Unmarried,College degree,Yes,Female,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,Yes,No,No,No,No,Basic service,No
+Zone 1,Married,Some college,No,Female,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,No,Yes,No,No,Yes,No,No,No,No,Yes,No,No,No,E-service,Yes
+Zone 2,Unmarried,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Married,Some college,No,Female,Yes,No,Yes,No,No,No,No,Yes,Yes,No,Yes,No,No,Basic service,Yes
+Zone 1,Unmarried,College degree,No,Male,Yes,No,Yes,No,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,Yes
+Zone 3,Unmarried,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,No,Yes,No,Plus service,No
+Zone 3,Married,Some college,No,Male,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 1,Married,High school degree,No,Male,Yes,No,Yes,Yes,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,Post-undergraduate degree,No,Female,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Total service,No
+Zone 3,Married,College degree,No,Male,Yes,No,Yes,Yes,No,No,No,Yes,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 1,Married,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,Yes,No,No,Basic service,No
+Zone 1,Married,College degree,No,Male,No,Yes,Yes,No,Yes,No,Yes,No,No,No,No,No,Yes,E-service,No
+Zone 1,Married,Some college,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 3,Married,College degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,Yes,E-service,No
+Zone 1,Unmarried,Some college,No,Male,Yes,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,No,Plus service,Yes
+Zone 1,Married,Post-undergraduate degree,No,Female,No,Yes,No,No,Yes,Yes,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 1,Unmarried,College degree,No,Male,No,Yes,No,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 1,Married,High school degree,No,Male,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Married,High school degree,No,Female,No,No,No,No,Yes,No,No,Yes,Yes,No,No,No,Yes,E-service,Yes
+Zone 3,Unmarried,College degree,No,Female,No,No,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Unmarried,Some college,No,Female,No,No,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,No,Yes,No,No,Yes,No,No,No,Yes,No,No,No,Yes,E-service,Yes
+Zone 3,Unmarried,Some college,No,Female,No,No,Yes,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,No
+Zone 1,Married,Some college,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,High school degree,No,Male,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,Yes
+Zone 2,Married,Some college,No,Female,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 1,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,No,Yes,Yes,No,No,Basic service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 1,Unmarried,High school degree,No,Male,No,Yes,No,No,No,Yes,No,Yes,No,No,No,Yes,Yes,Basic service,No
+Zone 2,Married,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,Yes,No,Basic service,No
+Zone 2,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Did not complete high school,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Unmarried,High school degree,No,Male,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Male,Yes,No,No,No,No,No,No,No,Yes,No,No,No,Yes,Basic service,Yes
+Zone 1,Unmarried,Did not complete high school,Yes,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,Yes,Basic service,No
+Zone 3,Unmarried,High school degree,No,Male,Yes,Yes,Yes,No,No,No,Yes,Yes,No,Yes,No,No,No,Basic service,No
+Zone 2,Married,College degree,No,Male,Yes,No,Yes,Yes,No,No,Yes,No,No,Yes,No,No,Yes,Basic service,Yes
+Zone 2,Married,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,College degree,No,Male,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Married,Some college,No,Male,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,E-service,No
+Zone 3,Married,Some college,No,Female,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,No,Yes,No,Plus service,No
+Zone 1,Unmarried,Did not complete high school,No,Female,Yes,No,No,No,No,Yes,No,No,No,Yes,Yes,No,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Male,No,Yes,No,No,Yes,Yes,No,No,No,No,No,No,Yes,E-service,Yes
+Zone 3,Unmarried,College degree,No,Male,Yes,Yes,No,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Unmarried,College degree,No,Male,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 2,Unmarried,College degree,No,Male,Yes,No,Yes,Yes,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Did not complete high school,No,Male,No,Yes,No,No,No,No,No,Yes,No,Yes,No,No,Yes,Basic service,Yes
+Zone 2,Unmarried,High school degree,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Unmarried,High school degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,Yes,No,No,E-service,No
+Zone 2,Unmarried,Some college,No,Female,No,No,No,Yes,Yes,No,Yes,No,Yes,Yes,No,Yes,Yes,Total service,No
+Zone 1,Unmarried,College degree,No,Female,No,No,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 1,Unmarried,High school degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,Yes,No,E-service,No
+Zone 1,Unmarried,Some college,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Married,High school degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 3,Married,High school degree,No,Male,No,Yes,Yes,No,Yes,No,No,No,No,No,No,No,Yes,E-service,No
+Zone 1,Unmarried,High school degree,No,Female,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,No,E-service,No
+Zone 2,Unmarried,High school degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 2,Married,High school degree,No,Female,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Unmarried,High school degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,Yes,No,Basic service,No
+Zone 1,Married,Some college,No,Female,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,No,Total service,No
+Zone 1,Unmarried,College degree,No,Male,No,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,No,Yes,Total service,Yes
+Zone 1,Married,Some college,No,Female,Yes,No,No,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Post-undergraduate degree,No,Male,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Unmarried,High school degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 3,Married,High school degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,High school degree,No,Male,No,No,No,No,No,No,No,No,No,No,No,Yes,No,Basic service,No
+Zone 1,Unmarried,High school degree,No,Male,Yes,Yes,No,No,Yes,No,No,No,No,No,Yes,Yes,Yes,E-service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,No,No,Yes,No,Yes,Yes,No,No,No,No,No,No,Yes,E-service,No
+Zone 3,Married,Did not complete high school,No,Female,No,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,Some college,No,Female,No,No,Yes,No,No,Yes,No,No,No,No,No,Yes,No,Basic service,Yes
+Zone 2,Married,College degree,No,Female,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Married,Some college,No,Male,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,Yes
+Zone 3,Unmarried,Some college,No,Male,No,Yes,No,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 1,Unmarried,Some college,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,No,Yes,Yes,No,Plus service,Yes
+Zone 1,Married,Did not complete high school,No,Female,No,No,No,No,Yes,No,No,Yes,Yes,No,No,No,No,E-service,No
+Zone 1,Unmarried,High school degree,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Female,No,No,Yes,No,No,No,No,No,No,Yes,No,Yes,No,Plus service,No
+Zone 2,Married,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Unmarried,High school degree,No,Male,Yes,No,Yes,No,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Female,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Total service,No
+Zone 1,Married,College degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Married,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,High school degree,No,Female,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,College degree,Yes,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Unmarried,High school degree,Yes,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,College degree,No,Male,No,No,Yes,No,Yes,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 2,Married,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Unmarried,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,Did not complete high school,No,Male,Yes,Yes,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 1,Married,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,High school degree,No,Female,No,Yes,No,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 3,Married,Some college,No,Female,No,Yes,No,No,Yes,Yes,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 2,Unmarried,Some college,No,Male,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 2,Unmarried,Post-undergraduate degree,No,Male,Yes,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 2,Married,High school degree,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Married,High school degree,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Plus service,No
+Zone 1,Unmarried,High school degree,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,Some college,Yes,Female,No,No,Yes,No,Yes,No,No,No,Yes,No,No,No,Yes,E-service,No
+Zone 2,Unmarried,Some college,No,Male,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Unmarried,Did not complete high school,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Unmarried,High school degree,No,Male,No,Yes,No,No,No,Yes,No,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 3,Unmarried,College degree,No,Male,Yes,Yes,Yes,No,No,No,No,Yes,Yes,No,No,No,Yes,Basic service,Yes
+Zone 3,Unmarried,High school degree,No,Female,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,Some college,No,Female,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 3,Married,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,College degree,No,Male,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Yes,No,E-service,No
+Zone 1,Unmarried,High school degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 3,Unmarried,Some college,No,Female,Yes,Yes,Yes,No,No,Yes,No,Yes,Yes,No,Yes,Yes,No,Plus service,Yes
+Zone 3,Unmarried,Some college,No,Male,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 1,Married,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Married,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,High school degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Total service,Yes
+Zone 1,Unmarried,Some college,No,Female,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Basic service,Yes
+Zone 2,Married,Did not complete high school,No,Female,No,Yes,No,Yes,No,Yes,Yes,Yes,No,No,No,No,Yes,Basic service,No
+Zone 2,Married,High school degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Unmarried,High school degree,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Married,High school degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 1,Married,Some college,No,Male,No,No,No,No,No,No,No,No,No,Yes,No,Yes,No,Plus service,No
+Zone 2,Married,High school degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,Yes,E-service,No
+Zone 1,Married,High school degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,Some college,Yes,Female,Yes,No,Yes,Yes,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,Some college,No,Male,No,Yes,Yes,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,No
+Zone 3,Married,Did not complete high school,No,Male,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Married,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,Yes,No,Basic service,No
+Zone 2,Married,High school degree,No,Male,No,Yes,Yes,No,No,No,No,Yes,No,No,No,No,No,Basic service,Yes
+Zone 1,Married,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,High school degree,No,Male,No,No,Yes,No,No,Yes,No,Yes,Yes,Yes,No,Yes,No,Plus service,Yes
+Zone 1,Married,College degree,No,Female,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Married,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,High school degree,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Married,Did not complete high school,No,Male,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,No,No,Plus service,No
+Zone 3,Unmarried,Post-undergraduate degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Unmarried,Some college,No,Male,No,No,Yes,No,No,Yes,No,No,Yes,Yes,Yes,No,No,Plus service,No
+Zone 1,Unmarried,College degree,No,Male,No,No,No,No,No,No,No,No,Yes,No,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,Some college,No,Male,Yes,Yes,No,No,Yes,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 2,Unmarried,High school degree,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,Yes
+Zone 3,Unmarried,College degree,No,Male,Yes,Yes,No,No,No,No,Yes,No,No,No,No,No,Yes,Basic service,Yes
+Zone 3,Unmarried,Did not complete high school,No,Male,No,Yes,No,No,Yes,Yes,No,Yes,No,Yes,No,No,No,E-service,Yes
+Zone 2,Unmarried,Some college,No,Male,No,No,No,No,No,No,No,No,No,No,Yes,No,No,Basic service,Yes
+Zone 1,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,Did not complete high school,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,Yes,E-service,No
+Zone 2,Unmarried,College degree,No,Male,Yes,No,Yes,No,Yes,No,No,No,No,No,No,Yes,No,E-service,No
+Zone 1,Unmarried,Did not complete high school,No,Female,Yes,No,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,College degree,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Married,College degree,No,Male,Yes,Yes,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Unmarried,College degree,No,Male,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Basic service,Yes
+Zone 3,Married,High school degree,No,Female,No,No,No,No,Yes,No,No,No,Yes,No,Yes,Yes,Yes,Plus service,No
+Zone 2,Unmarried,High school degree,No,Female,Yes,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Married,College degree,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,No,No,Yes,No,Plus service,No
+Zone 3,Married,Some college,No,Female,Yes,No,Yes,Yes,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,High school degree,No,Male,No,No,No,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,High school degree,No,Female,No,Yes,Yes,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,Yes,No,Yes,No,No,Basic service,Yes
+Zone 3,Unmarried,High school degree,No,Female,Yes,Yes,No,Yes,No,No,No,No,Yes,Yes,Yes,Yes,Yes,Plus service,No
+Zone 2,Unmarried,College degree,No,Female,No,Yes,Yes,No,Yes,Yes,No,No,No,No,No,No,No,E-service,No
+Zone 1,Unmarried,High school degree,Yes,Male,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,No,No,Yes,No,Plus service,No
+Zone 1,Unmarried,High school degree,No,Male,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,Basic service,No
+Zone 2,Unmarried,Some college,No,Female,No,Yes,No,No,Yes,No,No,No,No,No,No,No,Yes,E-service,Yes
+Zone 1,Married,College degree,No,Male,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,No,E-service,No
+Zone 3,Married,Some college,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 2,Married,High school degree,No,Female,No,No,No,No,No,No,No,No,No,Yes,No,No,No,Basic service,No
+Zone 2,Unmarried,College degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 2,Married,High school degree,No,Male,Yes,Yes,Yes,No,Yes,No,No,No,No,Yes,Yes,No,No,Plus service,No
+Zone 3,Married,High school degree,No,Male,Yes,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Married,Did not complete high school,No,Female,No,No,No,No,No,No,Yes,No,No,No,No,No,No,Basic service,Yes
+Zone 3,Unmarried,College degree,No,Male,Yes,No,Yes,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,Yes,No,No,Yes,No,No,Basic service,No
+Zone 2,Married,Some college,No,Female,Yes,No,Yes,Yes,No,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Male,Yes,No,No,Yes,Yes,Yes,No,No,Yes,Yes,No,Yes,Yes,Total service,Yes
+Zone 2,Married,College degree,No,Female,No,Yes,No,No,No,No,No,No,No,No,Yes,No,No,Basic service,No
+Zone 2,Unmarried,College degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,College degree,No,Female,No,Yes,Yes,No,Yes,No,No,No,Yes,No,No,No,No,E-service,No
+Zone 1,Unmarried,College degree,No,Male,No,Yes,No,Yes,No,Yes,Yes,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 2,Married,High school degree,No,Female,No,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,No,No,Plus service,No
+Zone 2,Married,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,College degree,No,Male,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,No,No,Total service,No
+Zone 1,Married,Did not complete high school,No,Male,No,No,Yes,No,Yes,No,No,No,Yes,Yes,No,Yes,No,Plus service,No
+Zone 2,Married,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,High school degree,Yes,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 1,Unmarried,Post-undergraduate degree,No,Male,No,Yes,No,Yes,No,Yes,No,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 2,Unmarried,College degree,No,Female,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 3,Married,Some college,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 1,Unmarried,Some college,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,No,Yes,Total service,Yes
+Zone 3,Married,Some college,No,Male,Yes,No,No,No,No,No,No,No,Yes,Yes,No,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Female,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,Basic service,No
+Zone 2,Married,High school degree,No,Male,Yes,No,Yes,Yes,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 2,Unmarried,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,Did not complete high school,No,Male,Yes,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,High school degree,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 3,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,No,Yes,No,Plus service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 1,Unmarried,College degree,No,Male,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Married,Post-undergraduate degree,No,Female,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 3,Unmarried,College degree,No,Male,No,Yes,No,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 2,Unmarried,Some college,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,Some college,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Married,Some college,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,Post-undergraduate degree,No,Male,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,No,Yes,No,No,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Unmarried,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,Some college,No,Male,No,Yes,No,No,Yes,No,No,Yes,No,No,No,Yes,Yes,E-service,Yes
+Zone 2,Married,High school degree,No,Female,No,Yes,No,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Married,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Unmarried,High school degree,Yes,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 3,Unmarried,College degree,No,Female,No,No,Yes,No,Yes,No,No,Yes,No,No,No,No,No,E-service,No
+Zone 1,Married,High school degree,No,Male,Yes,No,Yes,No,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 1,Unmarried,Post-undergraduate degree,No,Female,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,No,Yes,E-service,No
+Zone 3,Unmarried,Some college,No,Male,Yes,No,Yes,Yes,Yes,No,No,No,Yes,Yes,No,Yes,No,Plus service,No
+Zone 1,Married,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,Some college,No,Male,No,No,Yes,Yes,No,Yes,No,No,Yes,Yes,No,No,No,Plus service,No
+Zone 1,Married,High school degree,No,Male,Yes,No,Yes,No,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 3,Married,College degree,No,Female,No,Yes,No,Yes,Yes,Yes,Yes,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 1,Unmarried,Some college,No,Female,No,No,Yes,No,Yes,Yes,No,No,No,No,Yes,Yes,Yes,E-service,No
+Zone 1,Married,Some college,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,High school degree,No,Female,No,Yes,Yes,No,No,No,No,Yes,No,No,Yes,Yes,Yes,Basic service,No
+Zone 3,Married,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,Some college,No,Female,Yes,No,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 3,Unmarried,College degree,No,Female,Yes,Yes,Yes,No,Yes,No,No,No,No,No,No,No,Yes,E-service,No
+Zone 2,Unmarried,Some college,No,Female,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Basic service,Yes
+Zone 3,Unmarried,Some college,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Married,High school degree,No,Male,Yes,No,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 1,Married,High school degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,Yes,No,E-service,No
+Zone 2,Married,Some college,No,Male,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,College degree,No,Male,No,No,No,No,Yes,No,No,Yes,No,No,Yes,No,No,E-service,No
+Zone 1,Unmarried,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 1,Unmarried,High school degree,No,Male,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 1,Unmarried,Did not complete high school,Yes,Female,Yes,No,Yes,No,Yes,No,No,No,No,No,No,Yes,No,E-service,No
+Zone 2,Unmarried,High school degree,No,Male,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Total service,Yes
+Zone 2,Unmarried,High school degree,Yes,Male,No,No,Yes,No,Yes,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,High school degree,No,Male,Yes,No,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 1,Unmarried,Some college,No,Female,No,No,No,No,Yes,No,No,No,No,No,No,No,No,E-service,Yes
+Zone 1,Unmarried,Post-undergraduate degree,No,Female,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,No,E-service,Yes
+Zone 2,Unmarried,Some college,No,Female,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,E-service,No
+Zone 1,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,College degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 3,Married,Post-undergraduate degree,No,Male,No,Yes,Yes,No,Yes,Yes,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 2,Unmarried,High school degree,No,Male,No,Yes,No,No,Yes,No,No,No,No,No,No,No,Yes,E-service,No
+Zone 2,Unmarried,Some college,No,Female,No,No,Yes,No,Yes,No,No,No,No,Yes,No,No,No,E-service,No
+Zone 2,Married,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Married,High school degree,No,Female,Yes,No,Yes,No,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Unmarried,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 1,Married,Some college,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,Post-undergraduate degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Married,College degree,No,Female,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Married,Post-undergraduate degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Married,High school degree,Yes,Female,Yes,No,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 1,Married,College degree,No,Male,Yes,No,Yes,No,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,No,No,No,Yes,No,Basic service,No
+Zone 1,Married,College degree,No,Female,No,Yes,No,No,No,No,No,No,Yes,No,No,No,No,Basic service,Yes
+Zone 1,Married,Did not complete high school,No,Female,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Basic service,Yes
+Zone 3,Married,College degree,No,Female,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Married,College degree,No,Male,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 1,Married,College degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,Plus service,Yes
+Zone 3,Unmarried,High school degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Unmarried,College degree,Yes,Female,Yes,Yes,Yes,No,Yes,Yes,No,No,No,Yes,Yes,Yes,No,Plus service,Yes
+Zone 1,Unmarried,College degree,No,Male,No,No,No,No,No,No,No,No,Yes,No,No,No,No,Basic service,No
+Zone 2,Married,College degree,No,Male,No,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,Basic service,No
+Zone 2,Unmarried,College degree,No,Male,Yes,Yes,No,No,No,No,No,No,No,Yes,Yes,No,Yes,Basic service,No
+Zone 1,Married,College degree,No,Female,No,No,No,No,No,No,No,Yes,No,No,No,Yes,Yes,Basic service,No
+Zone 1,Unmarried,College degree,No,Female,No,Yes,Yes,No,No,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Total service,Yes
+Zone 3,Unmarried,Some college,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,Some college,No,Female,No,Yes,No,No,Yes,No,No,No,No,No,No,No,Yes,E-service,No
+Zone 1,Unmarried,High school degree,No,Female,Yes,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 3,Married,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,Basic service,No
+Zone 1,Married,Post-undergraduate degree,No,Male,No,No,No,No,No,No,No,No,Yes,No,No,No,No,Basic service,Yes
+Zone 3,Married,Some college,No,Female,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 3,Unmarried,High school degree,No,Female,Yes,No,No,No,No,No,No,No,Yes,Yes,No,No,No,Plus service,No
+Zone 3,Unmarried,Some college,No,Female,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 3,Married,Post-undergraduate degree,Yes,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Married,Did not complete high school,Yes,Female,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,No,No,Plus service,No
+Zone 1,Married,High school degree,No,Male,Yes,No,No,No,No,Yes,No,No,No,Yes,Yes,No,No,Plus service,No
+Zone 3,Unmarried,High school degree,No,Male,No,No,No,No,No,No,No,No,No,No,No,Yes,Yes,Basic service,No
+Zone 3,Married,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Total service,Yes
+Zone 3,Married,College degree,No,Female,No,Yes,Yes,No,Yes,Yes,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 3,Married,Some college,No,Male,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,E-service,No
+Zone 2,Unmarried,College degree,No,Male,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 1,Married,High school degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Married,High school degree,No,Female,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Married,High school degree,Yes,Female,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 3,Married,Some college,No,Female,No,No,Yes,Yes,Yes,No,No,Yes,No,Yes,Yes,No,Yes,E-service,No
+Zone 3,Married,College degree,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,Yes,Plus service,No
+Zone 2,Married,High school degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,Yes,No,E-service,No
+Zone 3,Unmarried,High school degree,No,Female,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Basic service,No
+Zone 2,Married,Did not complete high school,No,Male,Yes,Yes,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 1,Married,College degree,No,Male,No,Yes,Yes,Yes,Yes,No,Yes,Yes,No,No,No,No,Yes,E-service,No
+Zone 2,Married,Did not complete high school,Yes,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,High school degree,No,Male,No,Yes,Yes,Yes,Yes,No,No,Yes,Yes,No,No,Yes,No,E-service,No
+Zone 3,Married,Some college,No,Female,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,Total service,No
+Zone 1,Unmarried,Some college,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,Yes
+Zone 3,Unmarried,Some college,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,College degree,No,Female,No,No,Yes,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 3,Married,High school degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Unmarried,Post-undergraduate degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Married,Some college,No,Female,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Married,Did not complete high school,Yes,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Some college,No,Male,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 2,Married,High school degree,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Unmarried,Some college,No,Female,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,E-service,Yes
+Zone 1,Married,High school degree,No,Female,No,No,Yes,No,No,No,No,No,Yes,No,Yes,Yes,No,Plus service,No
+Zone 2,Married,High school degree,No,Female,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 3,Unmarried,High school degree,Yes,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,Did not complete high school,No,Female,Yes,No,No,No,No,No,No,No,Yes,No,Yes,Yes,No,Plus service,Yes
+Zone 3,Married,Did not complete high school,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Married,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 2,Unmarried,College degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,Post-undergraduate degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Unmarried,Did not complete high school,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Unmarried,College degree,No,Female,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,Yes
+Zone 1,Married,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Married,High school degree,No,Female,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,Yes,No,Plus service,No
+Zone 3,Married,College degree,No,Female,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 3,Unmarried,Did not complete high school,Yes,Female,No,No,Yes,No,No,No,No,No,No,Yes,No,No,No,Basic service,No
+Zone 3,Married,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Married,Some college,No,Female,No,Yes,Yes,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 2,Unmarried,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Male,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,No,No,Yes,E-service,Yes
+Zone 3,Married,College degree,No,Female,No,No,No,No,Yes,Yes,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 1,Married,College degree,No,Male,No,No,No,No,Yes,No,No,No,No,No,No,No,No,E-service,Yes
+Zone 2,Married,Did not complete high school,No,Female,No,Yes,Yes,No,No,No,No,Yes,No,No,No,No,No,Basic service,No
+Zone 1,Married,High school degree,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,Yes,No,E-service,No
+Zone 2,Unmarried,Some college,No,Male,Yes,Yes,Yes,Yes,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 3,Unmarried,High school degree,No,Male,No,No,No,No,No,No,No,No,No,No,No,Yes,No,Basic service,Yes
+Zone 1,Unmarried,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,Did not complete high school,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 2,Unmarried,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,No,Yes,Total service,No
+Zone 2,Married,College degree,No,Female,No,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Married,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 3,Married,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Married,High school degree,No,Female,No,No,No,No,No,No,No,No,Yes,No,Yes,No,No,Plus service,No
+Zone 1,Unmarried,High school degree,No,Female,No,No,Yes,Yes,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,Did not complete high school,No,Male,Yes,No,Yes,Yes,No,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,High school degree,Yes,Female,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,College degree,No,Female,No,No,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 2,Unmarried,College degree,No,Female,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Total service,Yes
+Zone 3,Unmarried,High school degree,Yes,Male,No,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,Some college,No,Female,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,No,No,No,Yes,E-service,No
+Zone 3,Married,High school degree,No,Female,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 3,Married,Some college,No,Male,No,No,No,No,No,No,No,No,Yes,No,No,No,Yes,Basic service,No
+Zone 2,Unmarried,College degree,No,Male,No,No,Yes,No,Yes,No,No,Yes,No,No,No,Yes,No,E-service,No
+Zone 3,Married,High school degree,No,Male,No,No,Yes,No,No,No,No,No,Yes,No,Yes,No,No,Plus service,No
+Zone 3,Unmarried,Some college,No,Female,Yes,No,Yes,No,No,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,High school degree,No,Male,Yes,No,Yes,Yes,No,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 3,Unmarried,High school degree,No,Female,Yes,Yes,Yes,No,Yes,No,No,No,Yes,No,Yes,Yes,No,Plus service,No
+Zone 3,Married,Some college,No,Female,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,No,Yes,Total service,No
+Zone 3,Unmarried,High school degree,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,No,Yes,Yes,No,Plus service,No
+Zone 2,Married,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,Some college,No,Female,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,Plus service,Yes
+Zone 1,Married,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,Yes,Yes,No,Yes,Total service,No
+Zone 2,Unmarried,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 2,Unmarried,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,No,Yes,No,Yes,No,Yes,Yes,Yes,Total service,Yes
+Zone 2,Unmarried,High school degree,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Married,Some college,No,Male,Yes,Yes,Yes,Yes,No,No,No,Yes,Yes,No,Yes,Yes,Yes,Plus service,No
+Zone 3,Married,Some college,No,Female,No,No,No,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Unmarried,High school degree,No,Female,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 1,Married,Some college,No,Male,Yes,No,Yes,Yes,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,Did not complete high school,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Married,Some college,No,Female,No,Yes,Yes,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,No
+Zone 1,Married,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 3,Unmarried,High school degree,No,Male,Yes,No,Yes,Yes,No,Yes,No,No,Yes,Yes,No,Yes,No,Plus service,No
+Zone 2,Married,High school degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 1,Married,Some college,No,Female,No,Yes,Yes,No,Yes,No,No,No,Yes,No,No,No,No,E-service,No
+Zone 2,Married,College degree,No,Female,No,No,Yes,No,No,No,No,No,Yes,No,No,Yes,No,Plus service,No
+Zone 2,Married,Did not complete high school,No,Male,No,No,Yes,No,Yes,No,No,No,No,Yes,No,Yes,No,Plus service,No
+Zone 3,Married,College degree,No,Male,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Yes,No,Yes,Total service,No
+Zone 2,Married,College degree,No,Male,Yes,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,Yes
+Zone 2,Unmarried,College degree,No,Male,No,No,Yes,No,No,No,No,No,No,Yes,Yes,No,No,Plus service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,High school degree,No,Female,No,No,No,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 3,Unmarried,Did not complete high school,Yes,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,High school degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,High school degree,No,Male,No,No,No,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 1,Unmarried,High school degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Unmarried,College degree,No,Male,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Married,Some college,No,Female,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Unmarried,College degree,No,Female,No,Yes,Yes,No,Yes,Yes,No,No,No,No,Yes,No,Yes,E-service,No
+Zone 3,Unmarried,High school degree,No,Male,No,No,No,No,No,No,No,No,Yes,Yes,Yes,No,No,Plus service,Yes
+Zone 1,Married,Some college,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,Yes,No,Yes,E-service,No
+Zone 2,Unmarried,High school degree,No,Male,No,No,No,No,Yes,No,Yes,Yes,No,No,No,No,No,E-service,Yes
+Zone 3,Married,High school degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,Yes,Yes,No,No,Plus service,No
+Zone 1,Unmarried,Did not complete high school,No,Female,Yes,Yes,Yes,Yes,Yes,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,High school degree,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,No,No,Plus service,Yes
+Zone 3,Unmarried,College degree,No,Male,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Married,High school degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,Yes
+Zone 3,Unmarried,College degree,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,Yes,E-service,No
+Zone 2,Married,Some college,No,Female,Yes,Yes,No,No,No,No,No,No,Yes,Yes,No,Yes,No,Plus service,Yes
+Zone 3,Married,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Unmarried,Some college,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Married,Did not complete high school,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 3,Unmarried,Some college,No,Male,No,No,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Married,Some college,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,High school degree,No,Female,Yes,No,Yes,No,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Married,High school degree,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,No,No,Plus service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 1,Unmarried,College degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,No,Yes,Total service,Yes
+Zone 3,Unmarried,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,Some college,No,Female,Yes,No,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 3,Married,Did not complete high school,No,Male,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,E-service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,College degree,No,Female,Yes,No,Yes,No,Yes,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,High school degree,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,No,Yes,No,No,Plus service,No
+Zone 1,Married,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,No,No,Plus service,No
+Zone 1,Unmarried,Post-undergraduate degree,No,Female,Yes,Yes,Yes,Yes,No,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Married,High school degree,No,Female,No,No,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 1,Married,Some college,No,Female,No,Yes,Yes,Yes,Yes,Yes,No,Yes,No,No,Yes,Yes,Yes,Total service,No
+Zone 1,Married,Some college,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Unmarried,College degree,No,Male,Yes,No,Yes,No,No,No,No,Yes,Yes,Yes,Yes,No,Yes,Plus service,No
+Zone 2,Unmarried,College degree,No,Male,Yes,No,No,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 2,Married,High school degree,No,Female,No,No,No,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,Some college,No,Female,Yes,No,Yes,Yes,Yes,No,No,No,Yes,Yes,Yes,No,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Male,Yes,Yes,No,Yes,No,Yes,Yes,Yes,No,No,Yes,No,No,Total service,No
+Zone 2,Married,College degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Total service,No
+Zone 2,Unmarried,Some college,No,Female,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,No,E-service,Yes
+Zone 3,Married,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,High school degree,No,Male,Yes,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Married,College degree,No,Female,No,Yes,Yes,Yes,Yes,No,No,Yes,No,No,No,No,No,E-service,Yes
+Zone 2,Unmarried,Some college,No,Male,No,No,No,No,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,High school degree,No,Female,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 2,Unmarried,Some college,No,Female,No,Yes,No,No,No,No,No,No,No,No,No,Yes,Yes,Basic service,No
+Zone 2,Married,Did not complete high school,No,Female,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,No,E-service,Yes
+Zone 1,Unmarried,Some college,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,No,No,Yes,Yes,E-service,No
+Zone 2,Unmarried,High school degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,Yes,No,Yes,Total service,Yes
+Zone 2,Unmarried,Post-undergraduate degree,No,Female,No,No,No,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Yes,Total service,No
+Zone 3,Married,Post-undergraduate degree,No,Male,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,Yes
+Zone 3,Unmarried,Some college,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,Some college,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,Some college,No,Female,Yes,No,Yes,No,No,No,Yes,No,No,No,No,No,Yes,Basic service,No
+Zone 2,Married,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,Some college,No,Male,Yes,No,No,No,No,No,No,No,Yes,No,No,Yes,No,Basic service,No
+Zone 2,Married,Did not complete high school,No,Male,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,No
+Zone 1,Married,College degree,No,Male,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,E-service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,Did not complete high school,Yes,Male,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,Yes,No,Yes,Yes,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,Post-undergraduate degree,No,Male,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 2,Unmarried,Some college,No,Female,No,Yes,No,No,Yes,No,No,No,Yes,No,No,No,Yes,E-service,Yes
+Zone 2,Unmarried,Did not complete high school,No,Female,Yes,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Married,High school degree,No,Female,Yes,No,Yes,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Did not complete high school,No,Female,Yes,No,Yes,No,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Post-undergraduate degree,No,Female,No,Yes,Yes,No,Yes,Yes,No,Yes,No,No,No,No,Yes,E-service,No
+Zone 3,Unmarried,High school degree,No,Male,Yes,No,Yes,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Unmarried,Some college,No,Female,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,High school degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Unmarried,Post-undergraduate degree,No,Female,No,Yes,No,No,No,No,No,Yes,No,No,No,No,Yes,Basic service,Yes
+Zone 3,Unmarried,College degree,No,Male,No,Yes,No,No,Yes,Yes,No,Yes,Yes,No,Yes,No,Yes,Total service,Yes
+Zone 3,Married,Some college,No,Female,No,Yes,Yes,No,Yes,No,No,No,Yes,Yes,No,No,Yes,E-service,No
+Zone 2,Married,High school degree,No,Male,No,No,Yes,No,No,No,No,No,Yes,No,Yes,No,No,Plus service,Yes
+Zone 2,Unmarried,High school degree,No,Male,Yes,No,Yes,No,No,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,College degree,No,Female,Yes,No,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 2,Unmarried,Some college,No,Female,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,No,No,Yes,Yes,Total service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,Yes,No,No,No,Basic service,No
+Zone 2,Married,High school degree,No,Female,Yes,No,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 3,Married,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,College degree,No,Male,Yes,No,Yes,No,No,Yes,Yes,No,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Unmarried,High school degree,No,Female,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,No,No,Total service,No
+Zone 2,Unmarried,College degree,No,Male,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,Yes
+Zone 2,Married,College degree,No,Male,Yes,No,Yes,Yes,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 1,Married,College degree,No,Female,Yes,No,Yes,Yes,No,No,No,Yes,Yes,No,Yes,No,Yes,Basic service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 1,Unmarried,Did not complete high school,Yes,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,No,Yes,No,Plus service,No
+Zone 2,Unmarried,College degree,No,Male,No,No,Yes,No,No,Yes,No,Yes,No,Yes,No,No,No,Basic service,Yes
+Zone 3,Unmarried,High school degree,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 1,Unmarried,High school degree,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,No
+Zone 2,Married,Some college,No,Female,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes
+Zone 2,Married,High school degree,No,Female,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 2,Married,Did not complete high school,No,Female,No,Yes,Yes,Yes,No,Yes,No,No,Yes,No,No,Yes,No,Plus service,No
+Zone 1,Married,Some college,No,Male,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 1,Married,Post-undergraduate degree,No,Female,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Total service,Yes
+Zone 1,Married,Some college,No,Male,Yes,Yes,Yes,Yes,No,No,No,No,Yes,Yes,Yes,Yes,Yes,Plus service,No
+Zone 3,Married,Post-undergraduate degree,No,Male,No,No,Yes,No,Yes,No,Yes,Yes,No,No,No,No,No,E-service,No
+Zone 1,Married,High school degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 2,Married,College degree,No,Male,No,Yes,No,Yes,Yes,No,No,Yes,No,Yes,No,Yes,Yes,E-service,No
+Zone 3,Unmarried,Some college,No,Male,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,No
+Zone 3,Married,High school degree,No,Male,Yes,No,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 1,Unmarried,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,No,No,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 2,Unmarried,High school degree,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Unmarried,Some college,No,Male,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,Basic service,No
+Zone 3,Married,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,High school degree,No,Male,Yes,No,Yes,No,No,No,Yes,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,Some college,No,Male,Yes,No,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,High school degree,No,Male,Yes,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,No,Yes,Basic service,Yes
+Zone 2,Married,High school degree,No,Female,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Married,Post-undergraduate degree,No,Male,No,No,No,No,Yes,No,No,Yes,No,Yes,No,No,Yes,E-service,No
+Zone 1,Married,Some college,No,Male,No,Yes,No,No,No,No,Yes,No,No,No,No,No,Yes,Basic service,No
+Zone 3,Unmarried,High school degree,No,Female,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 3,Married,Some college,No,Male,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Total service,No
+Zone 1,Married,College degree,No,Male,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Unmarried,Some college,No,Female,Yes,Yes,Yes,Yes,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,Yes
+Zone 3,Married,Some college,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,Did not complete high school,No,Female,No,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 2,Married,High school degree,No,Female,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,Yes
+Zone 1,Unmarried,Did not complete high school,No,Male,No,No,Yes,No,No,No,No,No,Yes,No,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,Yes,Yes,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,High school degree,Yes,Female,Yes,No,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,Did not complete high school,No,Male,No,No,Yes,No,Yes,No,No,Yes,No,No,No,Yes,No,E-service,No
+Zone 1,Married,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Male,No,No,Yes,No,No,No,No,No,No,No,No,No,Yes,Basic service,No
+Zone 3,Married,Did not complete high school,No,Female,No,No,Yes,No,No,No,No,Yes,No,No,No,No,No,Basic service,No
+Zone 2,Unmarried,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,No,No,No,Yes,Yes,No,Plus service,No
+Zone 2,Unmarried,Some college,No,Male,Yes,No,No,No,Yes,Yes,No,No,No,Yes,No,No,No,E-service,Yes
+Zone 3,Unmarried,Some college,No,Male,No,Yes,No,Yes,No,Yes,No,Yes,No,No,No,Yes,Yes,Basic service,Yes
+Zone 2,Married,Did not complete high school,No,Female,Yes,No,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,Some college,No,Female,Yes,No,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,Did not complete high school,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Unmarried,College degree,No,Male,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 2,Married,College degree,No,Female,Yes,Yes,Yes,Yes,No,Yes,Yes,No,Yes,No,Yes,Yes,No,Total service,Yes
+Zone 1,Unmarried,College degree,No,Male,No,Yes,Yes,No,No,Yes,No,Yes,Yes,No,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,College degree,No,Male,Yes,No,Yes,No,Yes,No,No,No,No,No,No,Yes,Yes,E-service,No
+Zone 1,Unmarried,High school degree,No,Female,Yes,No,No,No,Yes,No,No,No,Yes,Yes,No,No,No,Plus service,Yes
+Zone 1,Unmarried,Some college,No,Male,Yes,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 2,Married,High school degree,No,Female,No,Yes,Yes,Yes,Yes,No,No,Yes,No,No,Yes,No,Yes,E-service,No
+Zone 1,Married,High school degree,No,Male,Yes,No,Yes,No,No,No,No,Yes,Yes,No,Yes,Yes,No,Plus service,No
+Zone 3,Married,Some college,No,Female,Yes,No,Yes,Yes,No,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Total service,Yes
+Zone 1,Married,Post-undergraduate degree,No,Male,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Total service,Yes
+Zone 3,Unmarried,Some college,No,Female,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,Basic service,No
+Zone 1,Unmarried,Post-undergraduate degree,No,Female,No,Yes,No,No,No,No,No,No,No,No,No,No,No,Basic service,No
+Zone 3,Unmarried,Post-undergraduate degree,No,Female,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Total service,No
+Zone 3,Unmarried,High school degree,No,Female,Yes,No,Yes,No,No,Yes,No,No,Yes,Yes,Yes,Yes,No,Plus service,No
+Zone 3,Married,Some college,No,Female,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No,Yes,E-service,Yes

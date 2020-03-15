@@ -1,0 +1,572 @@
+---
+title: "WordNet and Entity Recognition"
+author: "Erin M. Buchanan"
+date: "12/12/2019"
+output: 
+  slidy_presentation:
+    increment: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Semantic Analysis
+
+- Recap: we have now learned how to tag datasets for parts of speech and build your own POS tagger
+- At the lowest level, this task is a small measure of semanticity - or being to understand meaning in a text
+  - POS tells us a lot about meaning, even without knowing the literal meaning of the words we are tagging
+- How might we get at the meaning of words?
+
+## Semantic Analysis
+
+- We will discuss how to explore WordNet and synsets
+- Analyze lexical semantic relations
+- Word sense disambiguation
+- Named Entity Recognition
+
+## WordNet
+
+- A large lexical database - started in English and has been expanded to other languages 
+- https://wordnet.princeton.edu/ 
+- Remember that we discussed the difference between *function* and *content* words
+- WordNet is mostly a dictionary of *content* words - nouns, adjectives, adverbs, and verbs
+- WordNet has an hierarchical structure, wherein each item is related to every other item in a tree like fashion
+
+## WordNet
+
+- Words are clustered into synsets - or synonym sets - wherein these words are of the same semantic meaning
+- Contains over 150,000 words grouped into 120,000(ish) synsets and many more word-sense pairs
+- WordNet can be accessed through `nltk` in Python and the `wordnet` package in R
+
+```{r}
+##r chunk
+#install.packages("wordnet")
+library(reticulate)
+#py_install("nltk")
+```
+
+## Synsets
+
+- These are defined as words that are semantically similar or synonyms
+- They may not be exactly the same, but centered around the same content and concepts (i.e., they have similar features or relations to other words)
+- These might also include collocations (multiword combinations) rather than just single words
+- Additionally, words with multiple senses or meanings (polysemes) are noted and assigned to different synsets based on their various meanings
+
+## Fruit in R
+
+- WordNet in *R* is a bit complex.
+  - First, define the type of filter you want to use.
+  - Filters can be "ContainsFilter", "EndsWithFilter", "ExactMatchFilter", "RegexFilter", "SoundFilter", "StartsWithFilter", and "WildcardFilter".
+
+```{r}
+##r chunk
+library(wordnet)
+filter <- getTermFilter("ExactMatchFilter", #find this exact word
+                        word = "fruit", #what the word is
+                        ignoreCase = TRUE) #should I ignore case
+```
+
+## Fruit in R
+
+- Next, you would define how you want to get the related terms.
+  - The indices can be: "ADJECTIVE", "ADVERB", "NOUN", or "VERB"
+- Last, you put in the filter. 
+
+```{r}
+##r chunk
+terms <- getIndexTerms("NOUN", #what type of word you want it to be
+                       5, #maximum number of results to return
+                       filter) #the filter you previously defined
+terms
+```
+
+## Fruit in R
+
+```{r}
+##r chunk
+#we could use lapply here to pull more than one
+fruit_sets <- lapply(terms, getSynsets)
+
+fruit_sets
+```
+
+## Fruit in Python
+
+- The Python version is easier - you can grab all the types at once!
+
+```{python}
+##python chunk
+from nltk.corpus import wordnet as wn
+import pandas as pd
+
+fruit_sets_py = wn.synsets("fruit")
+print(fruit_sets_py)
+```
+
+## Fruit in Python
+
+- You can also convert to a dataframe a lot easier!
+
+```{python}
+##python chunk
+fruit_df = pd.DataFrame([
+  {"Synset": each_synset, 
+  "Part of Speech": each_synset.pos(), 
+  "Definition": each_synset.definition(), 
+  "Lemmas": each_synset.lemma_names(), 
+  "Examples": each_synset.examples()} 
+  for each_synset in fruit_sets_py])
+
+fruit_df
+
+fruit_df["Definition"]
+```
+
+## Lexical Semantic Relationships
+
+- Text Entailment the directional relation between a text and hypothesis
+- Text: A hurricane hit Peter's town.
+- Hypothesis: Peter's town was damaged.
+- How might we make a system that can recognize entailment?
+
+## Entailments in Python
+
+- Entailments are coded into Wordnet, which we can pull from the `synset` using the `.entailments()` function. 
+- There may be more than one synset, but here we are just pulling the first one by using `[0]`.
+
+```{python}
+for action in ["walk", "eat", "digest"]:
+  action_synset = wn.synsets(action, pos = "v")[0] #take just the first one
+  print(action_synset, "-- entails -->", action_synset.entailments())
+```
+
+## Other types of relations
+
+- Homonyms: same written form/pronunciation but different meanings
+- Homographs: same written form, different pronunciation or meaning
+
+```{python}
+##python chunk
+for synset in wn.synsets("bank"):
+  print(synset.name(), " - ", synset.definition())
+```
+
+## Synonyms and Antonyms
+
+- Synsets are for synonyms, words with similar meanings
+- Antonyms are words with opposite meanings
+
+```{python}
+##python chunk
+large_synset = wn.synsets("large")
+large_synset[1] #grab large as an adjective
+
+large_synset[1].lemmas()
+large_synset[1].lemmas()[0].antonyms()
+```
+
+## Another example
+
+```{python}
+##python chunk
+term = "rich"
+term_synset = wn.synsets(term)[:3] #only the first three have connections
+
+for each_synset in term_synset:
+  term_l = each_synset.lemmas()[0]
+  term_s = term_l.synset()
+  term_a = term_l.antonyms()[0].synset()
+  
+  print("Synonym: ", term_s.name())
+  print("Definition: ", term_s.definition())
+  print("Antonym: ", term_a.name())
+  print("Definition: ", term_a.definition())
+  
+```
+
+## Hyponyms and Hypernyms
+
+- Hypernyms: a superordinate name, more abstract (animal)
+- Comparison word (dog)
+- Hyponyms: a subordinate name, more specific (beagle)
+
+```{python}
+##python chunk
+dog_synset = wn.synsets("dog")
+dog_synset
+dog = dog_synset[0]
+
+dog.hypernyms()
+dog.hyponyms()
+```
+
+## Why is this structure awesome?
+
+- We can begin to track the hierarchical path of how words are connected to each other in meaning by tracking the paths of hyper/hyponyms. 
+
+```{python}
+##python
+dog_paths = dog.hypernym_paths()
+dog_paths
+```
+
+## Holonyms and Meronyms
+
+- Holonyms are the name for a collection of objects
+
+```{python}
+##python chunk
+tree_synset = wn.synsets("tree")
+tree_synset
+tree_synset[0].definition()
+tree = tree_synset[0]
+tree.member_holonyms()
+```
+
+## Holonyms and Meronyms
+
+- Meronyms are the component parts of an object
+
+```{python}
+##python chunk
+tree.part_meronyms()
+
+tree.substance_meronyms()
+```
+
+## Similarity
+
+- With the structure of the network, we can calculate similarity by finding the paths between words or the most common hypernym, etc.
+- Let's look at an example:
+
+```{python}
+##python chunk
+tree = wn.synsets("tree")
+tree[0].definition()
+tree = tree[0]
+
+lion = wn.synsets("lion")
+lion[0].definition()
+lion = lion[0]
+
+cat = wn.synsets("cat")
+cat[0].definition()
+cat = cat[0]
+```
+
+## Lowest common hypernyms
+
+```{python}
+##python chunk
+tree.lowest_common_hypernyms(lion)
+tree.lowest_common_hypernyms(cat)
+lion.lowest_common_hypernyms(cat)
+
+tree.path_similarity(lion)
+tree.path_similarity(cat)
+lion.path_similarity(cat)
+```
+
+## Other similarity measures
+
+```{python}
+##python chunk
+from nltk.corpus import wordnet_ic
+semcor_ic = wordnet_ic.ic('ic-semcor.dat')
+tree.jcn_similarity(lion, semcor_ic)
+lion.jcn_similarity(cat, semcor_ic)
+
+tree.lin_similarity(lion, semcor_ic)
+lion.lin_similarity(cat, semcor_ic)
+```
+
+## Word Sense Disambiguation
+
+- We naturally use the context clues of a sentence to help us distinguish from different meanings possible in a word
+- This task is useful for search enginges, keywords, etc. in a business context
+- We can use the Lesk algorithm - examine the dictionary definition and the words around the target word in the sentence to see if they overlap.
+
+```{python}
+##python chunk 
+from nltk.wsd import lesk
+from nltk import word_tokenize
+
+sample_text = [("The fruits on that plant have ripened", "n"),
+          ("He finally reaped the fruit of his hard work as he won the race", "n")]
+
+word = "fruit"
+for sentence, pos_tag in sample_text:
+  word_syn = lesk(word_tokenize(sentence.lower()), word, pos_tag)
+  print("Sentence: ", sentence)
+  print("Word Synset: ", word_syn)
+  print("Corresponding Definition: ", word_syn.definition())
+```
+
+## One more example
+
+```{python}
+##python chunk 
+
+sample_text = [("Lead is a very soft, malleable metal", "n"),
+          ("John is the actor who plays the lead in that movie", "n"),
+          ("This road leads to nowhere", "v")]
+
+word = "lead"
+for sentence, pos_tag in sample_text:
+  word_syn = lesk(word_tokenize(sentence.lower()), word, pos_tag)
+  print("Sentence: ", sentence)
+  print("Word Synset: ", word_syn)
+  print("Corresponding Definition: ", word_syn.definition())
+```
+
+## Named Entity Recognition
+
+- Named entity - real-world object with a proper name
+  - Much like the proper nouns that are tagged in part of speech tagging
+  - Things like Twitter, France, and any celebrity
+- GPE - geopolitical entity - like a country
+- PER - person - like celebrities
+- ORG - organization - like Twitter
+
+## Categories and Labels
+
+- How many categories can there be?
+  - In part of speech tagging, we had a lot of different categories (50+ in Brown)
+  - However, we could use the universal tag set and only have 10 tags
+  - So it's up to us to determine the granularity of the tags
+
+## Categories and Labels
+
+- The most common tags are:
+  - PER for person
+  - LOC for location
+  - ORG for organization
+  - MISC for miscellaneous
+
+## Categories and Labels
+
+- Some other tags include:
+  - NORP for nationalities, religious, political groups
+  - FACILITY for buildings airports highways
+  - GRE for countries
+  - PRODUCT for objects, foods, etc. 
+  - EVENT for hurricanes, battles, wars, sporting events
+  - WORK_OF_ART for songs, books, paintings
+  - LAW for named laws
+  - LANGUAGE for languages 
+  - Numbers: DATE, TIME, PERCENT, MONEY, QUANTITY, ORDINAL, CARDINAL
+- Spacy uses about 18 different tags to be able to classify, which is what we are going to use 
+
+## Why NER?
+
+- Why should we use named entity recognition?
+  - Entity linking is where we use NER to help us find relationships between things in a text.
+  - *Rome is the capital of Italy.*
+  - Rome and Italy would get tagged as a place (GPE) and then we could link them together. 
+  - A business might use this ability to help identify links between organizations
+
+## A note about generalization 
+
+- One caveat with these models is that they are *brittle*
+  - The training is specific to the task
+  - Part of speech tagging can be fairly consistent across texts, as long as it's well trained
+  - NER taggers will break more easily because they are trained to recognize specific contexts 
+
+## Training models
+
+- These models are trained in the same fashion as the part of speech tagging that we demonstrated in the last chapter 
+  - Instead of datasets tagged with POS, we will be using datasets that are tagged with entities 
+- What might we use to help classify these objects?
+  - Obviously, we can have a look up dictionary of famous places, names, etc.
+  - The limitation would be that this dictionary would be quite large, and you would miss new things that weren't programmed until it was updated.
+
+## Training models
+
+- What other things might we use?
+  - Words around the target word
+  - Prefixes or suffixes
+  - Special symbols
+  - Uppercase words 
+- All of these are features we might use to help us train and build a model
+
+## Training models
+
+- After we figure out the features we want to use to categorize our named entities, the task becomes a machine learning classification task
+- A popular algorithm is Conditional Random Fields and some deep learning methods
+
+## How to Tag
+
+- IOB tagging: creates *chunks* of text to help us do named entity recognition
+- We often are interested in noun phrases, as named entities are often nouns
+  - B: word tagged as the beginning of the chunk
+  - I: words tagged as the inside of the chunk
+  - O: word tagged as the outside of the chunk
+- You need all three of these to mark the beginning and the end
+- The I is necessary to make sure that each word is tagged so every entry has a code
+
+## How to Tag
+
+- Spacy also uses L and U tags and gives them slightly different names
+  - B: beginning
+  - I: inside
+  - L: last (instead of outside)
+  - U: unit, a single entity token 
+  - O: a non-entity token
+  
+## The Stanford Named Entity Recognition Tagger
+
+- A famous named entity recognition tagger that is available in nltk
+- Written in java - so the set up requires finding the java files and having java set up correctly
+- Is a conditional random field algorithm that uses pattern recognition to learn patterns
+
+## NER with spacy
+
+```{python}
+##python chunk
+import spacy
+nlp = spacy.load("en_core_web_sm")
+
+##process with nlp
+example1 = nlp("Donald Trump visited the government headquarters in France today.")
+example2 = nlp("He studies philosophy at Paris Nanterre University, completed a Master's of Public Affairs at Sciences Po, and graduate from the Ecole nationale d'administration (ENA) in 2004.")
+```
+
+## How to Automatically Detect Entities
+
+- Notice how it tags the names and places.
+- Also notice how there are empty spaces 
+
+```{python}
+##python chunk
+for token in example1:
+  print(token.text, token.ent_type_)
+```
+
+## How to Automatically Detect Entities
+
+```{python}
+##python chunk
+for token in example2:
+  print(token.text, token.ent_type_)
+```
+
+## How to Train your own NER Tagger
+
+- To train models in spacy, you start with a blank model in a specific language. 
+- Next add some information about the type of model you want to build
+- Tutorial taken from: https://sematext.com/blog/entity-extraction-with-spacy/ and https://spacy.io/usage/training 
+
+```{python}
+##python chunk
+
+#empty spacy model
+nlp = spacy.blank("en")  
+
+#add a name for training
+nlp.vocab.vectors.name = 'example_model_training'   
+```
+
+## How to Train your own NER Tagger
+
+- Spacy models are built on "pipes", so we will add a NER pipe 
+
+```{python}
+##python chunk
+#add NER pipeline
+ner = nlp.create_pipe('ner')  
+#add pipeline to our blank model we created
+nlp.add_pipe(ner, last=True)  
+```
+
+## How to Train your own NER Tagger
+
+- Create some type of training data, here's a very small example. 
+- Notice this is a list [] of tuples () that contain dictionaries {}. 
+- The "u" indicates unicode. 
+
+```{python}
+##python chunk
+# training data
+training_data = [ #start our list
+
+    ( #start a tuple
+      #first is the text
+      u"Search Analytics: Business Value & BigData NoSQL Backend, Otis Gospodnetic", 
+      { #start a dictionary
+        #first key is always entities
+        #second value which is a LIST of TUPLES
+        'entities': [ #start value list
+          #slicing to find the specific section of the text
+          #start number, end number, entity tag
+          (58,74,'PERSON') 
+          ] #end value list
+        } #end dictionary 
+    ), #end of the tuple 
+    
+  ( #start tuple 
+    #text 
+    u"Introduction to Elasticsearch by Radu", 
+    { #start dictionary 
+      'entities': [ #list for values
+        (16,29,'TECH'), (33, 37, 'PERSON') 
+      ] #end of list 
+    } #end dictionary
+  ) #end tuple
+
+  ] #end list 
+```
+
+## How to Train your own NER Tagger
+
+- We need to tell our model what type of tags to expect.
+
+```{python}
+##python chunk
+nlp.entity.add_label('PERSON')
+nlp.entity.add_label('TECH')
+```
+
+## How to Train your own NER Tagger
+
+- Let's start training!
+
+```{python}
+##python chunk
+#begin training
+optimizer = nlp.begin_training()
+import random
+
+#run through training
+for i in range(20):
+    random.shuffle(training_data)
+    for text, annotations in training_data:
+        nlp.update([text], [annotations], sgd=optimizer)
+```
+
+## How to Train your own NER Tagger
+
+- You can save your model for later.
+
+```{python}
+##python chunk
+#save your model if you want to use it later
+nlp.to_disk("./model")
+```
+
+## Using your NER Tagger 
+
+```{python}
+##python chunk
+example3 = nlp(u"#bbuzz 2016: Otis Gospodnetic - Running High Performance And Fault Tolerant Elasticsearch ")
+
+for entity in example3.ents:
+  print(entity.label_, ' | ', entity.text)
+```
+
+## Summary
+
+- We explored the idea of learning about meaning using Wordnet.
+- With Wordnet, we can find related words and also calculate similarity.
+- Similar to part of speech tagging, we can also create models that do named entity recognition.
+- You learned how to set up a pipeline in spacy for building custom models. 

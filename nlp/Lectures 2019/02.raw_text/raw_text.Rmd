@@ -1,0 +1,594 @@
+---
+title: "Processing Raw Text"
+author: "Erin M. Buchanan"
+date: "01/30/2020"
+output: 
+  slidy_presentation:
+    increment: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Working with strings
+
+- Language data is just a bunch of strings!
+- Strings are character vectors - but they come in lots of shapes and sizes.
+- So, we will learn how to work with them in a few ways. 
+
+```{r}
+##r chunk
+library(reticulate)
+py_config()
+```
+
+## Basic operations
+
+- How do we combine strings? 
+
+```{r}
+##r chunk
+string1 = "swiss"
+string2 = "cheese"
+
+c(string1, string2) #notice this is a vector
+
+paste(string1, string2, sep = " ")
+```
+
+```{python}
+##python chunk
+string1 = "swiss"
+string2 = "cheese"
+
+string1 + string2
+string1 + " " + string2
+```
+
+## Indexing
+
+- Indexing is calling a particular row, column, or spot in a set of objects
+
+```{r}
+##r chunk
+string1[1] #pulls the first item
+setofstrings = c("swiss", "cheese", "is", "great")
+setofstrings[2]
+setofstrings[-2]
+```
+
+```{python}
+##python chunk
+string1[1]
+string1[0]
+string1[-1]
+
+setofstrings = ["swiss", "cheese", "is", "great"]
+setofstrings[0]
+setofstrings[-1]
+```
+
+## Slicing 
+
+- Slicing is taking only a set of indices (rather than everything)
+
+```{r}
+##r chunk
+setofstrings[1:2]
+#setofstrings[:2] not allowed
+```
+```{python}
+##python chunk
+setofstrings
+setofstrings[0:1]
+setofstrings[:1]
+setofstrings[:2]
+setofstrings[2:]
+```
+
+## Methods
+
+- How can we manipulate text? The ultimate goal is to clean the text, but what are some functions we might use?
+
+```{r}
+##r chunk
+sentence = paste(setofstrings, collapse = " ")
+
+toupper(sentence)
+tolower(sentence)
+
+library(stringr)
+str_to_upper(sentence)
+str_to_lower(sentence)
+str_to_title(sentence)
+str_to_sentence(sentence)
+```
+
+```{python}
+##python chunk
+sep = " "
+sentence = sep.join(setofstrings)
+sentence
+
+sentence.upper()
+sentence.lower()
+sentence.capitalize()
+sentence.title()
+```
+
+## Regular expressions
+
+- Regular expressions are flexible string patterns that allow you to search for specific combinations of text
+- Like "give me all the words that end in Y"
+- It's so flexible, it's hard to learn (trial and error!)
+- We will use the `stringr` package in tidyverse:
+  - https://stringr.tidyverse.org/articles/regular-expressions.html
+  - BUT there are some great base `R` functions as well: `grep`, `gsub`
+
+## Regular expressions
+
+- `.` matches a single character
+- `^` matches the start of a string
+- `$` matches the end of a string
+- `*` matches zero or more cases of the previous character `b*` would match no or infinite letter `b`
+- `?` matches zero or one of the previous previous character `b?` would match no or one b
+- `+` matches one more cases of previous character `b+` would match one or infinite b
+
+## Regular expressions
+
+- `|` is the OR operator
+- `[]` matches any character found in the brackets
+- `[^...]` matches a character NOT present in the brackets after the `^`
+- `\d` matches any decimal digits, can also use `[0-9]`
+- `\D` matches any non-digits, can also use `[^0-9]`
+- `\s` matches any whitespace character
+- `\S` matches non-whitespace characters
+- `\w` matches any alphanumeric characters, can also use `[a-zA-Z0-9_]`
+- `\W` matches any non-alphanumeric characters, can also use `[^a-zA-Z0-9_]`
+
+## Regular expressions
+
+```{r}
+##r chunk
+sentence = "We can talk about numbers like how great is 5 or what is a ? doing here?"
+str_extract(sentence, pattern = "5")
+str_extract(sentence, pattern = "\\d")
+
+str_extract_all(sentence, pattern = "\\?")
+
+str_detect(sentence, pattern = "n")
+
+str_replace_all(sentence, pattern = "\\?", replacement = "!")
+```
+
+```{python}
+##python chunk
+import re
+sentence = "We can talk about numbers like how great is 5 or what is a ? doing here?"
+
+#re.match - only finds the match at the beginning of the string
+print(re.search("4", sentence))
+print(re.search("\\d", sentence))
+print(re.search("\\?", sentence)) #note only first one
+
+print(re.findall("\\?", sentence))
+print(re.finditer("\\?", sentence))
+
+re.sub("\\?", "!", sentence)
+```
+
+## What do I need to do to clean up data?
+
+- Remove weird symbols and HTML tags 
+- Tokenize it 
+- Remove unnecessary tokens and stopwords
+- Contractions!
+- Spelling errors
+- ... then all the things you can do with that: stemming, lemmatization, tagging, chunking, and parsing
+- Remember GIGO!
+
+## Terminology
+
+- This step is akin to data cleaning for statistical analysis
+- Text preprocessing or normalization 
+- Creates a standardized format
+- Allows you to combine and/or compare tokens
+
+## Removing noise
+
+- Specially, let's do some simple web scraping and clean up that code. 
+- We can use `rvest` to get html data and clean it up.
+
+```{r}
+##r chunk
+library(rvest)
+blog_url = "https://www.aggieerin.com/post/getting-translations-with-rvest-and-selenium/"
+blog_post = read_html(blog_url)
+clean_text = html_text(blog_post)
+clean_text
+```
+
+## Removing noise
+
+- Use the `requests` package to pull html pages.
+- Use `BeautifulSoup` to clean it up (most of the time).
+
+```{python}
+##python chunk
+import requests
+blog_post = requests.get("https://www.aggieerin.com/post/getting-translations-with-rvest-and-selenium/")
+content = blog_post.content
+print(content[1000:2000])
+```
+
+## Removing noise
+
+```{python}
+##python chunk
+from bs4 import BeautifulSoup
+clean_content = BeautifulSoup(content)
+clean_text = clean_content.get_text()
+print(clean_text[1000:2000])
+```
+
+## Tokenization 
+
+- Tokenization is when you work on breaking down a long string into constituents. 
+- Generally, this idea means breaking down text into individual words, but you might be interested in breaking things down into sentences, paragraphs, etc. 
+- Remember, a token is usually considered an individual unit of meaning or word (and unique tokens are called types). 
+
+## Sentence tokenization
+
+- Sometimes this process is called sentence segmentation 
+- The basic technique is to simply break things down based on a `.` or `!` or `\n` characters.
+- We can use the `tokenizers` library in `R` to get us started. 
+
+```{r}
+##r chunk
+library(tokenizers)
+tokenize_sentences(clean_text)[[1]][3:8]
+
+count_sentences(clean_text) # hmmm
+temp = unlist(tokenize_sentences(clean_text))
+length(temp)
+```
+
+## Sentence tokenization
+
+- `nltk` provides great tokenization options that are preprogrammed. 
+- The default is the `PunktSentenceTokenizer` - which is a pretrained model to find abbreviations, collocations, and sentence boundaries. 
+- Said to work well for European languages. 
+
+```{python}
+##python chunk
+import nltk
+sentences = nltk.sent_tokenize(clean_text)
+print(sentences[1:3])
+len(sentences)
+```
+
+## Sentence tokenization
+
+- You can also use regular expressions to tokenize sentences
+- I would only suggest this approach with difficult, strangely formatted text
+- You could also supplement the text that has already been preprocessed with the regular tokenizers
+
+## Word tokenization 
+
+- Probably one of the most important components to NLP work 
+- Feels like this should be easy because it's just a simple whitespace right?
+- Don't forget about contractions! Spelling errors! And languages that are logographic.
+
+## Word tokenization
+
+```{r}
+##r chunk
+tokenize_words(clean_text,
+               lowercase = T,
+               stopwords = NULL, #more on this later
+               strip_punct = T,
+               strip_numeric = F,
+               simplify = F) #list format
+
+#tokenize_ptb(clean_text) Penn TreeBank option (see below)
+```
+
+## Word tokenization
+
+- Functions in `nltk`:
+  - word_tokenize
+  - TreeBankTokenizer
+  - TokTokTokenizer
+  - RegexpTokenizer
+- `spacy`!
+
+## Word tokenization
+
+- `word_tokenize` is a special instance of the Penn TreeBank Tokenizer 
+- This tokenizer is a regular expression monster
+  - Focuses on periods
+  - Separates commas and single quotes when combined with a white space
+  - Punctuation is included as a separate token
+  - Deals with contractions (sort of)
+
+```{python}
+##python chunk
+words = nltk.word_tokenize(clean_text)
+print(words[50:60])
+```
+
+## Spacy
+
+- https://spacy.io/usage/models
+
+```{python}
+##python chunk
+import spacy
+
+#this is very common naming to get spacy langauge models started
+nlp = spacy.load('en_core_web_sm')
+
+spacy_processed = nlp(clean_text)
+
+list(spacy_processed.sents)[20:30]
+len(list(spacy_processed.sents))
+```
+
+## Word tokenization
+
+```{python}
+##python chunk
+print([word.text for word in spacy_processed][:500])
+```
+
+## Removing symbols
+
+- Sometimes, things do not process correctly or the machine can't handle the accented characters such as `áö`. 
+- We would want to normalize them to the language you are processing in. 
+- The `iconv` base R function is also recommend, if you just want to strip them out.
+- `stringi` appears to have a good replacement function. 
+
+```{r}
+##r chunk
+characters = "éáö"
+
+library(stringi)
+
+stri_trans_general(str = characters,
+                   id = "Latin-ASCII")
+```
+
+## Removing symbols
+
+```{python}
+##python chunk
+import unicodedata
+
+def remove_accented_chars(text):
+  text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8', 'ignore')
+  return text
+
+remove_accented_chars(r.characters)
+```
+
+## Contractions
+
+- Contractions are shortened or combined forms of several words
+- Like "won't" is "will" and "not"
+- They present issues in processing text because you have to account for all the different combinations
+- The best way to deal with this problem is to have a look-up dictionary that maps the contraction to the expanded form 
+- Good thing those exist already!
+- You could make your own for special lexicons (like chat logs)
+
+## Contractions
+
+```{r}
+##r chunk
+library(textclean)
+
+words = unlist(tokenize_words(clean_text))
+words = str_replace_all(words, pattern = "’", 
+                        replacement = "'")
+
+words[49]
+
+replace_contraction(words, 
+                    contraction.key = lexicon::key_contractions, #default
+                    ignore.case = T)[49] #default
+```
+
+## Contractions
+
+```{r}
+##r chunk
+#py_install("contractions", pip = T)
+```
+
+```{python}
+##python chunk
+from contractions import contractions_dict
+
+for contraction, expansion in contractions_dict.items():
+  clean_text = clean_text.replace(contraction, expansion)
+```
+
+## Correcting text
+
+- We often have to deal with "incorrect" text:
+  - Slang: heyyyyy
+  - Spelling: hye 
+  - Stemming versus lemmatization
+  
+## Repeated characters
+
+Regex to the rescue!
+
+```{r}
+##r chunk
+long_text = "finallllyyyyyy"
+str_replace_all(long_text, pattern = "([[:alpha:]])\\1+", replacement = "\\1")
+```
+
+```{python}
+##python chunk
+long_text = "finallllyyyyyy"
+re.sub(r"(\w)\1+",r"\1", long_text)
+```
+
+## Spelling
+
+- Spelling options vary based on packages and options
+- Definitely check what spelling options are being suggested!
+
+```{r}
+##r chunk
+library(hunspell)
+
+wordlist = c("thse", "wods", "mispelled")
+
+# Spell check the words
+spelling.errors <- hunspell(wordlist)
+spelling.sugg <- hunspell_suggest(unlist(spelling.errors), dict = dictionary("en_US"))
+
+# Pick the first suggestion
+spelling.sugg <- unlist(lapply(spelling.sugg, function(x) x[1]))
+spelling.dict <- as.data.frame(cbind(spelling.errors,spelling.sugg))
+spelling.dict$spelling.pattern <- paste0("\\b", spelling.dict$spelling.errors, "\\b")
+
+#Replace the words 
+stri_replace_all_regex(str = wordlist,
+                       pattern = spelling.dict$spelling.pattern,
+                       replacement = spelling.dict$spelling.sugg,
+                       vectorize_all = FALSE)
+
+```
+
+## Spelling
+
+```{r}
+##r chunk
+#py_install("textblob")
+```
+
+```{python}
+##python chunk
+from textblob import Word
+wordlist = ["thse", "wods", "mispelled"]
+
+[Word(word).correct() for word in wordlist]
+```
+
+## Stemming
+
+- Remember, morphemes - which are the smallest unit of meaning 
+- Stemming is a regex type process in which you simply "cut off" the stem or inflection of the words
+- jumping, jumps, jumped --> jump because you just remove `ing`, `s`, and `ed`
+- However, that means that wings --> w because the `s` and `ing` are removed
+- Compare this procedure to lemmatization, which is using a dictionary to look up the part of speech of the word, which should correspond to a specific root word (or lemma)
+  - The part of speech is necessary because of word ambiguity, so that wings is recognized as noun, which means do not remove `ing`.
+
+## Stemming
+
+```{r}
+##r chunk
+wordlist = c("wings", "jumped", "morning", "reading")
+library(tm)
+stemDocument(wordlist, language = "english")
+```
+
+```{python}
+##python chunk
+wordlist = ["wings", "jumped", "morning", "reading"]
+
+from nltk.stem import PorterStemmer 
+from nltk.stem import LancasterStemmer
+
+ps = PorterStemmer()
+ls = LancasterStemmer()
+
+[ps.stem(word) for word in wordlist]
+[ls.stem(word) for word in wordlist]
+```
+
+## Lemmatization
+
+- The best way to lemmatize in R is certainly not the easiest - as it uses a part of speech mapper and dictionary look up with TreeTagger 
+- We can probably get by with the simpler functions and check out: https://cran.r-project.org/web/packages/textstem/README.html for more information on using different dictionaries
+
+```{r}
+##r chunk
+library(textstem)
+lemmatize_words(wordlist)
+
+sentence = "My system keeps crashing his crashed yesterday, ours crashes daily"
+lemmatize_strings(sentence)
+```
+
+## Lemmatization
+
+```{python}
+##python chunk
+##remember we imported spacy above
+sentence = "My system keeps crashing his crashed yesterday, ours crashes daily"
+
+def lemmatize_text(text):
+  text = nlp(text)
+  text = " ".join([word.lemma_ if word.lemma_ != "-PRON-" else word.text for word in text])
+  return text
+
+lemmatize_text(sentence)
+```
+
+## Stopwords
+
+- Stopwords are the function words in a sentence like `the, an, a, of, but`
+  - Compare this to the nouns, verbs, etc. that help portray meaning in a sentence
+- We usually want to remove them as unnecessary for our analysis
+- There are so many ways to do this in R it's mind boggling, favorite is probably `tm`
+
+```{r}
+##r chunk
+head(stopwords(kind = "SMART"))
+removeWords(sentence, stopwords(kind = "SMART"))
+```
+
+## Stopwords
+
+- Let's look at this complex loop exclusion
+  - Give me words in the tokenized sentence, if those words are not in the stopword list 
+
+```{python}
+##python chunk
+from nltk.corpus import stopwords
+
+set(stopwords.words('english'))
+
+[word for word in nltk.word_tokenize(sentence) if word not in stopwords.words('english')]
+```
+
+## Bring it all together
+
+- There is no one "correct" normalization procedure
+- You should examine the text at each step and determine if you have processed it appropriately
+- You will change/update/work through the steps listed here based on the task at hand
+
+## Summary
+
+- In this lecture you learned:
+  - Text is very messy, and we have to clean it up.
+  - Slicing and calling parts of variables in each language
+  - Tokenization
+  - Regular expressions
+  - Removing symbols
+  - Contractions
+  - Spelling and chat type issues (yaaaayyyy versus yay)
+  - Stemming
+  - Lemmatization
+  - Stopwords
+  - Bringing it all together 
+- Next up: part of speech tagging
+
+
+
+

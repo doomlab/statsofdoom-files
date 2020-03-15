@@ -1,0 +1,108 @@
+---
+title: 'Entity Recognition Assignment'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+#do not change this
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Libraries / R Setup
+
+- In this section, include the *R* set up for Python to run. 
+
+```{r}
+##r chunk
+
+```
+
+- In this section, include import functions to load the packages you will use for Python.
+
+```{python}
+##python chunk
+
+```
+
+## Synsets
+
+- You should create a Pandas dataframe of the synsets for a random word in Wordnet.
+- Use https://www.randomword.net/ to find your random word.
+- You should create this dataframe like the example shown for "fruit" in the notes.
+
+```{python}
+##python chunk
+
+```
+
+## Nyms
+
+- Include the homonyms and hypernyms of the random word from above. 
+
+```{python}
+##python chunk
+
+```
+
+## Similarity
+
+- Think of two related words to your random word. You can use the synonyms on the random generator page. Calculate the JCN and LIN similarity of your random word and these two words. (four numbers total).
+
+```{python}
+##python chunk
+
+```
+
+## NER Tagging
+
+- Create a blank spacy model to create your NER tagger. 
+
+```{python}
+##python chunk
+
+```
+
+- Add the NER pipe to your blank model. 
+
+```{python}
+##python chunk
+
+```
+
+- Create training data. 
+  - Go to: http://trumptwitterarchive.com/
+  - Note you can pick other people than Trump by using "Additional Accounts" at the top right. 
+  - Create training data with at least 5 tweets. 
+  - Tag those tweets with PERSON, LOCATION, GPE, etc. 
+
+```{python}
+##python chunk
+
+```
+
+- Add the labels that you used above to your NER tagger. 
+
+```{python}
+##python chunk
+
+```
+
+- Train your NER tagger with the training dataset you created. 
+
+```{python}
+##python chunk
+
+```
+
+## Using your NER Tagger 
+
+- Use one new tweet from the same writer you had before. 
+- Use your new NER tagger to see if it grabs any of the entities you included. 
+
+```{python}
+##python chunk
+
+```
+

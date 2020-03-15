@@ -1,0 +1,816 @@
+---
+title: "Parsing: Sentence Structure"
+author: "Erin M. Buchanan"
+date: "01/09/2020"
+output: 
+  slidy_presentation:
+    increment: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Analyzing Sentence Structure
+
+- Mostly, we've been focused at the word level: identifying them, assigning them to parts of speech, meaning, or phrase structure.
+- Now, we are going to move up to sentences, which allows us to think about different problems inherent in human language.
+- Two big issues:
+    - Ambiguity
+    - Creativity
+
+## Goals of Analyzing Sentences
+
+The goal of this chapter is to answer the following questions:
+
+- How can we use a formal grammar to describe the structure of an unlimited set of sentences?
+- How do we represent the structure of sentences using syntax trees?
+- How do parsers analyze a sentence and automatically build a syntax tree?
+
+## Linguistic Data and Unlimited Possibilities
+
+- Usain Bolt broke the 100m record
+- The Jamaica Observer reported that Usain Bolt broke the 100m record
+- Andre said The Jamaica Observer reported that Usain Bolt broke the 100m record
+- I think Andre said the Jamaica Observer reported that Usain Bolt broke the 100m record
+
+- All of these sentences say the same semantic meaning:
+  - But are creative in the sense that they are uttered/written differently. 
+  - What we see is a template to combine sentences. 
+
+## Recursion
+
+[You can imagine Piglet's joy when at last the ship came in sight of him.] In
+after-years he liked to think that he had been in Very Great Danger during the Terrible Flood, but the only danger he had really been in was the last half-hour of his imprisonment, when Owl, who had just flown up, sat on a branch of his tree to comfort him, and told him a very long story about an aunt who had once laid a seagull's egg by mistake, and the story went on and on, rather like this sentence, until Piglet who was listening out of his window without much hope, went to sleep quietly and naturally, slipping slowly out of the window towards the water until he was only hanging on by his toes, at which moment, luckily, a sudden loud squawk from Owl, which was really part of the story, being what his aunt said, woke the Piglet up and just gave him time to jerk himself back into safety and say, "How interesting, and did she?" when - well, you can imagine his joy when at last he saw the good ship, Brain of Pooh (Captain, C. Robin; 1st Mate, P. Bear) coming over the sea to rescue him...
+
+## Recursion
+
+- The previous sentence is actually just a combination of smaller sentences embedded together using S but S when S. 
+- Therefore, due a property of language called **recursion**, we could create endlessly long sentences. 
+- So, how should we define **grammar**?
+    - Grammar is the system or structure of language
+    - This system or structure gives us clues to meaning
+
+## Recursion 
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics('recursion.png')
+```
+
+## Generative Grammar
+
+- Chomsky approach to understanding language
+- Language is considered a giant collection of all grammatical sentences
+- Grammar is a set of logical rules to be able to generate grammatical sentences 
+- Meaning is built from the parts of the sentences
+
+## Ambiguity
+
+- I shot an elephant in my pajamas
+- Multiple ways to parse this sentence and create a phase structure tree
+- Who was in the pajamas? You or the elephant?
+
+## Syntax
+
+- We've talked a lot about grammatical slots - meaning that words have specific combinations that they can follow given the previous word. 
+- Therefore, we might be able to understand sentence structure (and generate our own) by looking at bigrams.
+
+- Let's create some sentences from a bigram set of a larger text:
+  - He roared with me the pail slip down his back
+  - The worst part and clumsy looking for whoever heard light
+
+## Syntax
+
+- These ideas are tied to Chomsky's famous sentence:
+  - Colorless green ideas sleep furiously.
+  - Sometimes this is called "word-salad" when they are syntactically correct but do not mean anything. 
+- Coordinate structure: If v1 and v2 are both phrases of grammatical category X, then v1 and v2 is also a phrase of category X.
+
+## Syntax
+
+Let's look at an example. 
+
+- The book's ending was (NP the worst part and the best part) for me.
+    - This is a NP + NP, which is readable and makes sense.
+- On land they are (AP slow and clumsy looking).
+    - This is AP + AP, which is readable and makes sense.
+- The worst part and clumsy looking for whoever heard light
+    - This is NP + AP, which is not readable or sensible. 
+
+## Constituents
+
+To understand **constituent structure**, we might try word substitution.
+
+- Constituent structure is the idea that words combine together to form units, like NP, VP, AP. That means you can replace them with other constituents of the same type and keep grammar in place. 
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics('cs.png')
+```
+
+## Constituents
+
+- Each node is a constituent. The immediate constituents of S are NP and VP.
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics('tree.png')
+```
+
+## Context Free Grammar
+
+- Context free grammar is a set of recursive (iterative) rules used to generate sentences.
+- The `nltk.grammar` module defines these for the `nltk` package.
+- If sentences can be parsed into two more different structures, they are considered ambiguous. 
+
+## Context Free Grammar
+
+- Syntactic Categories
+
+  - Symbol 	Meaning 	            Example
+  - S 	    sentence 	            the man walked
+  - NP 	    noun phrase           a dog
+  - VP 	    verb phrase           saw a park
+  - PP 	    prepositional phrase 	with a telescope
+  - Det 	  determiner 	          the
+  - N 	    noun 	                dog
+  - V 	    verb 	                walked
+  - P     	preposition           in
+
+## Parsing With Context Free Grammar
+
+- Parsing or a parser creates constituents and their structure to conform to grammar.
+    - Compare this to: tokenizing, tagging, classifying, chunking
+- Parsers are interpretations of a defined grammar - they search through the possible options of trees that the grammar says are ok and matches to the current sentence.
+- We can use evaluation in the same way as the other functions that we've written to assure we are doing it correctly.
+- The goal of parsers theoretically is to model psycholinguistic processing helping to understand how humans process syntax.
+- The goal of parsers practically is to break down sentences - potentially for use in question answer type applications like Siri/chatboxes/help lines, etc. 
+
+## Recursive Descent Parsing
+
+- Simplest parsing technique is to break down into lower level subgoals:
+    - Big goal: find S.
+    - Lower level goal: find NP, then VP.
+    - Lower lower level goal: find NP and VP with N/V on the left most side.
+- Top-down parser which uses a grammar to predict what the input might be
+
+## Recursive Descent Parsing
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics('recursive.png')
+```
+
+## Examples in Python 
+
+```{r}
+##r chunk
+library(reticulate)
+```
+
+```{python}
+import nltk
+##create our own grammar
+#CFG.fromstring is the way nltk understand the grammar
+#left side versus right side
+grammar1 = nltk.CFG.fromstring("""
+  S -> NP VP
+  VP -> V NP | V NP PP
+  PP -> P NP
+  V -> "saw" | "ate" | "walked"
+  NP -> "John" | "Mary" | "Bob" | Det N | Det N PP
+  Det -> "a" | "an" | "the" | "my"
+  N -> "man" | "dog" | "cat" | "telescope" | "park"
+  P -> "in" | "on" | "by" | "with"
+  """)
+```
+
+## Train the Parser
+
+```{python}
+#import the parser with our predefined grammar
+rd_parser = nltk.RecursiveDescentParser(grammar1)
+
+#create a new sentence to parse
+sent = 'Mary saw a dog'.split()
+print(sent)
+
+#loop over sentences if you have more than one and print out the tree
+for tree in rd_parser.parse(sent):
+     print(tree)
+```
+
+## Problems with Recursive Decent Parsing
+
+- Left-recursive pieces like NP -> NP PP can cause it to loop infinitely
+- Parser is slow and inefficient
+- Backtracking can discard things that were already correctly parsed
+- The top down nature of this parser is odd - why shouldn't we consider the input from the beginning?
+
+## Shift-Reduce Parsing
+
+- A bottom up parser that considers the input of the sentences
+- Tries to find sequences of words that are on the right side of the grammar, and replace them with the left side until we reach S
+- Slowly "shifts" the next word into the window for the sentence (aka the stack)
+- If the items in the stack currently match a right side rule, they get replaced (combined into a left side rule)
+- Then this shift-replace continues until S is reached
+
+## Shift-Reduce Parsing
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics('shift.png')
+```
+
+## Shift-Reduce Parsing
+
+- We can use `ShiftReduceParser()` to implement this in Python.
+- However, it does not have any backtracking, so it might fail to find a parse tree for a text
+- Also, it will only find one tree, even if several are possible
+
+```{python}
+sr_parser = nltk.ShiftReduceParser(grammar1)
+sent = 'Mary saw a dog'.split()
+for tree in sr_parser.parse(sent):
+     print(tree)
+```
+
+## Problems with Shift-Reduce Parsers
+
+- As noted, they can reach a dead end, even if the sentence was grammatical
+- This happens when the original parse choices selected were incorrect and it can't figure out what to do with the left over words 
+    - What reduction should it use when more than one is possible?
+    - Should it shift or reduce when both are possible?
+- You can extend these parsers to deal with these problems.
+
+## The Left-Corner Parser
+
+- Left-corner parser is meant to solve the problems of the recursive descent as a hybrid of the bottom up and top down approaches
+- A left-corner parser is a top-down parser with bottom-up filtering
+- Before starting, the parser will create a table of all the possible left corners
+
+## The Left-Corner Parser
+
+- Let's say we wanted to parse "John saw Mary"
+
+```{r, echo = FALSE, out.width="50%", fig.align='center'}
+knitr::include_graphics('left.png')
+```
+
+## The Left-Corner Parser
+
+However, remember how we defined `grammar1`:
+
+- NP -> Det N
+- NP -> Det N PP
+- NP -> "John" | "Mary" | "Bob"
+
+- How do we know which NP to start with first, since they are both left corners? 
+
+## Dependencies and Dependency Grammar
+
+- Phrase structure grammar (what we've been doing) focuses on how to combine words into their constituents 
+- Dependency grammar looks instead at the relation of words to other words
+- You create a "head" and its dependents
+- Usually the head is a verb - and then every other word is dependent on the verb or connected through a path of dependencies
+
+## Dependencies and Dependency Grammar
+
+- You can represent this as a graph, where nodes are each lexical item and arcs represent the dependencies
+- For example, I is the SBJ (subject) of shot, and NMOD (noun modifier of elephant)
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics('depend.png')
+```
+
+## Dependency Grammar
+
+```{python}
+##here's how we might write a grammar dependency 
+groucho_dep_grammar = nltk.DependencyGrammar.fromstring("""
+ 'shot' -> 'I' | 'elephant' | 'in'
+ 'elephant' -> 'an' | 'in'
+ 'in' -> 'pajamas'
+ 'pajamas' -> 'my'
+ """)
+
+print(groucho_dep_grammar)
+```
+
+## Dependency Grammar
+
+- Graphs are considered **projective** if all the edges can be added without crossing
+- Means that the word and all descendants are a continuous sequence of words in the sentence
+
+## Example Projective graph
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics('projective.png')
+```
+
+## Dependency Grammar
+
+```{python}
+pdp = nltk.ProjectiveDependencyParser(groucho_dep_grammar)
+sent = 'I shot an elephant in my pajamas'.split()
+trees = pdp.parse(sent)
+for tree in trees:
+     print(tree)
+```
+
+## Dependency Grammar
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics('depend2.png')
+```
+
+## Dependency Grammar
+
+What are the rules for determining what is a head and what is a dependent?
+
+- Heads determine the way a sentence/construction is made
+- Heads determine the semantic class of sentences/constructions
+- Heads are required, dependents are optional
+- The morphological form of the dependent is determined by the head
+
+## Dependency Grammar
+
+For example, let's say `PP | P and NP`:
+
+- Prepositional phrases are where the preposition is the head and the noun phrase is the dependent of the preposition.
+- This idea makes them similar to what we did at the beginning, just more explicit in their dependencies
+
+## Verbs are Special 
+
+Let's look at verbs:
+
+VP productions and their lexical heads
+
+- VP -> V Adj   	was
+- VP -> V NP 	    saw
+- VP -> V S 	    thought
+- VP -> V NP PP 	put
+
+- The squirrel was frightened.
+- Chatterer saw the bear.
+- Chatterer thought Buster was angry.
+- Joe put the fish on the log.
+
+## Verbs are Special 
+
+- Therefore:
+
+    - Was can have an adjective after it
+    - Saw can have a NP after it
+    - Thought can have a sentence after it
+    - Put can have an NP and PP after it
+
+## Verbs are Special 
+
+While this seems life a lot of different combinations, there are pretty set rules on what verbs can occur with their complements (the words after it - we've been calling these grammatical slots). 
+
+- The squirrel was Buster was angry.
+- Chatterer saw frightened.
+- Chatterer thought the bear.
+- Joe put on the log.
+
+## Verbs are Special 
+
+- Verbs (in this case, but really words) with different dependents are considered to have different **valencies**. 
+- We would need to find a way to expand/create the VP so it gets matched with the correct complement (constituent). 
+- We can create subcategories of verbs that fall into V + complement groups
+    - For example, transitive verbs require a direct object, which would be a noun phrase
+
+## Verbs are Special 
+
+- Verb Subcategories
+
+  - Symbol 	Meaning 	Example
+  - IV 	intransitive verb 	barked
+  - TV 	transitive verb 	saw a man
+  - DatV 	dative verb 	gave a dog to a man
+  - SV 	sentential verb 	said that a dog barked
+
+## Verbs are Special 
+
+- Another piece to consider would be a modifier, as prepositional phrases, adjectives, and adverbs 
+- Unlike a complement, modifiers are optional AND there can also be several of them
+
+- The squirrel really was frightened.
+- Chatterer really saw the bear.
+- Chatterer really thought Buster was angry.
+- Joe really put the fish on the log.
+
+## Dependency Parsing with Spacy
+
+- We can get our dependency sentence using the `nlp` function we build in spacy without too much work. 
+- Remember, this also does named entity recognition, part of speech tagging, etc. 
+
+```{python}
+##python chunk
+import spacy
+from spacy import displacy
+
+#process sentence for printing
+sentence = "US unveils world's most powerful supercomputer."
+nlp = spacy.load('en_core_web_sm')
+sentence_nlp = nlp(sentence)
+```
+
+## Print out text
+
+```{python}
+##python chunk
+for token in sentence_nlp:
+    print("{0}/{1} <--{2}-- {3}/{4}".format(
+        token.text, token.tag_, token.dep_, token.head.text, token.head.tag_))
+```
+
+## Print a picture 
+
+```{python results = 'asis'}
+##python chunk
+##notice in the markdown, results = 'asis'
+##this graph doesn't disply inline
+displacy.render(sentence_nlp,
+                options={'distance': 110,
+                         'arrow_stroke': 2,
+                         'arrow_width': 8})
+
+```
+
+## Understanding the style
+
+- Spacy uses the CLEAR style for printing dependencies 
+- This style is a set of rules on how to transform a constituency/phrase structure tree into a dependency graph
+- https://www.mathcs.emory.edu/~choi/doc/cu-2012-choi.pdf
+
+## Understanding the style
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics('clear_example.png')
+```
+
+## An Example
+
+- We've talk before about how English can be unfortunately complex. 
+- Consider commas:
+
+```{python}
+##python chunk
+sent1 = "I saw a girl with a telescope."
+sent2 = "I saw a girl, with a telescope."
+
+sent1_nlp = nlp(sent1)
+sent2_nlp = nlp(sent2)
+```
+
+## Visualize the differences
+
+```{python results = 'asis'}
+##python chunk
+##notice in the markdown, results = 'asis'
+##this graph doesn't disply inline
+displacy.render(sent1_nlp,
+                options={'distance': 110,
+                         'arrow_stroke': 2,
+                         'arrow_width': 8})
+
+displacy.render(sent2_nlp,
+                options={'distance': 110,
+                         'arrow_stroke': 2,
+                         'arrow_width': 8})
+```
+
+## How can we use this?
+
+- Let's try figuring out if we can determine how people are described.
+- We would need to find the words that are dependent on a specific noun.
+- We can use `harrypotter` as an example - what words around Harry change from the first to last book? 
+
+```{r}
+##r chunk
+library(harrypotter)
+data("philosophers_stone")
+data("deathly_hallows")
+```
+
+## Transfer and Process
+
+```{python}
+##python chunk
+book = r.philosophers_stone[0:5] #bring the book over chapter 1
+book2 = r.deathly_hallows[0:5] #bring the book over last chapter
+
+book = " ".join(book)
+book2 = " ".join(book2)
+
+book1 = nlp(book)
+book2 = nlp(book2)
+```
+
+## Look at the words 
+
+- We are looping over the sentences, then the words, followed by the "childs" 
+- These words are the words that are "dependent" or tied to the target word (Harry)
+
+```{python}
+##python chunk
+from collections import Counter
+words = []
+for sent in book1.sents: 
+    for word in sent: 
+        if 'Harry' in word.string: 
+            for child in word.children: 
+                words.append(child.string.strip())
+
+Counter(words).most_common()
+```
+
+## What about the last book? 
+
+```{python}
+##python chunk
+for sent in book2.sents: 
+    for word in sent: 
+        if 'Harry' in word.string: 
+            for child in word.children: 
+               for child in word.children: 
+                words.append(child.string.strip())
+
+Counter(words).most_common()
+```
+
+## Training our own parser
+
+```{python}
+##python chunk
+from __future__ import unicode_literals, print_function
+
+import plac
+import random
+from pathlib import Path
+```
+
+## How to build training data 
+
+- First, you need to break down the sentence you are interested in using as training data:
+  - "They trade mortgage-backed securities."
+  - It's important to think about how spacy is going to break this down.
+
+```{python}
+##python chunk
+sentence = "They trade mortgage-backed securities."
+sentence_nlp = nlp(sentence)
+
+[word.text for word in sentence_nlp]
+```
+
+## How to build training data
+
+- `['They', 'trade', 'mortgage', '-', 'backed', 'securities', '.']`
+- There are 7 items, but remember the first item is labeled 0.
+- Start by labeling the `deps` - what is each type of word in relation to it's dependency?
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics('draw_dep.png')
+```
+
+## How to build training data
+
+- Then label the *number* of the item that it relates back to 
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics('draw_dep.png')
+```
+
+## How to build training data
+
+- Therefore, we have 7 items to label, 7 dependency labels, 7 numbers marking where items should be tied to. 
+- `'heads': [1, 1, 4, 4, 5, 1, 1]`
+- `'deps': ['nsubj', 'ROOT', 'compound', 'punct', 'nmod', 'dobj', 'punct']`
+- This indicates that the first item (zero - `They`) is tied to the second item (one - `trade`), and is the subject of the verb.
+- The second item (one - `trade`) is the root/head verb of the sentence and is related to itself.
+- ...etc. 
+
+## How to build training data
+
+```{python}
+##python chunk
+# training data
+TRAIN_DATA = [ #open list
+    ("They trade mortgage-backed securities.", #sentence
+        { #open dictionary
+        #the word numbers
+        'heads': [1, 1, 4, 4, 5, 1, 1],
+        #their type
+        'deps': ['nsubj', 'ROOT', 'compound', 'punct', 'nmod', 'dobj', 'punct'] 
+    } #close dictionary
+    ), #close sentence
+    ("I like London and Berlin.", #sentence
+    { #open dictionary
+        #the word numbers
+        'heads': [1, 1, 1, 2, 2, 1],
+        #their type
+        'deps': ['nsubj', 'ROOT', 'dobj', 'cc', 'conj', 'punct'] 
+    } #close dictionary
+    ) #close sentence
+] #close list
+```
+
+## Build and train the model
+
+```{python}
+##python chunk
+#create a blank model
+nlp = spacy.blank('en')
+
+#add the parser to it
+parser = nlp.create_pipe('parser')
+nlp.add_pipe(parser, first=True)
+```
+
+## Build and train the model
+
+```{python}
+##python chunk
+#add the labels
+for _, annotations in TRAIN_DATA:
+        for dep in annotations.get('deps', []):
+            parser.add_label(dep)
+```
+
+## Losses
+
+- In spacy we can see how much our model is changing on each training round. 
+- Loss function calculates the difference between the training example and the expected output. The greater the difference, the more significant the gradient and the updates to our model.
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics('spacy_update.png')
+```
+
+## Build and train the model
+
+```{python}
+##python chunk
+#start training
+optimizer = nlp.begin_training()
+#number of times to run
+n_iter = 20
+#run training 
+for itn in range(n_iter):
+    random.shuffle(TRAIN_DATA)
+    losses = {}
+    for text, annotations in TRAIN_DATA:
+        nlp.update([text], [annotations], sgd=optimizer, losses=losses)
+    print(losses)
+```
+
+## Test the model 
+
+```{python}
+##python chunk
+# test the model 
+test_text = "I like securities."
+doc = nlp(test_text)
+print('Dependencies', [(t.text, t.dep_, t.head.text) for t in doc])
+```
+
+## Visualize the output
+
+```{python results = 'asis'}
+##python chunk
+displacy.render(doc,
+                options={'distance': 110,
+                         'arrow_stroke': 2,
+                         'arrow_width': 8})
+```
+
+## Save the model
+
+```{python}
+##python chunk
+#save your model if you want to use it later
+nlp.to_disk("./model")
+```
+
+## Another Example
+
+- You do not have to the use the formal markers like root, nsubj, etc. 
+- The program doesn't care what you labels sections or how you label them - just that the python formatting is right. 
+- So, we could create our own dependency system that explores the relation between actions (verb - ROOT), where the action occurs (noun - PLACE), and what modifies those nouns (QUALITY/ATTRIBUTE)
+
+## Training data
+
+```{python}
+##python chunk
+# training data: texts, heads and dependency labels
+# for no relation, we simply chose an arbitrary dependency label, e.g. '-'
+TRAIN_DATA = [
+    ("find a cafe with great wifi", {
+        'heads': [0, 2, 0, 5, 5, 2],  # index of token head
+        'deps': ['ROOT', '-', 'PLACE', '-', 'QUALITY', 'ATTRIBUTE']
+    }),
+    ("find a hotel near the beach", {
+        'heads': [0, 2, 0, 5, 5, 2],
+        'deps': ['ROOT', '-', 'PLACE', 'QUALITY', '-', 'ATTRIBUTE']
+    }),
+    ("find me the closest gym that's open late", {
+        'heads': [0, 0, 4, 4, 0, 6, 4, 6, 6],
+        'deps': ['ROOT', '-', '-', 'QUALITY', 'PLACE', '-', '-', 'ATTRIBUTE', 'TIME']
+    }),
+    ("show me the cheapest store that sells flowers", {
+        'heads': [0, 0, 4, 4, 0, 4, 4, 4],  # attach "flowers" to store!
+        'deps': ['ROOT', '-', '-', 'QUALITY', 'PLACE', '-', '-', 'PRODUCT']
+    }),
+    ("find a nice restaurant in london", {
+        'heads': [0, 3, 3, 0, 3, 3],
+        'deps': ['ROOT', '-', 'QUALITY', 'PLACE', '-', 'LOCATION']
+    }),
+    ("show me the coolest hostel in berlin", {
+        'heads': [0, 0, 4, 4, 0, 4, 4],
+        'deps': ['ROOT', '-', '-', 'QUALITY', 'PLACE', '-', 'LOCATION']
+    }),
+    ("find a good italian restaurant near work", {
+        'heads': [0, 4, 4, 4, 0, 4, 5],
+        'deps': ['ROOT', '-', 'QUALITY', 'ATTRIBUTE', 'PLACE', 'ATTRIBUTE', 'LOCATION']
+    })
+]
+```
+
+## Build and train the model
+
+```{python}
+##python chunk
+#create a blank model
+nlp2 = spacy.blank('en')
+
+#add the parser to it
+parser2 = nlp2.create_pipe('parser')
+nlp2.add_pipe(parser2, first=True)
+```
+
+## Build and train the model
+
+```{python}
+##python chunk
+#add the labels
+for _, annotations in TRAIN_DATA:
+        for dep in annotations.get('deps', []):
+            parser2.add_label(dep)
+```
+
+## Build and train the model
+
+```{python}
+##python chunk
+#start training
+optimizer2 = nlp2.begin_training()
+#number of times to run
+n_iter = 20
+#run training 
+for itn in range(n_iter):
+    random.shuffle(TRAIN_DATA)
+    losses = {}
+    for text, annotations in TRAIN_DATA:
+        nlp2.update([text], [annotations], sgd=optimizer2, losses=losses)
+    print(losses)
+```
+
+## Test the model 
+
+```{python}
+##python chunk
+# test the model 
+texts = ["find a hotel with good wifi",
+         "find me the cheapest gym near work",
+         "show me the best hotel in berlin"]
+docs = nlp2.pipe(texts)
+for doc in docs:
+  print(doc.text)
+  print([(t.text, t.dep_, t.head.text) for t in doc if t.dep_ != '-'])
+```
+
+## Visualize the output
+
+```{python results = 'asis'}
+##python chunk
+#notice not using pipe
+for text in texts: displacy.render(nlp2(text), options={'distance': 110, 'arrow_stroke': 2, 'arrow_width': 8})
+                     
+```
+
+## Save the model
+
+```{python}
+##python chunk
+#save your model if you want to use it later
+nlp2.to_disk("./model2")
+```
+
+## Scaling Up
+
+- We've only talked about a few small instances of grammar
+- It's **really** hard to scale up to the infinite number of possibilities for different grammatical constructions 
+- Ambiguity expands as the number of possible constructions expands 
+- Learn more by looking into Lexical Functional Grammar Pargram project, Head Driven Phrase Structure Grammar, and Lexicalized Tree Adjoining Grammar project
+- Some work may be possible by using probabilistic context free grammars by creating likelihoods of the phrase structure combinations to expect
+
+

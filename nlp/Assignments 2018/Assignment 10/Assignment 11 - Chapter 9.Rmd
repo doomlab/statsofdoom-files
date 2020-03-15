@@ -1,0 +1,47 @@
+---
+title: "Chapter 9 Exercises"
+author: "Erin M. Buchanan"
+date: "04/09/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Get Started
+
+- Create a Jupyter notebook with the following items. You should upload a compiled version of the notebook in html or pdf format.
+- Remember, use Markdown cells to answer text questions. Paste the questions into the cells so it's clear what you are answering.
+- Be sure to answer all the questions! Also be sure you are answering the questions posted, not an old answer from GitHub or Stack Overflow.
+
+## Feature Grammar
+
+Write a feature grammar that can correctly process the following issues:
+
+- Includes the verb `go` with all forms: go, goes, went, gone, and going
+- Matches agreement with the noun phrase: I, you, he, we
+- You can use the example from the book as a place to start, but it should only include the word set below.
+
+There are other forms of conjugation for go, but your grammar should be able to correctly match these combinations: 
+
+- I go to the store.
+- I am going to the store. 
+- I have gone to the store.
+- I went to the store.
+- You go to the store.
+- You are going to the store.
+- You have gone to the store.
+- You went to the store. 
+- He goes to the store.
+- He went to the store. 
+- He has gone to the store. 
+- He is going to the store. 
+- We go to the store. 
+- We are going to the store. 
+- We have gone to the store.
+- We went to the store. 
+
+## Test
+
+After you write the grammar, import it as a string and test it on at least four of the above sentences. Use http://www.nltk.org/howto/featgram.html to help you perform this task (the top example shows you the steps). 

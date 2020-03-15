@@ -1,0 +1,134 @@
+---
+title: 'Set Up Virtual Machine'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+#do not change this
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Install Software
+
+- Most recent version of R: https://cloud.r-project.org/
+- Most recent version of RStudio: https://rstudio.com/products/rstudio/download/#download
+
+```{r}
+##r chunk - do not change these
+R.version
+#RStudio.Version() run this line but it won't knit with it "on"
+```
+
+What version of Rstudio are you using?
+
+## Set up your python
+
+- Install the `reticulate` package (do not include this code).
+- Load the `reticulate` library.
+
+```{r python_setup}
+##r chunk
+
+```
+
+## Install Miniconda
+
+Try typing `py_config()` below. You should get a prompt to install Miniconda. If not, use `install_miniconda()`.
+
+```{r}
+##r chunk
+
+```
+
+## Show you've installed Python
+
+Run `py_config()` in the *R* chunk below. 
+
+```{r}
+##r chunk
+
+```
+
+## Let's do some R
+
+- In this chunk, we will load a dataset - use `data(rock)` to load it. 
+- Use the `head()` function to print out the first six rows of the dataset. 
+
+```{r an_r_section}
+##r chunk
+
+```
+
+## Let's do some Python
+
+- First, let's install some packages. 
+- You will need `numpy`, `nltk`, `spacy`, `scikit-learn` and `pandas` for starters. 
+- You can check if you have them first by using `py_module_available("PACKAGE")`.
+- Note: `scikit-learn` is a special package, you can check if it's avaliable by using `sklearn` but you install it with `scikit-learn`. 
+
+```{r check_install}
+##r chunk
+
+```
+
+- If any of these return `FALSE`, then install them using `py_install("PACKAGE")`. If you receive an error saying it cannot be found on Minicode, use `py_install("PACKAGE", pip = T)`.
+
+```{r install_packages}
+#if they are all TRUE, leave this blank
+##r chunk
+
+```
+
+## Call a dataset in Python
+
+- First, load the `sklearn` library, it has several sample datasets. You load python packages by using `import PACKAGE`. Note that you install and call this package different names (scikit-learn = sklearn).
+- Next, import the datasets part of sklearn by doing `from PACKAGE import FUNCTION`. Therefore, you should use `from sklearn import datasets`. 
+- Then call the `boston` dataset by doing: `dataset_boston = datasets.load_boston()`.
+- To print out the first six rows, use the `.head()` function: `df_boston.head()`, after converting the file with `pandas` (code included below).
+
+```{python}
+##python chunk
+##TYPE HERE##
+
+##convert to pandas
+import pandas as pd
+df_boston = pd.DataFrame(data=dataset_boston.data, columns=dataset_boston.feature_names)
+```
+
+QUESTION: Look in your environment window. What do you see?
+
+## Print out Python information in R
+
+- You can have the two environments interact. To print out information from Python in R: `py$VARNAME`.
+- Normally, to print out R dataset columns, you do `DATAFRAME$COLUMN`. Try to print out the `CRIM` column from your `df_boston` variable. 
+
+```{r}
+##r chunk
+
+```
+
+## Print our R in Python
+
+- When using R in Python, instead of `$`, we use `.` like this: `r.VARNAME`. 
+- To print out a single column, you use `DATAFRAME["COLUMNNAME"]`. Try printing out the `shape` column in the `rock` dataset. 
+
+```{python}
+##python chunk
+
+```
+
+## Get started with PyCharm!
+
+- Great job! Here's what you learned:
+  - Installed Python!
+  - You know how to install and load the libraries in both languages.
+  - You know how to load built in datasets in both languages.
+  - You know how to print out data from one language to another. 
+- Turn this document in for credit --> hit KNIT --> turn in the HTML file.
+- Be sure to fill in your name at the top!
+- Be sure to answer the embedded questions!
+
+  
+

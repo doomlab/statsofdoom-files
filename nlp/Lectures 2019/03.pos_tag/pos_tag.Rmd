@@ -1,0 +1,501 @@
+---
+title: "Part of Speech Tagging"
+author: "Erin M. Buchanan"
+date: "11/21/2019"
+output: 
+  slidy_presentation:
+    increment: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(reticulate)
+py_config()
+```
+
+## Recap
+
+- We have established that text is very messy and requires a good bit of work to clean it up
+- No one set of steps, but you have learned a list of possible things to do when working with text
+- Let's go on now to how we can begin to process and label text
+
+## Syntax
+
+- Syntax is a set of rules that we use to put words together to create "well-formed" sentences
+- Words --> phrases --> clauses --> sentences --> paragraphs --> discourse 
+- Remember a *constituent* is a member of the current set you are examining:
+  - Words are members of phrases and sentences
+  - Phrases are members of sentences
+  - Etc.
+
+## Syntax
+
+- One of the most important rules is word order - if we scramble the words in a sentence, the meaning is often lost
+- However, it is not the only rule:
+  - Colorless green ideas sleep furiously.
+- Yet word order gives us the most clues on how to process or *parse* a sentence
+
+## Words
+
+- Smallest unit of independent language with meaning
+  - Morphemes are the smallest unit of meaning, however, they are not always independent 
+  - Cat versus cat-s
+- We will spend this section thinking about how to classify words into their parts of speech (POS)
+
+## Common POS
+
+- Noun: words that depict objects or entities, but also can be abstract
+- Verb: words that depict some action, states, occurrences
+- Adjectives: words that describe or qualify nouns
+- Adverbs: words that describe or qualify verbs 
+- ...and more! Learn more at partofspeech.org
+
+## A quick example
+
+```{python}
+##python chunk
+import spacy
+import pandas as pd
+
+#this is very common naming to get spacy langauge models started
+nlp = spacy.load('en_core_web_sm')
+
+sentence = "We cannot, nor would we, fire Professor Person for his posts as a private citizen, as vile and stupid as they are, because the First Amendment of the United States Constitution forbids us to do so, she wrote in a letter posted to the university website."
+```
+
+## A quick example
+
+```{python}
+##python chunk
+spacy_pos_tagged = [(word, word.tag_, word.pos_) for word in nlp(sentence)]
+pd.DataFrame(spacy_pos_tagged).T
+```
+
+## Phrases
+
+- Phrases include one or more words that break into the following categories
+  - Noun phrase: noun is the head word, usually depicting the actor or actee in a sentence
+  - Verb phrase: the verb acts as the head word, usually depicting the action in the sentence
+- Within these two main phrase types, we can also define:
+  - Prepositional phrase: used when there is a preposition that modifies a previous phrase (going *up* the stairs)
+  - Adjective or adverb phrases: used when there is a modifier that refers to an earlier verb or noun phrase (the cat is *quick*)
+  
+## Phrases
+
+- We will cover these more in our entity recognition and dependency parsing sections
+- First, we have to figure out how to tag parts of speech to be able to do phrase tagging 
+- Understanding words and phrases also helps us understand grammar - a set of rules on how to construct sentences
+
+## Grammars
+
+- Dependency grammar - generally focuses on the words in a sentence and their dependency on each other 
+  - Often verb focused, as the verb determines the required dependencies 
+  - Uses part of speech and word order to help determine those dependencies
+- Constituency grammar - sometimes called phrase structure grammars, which build sentences hierarchically 
+  - More commonly used because the rules are more structured - a sentence breaks into a noun phrase and verb phrase, noun phrases often contain determiners, adjectives, and nouns, etc. 
+
+## A note on POS Taggers
+
+- There are many parts of speech:
+  - A noun can be labeled Noun, plural noun, proper noun, etc.
+  - A verb can be labeled with tense options
+  - A conjunction can be coordinating, subordinating or just a conjunction
+  - etc.
+
+## A note on POS Taggers
+
+- What does that mean for POS taggers?
+  - You have to define the level of specificity you want to work with
+  - Depends on the corpus used for the task
+  - Depends on the training for the tagger 
+  - The set of possible tags used are called *tag sets*
+
+## How can we decide how to tag words?
+
+- Dictionary look-up: simply look up the word in a predefined dictionary (WordNet, PennTreeBank)
+  - Look-up is fast, but very error prone
+  - Why? Polysemy!
+- Morphological clues: much like regular expressions, looks for specific morphemes
+  - Things like *ing* indicate a verb as a present participle or gerund
+  - Things like *ly* indicate an adverb
+  - Works pretty well, but still prone to errors
+
+## How can we decide how to tag words?
+
+- Syntactic clues: uses the context or the words around it to help determine part of speech
+  - Can be very slow because you have to parse in larger units
+  - More accurate but requires very large training corpus 
+- Semantic clues: uses the meaning of the word to help determine class
+  - Depending on sentence structure, this may work great, but polysemy is still a problem. 
+
+## How to POS tag
+
+- How exactly do these automatic taggers work? 
+- We will discuss a few packages and options on how to tag in *R*
+- Then we will discuss classic tagging using *nltk* as a contrast to state of the art tagging with *spaCy* in Python 
+
+## How do taggers work?
+
+- It's technically considered a machine learning problem
+- Steps to any classification problem:
+  - Data preparation: clean up the data (last week's lecture)!
+  - Features: Useful attributes from the data (words, letters, sentences, etc.)
+  - Feature extraction: collect the useful features in the data to help classify categories 
+
+## How do taggers work?
+
+- Steps to any classification problem:
+  - Training data: data that includes the raw inputs (text) and the correct classification (POS tags) in order to check our work 
+  - Testing/validation data: data that includes the raw inputs and correct classifications that we then use to verify our classifiers
+  - Model: the data is combined with a machine learning algorithm to build a classifier/tagger/chunker/parser/etc.
+  - Accuracy: a measure of how well your model performs 
+
+## POS Tagging with automatic classification
+
+- Any pre-trained tagger has been built using:
+  - A tagged corpus for training and testing data 
+    - Examples include the Brown Corpus, British National Corpus, and a few others
+  - A feature set that is appropriate for the task and algorithm
+    - Bag of words method, n-grams, etc. 
+  - An algorithm: default tagging, regular expressions, hidden markov, naive bayes, etc. 
+  
+## Automatic POS Tagging in *R*
+
+- There appear to be a variety of options for tagging in *R*
+- Going to demonstrate a few of them, using `RDRPOSTagger`, `openNLP`, `pos_tags` from `qdap`
+- Many of the setups involve installing external programs like TreeTagger
+
+```{r today_setup, eval = F}
+##r chunk
+devtools::install_github("trinker/termco")
+devtools::install_github("trinker/coreNLPsetup")
+devtools::install_github("trinker/tagger")
+install.packages("qdap")
+devtools::install_github("bnosac/RDRPOSTagger")
+```
+
+## Tagger Package
+
+- You will have to make sure you have installed `rJava` and have a JDK working
+- For these functions, you simply put in your text, you do not have to tokenize first
+- Uses `openNLP` to do the tagging 
+
+```{r}
+##r chunk
+sentence = py$sentence
+
+library(tagger)
+tag_pos(sentence) 
+```
+
+## Tagger Package
+
+- This package also comes with some nice plotting functions 
+
+```{r}
+##r chunk
+library(dplyr)
+tag_pos(sentence) %>% plot()
+```
+
+## Tagger Package
+
+- What are these tags? What is the tag set? 
+
+```{r}
+##r chunk
+penn_tags()
+```
+
+## Tagger Package
+
+- You can also convert between tag sets
+- Learn more at https://github.com/trinker/tagger
+
+```{r}
+##r chunk
+tag_pos(sentence) %>% as_universal() %>% plot()
+```
+
+## qdap Package
+
+- This package has a similar set of functions, which saves as a dataframe that you can print out the parts that you need
+
+```{r}
+##r chunk
+library(qdap)
+pos_saved <- pos(sentence)
+pos_saved$POStagged
+pos_saved$POSprop
+```
+
+## qdap Package
+
+- You can also view the tag set to understand the results
+
+```{r}
+##r chunk
+pos_tags()
+```
+
+## RDR POS Tagger
+
+- Ripple Down Rules-based Part-Of-Speech Tagger (RDRPOS)
+- One of the largest set of languages supported
+- Based on the corpora at https://universaldependencies.org/
+
+## RDR POS Tagger
+
+- Use `rdr_availabe_models()` to see what languages and options are available 
+
+```{r}
+##r chunk
+library(RDRPOSTagger)
+models <- rdr_available_models()
+models
+```
+
+## RDR POS Tagger
+
+- This package runs more "python-style" 
+- First you set the parameters of your tagger by noting language and annotation type
+- Then you tell it to tag a sentence 
+- Output is a dataframe that includes the POS tag as a column 
+
+## RDR POS Tagger
+
+```{r}
+##r chunk
+create_tagger <- rdr_model(language = "English", annotation = "POS")
+rdr_pos(create_tagger, x = sentence)
+```
+
+## On to Python
+
+- `nltk` includes multiple POS tagging options 
+- `spaCy` would be "state of the art"
+- Setup is a bit less strenuous than dealing with Java 
+
+## NLTK
+
+- The basic `pos_tag` option has been trained to handle most tagging fairly effectively 
+
+```{python}
+##python chunk
+import nltk
+tokens = nltk.word_tokenize(sentence)
+nltk.pos_tag(tokens)
+```
+
+## A word about Tuples
+
+- We've previously compared python lists with R vectors
+  - In python, you can tell it's a list by looking for the `[]` in the output
+  - Just like in R, you can change items in a list, by using slicing
+- Tuples are an ordered collection - can be any number of objects
+  - Tuples are *immutable* meaning you cannot change them 
+  - You can tell it's a tuple by looking for `()`
+- Much of the output from these models is a list of tuples, which means we can loop through those objects to do other tasks with them
+
+## spaCy
+
+- Note: we already imported spacy and loaded the English language module
+- Also note: we did this a slightly different way earlier, both are valid
+- The `pandas` way is likely more useful
+
+```{python}
+##python chunk
+tagged_sentence = nlp(sentence)
+for word in tagged_sentence:
+  print(word.text, word.pos_, word.tag_)
+```
+
+## Training your own tagger
+
+- Let's start with the classics using `nltk`
+  - Default tagger
+  - Regular expression tagger
+  - Lookup tagger 
+  - Unigram or more taggers
+  - Combination tagging 
+
+## The Default Tagger
+
+- We can start by assigning everything to the most common option, usually NN for noun.
+- Obviously, this won't be very good, but it's a place to start.
+- Generally, after you process a lot of text, the "unseen" words will be nouns (as other words repeat a lot), so a default tagger can help get those right and easily.
+
+```{python}
+##python chunk 
+##we have already used import nltk
+from nltk.corpus import brown
+
+##create a function to give it the default of NN
+default_tagger = nltk.DefaultTagger('NN')
+
+##assign that to tokenized Brown words
+tokens = brown.words(categories = "news") #just randomly picking the news words
+
+#tag those words!
+pd.DataFrame(default_tagger.tag(tokens)).head
+```
+
+## The Default Tagger
+
+- Just how good is tagging everything as a noun?
+
+```{python}
+##python chunk
+##a set with the answers
+brown_tagged_sents = brown.tagged_sents()
+
+##evaluate how well the tagger words against a known set
+default_tagger.evaluate(brown_tagged_sents)
+```
+
+## Regular Expression Tagger
+
+- We can match to common line endings and other known patterns.
+- Remember that the r begins the regex when you are going to use special characters like \
+- This set will be matched in order - so if ing is present, it gets marked and moves on.
+
+```{python}
+##python chunk 
+patterns = [
+(r'.*ing$', 'VBG'),               # gerunds
+(r'.*ed$', 'VBD'),                # simple past
+(r'.*es$', 'VBZ'),                # 3rd singular present
+(r'.*ould$', 'MD'),               # modals
+(r'.*\'s$', 'NN$'),               # possessive nouns
+(r'.*s$', 'NNS'),                 # plural nouns
+(r'^-?[0-9]+(.[0-9]+)?$', 'CD'),  # cardinal numbers
+(r'.*', 'NN')                     # nouns (default)
+]
+```
+
+## Regular Expression Tagger
+
+```{python}
+##python chunk
+##make a function for regex tagger
+regexp_tagger = nltk.RegexpTagger(patterns)
+
+##apply that function 
+##remember that tokens is untagged brown words
+pd.DataFrame(regexp_tagger.tag(tokens))[40:50] #just printing out some words
+
+##how good is that
+regexp_tagger.evaluate(brown_tagged_sents)
+```
+
+## The Lookup Tagger
+
+- A lot of high-frequency words do not have the NN tag. 
+- Let's find the hundred most frequent words and store their most likely tag.
+- We can then use this information as the model for a lookup tagger 
+
+```{python}
+##python chunk
+##create a frequency distribution of the target word set
+fd = nltk.FreqDist(brown.words(categories='news'))
+##pull out the top 100 words
+most_freq_words = fd.most_common(100)
+
+##create a conditional frequency distribution of the 
+##known word set, remember this is going to be word-pos
+cfd = nltk.ConditionalFreqDist(brown.tagged_words(categories='news'))
+pd.DataFrame(cfd)
+```
+
+## The Lookup Tagger
+
+```{python}
+##python chunk
+##create a dictionary of the words 
+##pull the max word-pos combination from our known set
+##but only for words in our target word set
+likely_tags = dict((word, cfd[word].max()) for (word, _) in most_freq_words)
+
+##create the baseline_tagger function
+##using model of our likely words
+##and backoff which is adding the default guess of NN rather than none
+baseline_tagger = nltk.UnigramTagger(model=likely_tags,
+                                     backoff=nltk.DefaultTagger('NN'))
+##examine how well it tags versus the known words
+baseline_tagger.evaluate(brown_tagged_sents)
+```
+
+## Unigram Tagger 
+
+- The previous slide showed an example of how the unigram tagger works 
+- For each word, pick the most common POS for that word.
+- For example, the word frequent would be assigned to adjective, even though it can be a noun.
+- Works much like a lookup tagger, but this system allows us to do tag training.
+- Training occurs where we look at each POS and store the most likely tag for each word in a dictionary.
+
+## Unigram Tagger 
+
+```{python}
+##python chunk
+##create a unigram tagger function 
+unigram_tagger = nltk.UnigramTagger(brown_tagged_sents)
+##lets see what it does 
+unigram_tagger.tag(tokens)[:50]
+
+##what's the performance?
+unigram_tagger.evaluate(brown_tagged_sents)
+```
+
+## Unigram Tagger
+
+- This tagger is the first we've used that "trains" - the rest were simple "here's the rules go!" taggers
+- We should not train and test on the same data (that's cheating!)
+- Often people do a 90-10 or 80-20 split of the data to test and then train 
+
+## Unigram Tagger
+
+```{python}
+##python chunk
+##figure out where the split is
+size = int(len(brown_tagged_sents) * 0.9)
+##break apart the data based on that split
+train_sents = brown_tagged_sents[:size]
+test_sents = brown_tagged_sents[size:]
+
+##create a function (training) on the first part
+unigram_tagger = nltk.UnigramTagger(train_sents)
+##test on the second part
+unigram_tagger.evaluate(test_sents)
+```
+
+## Combining Taggers
+
+- One way to address the trade-off between accuracy and coverage is to use the more accurate algorithms when we can, but to fall back on algorithms with wider coverage when necessary. 
+- For example, we could combine the results of a bigram tagger, a unigram tagger, and a default tagger
+    
+```{python}
+##python chunk
+##default to noun
+t0 = nltk.DefaultTagger('NN')
+##single words in context, go back to noun if necessary
+t1 = nltk.UnigramTagger(train_sents, backoff=t0)
+##double words in context, back up to single words
+t2 = nltk.BigramTagger(train_sents, backoff=t1)
+##how accurate is that
+t2.evaluate(test_sents)
+```
+
+## Spacy Training
+
+- Spacy provides language models that have already been trained for part of speech tagging.
+- You can train your own though, which would be especially useful for specialized datasets (chats, etc.).
+- Generally this type of training is an underlying neural net model
+- You can learn more about it here: https://spacy.io/usage/training#tagger-parser
+
+## Summary
+
+- In this section, we covered part of speech tagging by first thinking about the structure of language as our guide
+- We covered how you tag words in *R* and Python, followed by building your own classifiers/taggers in Python with NLTK (simple) and expanding with Spacy (more complex but powerful)
+- We can use these skills to start to do more interesting questions, like entity recognition and dependency parsing 
+
+  

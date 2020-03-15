@@ -1,0 +1,177 @@
+---
+title: "Processing Raw Text - Ordered Example"
+author: "Erin M. Buchanan"
+date: "11/7/2019"
+output: 
+  slidy_presentation:
+    increment: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Example
+
+- The purpose of this example is to show you how to process text in order, saving the steps along the way. 
+- Parts of the code have been removed, so you still have to do figure it out for the assignment, but this outline should get you started. 
+
+## Libraries
+
+- You would want to put in all your libraries here!
+
+```{r}
+##r chunk
+
+```
+
+```{python}
+##python chunk
+
+```
+
+## Importing data
+
+- I used `substr()` to just show part of the blog text, otherwise it prints very long pages. 
+
+```{r}
+##r chunk
+blog_url = "https://www.aggieerin.com/post/getting-translations-with-rvest-and-selenium/"
+blog_post = read_html(blog_url)
+clean_text_r = html_text(blog_post)
+
+substr(clean_text_r, 1000,2000)
+```
+
+- In comparison, you can use `[]` slicing in python to show only part of the string. 
+
+```{python}
+##python chunk 
+import requests
+blog_post = requests.get("https://www.aggieerin.com/post/getting-translations-with-rvest-and-selenium/")
+content = blog_post.content
+clean_content = BeautifulSoup(content)
+clean_text_py = clean_content.get_text()
+
+clean_text_py[1000:2000]
+```
+
+## Lower case
+
+- Notice how I am saving the text along the way - overwriting/updating as I go, rather than just printing it. `clean_text_r` is updating as I apply each step. 
+
+```{r}
+##r chunk
+clean_text_r <- tolower(clean_text_r)
+
+substr(clean_text_r, 1000,2000)
+```
+
+- Same thing here with `clean_text_py`. 
+
+```{python}
+##python chunk
+clean_text_py = clean_text_py.lower()
+
+clean_text_py[1000:2000]
+```
+
+## Take out symbols 
+
+```{r}
+##r chunk
+
+```
+
+```{python}
+##python chunk
+def remove_accented_chars(text):
+  text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8', 'ignore')
+  return text
+
+clean_text_py = remove_accented_chars(clean_text_py)
+
+clean_text_py[1000:2000]
+```
+
+## Contractions
+
+```{r}
+##r chunk
+
+```
+
+- Remember we updated this code!
+
+```{python}
+##python chunk
+for contraction, expansion in contractions_dict.items():
+  clean_text_py = clean_text_py.replace(contraction, expansion) 
+
+clean_text_py[1000:2000]
+```
+  
+## Spelling
+
+```{r}
+##r chunk
+spelling.errors <- hunspell(clean_text_r)
+spelling.sugg <- hunspell_suggest(unlist(spelling.errors), dict = dictionary("en_US"))
+
+##rest of code goes here
+```
+
+```{python}
+##python chunk
+
+##first create a tokenized word list 
+words_py = ...
+##then use the [Word(word)...] code
+corrected_py = ...
+
+#this code puts it back together 
+clean_text_py = " ".join(corrected_py)
+clean_text_py[1000:2000]
+```
+
+## Lemmatization
+
+```{r}
+##r chunk
+##be sure to do this step on your clean text r
+```
+
+```{python}
+##python chunk
+##be sure to do this step on your clean text py
+```
+
+## Stopwords
+
+```{r}
+##r chunk
+##be sure to do this step on your clean text r
+```
+
+```{python}
+##python chunk
+#use the code from class [word for word...]
+no_stop = ...
+
+#put them back together 
+clean_text_py = " ".join(no_stop)
+
+clean_text_py[1000:2000]
+```
+
+## Tokenization 
+
+```{r}
+##r chunk
+
+```
+
+```{python}
+##python chunk
+
+```

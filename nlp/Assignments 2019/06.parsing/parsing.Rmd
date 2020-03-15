@@ -1,0 +1,95 @@
+---
+title: 'Constituency and Dependency Parsing'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+#do not change this
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Libraries / R Setup
+
+- In this section, include the *R* set up for Python to run. 
+
+```{r}
+##r chunk
+
+```
+
+- In this section, include import functions to load the packages you will use for Python.
+
+```{python}
+##python chunk
+
+```
+
+## Import the grammar
+
+- Modify `grammar1` from the lecture notes to account for the following sentences:
+  - New sentence: "The dog ate the food."
+  - New sentence: "The dog walked by the cat in the park." 
+  
+```{python}
+##python chunk
+
+```
+
+## Process the sentences
+
+- Process the sentences with both the `RecursiveDescentParser` and `ShiftReduceParser`.
+
+```{python}
+##python chunk
+
+```
+
+## Training Data
+
+- Use *two* of your tweets from the previous assignment and modify the training data for dependency parsing. 
+
+```{python}
+##python chunk 
+
+```
+
+## Build the model
+
+- Create a blank spacy pipeline.
+- Add the parser to the pipeline.
+- Add the labels to the pipeline.
+
+```{python}
+##python chunk
+
+```
+
+## Train the model
+
+- Train the model with 10 iterations of the data. 
+
+```{python}
+##python chunk
+
+```
+
+## Test the model
+
+- Test your dependency model on a similar tweet.
+
+```{python}
+##python chunk
+
+```
+
+## Visualize
+
+- Include a visualization of the tweet you just tested. 
+- Remember, you should modify the chunk options to show the picture in the knitted document, since it does not display inline. 
+
+```{python}
+##python chunk
+
+```

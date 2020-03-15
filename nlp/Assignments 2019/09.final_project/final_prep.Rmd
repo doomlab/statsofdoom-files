@@ -1,0 +1,33 @@
+---
+title: 'Executive 2: Final Preparation'
+author: "STUDENT NAME"
+date: "Sys.Date()"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Objective
+
+This project should allow you to apply the information you've learned in the course to a new dataset. While the structure of the final project will be more of a research project, you can use this knowledge to appropriately answer questions in all fields, along with the practical skills of writing a report that others can read. The dataset must be related to language or language processing in some way. You must use an analysis we learned in class. 
+
+This assign is preparation for the final project focused on text cleaning. You will find a dataset that matches what you are interested in for your final project (likely sentiment analysis, but entity recognition or another classification problem would be acceptable as well). You will import your dataset and clean the data using the steps listed below. You can change datasets between now and the final, but this project should get the code ready for the data cleaning section. 
+
+### Method - Data - Variables
+
+Explain the data you have selected to study. You can find data through many available corpora or other datasets online (ask for help here for sure!). How was the data collected? Who/what is in the data? 
+
+### Clean the Data
+
+You should include code to perform the following steps:
+
+- Lower case
+- Remove symbols
+- Remove contractions
+- Fix spelling errors
+- Lemmatize the words
+- Remove stopwords 
+
+You can perform this analysis in Python or R. You will turn in a knitted file that shows the steps of the code, along with the final print out of the first few words for the finalized data. Be sure to save the data at each step and *do not* print it out until the end (you can make it print temporarily for yourself, but the final report should not be pages and pages of text printed out). 

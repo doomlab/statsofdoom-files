@@ -1,0 +1,139 @@
+---
+title: 'Sentiment Analysis'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load the libraries + functions
+
+
+- Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly. 
+- Import the separate python file that includes the functions you will need for the classification reports. 
+
+```{r libaries}
+##r chunk
+```
+
+- Load the Python libraries or functions that you will use for that section. 
+
+```{python}
+##python chunk
+
+```
+
+## The Data
+
+- This dataset includes tweets that have been coded as either negative or positive. 
+- Import the data using either R or Python. I put a Python chunk here because you will need one to import the data, but if you want to first import into R, that's fine. 
+
+```{python}
+##python chunk
+
+```
+
+## Clean up the data (text normalization)
+
+- Use our clean text function from this lecture to clean the text for this analysis. 
+
+```{python}
+##python chunk
+
+```
+
+## TextBlob
+
+- Calculate the expected polarity for all the tweets.
+- Using a cut off score of 0, change the polarity numbers to positive and negative categories.
+- Display the performance metrics of using Textblob on this dataset. 
+
+```{python}
+##python chunk
+
+```
+
+## AFINN
+
+- Calculate the expected polarity for all the tweets using AFINN.
+- Using a cut off score of 0, change the polarity numbers to positive and negative categories.
+- Display the performance metrics of using AFINN on this dataset. 
+
+```{python}
+##python chunk
+
+```
+
+## Split the dataset
+
+- Split the dataset into training and testing datasets. 
+
+```{python}
+##python chunk
+
+```
+
+## TF-IDF
+
+- Calculate features for testing and training using the TF-IDF vectorizer.
+
+```{python}
+##python chunk
+
+```
+
+## Logistic Regression Classifier
+
+- Create a blank logistic regression model.
+- Fit the the model to the training data.
+- Create the predicted value for the testing data.
+
+```{python}
+##python chunk
+
+```
+
+## Accuracy and Classification Report
+
+- Display the performance metrics of the logistic regression model on the testing data.
+
+```{python}
+##python chunk
+
+```
+
+## Topic Model Positive Reviews
+
+- Create a dataset of just the positive reviews. 
+- Create a dictionary and document term matrix to start the topics model.
+
+```{python}
+##python chunk
+
+```
+
+## Topic Model
+
+- Create the LDA Topic Model for the positive reviews with three topics.
+
+```{python}
+##python chunk
+
+```
+
+## Terms for the Topics
+
+- Print out the top terms for each of the topics. 
+
+```{python}
+##python chunk
+
+```
+
+## Interpretation
+
+- Which model best represented the polarity in the dataset? 
+- Looking at the topics analysis, what are main positive components to the data? 

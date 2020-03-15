@@ -1,0 +1,28 @@
+---
+title: "Chapter 7 Exercises"
+author: "Erin M. Buchanan"
+date: "03/19/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Get Started
+
+- Create a Jupyter notebook with the following items. You should upload a compiled version of the notebook in html or pdf format.
+- Remember, use Markdown cells to answer text questions. Paste the questions into the cells so it's clear what you are answering.
+- Be sure to answer all the questions! Also be sure you are answering the questions posted, not an old answer from GitHub or Stack Overflow.
+
+## Creating Phrases
+
+- The IOB tag system lets us create a flat structure (i.e., one line per word with tag) to read. Why do we need all three tags to be able to create this flat structure?
+
+- Create a chunker using regular expressions `RegexpParser` to find all the verb phrases, rather than the noun phrases.
+  - Evaluate the chunker from a blank set (i.e., `nltk.RegexpParser("")`).
+  - Evaluate the chunker from your updated regular expressions. 
+  - How much better did you do than tagging everything as O?
+  
+- Using the `UnigramChunker` we created in the lecture, examine how well the chunker does for verb phrases, rather than noun phrases. 
+  - Does it perform similarity for verb phrases, as we found for noun phrases? 

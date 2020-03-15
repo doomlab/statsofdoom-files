@@ -1,0 +1,32 @@
+---
+title: "Chapter 8 Exercises"
+author: "Erin M. Buchanan"
+date: "03/26/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Get Started
+
+- Create a Jupyter notebook with the following items. You should upload a compiled version of the notebook in html or pdf format.
+- Remember, use Markdown cells to answer text questions. Paste the questions into the cells so it's clear what you are answering.
+- Be sure to answer all the questions! Also be sure you are answering the questions posted, not an old answer from GitHub or Stack Overflow.
+
+## Creativity
+
+- Create a sentence that you think has never been said before. 
+- Creativity is a distinct problem for parsing sentences - why?
+
+## Parsing
+
+- Use the `grammar1` definition to parse several new sentences.
+  - New sentence: "The dog ate the food."
+  - New sentence: "The dog walked by the cat in the park." 
+  - Use the `RecursiveDescentParser` and `ShiftReduceParser`.
+  - Do either one of these give you an error?
+  
+- A famous sentence in linguistics includes `The horse raced past the barn fell`. Try to parse this sentence on your own - for each word, list the phrase and type of word.
+  - Why are ambiguous sentences like this one difficult for humans and for computers to understand?

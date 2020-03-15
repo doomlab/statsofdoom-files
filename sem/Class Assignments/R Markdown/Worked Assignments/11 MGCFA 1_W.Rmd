@@ -1,0 +1,240 @@
+---
+title: "11 MGCFA"
+author: "erin buchanan"
+date: "09/18/2019"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# MGCFA Class Assignment
+
+## Using the RS14 dataset, program the different models of a multigroup analysis using ethnicity as the grouping variable. 
+    Use race_test as the variable:
+        1 = Black
+        2 = White 
+    Be sure to first change the variable to a factor with labels. 
+    
+```{r import_data}
+master <- read.csv("./11 mgcfa.csv")
+head(master)
+table(master$race_test)
+
+master$race_test <- factor(master$race_test,
+                           levels = c(1,2),
+                           labels = c("Black", "White"))
+
+table(master$race_test, useNA = "ifany")
+
+master <- subset(master,
+                 !is.na(race_test))
+```
+
+## Overall Model
+
+```{r overallmodel}
+overall.model <- 'RS =~ RS1 + RS2 + RS3 + RS4 + RS5 + RS6 + RS7 + RS8 + RS9 + RS10 + RS11 + RS12 + RS13 + RS14'
+
+overall.fit <- cfa(model = overall.model,
+                   data = master,
+                   meanstructure = TRUE)
+
+summary(overall.fit)
+```
+
+## Measurement Invariance
+
+```{r}
+library(equaltestMI)
+
+MG.fit <- eqMI.main(model = overall.model, 
+                    data = master,
+                    group = "race_test",
+                    meanstructure = TRUE,
+                    output = "both", #mean, covariance, both  
+                    equivalence.test = FALSE, #change this in a moment
+                    adjRMSEA = TRUE, #but see new paper
+                    projection = TRUE, #see notes
+                    bootstrap = FALSE,
+                    quiet = TRUE)
+```
+
+## Get Individual Groups
+
+```{r}
+table(master$race_test)
+summary(MG.fit$convention.sem$LavaanOut$fit.configural.g1)
+summary(MG.fit$convention.sem$LavaanOut$fit.configural.g2)
+summary(MG.fit$convention.sem$LavaanOut$fit.combine.groups)
+summary(MG.fit$convention.sem$LavaanOut$fit.metric)
+summary(MG.fit$convention.sem$LavaanOut$fit.scalar)
+summary(MG.fit$convention.sem$LavaanOut$fit.strict.residuals)
+```
+
+    Add partial invariance to your table if necessary by adding a new row. 
+    
+```{r table}
+library(knitr)
+tableprint = matrix(NA, nrow = 10, ncol = 8)
+colnames(tableprint) = c("Model", "Chi-Square", "df", 
+                         "RMSEA", "SRMR", "CFI", "Change CFI", "Different?")
+##replace the 1:5 or 1:7 with the appropriate numbers
+tableprint[1, ] = c("All Groups", 
+                    fitmeasures(overall.fit, c("chisq", "df", "rmsea", 
+                                               "srmr", "cfi")), "na", "na")
+tableprint[2, ] = c("White", fitmeasures(MG.fit$convention.sem$LavaanOut$fit.configural.g2, 
+                                          c("chisq", "df", "rmsea", 
+                                               "srmr", "cfi")), "na", "na")
+tableprint[3, ] = c("Black", fitmeasures(MG.fit$convention.sem$LavaanOut$fit.configural.g1, 
+                                          c("chisq", "df", "rmsea", 
+                                               "srmr", "cfi")), "na", "na")
+tableprint[4, ] = c("Configural Invariance", fitmeasures(MG.fit$convention.sem$LavaanOut$fit.combine.groups, 
+                                          c("chisq", "df", "rmsea", 
+                                               "srmr", "cfi")), "na", "na")
+tableprint[5, ] = c("Metric Invariance", fitmeasures(MG.fit$convention.sem$LavaanOut$fit.metric, 
+                                          c("chisq", "df", "rmsea", 
+                                               "srmr", "cfi")), 
+                    fitmeasures(MG.fit$convention.sem$LavaanOut$fit.combine.groups, "cfi") - 
+                    fitmeasures(MG.fit$convention.sem$LavaanOut$fit.metric, "cfi"), "Invariant")
+tableprint[6, ] = c("Scalar Invariance", fitmeasures(MG.fit$convention.sem$LavaanOut$fit.scalar, 
+                                          c("chisq", "df", "rmsea", 
+                                               "srmr", "cfi")), 
+                    fitmeasures(MG.fit$convention.sem$LavaanOut$fit.metric, "cfi") - 
+                    fitmeasures(MG.fit$convention.sem$LavaanOut$fit.scalar, "cfi"), "Not Invariant")
+tableprint[7, ] = c("Strict Invariance", fitmeasures(MG.fit$convention.sem$LavaanOut$fit.strict.residuals, 
+                                          c("chisq", "df", "rmsea", 
+                                               "srmr", "cfi")), 
+                    fitmeasures(MG.fit$convention.sem$LavaanOut$fit.scalar, "cfi") - 
+                    fitmeasures(MG.fit$convention.sem$LavaanOut$fit.strict.residuals, "cfi"), "Not Invariant")
+
+kable(tableprint)
+```
+
+## What is the CFI you are trying to get to (i.e. CFI - .01)? 
+
+0.91172420938273 - .01 = 0.9017242
+
+## What questions would you freely estimate to get to partial invariance? 
+
+```{r}
+##write out partial codes
+partial_syntax <- paste(colnames(master)[4:17], "~1") 
+
+CFI_list  <- 1:length(partial_syntax)
+names(CFI_list) <- partial_syntax
+
+for (i in 1:length(partial_syntax)){
+  
+  temp <- cfa(model = overall.model, 
+              data = master,
+              meanstructure = TRUE,
+              group = "race_test",
+              group.equal = c("loadings", "intercepts"),
+              group.partial = partial_syntax[i])
+  
+  CFI_list[i] <- fitmeasures(temp, "cfi")
+}
+
+CFI_list
+
+options(scipen = 999)
+sort(CFI_list - fitmeasures(MG.fit$convention.sem$LavaanOut$fit.scalar, "cfi"), decreasing = T)
+```
+
+RS4!
+
+```{r}
+MG.fit_2 <- eqMI.main(model = overall.model, 
+                    data = master,
+                    group = "race_test",
+                    meanstructure = TRUE,
+                    group.partial = "RS4~1",
+                    output = "both", #mean, covariance, both  
+                    equivalence.test = FALSE, #change this in a moment
+                    adjRMSEA = TRUE, #but see new paper
+                    projection = TRUE, #see notes
+                    bootstrap = FALSE,
+                    quiet = TRUE)
+
+tableprint[8, ] = c("Partial Scalar Invariance RS4", fitmeasures(MG.fit_2$convention.sem$LavaanOut$fit.scalar, 
+                                          c("chisq", "df", "rmsea", 
+                                               "srmr", "cfi")), 
+                    fitmeasures(MG.fit$convention.sem$LavaanOut$fit.metric, "cfi") - 
+                    fitmeasures(MG.fit_2$convention.sem$LavaanOut$fit.scalar, "cfi"), "Invariant")
+
+tableprint[9, ] = c("Strict Invariance RS4", fitmeasures(MG.fit_2$convention.sem$LavaanOut$fit.strict.residuals, 
+                                          c("chisq", "df", "rmsea", 
+                                               "srmr", "cfi")), 
+                    fitmeasures(MG.fit_2$convention.sem$LavaanOut$fit.scalar, "cfi") - 
+                    fitmeasures(MG.fit_2$convention.sem$LavaanOut$fit.strict.residuals, "cfi"), "Not Invariant")
+```
+
+```{r}
+##write out partial codes
+partial_syntax <- paste(colnames(master)[4:17], "~~", colnames(master)[4:17]) 
+
+CFI_list  <- 1:length(partial_syntax)
+names(CFI_list) <- partial_syntax
+
+for (i in 1:length(partial_syntax)){
+  
+  temp <- cfa(model = overall.model, 
+              data = master,
+              meanstructure = TRUE,
+              group = "race_test",
+              group.equal = c("loadings", "intercepts", "residuals"),
+              group.partial = c("RS4~1", partial_syntax[i]))
+  
+  CFI_list[i] <- fitmeasures(temp, "cfi")
+}
+
+CFI_list
+
+options(scipen = 999)
+sort(CFI_list - fitmeasures(MG.fit_2$convention.sem$LavaanOut$fit.strict.residuals, "cfi"), decreasing = T)
+```
+
+So we are going to release RS3 as the residuals 
+
+```{r}
+MG.fit_3 <- eqMI.main(model = overall.model, 
+                    data = master,
+                    group = "race_test",
+                    meanstructure = TRUE,
+                    group.partial = c("RS4~1", "RS3~~RS3"),
+                    output = "both", #mean, covariance, both  
+                    equivalence.test = FALSE, #change this in a moment
+                    adjRMSEA = TRUE, #but see new paper
+                    projection = TRUE, #see notes
+                    bootstrap = FALSE,
+                    quiet = TRUE)
+
+tableprint[10, ] = c("Strict Invariance RS4 Intercept + RS3 Residual", fitmeasures(MG.fit_3$convention.sem$LavaanOut$fit.strict.residuals, 
+                                          c("chisq", "df", "rmsea", 
+                                               "srmr", "cfi")), 
+                    fitmeasures(MG.fit_2$convention.sem$LavaanOut$fit.scalar, "cfi") - 
+                    fitmeasures(MG.fit_3$convention.sem$LavaanOut$fit.strict.residuals, "cfi"), "Not Invariant")
+
+kable(tableprint)
+```
+
+## Interpret your findings - are the groups invariant?  Did you see a break down between groups anywhere? What does that break down imply?
+
+Yes - intercept for RS4 is not invariant (it's different), and then the residual for RS3 is also different.
+
+```{r}
+summary(MG.fit_3$convention.sem$LavaanOut$fit.strict.residuals,
+        standardized = T, 
+        rsquare = T, 
+        fit.measures = T)
+```
+
+For RS4 (friends), Blacks are rating this higher than Whites on average. For RS3 (stride), Blacks answers are twice as variable than Whites. 
+
+
+
+
+
+

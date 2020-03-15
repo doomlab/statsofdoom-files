@@ -1,0 +1,70 @@
+---
+title: "2 Data Screening"
+author: "erin buchanan"
+date: "6/11/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Data Screening Class Assignment
+
+Download the data screening file to analyze. You want to screen the whole dataset at once to look for issues, since all the variables will be used in several different hypotheses.   
+
+Study: This dataset includes a male body dissatisfaction scale with the following questions: 
+
+1.	I think my body should be leaner
+2.	I am concerned that my stomach is too flabby
+3.	I feel dissatisfied with my overall body build
+4.	I think I have too much fat on my body
+5.	I think my abs are not thin enough
+6.	I feel satisfied with the size and shape of my body
+7.	Has eating sweets, cakes, or other high calorie food made you feel fat or weak?
+8.	Have you felt excessively large and rounded (i.e., fat)?
+9.	Have you felt ashamed of your body size or shape?
+10.	Has seeing your reflection (e.g., in a mirror or window) made you feel badly about your size or shape?
+11.	Have you been so worried about your body size or shape that you have been feeling that you ought to diet?
+
+# Check the data for the following:
+
+## Accuracy:
+1.	Check the data for out of range scores.  The scale ranges from 1 (never) to 6 (always).
+    a.	Include a summary showing you do/do not have out of range scores.
+    b.	If necessary, fix the out of range scores. 
+        i.	Indicate what the problems were in the dataset.
+        ii.	Make all out of range values NA. 
+        iii.	Include a summary showing that you fixed the accuracy issues.
+
+## Missing data:
+2.	What type of missing data do you appear to have?
+3.	Include a summary of the missing data by participant.
+    a.	For example, you can do table(missing) to see the percentages by participant. 
+4.	Include a table of the missing data by column after you exclude participants with too much missing data. 
+5.	If necessary, use mice to impute the data. 
+    a.	Include a summary of the data that shows that you might have NA values for categorical columns but not continuous columns. 
+ Outliers:
+6.	Calculate Mahalanobis distance scores for your data.
+    a.	What is your df for the cut off score?
+    b.	What is the cut off score?
+    c.	How many outliers did you have? You can include the summary of the mahal < cutoff. 
+    d.	Delete the outliers.
+
+## Additivity:
+7.	Include a symnum table of the continuous variables.
+8.	Are any of the variables too highly correlated?
+
+## Normality:
+9.	Include the multivariate normality histogram.
+10.	Interpret the graph.  Does it indicate multivariate normality?
+
+## Linearity: 
+11.	Include the multivariate QQ plot.
+12.	Interpret the graph. Does it indicate multivariate linearity?
+
+## Homogeneity/Homoscedasticity:
+13.	Include the multivariate residuals plot.
+14.	Interpret the graph. Does it indicate homogeneity?
+15.	Interpret the graph. Does it indicate homoscedasticity?
+

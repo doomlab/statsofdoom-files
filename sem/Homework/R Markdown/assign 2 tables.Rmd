@@ -1,0 +1,90 @@
+---
+title: "table example"
+author: "erin buchanan"
+date: "6/14/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r path assignment}
+library(lavaan)
+library(semPlot)
+
+data.cor = lav_matrix_lower2full(c(1, 
+                                   .19, 1, 
+                                   -.16, -.20, 1, 
+                                   -.37, -.06, .36, 1, 
+                                   -.06, -.05, -.03, -.25, 1, 
+                                   .13, -.06, -.09, -.28, .41, 1))
+rownames(data.cor) = colnames(data.cor) = c("agg", "with", "edu", "age", "emotion", "conduct")
+
+model = '
+conduct ~ agg + age + edu
+emotion ~ age + edu + with
+edu ~ with
+age ~ agg
+age ~~ edu
+'
+
+model.fit = sem(model, sample.cov = data.cor, sample.nobs = 200)
+summary(model.fit, standardized=TRUE, fit.measures=TRUE)
+fitMeasures(model.fit)
+semPaths(model.fit, whatLabels = "par", layout = "spring")
+
+model2 = 'conduct ~ age + edu
+emotion ~ age + edu 
+'
+
+model.fit2 = sem(model2, sample.cov = data.cor, sample.nobs = 200)
+summary(model.fit2, standardized=TRUE, fit.measures=TRUE)
+fitMeasures(model.fit2)
+semPaths(model.fit2, whatLabels = "par", layout = "spring")
+
+model3 = 'conduct ~ agg 
+emotion ~ with
+'
+model.fit3 = sem(model3, sample.cov = data.cor, sample.nobs = 200)
+summary(model.fit3, standardized=TRUE, fit.measures=TRUE)
+fitMeasures(model.fit3)
+semPaths(model.fit3, whatLabels = "par", layout = "spring")
+
+```
+
+```{r make a table, results = 'asis'}
+
+model1fit = round(fitMeasures(model.fit), 3)
+model2fit = round(fitMeasures(model.fit2), 3)
+model3fit = round(fitMeasures(model.fit3), 3)
+
+##make a blank "table"
+##model name, chisquare, df, rmsea, srmr, cfi
+##three models
+table = matrix(NA, nrow = 3, ncol = 6)
+
+##create column names
+colnames(table) = c("Model", "ChiSquare", "df", "RMSEA", "SRMR", "CFI")
+
+##stick in the information you need
+table[1, ] = c("Model 1", model1fit["chisq"], model1fit["df"], 
+               model1fit["rmsea"], model1fit["srmr"],
+               model1fit["cfi"])
+
+table[2, ] = c("Model 2", model2fit["chisq"], model2fit["df"], 
+               model2fit["rmsea"], model2fit["srmr"],
+               model1fit["cfi"])
+
+table[3, ] = c("Model 3", model3fit["chisq"], model3fit["df"], 
+               model3fit["rmsea"], model3fit["srmr"],
+               model3fit["cfi"])
+
+##print that sucker out
+library(knitr)
+kable(table, caption = "This Table Rocks!")
+
+```
+

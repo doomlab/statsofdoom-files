@@ -1,0 +1,51 @@
+---
+title: "12 MGCFA 2"
+author: "erin buchanan"
+date: "6/26/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## MGCFA Class Assignment
+Program a multigroup model and calculate latent means. 
+    DASS - Depression, Anxiety, and Stress Scale
+        Depression: Questions 3, 5, 10, 13, 16, 17, 21
+        Anxiety: Questions 2, 4, 7, 9, 15, 19, 20
+        Stress: 1, 6, 8, 11, 12, 14, 18
+
+    Test gender as the grouping variable:
+        1 = female
+        2 = male 
+
+## Create a table of the fit estimates. 
+Add partial invariance to your table when necessary. 
+
+```{r table}
+library(knitr)
+tableprint = matrix(NA, nrow = 7, ncol = 8)
+colnames(tableprint) = c("Model", "Chi-Square", "df", 
+                         "RMSEA", "SRMR", "CFI", "Change CFI", "Different?")
+##replace the 1:5 or 1:7 with the appropriate numbers
+tableprint[1, ] = c("All Groups", 1:5, "na", "na")
+tableprint[2, ] = c("Female", 1:5, "na", "na")
+tableprint[3, ] = c("Male", 1:5, "na", "na")
+tableprint[4, ] = c("Configural Invariance", 1:5, "na", "na")
+tableprint[5, ] = c("Metric Invariance", 1:7)
+tableprint[6, ] = c("Scalar Invariance", 1:7)
+tableprint[7, ] = c("Strict Invariance", 1:7)
+
+kable(tableprint)
+
+```
+
+## What pieces would you freely estimate to get to partial invariance? 
+
+## Interpret your findings - are the groups invariant?  Did you see a break down between groups anywhere? What does that break down imply?
+
+## Include the latent means and standard deviations for your groups.
+
+## Use a t-test to determine if they are significantly different. Include Cohen's d for your test. 
+You can use MOTE or you can use the cohen.d function. 

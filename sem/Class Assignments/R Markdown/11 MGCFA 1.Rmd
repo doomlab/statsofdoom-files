@@ -1,0 +1,42 @@
+---
+title: "11 MGCFA"
+author: "erin buchanan"
+date: "6/26/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# MGCFA Class Assignment
+
+## Using the RS14 dataset, program the different models of a multigroup analysis using ethnicity as the grouping variable. 
+    Use race_test as the variable:
+        1 = Black
+        2 = White 
+    Be sure to first change the variable to a factor with labels. 
+    Add partial invariance to your table if necessary by adding a new row. 
+```{r table}
+library(knitr)
+tableprint = matrix(NA, nrow = 7, ncol = 8)
+colnames(tableprint) = c("Model", "Chi-Square", "df", 
+                         "RMSEA", "SRMR", "CFI", "Change CFI", "Different?")
+##replace the 1:5 or 1:7 with the appropriate numbers
+tableprint[1, ] = c("All Groups", 1:5, "na", "na")
+tableprint[2, ] = c("White", 1:5, "na", "na")
+tableprint[3, ] = c("Black", 1:5, "na", "na")
+tableprint[4, ] = c("Configural Invariance", 1:5, "na", "na")
+tableprint[5, ] = c("Metric Invariance", 1:7)
+tableprint[6, ] = c("Scalar Invariance", 1:7)
+tableprint[7, ] = c("Strict Invariance", 1:7)
+
+kable(tableprint)
+
+```
+
+## What is the CFI you are trying to get to (i.e. CFI - .01)? 
+
+## What questions would you freely estimate to get to partial invariance? 
+
+## Interpret your findings - are the groups invariant?  Did you see a break down between groups anywhere? What does that break down imply?

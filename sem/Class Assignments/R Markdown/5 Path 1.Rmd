@@ -1,0 +1,31 @@
+---
+title: "5 Path 1"
+author: "erin buchanan"
+date: "6/14/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Path Day 1 Class Assignment
+
+## Part 1: Import the correlation matrix into R. See Table 1 on Blackboard. 
+Note: Exercise 2.2 is used from the book.
+
+## Create the path model in lavaan - you do not have to label the parameters a, b, c, etc. See Figure 1 on Blackboard. 
+
+## Run the model.
+Include a picture with the unstandardized estimates. This picture should output automatically as part of semPaths.
+
+## Part 2: Import the covariance matrix into R. See Table 2 on Blackboard. 
+Note: Exercise 2.3 is used from the book.
+
+## Create the path model in lavaan with the indirect effect. See Figure 2 on Blackboard. 
+
+## Run the model.
+Include a picture with the unstandardized estimates. This picture should output automatically as part of semPaths.
+
+
+

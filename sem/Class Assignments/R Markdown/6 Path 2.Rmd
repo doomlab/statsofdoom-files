@@ -1,0 +1,32 @@
+---
+title: "6 Path 2"
+author: "erin buchanan"
+date: "6/14/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Path Day 2 Class Assignment
+
+## Create a model using the correlation table and figure on Blackboard.  
+
+## Run the fit of the model.
+
+## Include the fit indices using fitMeasures().
+
+## Include a picture of the model. 
+
+## For model 2, remove either the environmental component (withdrawal and aggression) or the genetic component (age, education used as a proxy for IQ). 
+
+## Run the fit of the model.
+
+## Include the fit indices using fitMeasures().
+
+## Include a picture of the model. 
+
+## Compare the models based on the most common fit measures: Chi-square, RMSEA, SRMR, CFI, TLI, NFI, AIC, and ECVI.
+    a. Which model is better?
+    b. Interpret the loadings of the better model. What do they seem to imply? Are they significant?

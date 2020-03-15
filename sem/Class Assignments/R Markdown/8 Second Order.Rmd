@@ -1,0 +1,40 @@
+---
+title: "8 Second Order"
+author: "erin buchanan"
+date: "6/26/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Hierarchical CFA Class Assignment
+
+## DASS - Depression, Anxiety, and Stress Scale
+    Depression: Questions 3, 5, 10, 13, 16, 17, 21
+    Anxiety: Questions 2, 4, 7, 9, 15, 19, 20
+    Stress: 1, 6, 8, 11, 12, 14, 18
+
+Program each of the following models. For each model, include a picture of the model. Put the fit indices in a kable() table. 
+
+## Create a 3-factor model of the DASS.
+
+## Create a 2nd order 3-factor model of the DASS.
+
+## Create a bi-factor model of the DASS.
+
+## Table of fit indices, include RMSEA, SRMR, CFI, and AIC. 
+    You can include everything from the video - here we are creating the table in Markdown, so trying to make a bit shorter. 
+
+## Look at model fit and parameter estimates for the following questions:
+    a.	Which model appears to fit the DASS structure the best?
+    b.  Are the correlations high in the first order model? Does it support a second order model?
+    c. 	Are the questions loading onto their factors appropriately?
+        i.	First order:
+        ii.	Second order: 
+        iii.	Bi-factor:
+              a. Domain specific:
+              b. General:
+              c. Does this support using a bifactor model?
+

@@ -1,0 +1,98 @@
+---
+title: "10 MTMM"
+author: "erin buchanan"
+date: "6/26/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# MTMM Class Assignment
+## Program the steps of MTMM and include the fit indices, loadings, and an interpretation of the results from your analysis. 
+    Traits:
+        Meaning: 
+            o	MLQ 1, 2, 5, 10
+            o	SONG 1, 9
+            o	PIL 4, 17
+        Purpose:
+            o	MLQ 3, 4, 6, 8, 9
+            o	SONG 2, 8 
+            o	PIL 3, 20 
+    Methods:
+        o	MLQ
+        o	PIL
+        o	SONG
+
+## Create a table of the models, using the starting point below:
+```{r model table}
+library(knitr)
+tableprint = matrix(NA, nrow = 4, ncol = 6)
+colnames(tableprint) = c("Model", "Chi-Square", "df", 
+                         "RMSEA", "SRMR", "CFI")
+##replace the 1:5 with the appropriate numbers
+tableprint[1, ] = c("Model 1 - Correlated traits and methods", 1:5)
+tableprint[2, ] = c("Model 2 - No traits, correlated methods", 1:5)
+tableprint[3, ] = c("Model 3 - Perfectly correlated traits, correlated methods", 1:5)
+tableprint[4, ] = c("Model 4 - Correlated traits, uncorrelated methods", 1:5)
+
+kable(tableprint)
+```
+
+## Create a model comparison table, using the starting point below:
+
+```{r comparison model}
+library(knitr)
+tableprint = matrix(NA, nrow = 3, ncol = 6)
+colnames(tableprint) = c("Model", "Change Chi-Square", "Change df", 
+                         "Critical Chi-Square", "Change CFI", "Significant Change")
+##replace the 1:5 with the appropriate numbers
+tableprint[1, ] = c("Convergent Validity Traits Model 1 - 2", 1:5)
+tableprint[2, ] = c("Discriminant Validity Traits Model 1 - 3", 1:5)
+tableprint[3, ] = c("Discriminant Validity Methods Model 1 - 4", 1:5)
+
+kable(tableprint)
+
+```
+
+## Create a table of the estimates, using the starting point below: 
+
+```{r estimates table}
+library(knitr)
+tableprint = matrix(NA, nrow = 17, ncol = 6)
+colnames(tableprint) = c("Estimate", "Meaning", "Purpose", 
+                         "MLQ", "PIL", "SONG")
+##replace the 0 values with numbers, X values are marked off on purpose. 
+tableprint[1, ] = c("MLQ 1", 0, "X", 0, "X", "X")
+tableprint[2, ] = c("MLQ 2", 0, "X", 0, "X", "X")
+tableprint[3, ] = c("MLQ 5", 0, "X", 0, "X", "X")
+tableprint[4, ] = c("MLQ 10", 0, "X", 0, "X", "X")
+tableprint[5, ] = c("PIL 4", 0, "X", "X", 0, "X")
+tableprint[6, ] = c("PIL 17", 0, "X", "X", 0, "X")
+tableprint[7, ] = c("SONG 1", 0, "X", "X", "X", 0)
+tableprint[8, ] = c("SONG 9", 0, "X", "X", "X", 0)
+tableprint[9, ] = c("MLQ 3", "X", 0, 0, "X", "X")
+tableprint[10, ] = c("MLQ 4", "X", 0, 0, "X", "X")
+tableprint[11, ] = c("MLQ 6", "X", 0, 0, "X", "X")
+tableprint[12, ] = c("MLQ 8", "X", 0, 0, "X", "X")
+tableprint[13, ] = c("MLQ 9", "X", 0, 0, "X", "X")
+tableprint[14, ] = c("PIL 3", "X", 0, "X", 0, "X")
+tableprint[15, ] = c("PIL 20", "X", 0, "X", 0, "X")
+tableprint[16, ] = c("SONG 2", "X", 0, "X", "X", 0)
+tableprint[17, ] = c("SONG 8", "X", 0, "X", "X", 0)
+
+
+kable(tableprint)
+
+```
+
+## Correlations
+    Traits correlations:
+        Purpose to meaning:
+    Methods correlations:
+        PIL to MLQ: 
+        PIL to SONG:
+        MLQ to SONG:
+
+## Interpret your results - explaining convergent and discriminant validity in context of the models and parameter estimates. 

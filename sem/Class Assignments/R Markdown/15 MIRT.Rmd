@@ -1,0 +1,32 @@
+---
+title: "15 MIRT"
+author: "erin buchanan"
+date: "6/26/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Polytomous IRT Class Assignment
+
+## Run an Polytomous IRT analysis on the data from a scale covering generalized life purpose.
+## 1.	Reverse code items: 5, 8, 13 for a 1-7 Likert scale. 
+
+## 2.	Calculate a GPCM on the data. 
+
+## 3.	Include the following:
+    a.	ICCs for the GPCM.
+    b.	TIF for the GPCM.
+
+## 4.	Do the items appear to load onto one factor? Include the summary.
+
+## 5.	Interpret your findings:
+    a.	Items:
+        i.	Which questions are good items for discrimination?
+        ii.	Which questions measure below average ability?
+        iii.	Which questions measure above average ability?
+        iv.	Use a, item traces, and IICs for the above questions to answer them.
+    b.	Answers:
+        i.	Do the item choices appear ordered?
+        ii.	Are the choices all probable at some point of ability? 

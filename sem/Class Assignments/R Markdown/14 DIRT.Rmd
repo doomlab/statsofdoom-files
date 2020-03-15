@@ -1,0 +1,39 @@
+---
+title: "14 DIRT"
+author: "erin buchanan"
+date: "6/26/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Dichotomous IRT Class Assignment
+
+## Run an IRT analysis on the data from an Educational Psychology Test on questions 2-5.  
+
+## 1.	Calculate the summary statistics on those questions.
+    a.	Looking at the items, what might you expect?  Do some of them seem easier than others?
+
+## 2.	Calculate the models.
+    a.	Run a 2PL model.
+    b.	Run a 3PL model.
+
+## 3.	Include the following:
+    a.	ICCs for 2 and 3PL.
+    b.	TIF for 2 and 3PL.
+
+## 4.	Which model is better?
+    a.	Is the guessing parameter necessary?
+
+## 5.	Interpret your findings:
+    a.	Items:
+        i.	Which questions are good items for discrimination?
+        ii.	Which questions measure below average ability (i.e. they are easy)?
+        iii.	Which questions measure above average ability (i.e. they are hard)?
+    b.	Factor Scores:
+        i.	Do the patterns of factor scores match what would be expected for the data?
+        ii.	Do those patterns fit the model?  Which patterns are inconsistent?
+        iii.	Do the items fit the model?
+
+

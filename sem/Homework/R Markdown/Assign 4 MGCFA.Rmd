@@ -1,0 +1,56 @@
+---
+title: 'Assignment 4: MGCFA'
+author: "erin buchanan"
+date: "7/5/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# MGCFA Assignment
+Participants were given the Purpose in Life Questionnaire (attached) to examine if they endorsed finding purpose in their life.  The psychometric properties of the PIL are under debate, especially the relationship between assessment types.  You will test the following two-factor model for differences between a randomized questionnaire and a non-randomized questionnaire.
+    Exciting life: 1 2 5 8 9 11 12 16 19
+    Purposeful life: 3 4 6 7 10 13 17 18 20
+    Note: Several questions are not used, be sure to drop them first. 
+
+## Step 1: Shortened Data Screening
+Reverse code the following questions: 2, 5, 7, 10, 17, 18, 19. Otherwise, assume the data is accurate.
+
+### Missing values:
+    a. Include a table that shows the missing data by person (summary of missingness by participant). 
+    b. Exclude all people who are missing more than 5% for the variables you are interested in.
+    c. Include the percent/proportion of data missing by variable.
+    d. Impute the missing values with mice for participants and columns with less than 5% of missing data. 
+
+## Step 2: MGCFA of the PIL using the two-factor model described above. You will use the group variable to test randomized data (random random) and non-randomized data (random not).
+
+### Include a table of fit indices with the following rows:
+    a.	Overall model
+    b.	Each group separately
+    c.	Configural invariance
+    d.	Metric invariance
+    e.	Scalar invariance
+    f.	Strict factorial invariance 
+    g.	Any partial invariance steps and indicate which item/intercept/error was the issue. 
+
+What do those questions/partial invariance imply?
+
+### Test the latent means for differences across your groups.
+    a.	Include the means/SDs for groups.
+    b.	Include the t-test values for those differences.
+    c.	Include the effect size of the difference. 
+    d.	Are latent means practically different (think about significance and effect size)? 
+
+## Step 3: Latent curve model: PIL scores were taken a three time points. Calculate a latent curve model of those time points. You will likely get a Heywood case. If you do, set the variance of that problem point equal to 1.
+For these tables, use the examples from your class assignments to help make those easily. 
+    a.	Include the fit statistics from the steps of your latent curve model.
+    b.	Include the loadings for the residuals, intercept, and slope (see class assignment for table example).
+    c.	Which model is best?
+    d.	What do the loadings imply?
+
+## Step 4: Include a write up that has the information from above in it.
+    1.	You can break it down into the three sections.
+    2.	Be sure to talk about each of the above parts in your write up, but you can move all the numbers to a table (especially fit indices), if you want.
+    3.	Be sure to interpret the meaning as well - what does the multigroup model imply about testing our scale with groups?  What does the latent growth model indicate about the changes in these scales over time?

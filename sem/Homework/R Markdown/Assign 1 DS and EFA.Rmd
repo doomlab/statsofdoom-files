@@ -1,0 +1,149 @@
+---
+title: "Assign 1: Data Screening and EFA"
+author: "erin buchanan"
+date: "6/12/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Data Screening and EFA Assignment
+
+## Abstract:
+  Research in past decades has underscored the importance of body dissatisfaction (BD) in the development and maintenance of disordered eating and health practices (e.g., restrictive eating, exercise habits). Given that 90% of individuals with eating disorders are female, research has focused primarily on female BD. However, male BD has increased sharply over the past decade, and has been linked to maladaptive health behaviors (e.g., steroid use, excessive exercise). Although the presentation of BD contrasts greatly between males and females, many current measures do not delineate between features of male and female BD and are not sensitive to core features of male BD (e.g., muscularity and bulk). Measures specified for males attempt to focus on these core features, but incorrectly assume that these features are equally important for all males. Therefore, this study provided an evaluation of four measures of male BD using item response theory to provide an alternative method of analysis and scoring for a more complete picture of male BD. 841 participants completed the study. By examining the response patterns in the data, the following research questions were answered: 1) What is the level of discriminability of each item and which are the most informative? 2) Are there item biases along the spectrum of BD? 3) Are these scales equivalent measures of BD and are equivalent short-form measures possible? Results also provided evidence for future research on developing a computer-adaptive test (CAT) for BD.
+
+## Data:
+  Question group 1: Participants rate these questions from 1 (extremely dissatisfied) to 5 (extremely satisfied) about different body parts. 
+
+1.	Weight
+2.	Leanness of shoulders
+3.	Leanness of arms (e.g., biceps/triceps)
+4.	Muscularity of arms (e.g., biceps/triceps)
+5.	Leanness of stomach/abdomen
+6.	Muscularity of stomach/abdomen
+7.	Leanness of chest/upper torso
+8.	Muscularity of chest/upper torso
+9.	Leanness of back
+10.	Muscularity of back
+11.	Muscularity of neck
+12.	Overall body build
+13.	Overall leanness of body
+14.	Overall level of body's muscularity
+
+Question group 2: Participants rate these questions from 1 (never) to 5 (always) about how they feel about their bodies.
+
+15.	I think my body should be leaner
+16.	I am concerned that my stomach is too flabby
+17.	I feel dissatisfied with my overall body build
+18.	I think I have too much fat on my body
+19.	I think my abs are not thin enough
+20.	Has eating sweets, cakes, or other high calorie food made you feel fat or weak?
+21.	Have you felt excessively large and rounded (i.e., fat)?
+22.	Have you felt ashamed of your body size or shape?
+23.	Has seeing your reflection (e.g., in a mirror or window) made you feel badly about your size or shape?
+24.	Have you been so worried about your body size or shape that you have been feeling that you ought to diet?
+25.	I think my body should be leaner
+26.	I think I have too much fat on my body
+27.	Eating sweets, cakes, or other high calorie foods makes me feel fat
+28.	I feel excessively fat
+29.	Seeing my reflection (e.g., in a mirror or window) makes me feel badly about my body fat
+
+Question group 3: Participants rate these items from 1 (strongly agree) to 5 (strongly disagree) about how they feel about their bodies. 
+
+30.	I am happy with how much muscle I have compared to how much fat I have
+31.	Other people think I have a good body
+32.	I am a good weight for my height
+33.	I am hesitant to take my shirt off in public because people will look at my body
+34.	I have thoughts of dissatisfaction towards my body
+35.	I think I have a generally attractive body
+36.	My body looks healthy
+37.	The shape of my body is one of my assets
+38.	My body is sexually appealing to others
+
+## Data screening: Include the relevant output for each question. 
+
+## 1.	Accuracy:
+    a.	Check for typos and problems with the dataset. 
+        i.	Show that the data has scores that are accurate or that are inaccurate. 
+        ii.	Fix any typos in the data by deleting only that point.
+    b.	Reverse code question 1 group so that high scores on these items indicate body dissatisfaction. 
+
+## 2.	Missing data:
+    a.	Include a table that shows the missing data by person (table of missingness by participant).
+    b.	Exclude participants who are missing too much data from the rest of the analysis.
+    c.	Include the percent/proportion of data missing by variable.  
+    d.	Run mice to replace the data when appropriate.
+    e.	Include a summary of the data to show the missing data has been replaced.
+
+## 3.	Outliers
+    a.	Create Mahalanobis distance scores.
+    b.	Include a summary of the Mahalanobis scores or a summary of the number of outliers (true/false table). 
+    c.	Exclude all multivariate outliers.
+
+## 4.	Additivity/Multicollinearity
+    a.	Are any of the variables too correlated?
+    b.	Run a correlation table (do not need to include).
+    c.	Use the symnum function to look at the data to see if any of the correlations are too high.
+
+## 5.	Normality
+    a.	Include the skew and kurtosis values for your variables.
+    b.	Include one univariate histogram. 
+    c.	Include the multivariate histogram.
+    d.	Is the data normal?
+
+## 6.	Linearity
+    a.	Include the QQ plot for linearity.
+    b.	Is the data linear?
+
+## 7.	Homogeneity and Homoscedasticity
+    a.	Include a residual scatterplot of the data.
+    b.	Is the data homogeneic?
+    c.	Is the data homoscedastic?
+
+## EFA: Include the relevant output for each question.
+
+## 1.	Before you start:
+    a.	Include output for both KMO and Barlett's test.
+    b.	What does the Kaiser-Meyer-Olkin statistic tell you about sampling adequacy? Give number and interpretation. 
+        i.	How many participants do you have? Do you seem to meet the 10-15 people per item suggestion?
+    c.	What does Barlett's test tell you?  Give number and interpretation. 
+
+## 2.	Number of factors:
+    a.	Theory suggests two factors. 
+    b.	How many does the Kaiser criterion suggest? 
+        i.	Include the sum of the eigenvalues for both criteria.
+    c.	How many does the scree plot suggest? 
+        i.	Include the scree plot.
+    d.	How many does the parallel analysis indicate? 
+        i.	Include the parallel analysis.
+    e.	Hint: If you see a set of loadings where one factor's loadings all double load with another factor, you are overfactoring - a sign you've run too many factors. 
+
+## 3.	Simple structure:
+    a.	Use maximum likelihood as the fitting estimation and direct oblimin for the rotation.
+    b.	Rounds of Loading Interpretation:
+        i.	Include the loadings for each round of analysis.
+        ii.	Describe which questions were considered bad and why you excluded them. 
+        iii.	Continue this process until you achieve simple structure. 
+
+## 4.	Adequate solution:
+    a.	Include the fit indices (RMSEA + CI, RMSR, CFI, TLI).
+    b.	Describe the fit indices.  
+    c.	Include the reliabilities for each factor.
+    d.	Are the reliabilities any good?
+    e.	Label the factors based on the questions.
+
+## 5.	Create subscale averages for each participant based on your EFA results. You should have several new columns that are the average score of the factors created above. 
+    a.	Include a summary of the means and standard deviations for these subscales.
+
+## 6.	Write up:
+Normally, you would also include the table of the loadings for EFA in a write up (not necessary here). Please write the overall paragraph below this section including all of the following points. You do not need to format in APA style, since we have not covered how to do that in Markdown. 
+    a.	Short description of the scale.
+    b.	Include a summary of data screening. 
+    c.	List the type of analysis - rotation, fitting estimation, program used.
+    d.	Values on why you had enough people and an adequate set of correlations.
+    e.	Number of factors suggested you choose and why (scree, eigenvalues, parallel analysis).
+    f.	What questions you eliminated - why did you eliminate them? Go through the rounds one at a time.
+    g.	Interpretation of the factors.
+    h.	Description of adequacy of solution - fit indices, reliabilities, and average/SD scores for the factors.

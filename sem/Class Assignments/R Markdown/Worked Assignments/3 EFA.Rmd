@@ -1,0 +1,114 @@
+---
+title: "3 EFA"
+author: "erin buchanan"
+date: "6/12/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# EFA Example Class Assignment
+
+## Abstract:
+  System justification theory (Jost & Banaji, 1994; Jost, Banaji, & Nosek, 2004) predicts that ideologies expressed by privileged groups which serve to justify the existence of group inequality can be internalized by members of disadvantaged groups, so that they support and defend the social status quo even at their own direct personal expense and at the expense of other members of their group. Jost and Calogero (2011) have examined self-objectification responses to sexism, which reinforce the status quo of gender inequality; they reported that a low need for cognitive closure as measured by Webster and Kruglanski's (1994) scale offers protection against self-subjugating system-justifying effects. Women having a low need for closure exhibited a lesser degree of self-objectification upon exposure to sexist ideology. Jost and Calogero, following Glick and Fiske (1996, 2001), differentiated between hostile and benevolent expressions of sexism as well as combining the two into a complementary exposure condition which they observed was most pernicious of all. As there is a scarcity of published work investigating the application of system justification theory to prejudice against individuals of lower socioeconomic status (SES), we will build on Jost and Calogero's work by searching for system-justifying effects upon exposure to benevolent, hostile, and complementary expressions of SES-based prejudice. System justification theory predicts that in response to statements advocating an ideology prejudiced against them, participants with a lower SES will exhibit stronger self-subjugating responses, which reinforce the status quo of SES inequality. 
+
+# Assignment: 
+
+```{r import data}
+master = read.csv("~/OneDrive - Missouri State University/TEACHING/751 SEM/class assignments/R Markdown/3 efa.csv")
+```
+
+## 1.	Data screening/clean up (short):
+    a.	Exclude missing cases from the dataset.
+    b.	Exclude the group variable from the analysis.
+
+```{r data screening}
+nomiss = na.omit(master)
+final = nomiss[ , -ncol(nomiss)]
+```
+
+
+## 2.	Run an EFA analysis on the openness to experience scale, and answer the following questions (you can do multiple R sections here if you want):
+    a.	Number of factors: (As you are watching this video here, note that I added comments to the video as updates)
+        i.	Parallel Analysis: 5 factors
+        ii.	Scree plot: 2 factors
+        iii.	Eigenvalues: 2 or 3 factors
+
+```{r number of factors}
+library(psych)
+library(GPArotation)
+
+parallel = fa.parallel(final, fm = "ml", fa = "fa")
+parallel$fa.values
+
+sum(parallel$fa.values > 1) ##old kaiser 
+sum(parallel$fa.values > .7) ##new kaiser
+```
+
+    b.	Simple structure:
+        i.	Set up: run with an oblimin rotation and ML as the type of math.
+        ii.	Run the analysis excluding questions as they do not load. 3, 11, 15, 16
+        
+```{r simple structure}
+
+twofactor = fa(final, #dataset
+               nfactors = 2, #number of factors
+               rotate = "oblimin", #rotation type
+               fm = "ml") #math 
+twofactor
+
+twofactor2 = fa(final[ , -c(3, 11, 15, 16)],
+                nfactors = 2,
+                rotate = "oblimin",
+                fm = "ml")
+names(final)
+twofactor2
+```
+
+    c.	Adequate:
+        i.	Include fit indices:
+            1.	RMSR: .08 good
+            2.	RMSEA: RMSEA index =  0.094  and the 90 % confidence intervals are  0.059 0.109, good/adequate 
+            3.	TLI: 0.828 poor 
+            4.	CFI: 0.8751034 poor 
+        ii.	Include reliability: .82, .85 both good
+        iii.	Name your factors:
+        one factor is about the arts, the other factor is thinking philosophy 
+
+```{r adequate}
+twofactor2
+
+1 - ((twofactor2$STATISTIC - twofactor2$dof) / (twofactor2$null.chisq - twofactor2$null.dof))
+
+alpha(final[ , c(4:10, 13, 17, 19, 20)], check.keys = TRUE)
+alpha(final[ , c(1, 2, 12, 14, 18)], check.keys = TRUE)
+```
+
+
+# Openness to Experience Scale
+  Below are some phrases describing people's behaviors. Please use the rating scale below to describe how accurately each statement describes you. Describe yourself as you generally are now, not as you wish to be in the future. Describe yourself as you honestly see yourself in relation to other people of your gender and of roughly your same age.  Please read each statement carefully, and then check the box that corresponds to your response.
+
+Scale: very inaccurate, moderately inaccurate, neither inaccurate nor accurate, moderately accurate, very accurate
+
+1.	Believe in the importance of art.
+2.	Have a vivid imagination.
+3.	Tend to vote for liberal political candidates.
+4.	Carry the conversation to a higher level.
+5.	Enjoy hearing new ideas.
+6.	Enjoy thinking about things.
+7.	Can say things beautifully.
+8.	Enjoy wild flights of fantasy.
+9.	Get excited by new ideas.
+10.	Have a rich vocabulary.
+11.	Am not interested in abstract ideas.
+12.	Do not like art.
+13.	Avoid philosophical discussions.
+14.	Do not enjoy going to art museums.
+15.	Tend to vote for conservative political candidates.
+16.	Do not like poetry.
+17.	Rarely look for a deeper meaning in things.
+18.	Believe that too much tax money goes to support artists.
+19.	Am not interested in theoretical discussions.
+20.	Have difficulty understanding abstract ideas.

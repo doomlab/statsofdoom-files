@@ -1,0 +1,86 @@
+---
+title: "14 DIRT"
+author: "Jessica Aikens"
+date: "6/26/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+dataset = read.csv("14 dirt.csv", header = F)
+###dich, answers are right or wrong, easy questions are going to disc at the bottom of distribution
+data = dataset[, 2:5]
+summary(data)
+
+```
+# Dichotomous IRT Class Assignment
+```{r}
+library(ltm)
+
+```
+
+
+
+## Run an IRT analysis on the data from an Educational Psychology Test on questions 2-5.  
+
+## 1.	Calculate the summary statistics on those questions.
+    a.	Looking at the items, what might you expect?  Do some of them seem easier than others? Yes, almost everyone got question three right, and every other question had over .7 people get right. These questions are too easy. Easy questions are going to disc at the bottom of distribution.
+
+## 2.	Calculate the models.
+    a.	Run a 2PL model.
+    b.	Run a 3PL model.
+    
+```{r}
+##how good is this question measuring my latent variable?
+##measuring whats to easy, if negative, hard questions will have a positive difficulty parameter, 
+##2pl
+IRTmodel = ltm(data ~ z1, IRT.param = TRUE)
+##get the parameters
+summary(IRTmodel)
+coef(IRTmodel) ##diff, b parameter - means questions are easy, v3 -3.10 zscore (only people who are 3 sd below the mean are getting this question wrong), ##dscrmn (slope) tells how discr it is (cutoff at 1, less than one get rid of question)
+plot(IRTmodel, type = "ICC") ## all items at once, b 50/50 point is estimated where it crosses the line, probability of getting it correct, a slopes will tell how discriminiable it is
+plot(IRTmodel, type = "ICC", items = 3) ## one item at a time
+plot(IRTmodel, type = "IIC")
+plot(IRTmodel, type = "IIC", items = 0) ## Test Information Function best at 10, how much info is each question giving you?, 
+factor.scores(IRTmodel) ##shows the observable response patterns, 1-right, 0-wrong, response- measure of ability, this plot gives how good you are as a student depending on how many questions you get right (response .397 above average, wrong? -1.763 below average)
+person.fit(IRTmodel)##pvalue if latent score is appropiate, want them to be nonsignificant
+item.fit(IRTmodel)##are items consistent with the model?, significant value implies that items are bad (significantly diff from model)
+
+##3pl is a guessing parameters, sometimes might flatten to zero, guessing parameters how guessable it is if you had no idea what it was
+##run with a 3PL
+IRTmodel2 = tpm(data= data, type = "latent.trait", IRT.param = TRUE)
+summary(IRTmodel2)
+options(scipen = 999)
+coef(IRTmodel2)
+plot(IRTmodel2, type = "ICC")
+plot(IRTmodel2, type = "IIC", items = 0)
+factor.scores(IRTmodel2)
+person.fit(IRTmodel2)
+item.fit(IRTmodel2)
+
+##b tells you where it discriminates. a is slope how good it is at discriminating (cut off at 1 is a good disc), want steepers slopes, means they are more disc. c is a guessing parameter
+```
+
+## 3.	Include the following: ONly estimate one piece of information, 3 parameters people estimate are abc, start with b, things are 50/50
+    a.	ICCs for 2 and 3PL.
+    b.	TIF for 2 and 3PL.
+
+## 4.	Which model is better? 2PL
+    a.	Is the guessing parameter necessary? No
+```{r}
+anova(IRTmodel, IRTmodel2)
+```
+
+
+## 5.	Interpret your findings:
+    a.	Items:
+        i.	Which questions are good items for discrimination?
+        2, 4, & 5
+        ii.	Which questions measure below average ability (i.e. they are easy)? All are measuring below
+        iii.	Which questions measure above average ability (i.e. they are hard)? None
+    b.	Factor Scores:
+        i.	Do the patterns of factor scores match what would be expected for the data? We have about the right amount of people we would expect to fit the data
+        ii.	Do those patterns fit the model?  Which patterns are inconsistent? They appear to fit the model but a couple do not but they are measured by one person such as pattern 1.   
+        iii.	Do the items fit the model? The items are okay, the chi-square significant. 
+
+

@@ -1,0 +1,50 @@
+---
+title: 'Assign 5: IRT'
+author: "erin buchanan"
+date: "7/5/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# IRT Assignment
+Participants were given the Life Purpose Questionnaire, which is a dichotomous version of the Purpose in Life Questionnaire. You will program an IRT model to determine what questions from the LPQ are helpful in discriminating between levels of purpose in life, which is related to depression, PTSD, and other measures of psychological problems. 
+
+## Step 1. Shortened Data Screening
+    1.	Look at the data for any values:
+        a.	Not 0 or 1 for the DIRT (LPQ).
+        b.	Not 1-7 for the MIRT (PIL).
+        c.	Fix incorrect values.
+        d.	Reverse code the MIRT (PIL) dataset for items: 2, 5, 7, 10, 14, 15, 17, 18, 19
+    2.	Exclude participants who are missing more than 5% of their data.
+
+## Step 2. Program a 2PL model of the LPQ.
+ICC = Item characteristic curve, TIF = test information function. 
+    1.	Include a picture of the ICCs and TIF.
+    2.	Include the AIC value (using the summary function).
+    3.	Include the difficulty and discrimination values for the items.
+        a.	Which questions are bad discriminators?
+        b.	Where do questions seem to be measuring purpose (the latent variable)?
+
+## Step 3. Program a 2PL model of the LPQ excluding questions that do not discriminate well.
+    1.	Include a picture of the ICCs and TIF.
+    2.	Include the AIC value (using the summary function).
+        a.	Compare AIC to the previous model. Which is better? 
+    3.	Include the difficulty and discrimination values for the items.
+
+## Step 4. Program a generalized partial credit model for the PIL data.  
+The LPQ is a modified version of the Purpose in Life Questionnaire to have dichotomous items. Let's compare the two scales by programming a Polytomous model of the PIL. 
+
+    1.	Include a picture of the ICCs and TIF. 
+    2.	Look at items and comment on if they: 
+        a.	Appear ordered.
+        b.	Each choice is the most probable at some level of ability.
+    3.	Exclude items that have poor a values.
+    4.	Run this model again without those items.
+        a.	How many scale points should this scale have for items?
+        b.	Do items appear to be ordered and choices all have a most likely ability?
+    5.	Explain differences/similarities between items on the LPQ and PIL. 
+
+Explain your reasoning and thoughts with each step. This assignment does not include a write up. :) You made it!

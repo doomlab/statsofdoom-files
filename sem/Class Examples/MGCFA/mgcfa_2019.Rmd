@@ -1,0 +1,496 @@
+---
+title: "MGCFA Example"
+author: "Erin M. Buchanan"
+date: "9/17/2019"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+## Overview
+
+- This video covers an example of Multigroup Confirmatory Factor Analysis (MGCFA)
+- This video is part of my structural equation modeling series:
+  - https://www.youtube.com/watch?v=JEFMdQrXwJc&list=PLw93TUuxrFAZkJVc5dhgTZpOT7qmTjlT7
+  - https://www.youtube.com/watch?v=tmpFrygKTUQ&list=PLw93TUuxrFAZV3ZgsNfMFszE8OA744NnQ
+- This video is an update because of changes in the *semTools* package, as well new information on equivalence testing
+
+## Assumptions
+
+- You know something about structural equation modeling
+- You've got an idea about multigroup models 
+  - Lecture: https://youtu.be/W4fkW-tqIUg
+- You've learned a bit of *lavaan* syntax 
+
+## Let's get started!
+
+- Equality constraints
+- We've talked before about setting paths equal to each other by calling them the same parameter name
+  - cheese =~ a\*feta + a\*swiss
+  - So feta and swiss will be estimated at the same value. 
+- The entire purpose of a multigroup model is to build equality constraints
+- We could do this one at a time, ourselves, or use the *semTools* package to build these
+
+## An Example
+
+- Using the RS-14 scale: a one-factor measure of resiliency
+
+```{r}
+##libraries
+library(lavaan)
+
+##data
+master <- read.csv("mgcfa RS.csv")
+
+head(master)
+```
+
+## Clean up the data
+
+- By not including other labels, we are dropping those categories 
+
+```{r}
+master$Sex <- factor(master$Sex, 
+                     levels = c(1,2),
+                     labels = c("Men", "Women"))
+table(master$Sex)
+
+master <- subset(master, 
+                 !is.na(Sex))
+```
+
+## Start with Overall CFA
+
+- NEW: `meanstructure = TRUE`
+- Gives you the intercepts and means in the model.
+- You want to turn that one at the beginning, and you are first examining models with means, so you can tell if you have bad parameters at the start. 
+
+## Start with Overall CFA
+
+```{r}
+overall.model <- '
+RS =~ RS1 + RS2 + RS3 + RS4 + RS5 + RS6 + RS7 + RS8 + RS9 + RS10 + RS11 + RS12 + RS13 + RS14
+'
+
+overall.fit <- cfa(model = overall.model,
+                   data = master, 
+                   meanstructure = TRUE) ##this is important 
+```
+
+## Examine Overall Fit
+
+```{r}
+summary(overall.fit, 
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Make a table of fit indices
+
+```{r}
+table_fit <- matrix(NA, nrow = 9, ncol = 6)
+colnames(table_fit) = c("Model", "X2", "df", "CFI", "RMSEA", "SRMR")
+table_fit[1, ] <- c("Overall Model", round(fitmeasures(overall.fit, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+kable(table_fit)
+```
+
+## Create a Picture
+
+```{r semplot, messages = F}
+library(semPlot)
+
+semPaths(overall.fit, 
+         whatLabels = "std", 
+         layout = "tree")
+```
+
+## The `equaltestMI` package 
+
+```{r}
+library(equaltestMI)
+
+MG.model <- eqMI.main(model = overall.model, 
+                      data = master,
+                      group = "Sex",
+                      meanstructure = TRUE,
+                      output = "both", #mean, covariance, both  
+                      equivalence.test = FALSE, #change this in a moment
+                      adjRMSEA = TRUE, #but see new paper
+                      projection = TRUE, #see notes
+                      bootstrap = FALSE)
+```
+
+## Examine and Update Results
+
+- You would first examine each group separately to see fit
+- All the models you could potentially want to run are saved with the `eqMI.main` function
+- Let's work through the Brown style steps to see how we can pull all the information we'd want
+
+## Men Overall Summary
+
+```{r}
+##Men
+summary(MG.model$convention.sem$LavaanOut$fit.configural.g1, ##each model saved here
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Women Overall Summary
+
+```{r}
+##Women
+summary(MG.model$convention.sem$LavaanOut$fit.configural.g2, ##each model saved here
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Add the fit to table
+
+```{r}
+table_fit[2, ] <- c("Men Model", round(fitmeasures(MG.model$convention.sem$LavaanOut$fit.configural.g1, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+table_fit[3, ] <- c("Women Model", round(fitmeasures(MG.model$convention.sem$LavaanOut$fit.configural.g2, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+kable(table_fit)
+```
+
+## Configural Invariance
+
+- Both groups "pancaked" together 
+
+```{r}
+summary(MG.model$convention.sem$LavaanOut$fit.combine.groups, ##each model saved here
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Add the fit to table
+
+```{r}
+table_fit[4, ] <- c("Configural Model", round(fitmeasures(MG.model$convention.sem$LavaanOut$fit.combine.groups, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+kable(table_fit)
+```
+
+## What is this doing?
+
+- Two places to change things: 1) model definition, 2) `cfa()` parameters
+
+```{r}
+overall.model
+
+#cfa(model = overall.model, 
+#   data = master,
+#   meanstructure = TRUE,
+#   group = "Sex")
+
+MG.model$convention.sem$LavaanOut$fit.combine.groups@call
+```
+
+## Metric Invariance
+
+- Are the factor loadings the same? 
+
+```{r}
+summary(MG.model$convention.sem$LavaanOut$fit.metric, ##each model saved here
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Add the fit to table
+
+```{r}
+table_fit[5, ] <- c("Metric Model", round(fitmeasures(MG.model$convention.sem$LavaanOut$fit.metric, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+kable(table_fit)
+```
+
+## What is this doing?
+
+```{r}
+overall.model
+
+#cfa(model = overall.model, 
+#   data = master,
+#   meanstructure = TRUE,
+#   group = "Sex",
+#   group.equal = c("loadings"))
+
+MG.model$convention.sem$LavaanOut$fit.metric@call
+```
+
+## Scalar Invariance
+
+- Are the item intercepts the same? 
+
+```{r}
+summary(MG.model$convention.sem$LavaanOut$fit.scalar, ##each model saved here
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Add the fit to table
+
+```{r}
+table_fit[6, ] <- c("Scalar Model", round(fitmeasures(MG.model$convention.sem$LavaanOut$fit.scalar, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+kable(table_fit)
+```
+
+## What is this doing?
+
+```{r}
+overall.model
+
+#cfa(model = overall.model, 
+#   data = master,
+#   meanstructure = TRUE,
+#   group = "Sex",
+#   group.equal = c("loadings", "intercepts"))
+
+MG.model$convention.sem$LavaanOut$fit.scalar@call
+```
+
+## Strict (Error) Invariance
+
+- Are the item residuals the same? 
+
+```{r}
+summary(MG.model$convention.sem$LavaanOut$fit.strict.residuals, ##each model saved here
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Add the fit to table
+
+```{r}
+table_fit[7, ] <- c("Strict Model", round(fitmeasures(MG.model$convention.sem$LavaanOut$fit.strict.residuals, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+kable(table_fit)
+```
+
+## What is this doing?
+
+```{r}
+overall.model
+
+#cfa(model = overall.model, 
+#   data = master,
+#   meanstructure = TRUE,
+#   group = "Sex",
+#   group.equal = c("loadings", "intercepts", "residuals"))
+
+MG.model$convention.sem$LavaanOut$fit.strict.residuals@call
+```
+
+## Partial Invariance
+
+- We can see in this last step that we have a difference in models based on change in CFI. 
+- Now, we have to figure out where the problem is and update our model to fix that problem.
+- You would only look for problems *in the step you are in*.
+
+## Partial Invariance
+
+- Figure out which level you need:
+  - metric `=~` for loadings
+  - scalar `~1` for intercepts
+  - strict `~~` for variances
+- Change each item one at a time and note the changes
+
+## Partial Invariance
+
+```{r}
+##write out partial codes
+partial_syntax <- paste(colnames(master)[4:17], #all the columns
+                        "~~", #residuals
+                        colnames(master)[4:17]) #all columns again 
+
+CFI_list  <- 1:length(partial_syntax)
+names(CFI_list) <- partial_syntax
+
+for (i in 1:length(partial_syntax)){
+  
+  temp <- cfa(model = overall.model, 
+              data = master,
+              meanstructure = TRUE,
+              group = "Sex",
+              group.equal = c("loadings", "intercepts", "residuals"),
+              group.partial = partial_syntax[i])
+  
+  CFI_list[i] <- fitmeasures(temp, "cfi")
+}
+
+CFI_list
+```
+
+## Figure out which parameters to "free"
+
+```{r}
+options(scipen = 999)
+sort(CFI_list - fitmeasures(MG.model$convention.sem$LavaanOut$fit.strict.residuals, "cfi"), decreasing = T)
+```
+
+## Free up those paramers!
+
+```{r}
+MG.model_2 <- eqMI.main(model = overall.model, 
+                      data = master,
+                      group = "Sex",
+                      meanstructure = TRUE,
+                      group.partial = c("RS9~~RS9"),
+                      output = "both", #mean, covariance, both  
+                      equivalence.test = FALSE, #change this in a moment
+                      adjRMSEA = TRUE, #but see new paper
+                      projection = TRUE, #see notes
+                      bootstrap = FALSE,
+                      quiet = T)
+
+MG.model_2$convention.sem$LavaanOut$fit.strict.residuals@call
+```
+
+## Check out the fit
+
+```{r}
+summary(MG.model_2$convention.sem$LavaanOut$fit.strict.residuals,
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Add the fit to table
+
+```{r}
+table_fit[8, ] <- c("Strict Model RS9", round(fitmeasures(MG.model_2$convention.sem$LavaanOut$fit.strict.residuals, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+kable(table_fit)
+```
+
+## Add one more free parameter
+
+```{r}
+MG.model_3 <- eqMI.main(model = overall.model, 
+                      data = master,
+                      group = "Sex",
+                      meanstructure = TRUE,
+                      group.partial = c("RS9~~RS9", "RS13~~RS13"),
+                      output = "both", #mean, covariance, both  
+                      equivalence.test = FALSE, #change this in a moment
+                      adjRMSEA = TRUE, #but see new paper
+                      projection = TRUE, #see notes
+                      bootstrap = FALSE,
+                      quiet = T)
+
+table_fit[9, ] <- c("Strict Model RS9 + 13", round(fitmeasures(MG.model_3$convention.sem$LavaanOut$fit.strict.residuals, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+kable(table_fit)
+```
+
+## Interpretation
+
+- The RS is mostly invariant – the structure, loadings, intercepts, and most of the error variances are the same across men and women.
+- However, two items show larger variances:
+    - RS9
+    - RS13
+    - Where, women show much larger variances on both of those questions. 
+        - I keep interested in things.
+        - My life has meaning. 
+
+## lavPredict on the items
+
+```{r}
+predicted_scores <- lavPredict(MG.model_3$convention.sem$LavaanOut$fit.strict.residuals,
+                               type = "ov")
+
+table(master$Sex)
+
+predicted_scores <- as.data.frame(do.call(rbind, predicted_scores))
+predicted_scores$Sex <- c(rep("Women", 266), rep("Men", 244))
+
+predicted_scores$sum <- apply(predicted_scores[ , 1:14], 1, sum)
+
+tapply(predicted_scores$sum, predicted_scores$Sex, mean)
+```
+
+## lavPredict on the factor scores
+
+```{r}
+master$sum <- apply(master[ , 4:17], 1, sum)
+
+tapply(master$sum, master$Sex, mean)
+
+latent_means <- lavPredict(MG.model_3$convention.sem$LavaanOut$fit.strict.residuals)
+
+latent_means <- as.data.frame(do.call(rbind, latent_means))
+latent_means$Sex <- c(rep("Women", 266), rep("Men", 244))
+
+tapply(latent_means$RS, latent_means$Sex, mean) 
+
+tapply(latent_means$RS, latent_means$Sex, mean) * tapply(master$sum, master$Sex, sd, na.rm = T) + tapply(master$sum, master$Sex, mean, na.rm = T)
+```
+
+## Calculate your favorite stat
+
+```{r effectsize, message = F}
+library(MOTE)
+M = tapply(predicted_scores$sum, predicted_scores$Sex, mean)
+SD = tapply(predicted_scores$sum, predicted_scores$Sex, sd)
+N = tapply(predicted_scores$sum, predicted_scores$Sex, length)
+
+d.ind.t(M[1], M[2], SD[1], SD[2], N[1], N[2], a = .05)
+```
+
+## Compare that to your latent means output
+
+```{r}
+MG.model_3$projection.res$projection$latent.test
+```
+
+## EQ Testing?
+
+```{r}
+EQ.model <- eqMI.main(model = overall.model, 
+                      data = master,
+                      group = "Sex",
+                      meanstructure = TRUE,
+                      output = "both", #mean, covariance, both  
+                      equivalence.test = TRUE, #change this in a moment
+                      adjRMSEA = TRUE, #but see new paper
+                      projection = TRUE, #see notes
+                      bootstrap = FALSE,
+                      quiet = T)
+
+EQ.model$eqMI.stat
+```
+
+## Thanks!
+
+
+

@@ -1,0 +1,56 @@
+---
+title: "Assignment 3: CFA"
+author: "erin buchanan"
+date: "7/5/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# CFA Assignment
+
+## Data screening (shortened):
+    a.	Assume that the data is accurate.
+    b.	Outliers:
+        i.	Screen the data for outliers.
+        ii.	How many outliers did you have? Include a summary. 
+        iii.	Exclude any multivariate outliers.
+
+## Regular CFA:
+Use the picture posted on blackboard to structure the following models. NOTE: You will have issues with this set of CFAs - try examining the correlations and collapsing very large correlations. Be sure to watch for errors. 
+
+### Program 4-factor model - Use VCI, WMI, POI, and PSI as latent variables
+
+### Program 2-factor model - with VIQ and PIQ as latent variables (collapse across the indices for those latents)
+
+### Program 1-factor model - with IQ as the only latent variable.
+
+### Comment on which model is the best model by using a difference test against the models (use AIC or CFI but be explicit on your reasoning/explanation).
+
+### For the BEST MODEL ONLY:
+    i.	Check the standardized residuals and see if there are any questions that are not being measured well (i.e. residual Z-score > 2.58).
+      1.	Use residuals(model.fit, type = "standardized") to get those values.
+      2.	Report those questions and values.
+    ii.	Should any of the questions be moved?  Check the modification indices and report if you moved or double loaded questions.
+    
+## Second order CFA
+    a. Program a general IQ factor leading to your subscale factors, and include model fit.
+    b. Does the data support a second order model?
+    
+## Bi-Factor CFA
+NOTE: To fix Heywood cases here: calculate the variance for the items that are giving Heywood problems. Fix those variances to the variance in the dataset one at a time until the negative variances go away. 
+
+    a.	Program a general IQ factor that is a generalized factor. Include the sub-domains as domain specific factors.
+    b.	List model fit.
+    c.	Does the mode support the domain specific areas, after accounting for the generalized latent variable?
+	 
+## Full SEM - program a model wherein a combined PSI+POI predicts WMI, which then predicts VCI. (i.e. PSI/POI --> WMI --> VCI)
+    a.	Use modification indices to make a better model (that still makes sense!)
+    b.	List all fit indices and model differences (CFI/AIC) as you change paths. Only one path at a time please!
+    c.	Are there any non-significant paths?
+    d.	How much variance is accounted for by each of the latents (use SMCs)?
+
+## Write up:
+Include an informal write up that discusses each model briefly, indicating a summary of each big section (CFA, Second Order, BiFactor, Full SEM). You can reference a table of fit indices instead of listing model fit in the paragraph. 

@@ -1,0 +1,41 @@
+---
+title: "1 Intro R"
+author: "erin buchanan"
+date: "6/11/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Create R chunks to display both the output and code in this file. For each of the following sections, create the code to answer the question and output the answer (if necessary).
+
+#	Make a vector of numbers. 
+    o	Use the rep or seq function.
+    o	Include a concatenate c().
+```{r part 1}
+vect = c(1,2,3,4)
+vect
+```
+
+
+#	Use the length() function to figure out how long your vector is.
+
+#	Make a matrix at least 5 by 5. 
+    o	Pull out the value for row 2 column 3.
+
+#	Use the head() function to look at the dataset USArrests. 
+    o	Calculate a summary of USArrests.
+
+#	Import a data set (attached). 
+    o	Recode all the values to LEFT and RIGHT in the whichhand column.
+    o	Create a summary of the dataset.
+    o	Exclude all navalues in the dataset.
+    o	Create a dataset with only LEFT handed participants.
+    o	Calculate the correlation table of just the following variables: LR_switch, finger_switch, rha, word_length, letter_freq
+
+#	Bonus: 
+    o	Run a regression using the following: lm(rating~finger_switch, data=data) **or whatever you called the data
+    o	Save the output of the regression.
+    o	Pull out only the slope from the coefficients.

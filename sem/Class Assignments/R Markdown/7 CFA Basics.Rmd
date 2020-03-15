@@ -1,0 +1,37 @@
+---
+title: "7 CFA Basics"
+author: "erin buchanan"
+date: "6/26/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# CFA Basics Class Assignment
+
+##CAAFI: Computer Aversion, Attitudes, and Familiarity Index
+    Computer Familiarity: Items 3, 13-14, 16, 20-23, 27, and 30. 
+    Computer Attitudes: Items 1-2, 4-5, 8, 11, 18-19, and 28-29.
+    Computer Aversion: Items 6-7, 9-10, 12, 15, 17, and 24-26.
+
+## Create a one-factor and three-factor model.
+
+## Include the model pictures with standardized loadings.
+
+## Check the following for the three-factor model, and type your answers below:
+    You do not have to highlight the word document, but can if you want to. 
+    a.	Heywood cases:
+        o	SMCS?
+        o	Error variances?
+    b.	Loadings:
+        o	Are any of the item loadings poor?
+    c.	Are there any bad residuals? 
+        o	Look at the correlation table, which combinations are high?
+    d.	Are there any modification indices that you could use to improve the fit on the model?
+
+## Practice your kable() table skills, and create a table with one- and three- factor models as the rows, with RMSEA, CFI, and AIC below. 
+    Which model is better? 
+
+

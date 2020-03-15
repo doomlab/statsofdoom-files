@@ -1,0 +1,91 @@
+---
+title: "APA Style Cheat Sheet"
+author: "Enter Yo' Name"
+date: "10/1/2017"
+output: word_document
+---
+
+```{r setup}
+##install papaja special library
+##you only have to do this part once
+##comment it out when you are done
+#devtools::install_github("crsh/papaja")
+
+##load papaja
+library(papaja)
+
+##load MOTE for decimals
+library(MOTE)
+```
+
+You can print out information that you have saved and used in R chunks. The papaja library also allows you to use special functions that will format your work in APA style. The MOTE library additionally has a decimal format function for when you cannot use papaja. 
+
+```{r descriptives}
+##here you will have loaded some data you are working with, like the homework
+##I've used the airquality dataset to compare temps between aug and sept
+master = subset(airquality, Month == 8 | Month == 9)
+
+##calculate M, SD, N in the normal way
+M = tapply(master$Temp, master$Month, mean)
+stdev = tapply(master$Temp, master$Month, sd)
+N = tapply(master$Temp, master$Month, length)
+```
+
+Remember that we used M[1] to indicate the first mean from tapply, and M[2] for the second mean. We used those numbers to help us calculate effect size. We can also use that to help us report those numbers. Big R chunks get three \` signs, while little R chunks get one (see below):
+
+`r M[1]`
+
+`r M[2]`
+
+To really see what is happening, you will need to knit the document. Instead of seeing the r code, you will see the actual numbers that those represent. However, they might have 17 decimal places, so we can use the apa() function in MOTE to clean them up:
+
+`r apa(M[1],2,T)`
+
+`r apa(M[2],2,T)`
+
+The apa function takes several arguments:
+- a single number or set of numbers
+- the number of decimal places you want
+- T includes the leading zero (i.e. 0.51) or F excludes the leading zero (i.e. .51)
+
+Now, we can string a lot of those things together to report the M and SD in a paragraph:
+
+The mean temperature for August was *M* = `r apa(M[1],2,T)` (*SD* = `r apa(stdev[1],2,T)`), and the mean temperature for September was *M* = `r apa(M[2],2,T)` (*SD* = `r apa(stdev[2],2,T)`).
+
+The \* creates italics when you knit. 
+
+```{r ttest}
+##compare Aug and Sept
+toutput = t.test(Temp ~ Month,
+                 data = master,
+                 var.equal = T,
+                 paired = F)
+
+toutput
+
+apa_print(toutput)
+```
+
+You will need to save the t-test information, so you can print it outside of the r chunk. The apa_print function produces several results:
+- $estimate, which is the mean change and confidence interval 
+- $statistic, which is the t-test statistic and p value, appropriately formatted
+- $full_result, which is both of the above combined
+
+Since we are doing an independent t-test, I want to report both of the means separately, as I did above. So, I am going to only use the $statistic information. 
+
+These temperatures were different, `r apa_print(toutput)$statistic`. 
+
+```{r effect-size}
+##calculate d
+effect = d.ind.t(M[1], M[2], stdev[1], stdev[2], N[1], N[2], a = .05)
+
+effect$d
+```
+
+I can combine my test statistic with the d values and confidence interval:
+- The dollar sign section creates special coding for subscripts (may only work with people who have install Latex).
+- You use the _ to denote subscript and everything in the {} will be lowered.
+- These codes allow you to write Greek symbols too $\beta$, $\alpha$.
+- They will automatically be italicized.
+
+These temperatures were different with a large effect size, `r apa_print(toutput)$statistic`, $d_{s}$ = `r apa(effect$d, 2, T)`, *95% CI*[`r apa(effect$dlow, 2, T)` - `r apa(effect$dhigh, 2, T)`]. 

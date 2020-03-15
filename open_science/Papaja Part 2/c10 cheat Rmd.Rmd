@@ -1,0 +1,174 @@
+---
+title: "APA Style Cheat Sheet"
+author: "Enter Yo' Name"
+date: "10/1/2017"
+output:
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup}
+##install papaja special library
+##you only have to do this part once
+##comment it out when you are done
+#devtools::install_github("crsh/papaja")
+
+##load papaja
+library(papaja)
+
+##load MOTE for decimals
+library(MOTE)
+
+library(knitr)
+```
+
+Last week we covered how to pull numbers from chunks and report them outside the chunk - using MOTE's apa function. Turns out papaja has that function too! :)
+
+Let's run an example from my class to demonstrate a couple new things today:
+
+```{r anova}
+##import the data
+library(haven)
+master = read_spss("c10 viagra.sav")
+
+##run an ANOVA
+library(ez)
+##you must have a participant number for ezANOVA
+master$partno = 1:nrow(master)
+master$dose = as.factor(master$dose)
+options(scipen = 999)
+
+ezoutput = ezANOVA(data = master,
+                   dv = libido,
+                   between = dose,
+                   wid = partno,
+                   type = 3, 
+                   detailed = T)
+
+ezoutput
+
+##running a one way anova - if Levene's Test is significant
+aovoutput = oneway.test(libido ~ dose, data = master)
+
+aovoutput
+
+##normal LM type output
+lmoutput = lm(libido ~ dose, data = master)
+
+lmoutput
+
+#apa_print(ezoutput)
+apa_print(aovoutput)
+apa_print(lmoutput)
+
+```
+
+#Printing when you can use papaja
+
+We talked last week about the apa_print() function. You can use that with S3 and S4 class objects, meaning lm/aov type answers.
+- You would use apa_print(SAVEDOUTPUT), so here that would be apa_print(aovoutput)
+- Depending on what is in the output, depends on what you can get out of it. 
+
+So we can print the F statistics from the one-way test with `r apa_print(aovoutput)$statistic`. However, that's not the best, since the *df* are missing. We can explore how to report manually below.
+
+LM outputs work even better. You get lots of options! Mostly, we might consider doing something like this: `r apa_print(lmoutput)$full_result$modelfit`. 
+
+`r apa_print(lmoutput)$statistic$modelfit`, `r apa_print(lmoutput)$estimate$modelfit`.
+
+#Printing when you can't use papaja
+
+So, what can we do if we want to dynamically use our numbers but can't use apa_print? We can figure out how to pull the numbers we want. 
+
+I can print the whole ANOVA table:
+
+`r kable(ezoutput$ANOVA)`
+
+I'd probably just want to report it APA style. Using my understanding of matrices, I can figure out how to get numbers out I want. 
+
+df = `r ezoutput$ANOVA[2,2]; ezoutput$ANOVA[2,3]`
+
+F = `r ezoutput$ANOVA[2,6]`
+
+p = `r ezoutput$ANOVA[2,7]`
+
+eta = `r ezoutput$ANOVA[2,9]`
+
+Putting that all together, I can do: 
+*F*(`r ezoutput$ANOVA[2,2]`, `r ezoutput$ANOVA[2,3]`) = `r apa(ezoutput$ANOVA[2,6],2,T)`, 
+*p* = `r apa(ezoutput$ANOVA[2,7],3,F)`, $\eta^2$ = `r apa(ezoutput$ANOVA[2,9], 2, F)`.
+
+(as an aside, you do not need Latex to print to word with the symbols, only PDF).
+
+```{r post_hoc}
+post = pairwise.t.test(master$libido,
+                master$dose,
+                p.adjust.method = "bonferroni", 
+                paired = F, 
+                var.equal = T)
+
+post$p.value
+
+post$p.value[1]; post$p.value[2]; post$p.value[3]; post$p.value[4]
+
+post$p.value[1,1]; post$p.value[2,1]; post$p.value[1,2]; post$p.value[2,2]
+```
+
+#Printing use papaja's printnum and printp
+
+We talked about the apa() function in the MOTE library last week. This week, let's cover printnum() and printp() in papaja. 
+
+printnum works by:
+- first, put in the number
+
+- second, gt1 = T or F for greater than 1 (aka the leading zero issue)
+
+- third, zero = T or F for if a number can be zero
+
+- fourth, margin = 1 or 2 for matrices ... 1 for rows, 2 for columns, like the apply function
+
+And a couple of other options, but these are the main ones. 
+
+So for F = `r printnum(ezoutput$ANOVA[2,6])`, we can use the defaults because F can be greater than one and can also be zero.
+
+But for eta = `r printnum(ezoutput$ANOVA[2,9], gt1 = F)`.
+
+You can also use the digits command to get more or less digits: `r printnum(ezoutput$ANOVA[2,9], gt1 = F, digits = 3)`.
+
+printp is a separate wrapper with a very handy function that prints the < symbol for numbers less than .001, and automatically assumes three decimals as per APA style.
+
+`r printp(ezoutput$ANOVA[2,7])`
+
+`r printp(.000001)`
+
+#Printing post hoc information
+
+Using that information - let's pull out the post hoc p-values to report.
+
+I could say one versus two was not significant, *p* = `r printp(post$p.value[1])`, while one versus three was significant, *p* = `r printp(post$p.value[2])`, and finally two versus three was not significant, *p* = `r printp(post$p.value[4])`. We'd want to include effect sizes, which is what we covered last week, if you are interested in MOTE and how to report those values. 
+
+#Printing a table
+I've covered the kable function before for my SEM class, but let's cover apa_table() in this video. 
+
+1) To manually make a table, first create a blank matrix to put your information in.
+2) Fill in your table with information you want to print. 
+3) Use apa_table!
+
+```{r table, echo=FALSE, results='asis'}
+
+tableprint = matrix(NA, nrow = 3, ncol = 4)
+
+tableprint[1, ] = c("Row 1", 4, 2, 6)
+tableprint[2, ] = c("Row 2", post$p.value[1], post$p.value[2], post$p.value[4])
+tableprint[3, ] = c("Row 3", "MORE", "ROWS", "ETC.")
+
+tableprint[1, 2:4] = printnum(as.numeric(tableprint[1, 2:4]))
+tableprint[2, 2:4] = printp(as.numeric(tableprint[2, 2:4]))
+
+apa_table(tableprint,
+          caption = "This part goes at the top",
+          note = "This part goes at the bottom.",
+          align = c("l", "c", "c", "c"),
+          col.names = c("Variable Name", "Column 2", "Column 3", "Column 4"))
+
+```
+

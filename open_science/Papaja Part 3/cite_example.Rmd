@@ -1,0 +1,82 @@
+---
+title             : "Example Citation Document"
+shorttitle        : "CITES"
+
+author: 
+  - name          : "Erin M. Buchanan"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "Missouri"
+    email         : "erinbuchanan@missouristate.edu"
+
+affiliation:
+  - id            : "1"
+    institution   : "Missouri State University"
+
+author_note: |
+  Erin is awesome.
+
+abstract: |
+  We would say stuff here.
+  
+keywords          : "citation, example"
+
+bibliography      : ["cite_example.bib"]
+csl               : ["harvard-durham-university-business-school.csl"]
+
+figsintext        : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+lineno            : yes
+
+lang              : "english"
+class             : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r load_packages, include = FALSE}
+library("papaja")
+
+#install.packages("citr")
+```
+
+Semantic priming has been shown to be awesome [@Bakker2016; @Cohen1962]. 
+
+- in [], they will look like: (Name & Name, Year; Name et al., Year)
+
+@Bakker2016
+
+- not [], they will be regular text citations: Name and Name (Year)
+
+[-@Bakker2016]
+
+a minus sign will suppress the author
+
+[@Fanelli2012]
+
+@Cumming2007 says that it will alright. 
+
+@Cheese1765
+
+
+# Methods
+
+## Participants
+
+## Material
+
+## Procedure
+
+## Data analysis
+
+# Results
+
+# Discussion
+
+\newpage
+
+# References
+
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}

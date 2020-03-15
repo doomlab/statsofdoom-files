@@ -1,0 +1,625 @@
+
+                                     F A C T O R   
+
+
+                           Unrestricted Factor Analysis 
+
+                                Release Version 9.2
+                                    February, 2013
+                            Rovira i Virgili University
+                                Tarragona, SPAIN
+
+                                   Programming:
+                               Urbano Lorenzo-Seva
+
+                            Mathematical Specification:
+                               Urbano Lorenzo-Seva
+                                 Pere J. Ferrando
+
+                            Date: Friday, November 29, 2013
+                            Time: 16:42:43
+--------------------------------------------------------------------------------
+
+DETAILS OF ANALYSIS
+
+Participants' scores data file                       : Z:\buchanan On My Mac\Dropbox\PSY 745 fa 13\spss guides\c17 efa SAQ.dat
+Number of participants                               : 2571
+Number of variables                                  : 23
+Variables included in the analysis                   : ALL
+Variables excluded in the analysis                   : NONE
+Number of factors                                    : 2
+Number of second order factors                       : 0
+Procedure for determining the number of dimensions   : Optimal implementation of Parallel Analysis (PA) (Timmerman, & Lorenzo-Seva, 2011)
+Dispersion matrix                                    : Pearson Correlations
+Method for factor extraction                         : Exploratory Maximum Likelihood (ML)
+Rotation to achieve factor simplicity                : Normalized Direct_Oblimin
+Value of parameter gamma                             : 0.0000
+Clever rotation start                                : Weighted Varimax
+Number of random starts                              : 10
+Maximum mumber of iterations                         : 100
+Convergence value                                    : 0.00001000
+
+--------------------------------------------------------------------------------
+
+UNIVARIATE DESCRIPTIVES 
+
+Variable     Mean       Confidence Interval     Variance   Skewness     Kurtosis
+                        (95%)                                          (Zero centered)
+
+V   1        2.373     (   2.33     2.41)       0.687      0.647        0.618
+V   2        1.623     (   1.58     1.67)       0.725      1.485        2.038
+V   3        3.414     (   3.36     3.47)       1.159     -0.098       -0.754
+V   4        2.785     (   2.74     2.83)       0.902      0.377       -0.272
+V   5        2.721     (   2.67     2.77)       0.933      0.449       -0.428
+V   6        2.226     (   2.17     2.28)       1.260      0.925        0.154
+V   7        2.923     (   2.87     2.98)       1.218      0.195       -0.840
+V   8        2.236     (   2.19     2.28)       0.763      1.044        1.486
+V   9        2.846     (   2.78     2.91)       1.598     -0.063       -1.144
+V  10        2.280     (   2.24     2.32)       0.770      0.828        0.596
+V  11        2.254     (   2.21     2.30)       0.777      0.833        0.907
+V  12        3.159     (   3.11     3.21)       0.843      0.164       -0.179
+V  13        2.448     (   2.40     2.50)       0.902      0.608        0.043
+V  14        2.875     (   2.82     2.93)       1.000      0.287       -0.342
+V  15        2.765     (   2.71     2.82)       1.021      0.424       -0.433
+V  16        2.878     (   2.83     2.92)       0.842      0.388       -0.111
+V  17        2.466     (   2.42     2.51)       0.783      0.756        0.500
+V  18        2.568     (   2.51     2.62)       1.111      0.478       -0.224
+V  19        2.291     (   2.24     2.35)       1.215      0.478       -0.717
+V  20        3.623     (   3.57     3.68)       1.076     -0.396       -0.607
+V  21        3.170     (   3.12     3.22)       0.973      0.110       -0.751
+V  22        2.886     (   2.83     2.94)       1.086     -0.069       -0.663
+V  23        3.433     (   3.38     3.49)       1.093     -0.596       -0.141
+
+Polychoric correlation is advised when the univariate distributions of ordinal items are 
+asymmetric or with excess of kurtosis. If both indices are lower than one in absolute value, 
+then Pearson correlation is advised. You can read more about this subject in:
+
+Muthén, B., & Kaplan D. (1985). A comparison of some methodologies for the factor analysis of non-normal Likert variables. British Journal of Mathematical and Statistical Psychology, 38, 171-189.
+Muthén, B., & Kaplan D. (1992). A comparison of some methodologies for the factor analysis of non-normal Likert variables: A note on the size of the model. British Journal of Mathematical and Statistical Psychology, 45, 19-30.
+
+--------------------------------------------------------------------------------
+
+MULTIVARIATE DESCRIPTIVES 
+
+Analysis of the Mardia's (1970) multivariate asymmetry skewness and kurtosis.
+
+                                            Coefficient        Statistic     df       P
+
+Skewness                                         20.720         8878.333   2300     1.0000
+SKewness corrected for small sample              20.720         8889.557   2300     1.0000
+Kurtosis                                        686.395           83.280            0.0000**
+
+** Significant at 0.05
+
+--------------------------------------------------------------------------------
+
+STANDARIZED VARIANCE / COVARIANCE MATRIX (PEARSON CORRELATION)
+
+Variable     1        2        3        4        5        6        7        8        9       10       11       12       13       14       15       16       17       18       19       20       21       22       23     
+V   1        1.000  
+V   2       -0.096    1.000  
+V   3        0.340   -0.316    1.000  
+V   4        0.438   -0.110    0.382    1.000  
+V   5        0.404   -0.117    0.313    0.403    1.000  
+V   6        0.219   -0.073    0.229    0.280    0.259    1.000  
+V   7        0.307   -0.157    0.384    0.410    0.341    0.515    1.000  
+V   8        0.333   -0.048    0.261    0.351    0.271    0.224    0.299    1.000  
+V   9       -0.089    0.316   -0.297   -0.122   -0.093   -0.111   -0.126    0.018    1.000  
+V  10        0.216   -0.082    0.195    0.218    0.261    0.324    0.286    0.161   -0.132    1.000  
+V  11        0.358   -0.141    0.353    0.371    0.300    0.329    0.346    0.630   -0.113    0.274    1.000  
+V  12        0.348   -0.192    0.412    0.444    0.349    0.314    0.425    0.254   -0.164    0.248    0.338    1.000  
+V  13        0.357   -0.141    0.320    0.346    0.304    0.467    0.444    0.316   -0.165    0.304    0.425    0.490    1.000  
+V  14        0.340   -0.162    0.373    0.353    0.317    0.404    0.442    0.283   -0.119    0.257    0.327    0.435    0.451    1.000  
+V  15        0.248   -0.163    0.315    0.336    0.264    0.361    0.393    0.302   -0.184    0.297    0.367    0.334    0.344    0.382    1.000  
+V  16        0.500   -0.165    0.421    0.418    0.397    0.246    0.391    0.324   -0.186    0.293    0.371    0.411    0.360    0.420    0.456    1.000  
+V  17        0.372   -0.085    0.330    0.385    0.312    0.284    0.393    0.591   -0.034    0.221    0.588    0.336    0.410    0.356    0.375    0.412    1.000  
+V  18        0.349   -0.162    0.377    0.384    0.324    0.514    0.502    0.281   -0.147    0.294    0.375    0.494    0.534    0.500    0.345    0.424    0.377    1.000  
+V  19       -0.186    0.204   -0.338   -0.183   -0.163   -0.165   -0.266   -0.157    0.251   -0.125   -0.197   -0.263   -0.224   -0.251   -0.207   -0.264   -0.160   -0.254    1.000  
+V  20        0.218   -0.199    0.327    0.246    0.203    0.103    0.224    0.178   -0.156    0.086    0.259    0.301    0.207    0.229    0.209    0.268    0.209    0.237   -0.245    1.000  
+V  21        0.332   -0.202    0.420    0.412    0.337    0.274    0.485    0.298   -0.133    0.196    0.349    0.443    0.376    0.402    0.302    0.423    0.366    0.432   -0.272    0.470    1.000  
+V  22       -0.101    0.233   -0.199   -0.095   -0.129   -0.163   -0.165   -0.076    0.259   -0.127   -0.159   -0.163   -0.192   -0.166   -0.165   -0.152   -0.123   -0.157    0.236   -0.095   -0.125    1.000  
+V  23       -0.001    0.102   -0.145   -0.030   -0.038   -0.066   -0.067   -0.047    0.173   -0.058   -0.083   -0.042   -0.049   -0.045   -0.058   -0.077   -0.088   -0.077    0.125   -0.030   -0.063    0.233    1.000  
+
+--------------------------------------------------------------------------------
+
+ADEQUACY OF THE CORRELATION MATRIX 
+
+Determinant of the matrix     = 0.000504665969975
+Bartlett's statistic          = 19445.9 (df =   253; P = 0.000010)
+Kaiser-Meyer-Olkin (KMO) test = 0.93044 (very good)
+
+--------------------------------------------------------------------------------
+
+EXPLAINED VARIANCE BASED ON EIGENVALUES
+
+Variable  Eigenvalue   Proportion of   Cumulative Proportion
+                       Variance        of Variance
+
+   1      7.30965      0.31781         0.31781  
+   2      1.75058      0.07611         0.39392  
+   3      1.31374      0.05712  
+   4      1.22973      0.05347  
+   5      0.98493      0.04282  
+   6      0.89277      0.03882  
+   7      0.80450      0.03498  
+   8      0.78171      0.03399  
+   9      0.74820      0.03253  
+  10      0.71513      0.03109  
+  11      0.68210      0.02966  
+  12      0.66787      0.02904  
+  13      0.60905      0.02648  
+  14      0.57591      0.02504  
+  15      0.54848      0.02385  
+  16      0.52129      0.02266  
+  17      0.50754      0.02207  
+  18      0.45479      0.01977  
+  19      0.42251      0.01837  
+  20      0.40652      0.01767  
+  21      0.37819      0.01644  
+  22      0.36307      0.01579  
+  23      0.33174      0.01442  
+       
+--------------------------------------------------------------------------------
+
+PARALLEL ANALYSIS (PA) BASED ON MINIMUM RANK FACTOR ANALYSIS
+(Timmerman & Lorenzo-Seva, 2011)
+
+Implementation details:
+
+	Correlation matrices analized:                Pearson correlation matrices
+	Number of random correlation matrices:        500
+	Method to obtain random correlation matrices: Permutation of the raw data (Buja & Eyuboglu, 1992)
+
+
+Variable  Real-data      Mean of random   95 percentile of random
+          % of variance  % of variance    % of variance
+
+   1       35.4*           8.8             10.3
+   2        8.2            8.3              9.6
+   3        6.2            7.9              9.1
+   4        5.5            7.5              8.5
+   5        4.4            7.1              8.0
+   6        3.9            6.7              7.5
+   7        3.7            6.3              7.0
+   8        3.4            5.9              6.6
+   9        3.3            5.5              6.2
+  10        3.1            5.1              5.7
+  11        2.9            4.7              5.4
+  12        2.8            4.3              4.9
+  13        2.5            3.9              4.6
+  14        2.4            3.5              4.3
+  15        2.3            3.2              3.9
+  16        2.1            2.8              3.6
+  17        2.0            2.4              3.2
+  18        1.9            2.0              2.8
+  19        1.6            1.6              2.5
+  20        1.3            1.3              2.0
+  21        1.0            0.9              1.6
+  22        0.2            0.5              1.0
+  23        0.0            0.0              0.0
+       
+
+*  Advised number of dimensions:    1
+
+--------------------------------------------------------------------------------
+
+GOODNESS OF FIT STATISTICS 
+
+             Root Mean Square Error of Approximation (RMSEA) =   0.071
+                    Estimated Non-Centrality Parameter (NCP) = 1336.400
+                                          Degrees of Freedom = 208
+                                     Test of Approximate Fit
+                                       H0 : RMSEA < 0.05;  P = 0.000
+
+                       Chi-Square with 208 degrees of freedom = 2916.592 (P = 0.000010)
+Chi-Square for independence model with 253 degrees of freedom = 19445.919
+                 Non-Normed Fit Index (NNFI; Tucker & Lewis) =   0.83
+                                 Comparative Fit Index (CFI) =   0.86
+                                 Goodness of Fit Index (GFI) =   0.98
+                       Adjusted Goodness of Fit Index (AGFI) =   0.97
+         Goodness of Fit Index without diagonal values (GFI) =   0.97
+Adjusted Goodness of Fit Index without diagonal values(AGFI) =   0.96
+
+EIGENVALUES OF THE REDUCED CORRELATION MATRIX
+
+Variable  Eigenvalue 
+
+   1      6.712575569 
+   2      1.057037965 
+   3      0.701974748 
+   4      0.536922808 
+   5      0.297637925 
+   6      0.138318371 
+   7      0.083482071 
+   8      0.067672767 
+   9      0.028724774 
+  10      0.013846694 
+  11     -0.024348646 
+  12     -0.045122274 
+  13     -0.064140926 
+  14     -0.082097960 
+  15     -0.087516474 
+  16     -0.124892064 
+  17     -0.127092590 
+  18     -0.156707606 
+  19     -0.202390303 
+  20     -0.227865995 
+  21     -0.258194784 
+  22     -0.261533971 
+  23     -0.270393954 
+       
+--------------------------------------------------------------------------------
+
+UNROTATED LOADING MATRIX 
+
+Variable     F   1    F   2    Communality
+
+V   1       -0.559    0.007       0.312
+V   2        0.247    0.219       0.109
+V   3       -0.580   -0.187       0.371
+V   4       -0.606   -0.034       0.369
+V   5       -0.517   -0.068       0.272
+V   6       -0.527   -0.157       0.303
+V   7       -0.650   -0.181       0.455
+V   8       -0.609    0.548       0.671
+V   9        0.218    0.280       0.126
+V  10       -0.398   -0.100       0.168
+V  11       -0.682    0.358       0.594
+V  12       -0.629   -0.230       0.449
+V  13       -0.646   -0.116       0.431
+V  14       -0.619   -0.184       0.417
+V  15       -0.558   -0.058       0.315
+V  16       -0.641   -0.098       0.421
+V  17       -0.674    0.343       0.572
+V  18       -0.668   -0.219       0.495
+V  19        0.369    0.194       0.174
+V  20       -0.396   -0.122       0.171
+V  21       -0.619   -0.159       0.409
+V  22        0.249    0.158       0.087
+V  23        0.114    0.060       0.017
+
+--------------------------------------------------------------------------------
+
+ROTATED LOADING MATRIX 
+
+Variable     F   1    F   2 
+
+V   1        0.432    0.234  
+V   2       -0.353    0.117  
+V   3        0.590    0.050  
+V   4        0.499    0.212  
+V   5        0.453    0.142  
+V   6        0.527    0.059  
+V   7        0.641    0.084  
+V   8        0.075    0.789  
+V   9       -0.375    0.188  
+V  10        0.384    0.063  
+V  11        0.272    0.631  
+V  12        0.660    0.027  
+V  13        0.590    0.147  
+V  14        0.619    0.069  
+V  15        0.478    0.169  
+V  16        0.573    0.163  
+V  17        0.276    0.613  
+V  18        0.682    0.054  
+V  19       -0.430    0.042  
+V  20        0.399    0.039  
+V  21        0.600    0.094  
+V  22       -0.310    0.056  
+V  23       -0.133    0.014  
+
+ROTATED LOADING MATRIX 
+(loadings lower than absolute   0.300 omitted)
+
+Variable     F   1    F   2 
+
+V   1        0.432           
+V   2       -0.353           
+V   3        0.590           
+V   4        0.499           
+V   5        0.453           
+V   6        0.527           
+V   7        0.641           
+V   8                 0.789  
+V   9       -0.375           
+V  10        0.384           
+V  11                 0.631  
+V  12        0.660           
+V  13        0.590           
+V  14        0.619           
+V  15        0.478           
+V  16        0.573           
+V  17                 0.613  
+V  18        0.682           
+V  19       -0.430           
+V  20        0.399           
+V  21        0.600           
+V  22       -0.310           
+V  23                        
+
+EXPLAINED VARIANCE AND RELIABILITY OF ROTATED FACTORS
+Mislevy & Bock (1990)
+
+Factor      Variance                      Reliability estimate
+                                               
+
+   1         5.636                          0.881
+   2         2.070                          0.784
+
+--------------------------------------------------------------------------------
+
+INDICES OF FACTOR SIMPLICITY
+Bentler (1977) & Lorenzo-Seva (2003) 
+
+Bentler's simplicity index (S) :   0.98503 (Percentile 100)
+Loading simplicity index  (LS) :   0.33981 (Percentile  89)
+
+       
+--------------------------------------------------------------------------------
+
+INTER-FACTORS CORRELATION MATRIX
+
+Factor       F   1    F   2 
+
+F   1        1.000  
+F   2        0.355    1.000  
+
+--------------------------------------------------------------------------------
+
+STRUCTURE MATRIX 
+
+Variable     F   1    F   2 
+
+V   1        0.515    0.387  
+V   2       -0.311   -0.008  
+V   3        0.608    0.259  
+V   4        0.574    0.389  
+V   5        0.504    0.303  
+V   6        0.547    0.246  
+V   7        0.670    0.311  
+V   8        0.356    0.816  
+V   9       -0.308    0.055  
+V  10        0.406    0.199  
+V  11        0.496    0.727  
+V  12        0.669    0.261  
+V  13        0.642    0.356  
+V  14        0.643    0.288  
+V  15        0.538    0.339  
+V  16        0.630    0.366  
+V  17        0.494    0.711  
+V  18        0.701    0.297  
+V  19       -0.415   -0.110  
+V  20        0.412    0.181  
+V  21        0.633    0.307  
+V  22       -0.290   -0.054  
+V  23       -0.129   -0.034  
+
+--------------------------------------------------------------------------------
+
+GREATEST LOWER BOUND (GLB) TO RELIABILITY 
+Woodhouse & Jackson (1977)
+
+Greatest Lower Bound to Reliability =   0.933542  
+                   McDonald's Omega =   0.890441  
+      Standardized Cronbach's alpha =   0.892908  
+            Total observed variance =  23.000  
+              Total Common Variance =  12.524  
+
+
+
+ASSOCIATED COMMUNALITIES 
+
+Variable  Communality
+
+V   1        0.553874  
+V   2        0.398498  
+V   3        0.571940  
+V   4        0.615366  
+V   5        0.406323  
+V   6        0.673460  
+V   7        0.639991  
+V   8        0.705083  
+V   9        0.407714  
+V  10        0.330463  
+V  11        0.731168  
+V  12        0.572681  
+V  13        0.645705  
+V  14        0.485272  
+V  15        0.570089  
+V  16        0.702647  
+V  17        0.628525  
+V  18        0.648507  
+V  19        0.384292  
+V  20        0.481690  
+V  21        0.696842  
+V  22        0.422847  
+V  23        0.251477  
+
+
+The greatest lower bound (glb) to reliability represents the smallest reliability possible
+given observed covariance matrix under the restriction that the sum of error variances 
+is maximized for errors that correlate 0 with other variables (Ten Berge, Snijders, & Zegers, 1981).
+
+Omega can be interpreted as the square of the correlation between the scale score and the latent
+variable common to all the indicators in the infinite universe of indicators of which the scale
+indicators are a subset (McDonald, 1999, page 89).
+
+--------------------------------------------------------------------------------
+
+DISTRIBUTION OF RESIDUALS 
+
+Number of Residuals = 253
+
+Summary Statistics for Fitted Residuals
+
+Smallest Fitted Residual = -0.1316
+  Median Fitted Residual =  0.0040
+ Largest Fitted Residual =  0.2057
+    Mean Fitted Residual =  0.0084
+Variance Fitted Residual =  0.0026
+
+               Root Mean Square of Residuals (RMSR) =  0.0520
+Expected mean value of RMSR for an acceptable model =  0.0197 (Kelley's criterion) (Kelley, 1935,page 146; see also Harman, 1962, page 21 of the 2nd edition)
+Note: if the value of RMSR is much larger than Kelley's criterion value the model cannot be considered as good
+
+
+Histogram for fitted residuals
+
+
+ Value        Freq
+                   |
+   -0.1316      3  |  *
+   -0.0979      4  |  *
+   -0.0642     20  |  ********
+   -0.0304     48  |  *********************
+    0.0033     91  |  ****************************************
+    0.0370     52  |  **********************
+    0.0708     18  |  *******
+    0.1045      8  |  ***
+    0.1382      5  |  **
+    0.1719      1  |  
+    0.2057      3  |  *
+                   +-----------+---------+---------+-----------+
+                     0        22.8       45.5       68.3        91.0
+
+
+Summary Statistics for Standardized Residuals
+
+Smallest Standardized Residual = -6.67
+  Median Standardized Residual =  0.20
+ Largest Standardized Residual =  10.43
+    Mean Standardized Residual =  0.43
+       
+Stemleaf Plot for Standardized Residuals
+
+  -6 | 730
+  -5 | 44
+  -4 | 52
+  -3 | 99888443222
+  -2 | 8877776653332110
+  -1 | 9988666555555444443333322200
+  -0 | 999999998887777777666666665555544443333333322211111
+   0 | 01111111122222233333333444455555556777778888999999
+   1 | 0001122222233333334455666666688889999
+   2 | 0011122223444444677899
+   3 | 0001124556689
+   4 | 477
+   5 | 005899
+   6 | 579
+   7 | 23
+   8 | 1
+   9 | 9
+  10 | 24
+
+
+Largest Negative Standardized Residuals
+
+Residual for Var   6 and Var   1    -3.81
+Residual for Var   7 and Var   1    -2.77
+Residual for Var  15 and Var   1    -3.22
+Residual for Var   3 and Var   2    -6.67
+Residual for Var  11 and Var   2    -2.62
+Residual for Var  20 and Var   2    -3.78
+Residual for Var   6 and Var   3    -5.40
+Residual for Var   9 and Var   3    -5.96
+Residual for Var  10 and Var   3    -2.75
+Residual for Var  13 and Var   3    -3.87
+Residual for Var  18 and Var   3    -2.61
+Residual for Var  19 and Var   3    -4.47
+Residual for Var  23 and Var   3    -3.44
+Residual for Var  12 and Var   6    -2.71
+Residual for Var  16 and Var   6    -5.44
+Residual for Var  20 and Var   6    -6.31
+Residual for Var  21 and Var   6    -3.93
+Residual for Var  20 and Var   7    -2.81
+Residual for Var  11 and Var   9    -3.24
+Residual for Var  20 and Var  10    -4.22
+Residual for Var  21 and Var  10    -3.38
+Residual for Var  16 and Var  13    -3.30
+Residual for Var  20 and Var  13    -3.20
+Residual for Var  21 and Var  15    -2.67
+Residual for Var  20 and Var  18    -2.72
+Residual for Var  20 and Var  19    -3.83
+
+Largest Positive Standardized Residuals
+
+Residual for Var   4 and Var   1     5.05
+Residual for Var   5 and Var   1     5.87
+Residual for Var  16 and Var   1     7.23
+Residual for Var  23 and Var   1     3.17
+Residual for Var   6 and Var   2     4.65
+Residual for Var   9 and Var   2     10.16
+Residual for Var  18 and Var   2     2.58
+Residual for Var  19 and Var   2     3.60
+Residual for Var  22 and Var   2     6.94
+Residual for Var  23 and Var   2     3.07
+Residual for Var  20 and Var   3     3.80
+Residual for Var   5 and Var   4     4.42
+Residual for Var  12 and Var   4     2.76
+Residual for Var  22 and Var   4     3.11
+Residual for Var  16 and Var   5     2.99
+Residual for Var   7 and Var   6     7.27
+Residual for Var  10 and Var   6     4.97
+Residual for Var  13 and Var   6     5.51
+Residual for Var  15 and Var   6     2.93
+Residual for Var  18 and Var   6     6.46
+Residual for Var  19 and Var   6     3.04
+Residual for Var   9 and Var   7     3.40
+Residual for Var  21 and Var   7     2.70
+Residual for Var  14 and Var   9     3.45
+Residual for Var  18 and Var   9     3.03
+Residual for Var  19 and Var   9     5.87
+Residual for Var  22 and Var   9     8.14
+Residual for Var  23 and Var   9     6.66
+Residual for Var  15 and Var  10     3.52
+Residual for Var  13 and Var  12     2.91
+Residual for Var  18 and Var  13     3.90
+Residual for Var  16 and Var  15     4.69
+Residual for Var  22 and Var  19     5.75
+Residual for Var  23 and Var  19     3.60
+Residual for Var  21 and Var  20     10.43
+Residual for Var  22 and Var  21     2.73
+Residual for Var  23 and Var  22     9.88
+       
+--------------------------------------------------------------------------------
+
+References
+
+Bentler, P.M. (1977). Factor simplicity index and transformations. Psychometrika, 59, 567-579.
+
+Buja, A., & Eyuboglu, N. (1992). Remarks on parallel analysis. Multivariate Behavioral Research, 27(4), 509-540.
+
+Harman, H. H. (1962). Modern Factor Analysis, 2nd Edition. University of Chicago Press, Chicago.
+
+Kelley, T. L. (1935). Essential Traits of Mental Life, Harvard Studies in Education, vol. 26. Harvard University Press, Cambridge.
+
+Lorenzo-Seva, U. (2003). A factor simplicity index. Psychometrika, 68, 49-60.
+
+McDonald, R.P. (1999). Test theory: A unified treatment. Mahwah, NJ: Lawrence Erlbaum.
+
+Mardia, K. V. (1970), Measures of multivariate skewnees and kurtosis with applications. Biometrika, 57, 519-530.
+
+Mislevy, R.J., & Bock, R.D. (1990). BILOG 3 Item analysis and test scoring with binary logistic models. Mooresville: Scientific Software.
+
+Ten Berge, J.M.F., Snijders, T.A.B. & Zegers, F.E. (1981). Computational aspects of the greatest lower bound to reliability and constrained minimum trace factor analysis. Psychometrika, 46, 201-213.
+
+Ten Berge, J.M.F., & Socan, G. (2004). The greatest lower bound to the reliability of a test and the hypothesis of unidimensionality. Psychometrika, 69, 613-625.
+
+Timmerman, M. E., & Lorenzo-Seva, U. (2011). Dimensionality Assessment of Ordered Polytomous Items with Parallel Analysis. Psychological Methods, 16, 209-220.
+
+Woodhouse, B. & Jackson, P.H. (1977). Lower bounds to the reliability of the total score on a test composed of nonhomogeneous items: II. A search procedure to locate the greatest lower bound. Psychometrika, 42, 579-591.
+
+       
+
+FACTOR is based on CLAPACK.
+Anderson, E., Bai, Z., Bischof, C., Blackford, S., Demmel, J., Dongarra, J., Du Croz, J., Greenbaum, A., Hammarling, S., McKenney, A., & Sorensen, D. (1999). LAPACK Users' Guide. Society for Industrial and Applied Mathematics. Philadelphia, PA
+
+FACTOR can be refered as:
+Lorenzo-Seva, U., & Ferrando, P.J. (2006). FACTOR: A computer program to fit the exploratory factor analysis model.Behavioral Research Methods, Instruments and Computers, 38(1), 88-91.
+
+--------------------------------------------------------------------------------
+
+FACTOR completed
+
+Computing time     :  2.08 minutes.
+Matrices generated : 2236274 

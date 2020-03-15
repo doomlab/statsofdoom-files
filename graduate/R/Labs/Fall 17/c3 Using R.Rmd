@@ -1,0 +1,169 @@
+---
+title: "Chapter 3 R Lab"
+author: "Enter Yo Name"
+date: "9/3/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Logical Operators: 
+
+1.	Use logical operations to get R to agree that "two plus two equals five" is FALSE.
+
+```{r q1}
+
+```
+
+2.	Use logical operations to test whether 8 ^ 13 is less than 15 ^ 9.
+
+```{r q2}
+
+```
+
+# Variables:
+
+3.	Create a variable called potato whose value corresponds to the number of potatoes you've eaten in the last week. Or something equally ridiculous. Print out the value of potato.
+
+```{r q3}
+
+```
+
+4.	Calculate the square root of potato using the sqrt() function. Print out the value of potato again to verify that the value of potato hasn't changed.
+
+```{r q4}
+
+```
+
+5.	Reassign the value of potato to potato * 2. Print out the new value of potato to verify that it has changed.
+
+```{r q5}
+
+```
+
+6.	Try making a character (string) variable and a logical variable . Try creating a variable with a "missing" value NA. You can call these variables whatever you would like. Use class(variablename) to make sure they are the right type of variable. 
+
+```{r q6}
+
+```
+
+# Vectors:
+
+7.	Create a numeric vector with three elements using c().
+
+```{r q7}
+
+```
+
+8.	Create a character vector with three elements using c().
+
+```{r q8}
+
+```
+
+9.	Create a numeric vector called age whose elements contain the ages of three people you know, where the names of each element correspond to the names of those people.
+
+```{r q9}
+
+```
+
+10.	Use "indexing by number" to get R to print out the first element of one of the vectors you created in the last questions.
+
+```{r q10}
+
+```
+
+11.	Use logical indexing to return all the ages of all people in age greater than 20.
+
+```{r q11}
+
+```
+
+12.	Use indexing by name to return the age of one of the people whose ages you've stored in age
+
+```{r q12}
+
+```
+
+# Dataframes:
+
+13.	Load the airquality dataset. 
+14. Use the $ method to print out the Wind variable in airquality.
+15.	Print out the third element of the Wind variable.
+
+```{r q13-15}
+
+```
+
+16.	Create a new data frame called aq that includes only the first 10 cases. Hint: typing c(1,2,3,4,5,6,7,8,9,10) is tedious. R allows you to use 1:10 as a shorthand method!
+17.	Use logical indexing to print out all days (ie. cases) in aq where the Ozone level was higher than 20. 
+    a.	What did the output do with NA values?
+18.	Use subset() to do the same thing. Notice the difference in the output.
+
+```{r q16-18}
+
+```
+
+19.	Create a TooWindy variable inside aq, which is a logical variable that is TRUE if Wind is greater than 10, and FALSE otherwise.
+
+```{r q19}
+
+```
+
+20.	Use the length() function to determine the number of observations in the airquality dataframe.
+
+```{r q20}
+
+```
+
+21.	Calculate the mean and standard deviation of one of the variables in airquality.
+
+```{r q21}
+
+```
+
+22.	Make a table of the Temp values.
+
+```{r q22}
+
+```
+
+23.	Make a histogram of the Ozone column. Is it a normal distribution? Why or why not?
+
+```{r q23}
+
+```
+
+# Functions: 
+
+24.	Make a simple function to calculate x + 6.
+
+```{r q24}
+
+```
+
+25.	Use that function add 6 to the Temp column in airquality. 
+
+```{r q25}
+
+```
+
+# Packages:
+
+26.	Install the ggplot2 package.
+27.	Install the car package.
+28.	Install the ez package. (no output necessary for these three)
+29.	Load the car library.
+
+```{r q29}
+
+```
+
+# Files
+30. Import the csv file provided on Blackboard. 
+
+```{r q30}
+
+```

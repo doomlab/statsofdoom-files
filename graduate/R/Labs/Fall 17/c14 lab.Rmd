@@ -1,0 +1,72 @@
+---
+title: "Chapter 14 Lab"
+author: "Enter Yo' Name"
+date: "10/29/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Abstract
+
+This article examines how employee perceptions of supervisory and organizational support for work–life balance, in addition to the number of work–life balance programs available, predict a number of work–life balance outcomes including role conflict, job satisfaction, family satisfaction and turnover intentions in a sample of large private and public sector organizations in Ireland. The attitudes of HR managers towards work–life balance programs are also explored. We found that perceptions of work–life supportiveness as measured at the HR manager and immediate supervisor levels affect employee uptake of work–life programs, employee work–life balance outcomes and turnover intentions.
+
+*Citation:* McCarthy, A., Cleveland, J. N., Hunter, S., Darcy, C., & Grady, G. (2013). Employee work–life balance outcomes in Ireland: a multilevel investigation of supervisory support and perceived organizational support. The International Journal of Human Resource Management, 24(6), 1257-1276.
+
+# Dataset:
+
+    - Work-life supportiveness: a categorical variable measuring how supportive the HR manager and immediate supervisor were for work-life balance
+    - Employee involvement: all scores are scaled so that high scores are positive outcomes: employees are very involved, very balanced, and less likely to turnover
+        -	Work-life programs: percentage of programs employee was involved in.
+        -	Work-life outcomes: employee rating of percentage of work-life balance
+        -	Turnover intention: employee rating of percent possibility of turnover (reversed scaled so high scores mean very unlikely to turnover).
+
+```{r starting}
+
+```
+
+# Questions:
+
+How would you describe this ANOVA?
+
+    a.	#X#:
+    b.	Type of ANOVA:
+
+Label the following:
+
+    a.	The between subjects independent variable:
+    b.	The repeated measures independent variable: 
+
+What is the dependent variable?
+
+Run the ANOVA and assumption tests you get from uzizng ezANOVA.
+    
+    a.	Do you have problems with any of the assumptions? 
+    b.	If so, where/which ones?
+    c.  Which main effects/interaction were significant?
+
+```{r assumption-anova}
+
+```
+    
+Include the marginal means for each variable.
+    
+    a.	What are the differences in supportiveness means? (Explain in layperson's terms what happened in the study).
+    b.	What appear to be the differences in involvement means? (Do not run any tests, just explain the means).
+    
+```{r descriptives}
+
+```
+    
+Run a simple effects analyses.
+
+    a.	Include the interaction means using tapply. 
+    b.	What type of post hoc test are you running?
+    c.	Which comparisons were significantly different?
+
+```{r simple-effects}
+
+```
+

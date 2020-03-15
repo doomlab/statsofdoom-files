@@ -1,0 +1,179 @@
+---
+title: "Chapter 10 Assignment"
+author: "Enter Yo' Name"
+date: "10/8/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+#Abstract
+
+How do university training and subsequent practical experience affect expertise in clinical psychology? To answer this question we developed methods to assess psychological knowledge and the competence to diagnose, construct case conceptualizations, and plan psychotherapeutic treatment: a knowledge test and short case studies in a first study, and a complex, dynamically evolving case study in the second study. In our cross-sectional studies, psychology students, trainees in a certified postgraduate psychotherapist curriculum, and behavior therapists with more than 10 years of experience were tested (100 in total: 20 each of novice, intermediate, and advanced university students, postgraduate trainees, and therapists). Clinical knowledge and competence increased up to the level of trainees but unexpectedly decreased at the level of experienced therapists. We discuss the results against the background of expertise research and the training of clinical psychologists (in Germany). Important factors for the continuing professional development of psychotherapists are proposed.
+
+*Citation*: Vollmer, S., Spada, H., Caspar, F., & Burri, S. (2013). Expertise in clinical psychology. The effects of university training and practical experience on expertise in clinical psychology. Frontiers in Psychology, 4, 141. doi: 10.3389/fpsyg.2013.00141 
+
+# Dataset:
+-	Participant type: novice psychology students, intermediate psychology students, advanced university students, postgraduate trainees, therapists
+-	Competence: an average score of clinical knowledge and competence based on the knowledge test and short case studies.
+
+APA write ups should include means, standard deviation/error (or a figure), t-values, p-values, effect size, and a brief description of what happened in plain English.
+
+```{r starting}
+
+```
+
+# Data screening:
+
+Assume the data is accurate and that there is no missing data.
+
+## Outliers
+    a.	Examine the dataset for outliers using z-scores with a criterion of 3.00 as p < .001.
+    b.	Why do we have to use z-scores? 
+    c.	How many outliers did you have?
+    d.	Exclude all outliers.
+    
+```{r outliers}
+
+```
+
+# Assumptions
+
+## Normality: 
+    a.	Include a picture that you would use to assess multivariate normality. 
+    b.	Do you think you've met the assumption for normality? 
+
+```{r normality}
+
+```
+
+## Linearity:
+    a.	Include a picture that you would use to assess linearity.
+    b.	Do you think you've met the assumption for linearity?
+
+```{r linearity}
+
+```
+
+## Homogeneity/Homoscedasticity: 
+    a.	Include a picture that you would use to assess homogeneity and homoscedasticity.
+    b.	Include the output from Levene's test.
+    c.	Do you think you've met the assumption for homogeneity? (Talk about both components here). 
+    d.	Do you think you've met the assumption for homoscedasticity?
+
+```{r homogs}
+
+```
+
+# Hypothesis Testing:
+
+Run the ANOVA test.
+    a.	Include the output from the ANOVA test.
+    b.	Was the omnibus ANOVA test significant?
+    
+```{r anova}
+
+```
+
+Calculate the following effect sizes:
+    a.	$\eta^2$
+    b.	$\omega^2$
+
+```{r effect}
+eta = 12 ##fill in the number here use for power below
+eta
+
+```
+
+Given the $\eta^2$ effect size, how many participants would you have needed to find a significant effect? 
+
+If you get an error: "Error in uniroot(function(n) eval(p.body) - power, c(2 + 0.0000000001, : f() values at end points not of opposite sign"
+- This message implies that the sample size is so large that the estimation of sample size has bottomed out. You should assume sample size required n = 2 *per group*. Mathematically, ANOVA has to have two people per group - although, that's a bad idea for sample size planning due to assumptions of parametric tests.
+- Leave in your code, but comment it out so the document will knit. 
+
+```{r power}
+
+```
+
+Run a post hoc independent t-test with no correction and a Bonferroni correction. Remember, for a real analysis, you would only run one type of post hoc. This question should show you how each post hoc corrects for type 1 error by changing the p-values.  
+
+```{r posthoc}
+
+```
+
+Include the effect sizes for only Advanced Students vs Post Graduate Trainees and Intermediate students versus Therapists.
+
+```{r effectsize}
+
+```
+
+Create a table of the post hoc and effect size values:
+
+```{r table, results='asis'}
+tableprint = matrix(NA, nrow = 3, ncol = 3)
+
+##row 1
+##fill in where it says NA with the values for the right comparison
+##column 2 = Advanced Students vs Post Graduate Trainees
+##column 3 = Intermediate students versus Therapists
+tableprint[1, ] = c("No correction p", NA, NA)
+
+##row 2
+tableprint[2, ] = c("Bonferroni p", NA, NA)
+
+##row 3
+tableprint[3, ] = c("d value", NA, NA)
+
+kable(tableprint, 
+      digits = 3,
+      col.names = c("Type of Post Hoc", 
+                    "Advanced Students vs Post Graduate Trainees", 
+                    "Intermediate students versus Therapists"))
+```
+
+Run a trend analysis.
+    a.	Is there a significant trend?  
+    b.	Which type?
+    
+```{r trend}
+
+```
+
+Make a bar chart of the results from this study:
+    a.	X axis labels and group labels
+    b.	Y axis label
+    c.	Y axis length – the scale runs 0-100. You can add coord_cartesian(ylim = c(0,100)) to control y axis length to your graph. 
+    d.	Error bars
+    e.	Ordering of groups: Use the factor command to put groups into the appropriate order. You use the factor command to reorder the levels by only using the levels command and putting them in the order you want. Remember, the levels have to be spelled correctly or it will delete them. 
+
+```{r graph}
+
+```
+
+Write up a results section outlining the results from this study.  Use two decimal places for statistics (except when relevant for p-values). Be sure to include the following:
+    a.	A reference to the figure you created (the bar chart) – this reference allows you to not have to list every single mean and standard deviation.
+    b.	Very brief description of study and variables.
+    c.	The omnibus test value and if it was significant.
+    d.	The two post hoc comparisons listed above describing what happened in the study and their relevant statistics. You would only list the post hoc correction values. 
+    e.	Effect sizes for all statistics.
+
+# Theoretical Questions:
+
+12.	If I ran all possible pairwise comparisons, what would the type 1 error rate be in the experiment?
+    a.	List the value of c that you used:
+    b.	List the alpha rate: 
+    
+13.	What is the "omnibus" test (i.e. what does it mean when someone says omnibus test)?
+
+14.	What is the systematic variance estimate when using ANOVA (explain formula, not numbers from this study)?
+
+15.	What is the unsystematic variance estimate when using ANOVA (explain formula, not numbers from this study)?
+
+# Test Study
+On the test, you will see a table like this one:
+https://people.richland.edu/james/ictcm/2004/anovagen.php
+Be sure you can fill in the correct numbers!
+

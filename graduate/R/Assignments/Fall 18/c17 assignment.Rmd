@@ -1,0 +1,94 @@
+---
+title: "Chapter 17 Assignment"
+author: "Enter Yo Name"
+date: "12/3/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Abstract
+
+With the rise in efforts to evaluate the quality of mental health care and its outcomes, the measurement of change has become an important topic. This paper tracks the creation of a new instrument designed to assess psychotherapy outcome. The Outcome Questionnaire (OQ) was designed to include items relevant to three domains central to mental health: subjective discomfort, interpersonal relations, and social role performance. This study describes the theoretical development and psychometric properties of the OQ. Psychometric properties were assessed using clinical, community, and undergraduate samples. The OQ appears to have high reliability and evidence to suggest good concurrent and construct validity of the total score. The data presented show that it distinguishes patient from non-patient samples, is sensitive to change, and correlates with other measures of patient distress.
+
+*Citation*: Lambert, M. J., Burlingame, G. M., Umphress, V., Hansen, N. B., Vermeersch, D. A., Clouse, G. C., & Yanchar, S. C. (1996). The reliability and validity of the Outcome Questionnaire. Clinical Psychology & Psychotherapy, 3(4), 249-258.
+
+# Data screening: 
+
+    - If you can't data screen at this point, I give up.  So, let's pretend you can and skip it. Spend that time on the test instead. Remember that data screening for EFA is the same as the fake style we've done for every analysis but regression. 
+
+```{r starting}
+
+```
+
+# Before you start:
+
+    a.	Include output for both KMO and Barlett's test.
+    b.	What does the Kaiser-Meyer-Olkin statistic tell you about sampling adequacy for this dataset?
+        i.	How many participants do you have? Do you seem to meet the 10-15 people per item suggestion?
+    c.	What does Barlett's test tell you for this dataset?  
+
+```{r efastart}
+
+```
+
+# Number of factors:
+
+    a.	Theory suggests three factors.
+    b.	How many does the Kaiser criterion suggest? 
+        i.	Include the sum of the eigenvalues for both criteria.
+    c.	How many does the scree plot suggest? 
+    d.	How many does the parallel analysis indicate? 
+    e.	Run the factor analysis with three factors.
+
+```{r nofactors}
+
+```
+
+# Simple structure:
+
+    a.	Use maximum likelihood as the fitting estimation and direct oblimin for the rotation.
+    b.	Rounds of Loading Interpretation:
+        i.	Include the loadings for each round of analysis.
+        ii.	Describe which questions were considered bad and why you excluded them. 
+        iii.	Continue this process until you achieve simple structure. 
+
+```{r simple}
+
+```
+
+# Adequate solution:
+
+    a.	Include the fit indices (RMSEA + 90% CI, RMSR, CFI, TLI).
+    b.	Describe the fit indices (good, acceptable, poor).  
+    c.	Include the reliabilities for each factor.
+        i.	Are the reliabilities acceptable?
+    d.	Label the factors based on the questions.
+
+```{r modelfit}
+
+```
+
+# Using EFA to do other things:
+
+    a.  Create subscale averages for each participant based on your EFA results. You should have three new columns that are the average score of the factors created above. 
+    b.	Use the apply function to create these values. 
+    c.	Include a summary of the means and standard deviations for these subscales.
+
+```{r efaextend}
+
+```
+
+# Write up:
+    
+    a.	Short description of the scale.
+    b.	List the type of analysis – rotation, fitting estimation, program used.
+    c.	Values on why you had enough people and an adequate set of correlations.
+    d.	Number of factors suggested you choose and why (scree, eigenvalues, parallel analysis).
+    e.	What questions you eliminated – why did you eliminate them? Go through the rounds one at a time.
+    f.	Interpretation of the factors.
+    g.	Description of adequacy of solution – fit indices, reliabilities, and average/SD scores for the factors.
+
+

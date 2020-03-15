@@ -1,0 +1,176 @@
+---
+title: "Chapter 6 Assignment"
+author: "Enter Yo Name"
+date: "11/12/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Abstract
+
+The purpose of this study was to assess both fear of flying and positive emotions regarding air travel. A sample of participants recruited at the local airport and from a university campus completed a questionnaire measuring fear of flying (Flight Anxiety Situations Questionnaire) as well as positive emotions toward flying. Regression analyses were used to examine a model for predicting both fear of flying and positive emotions regarding air travel. Fear of flying was predicted by sex, recent flying experience, and stress/worry regarding check-in and security checks. Positive emotions were unrelated to demographic variables and flying experience, but were predicted by satisfaction with check-in and security checks.
+
+*Citation:* Martinussen, M., Gundersen, E., & Pedersen, R. (2011). Predicting fear of flying and positive emotions towards air travel. Aviation Psychology and Applied Human Factors, 1, 70-74.
+
+# Dataset:
+
+    -	Gender of the participant
+    -	Fear of flying: an average score of the flight anxiety situations questionnaire ranging from 1 (no fear) to 7 (very afraid)
+    -	Recent flying experience: number of flights taken in the last year
+    -	Stress: worry of the participant about check-in and security check points ranging from 1 (no worry) to 7 (very worried)
+    -	Positive emotion: how positive participants felt about air travel in general (higher scores are more positive, ranges from 1 to 7).
+
+```{r starting}
+
+```
+
+# Data Screening:
+
+## Accuracy: 
+
+    a.	Include output that indicates if the data are or are not accurate.
+    b.	If the data are not accurate, delete the inaccurate scores.
+    c.	Include a summary that shows that you fixed the inaccurate scores.
+    
+```{r accuracy}
+
+```
+    
+## Missing:
+
+    a.  Since any accuracy errors will create more than 5% missing data, exclude all data pairwise for the rest of the analyses. 
+    
+```{r missing}
+
+```
+    
+## Outliers:
+
+    a.	Include a summary of your mahal scores.
+    b.	What are the df for your Mahalanobis cutoff?
+    c.	What is the cut off score for your Mahalanobis measure?
+    d.	How many outliers did you have?
+    e.	Delete all outliers.  
+    
+```{r outliers}
+
+```
+    
+# Assumptions:
+
+## Linearity: 
+
+    a.	Include a picture that shows how you might assess multivariate linearity.
+    b.	Do you think you've met the assumption for linearity? 
+
+```{r linearity}
+
+```
+
+## Normality: 
+
+    a.	Include a picture that shows how you might assess multivariate normality.
+    b.	Do you think you've met the assumption for normality? 
+
+```{r normality}
+
+```
+
+## Homogeneity and Homoscedasticity: 
+
+    a.	Include a picture that shows how you might assess multivariate homogeneity.
+    b.	Do you think you've met the assumption for homogeneity?
+    c.	Do you think you've met the assumption for homoscedasticity?
+    
+```{r homogs}
+
+```
+    
+# Hypothesis Testing / Graphs:
+
+Create a scatter plot of fear of flying and stress.
+
+    a.	Be sure to check x/y axis labels and length.
+    b.	What type of relationship do these two variables appear to have?
+    
+```{r plot1}
+
+```
+    
+Create a scatter plot of recent flights and positive emotion.
+
+    a.	Include a linear line on the graph. 
+    b.	Be sure to check x/y axis labels and length.
+    c.	What type of relationship do these two variables appear to have?
+
+```{r plot2}
+
+```
+    
+Create a scatter plot of recent flights and stress, grouping by gender.
+
+    a.	Include a linear line on the graph. 
+    b.	Be sure to check x/y axis labels and length.
+    c.	What type of relationship do these two variables appear to have for each group?
+    
+```{r plot3}
+
+```
+    
+Include a correlation table of all of the variables (cor).
+
+    a.	Include the output for Pearson.
+    b.	Include the output for Spearman.
+    c.	Include the output for Kendall.
+    d.	Which correlation was the strongest?
+    e.  For the correlations with gender, would point biserial or biserial be more appropriate?  Why?
+    
+```{r correl1}
+
+```
+    
+
+Calculate confidence interval for stress and fear of flying.
+
+```{r cicorrel1}
+
+```
+
+Calculate the difference in correlations for 1) recent flights and fear of flying and 2) fear of flying and positive emotions.
+
+    a.	Include the output from the test through Pearson's test.
+    b.	Is there a significant difference in their correlations?
+
+```{r correl2}
+
+```
+
+Calculate the difference in correlations for gender on fear of flying and stress.
+
+    a.	Include the output from the test.
+    b.	Is there a significant difference in their correlations?
+    
+```{r correl3}
+
+```
+
+Calculate the partial and semipartial correlations for all variables, and include the output. 
+
+    a.	Are any of the correlations significant after controlling for all other relationships?
+    
+```{r partials}
+
+```
+
+# Theory:
+
+    - What are we using as our model for understanding the data in a correlational analysis?
+    - How might we determine model fit?
+    - What is the difference between correlation and covariance?
+    - What is the difference between R and r?
+    - When would I want to use a nonparametric correlation over Pearson's correlation?
+    - What is the distinction between semi-partial and partial correlations? 
+

@@ -1,0 +1,73 @@
+---
+title: "Chapter 17 Lab"
+author: "Enter Yo Name"
+date: "12/3/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Abstract
+
+This study's primary purpose was to examine the factor structure of the 20-item
+Seeking of Noetic Goals (SONG) test via exploratory and confirmatory factor-analytic procedures. An additional objective was to report on the measure's incremental validity in comparison to the Search scale of the Meaning in Life Questionnaire (MLQ), an alternative measure of search for meaning. This study utilized data from three samples of American undergraduates (N = 908) from a medium-sized southern university. Factor analysis supported a two-factor model of the SONG, with patterns of correlation further suggesting the measure assesses distinct constructs. Multi-group confirmatory factor analysis indicated similar scale structure and item answering in terms of gender. Overall, the first factor yielded reliable scores that correlated significantly and in the expected direction with measures of well-being and psychological distress. The second factor did not yield reliable scores nor did it correlate significantly with many of the other measures administered. However, both factors were shown to significantly predict scores from measures of depression and general psychological distress after controlling for MLQ Search scale scores. We consider the data with respect to SONG scoring and interpretation, and discuss implications of these data for future research.
+
+*Citation*: Schulenberg, S.E., Baczwaski, B.J., & Buchanan, E.M. (2013). Measuring Search for Meaning: A Factor-Analytic Evaluation of the Seeking of Noetic Goals Test (SONG). Journal Of Happiness Studies. 15, 693-715. doi: 10.1007/s10902-013-9446-7
+
+# Dataset: 
+
+    - Includes the 20-item questions from the SONG, see attached PDF. 
+
+```{r starting}
+
+```
+
+# Before you start:
+    
+    a.	Do you have a large enough sample size by just looking at the number of participants?
+    b.	What does the Kaiser-Meyer-Olkin statistic tell you about sampling adequacy for this dataset? 
+    c.	Reasonably, how many factors could we have with a 20-item questionnaire?
+    d.	What does Barlett's test tell you for this dataset?  
+
+```{r efastart}
+
+```
+
+# Number of factors:
+
+    a.	Theory suggests two factors.
+    b.	How many does the Kaiser criterion suggest? 
+        i.	Include a summary of the old and new criterion.
+    c.	How many does the scree plot suggest?
+    d.	How many does the parallel analysis indicate? 
+
+```{r nofactors}
+
+```
+
+# Simple structure:
+    
+    a.	Use maximum likelihood as the fitting estimation and direct oblimin for the rotation.
+    b.	Rounds of Loading Interpretation:
+        i.	Include the loadings for each round of analysis.
+        ii.	Describe which questions were considered bad and why you excluded them. 
+        iii.	Continue this process until you achieve simple structure. 
+
+```{r simple}
+
+```
+
+# Adequate solution:
+    
+    a.	Include the fit indices (RMSEA + 90% CI, RMSR, CFI, TLI).
+    b.	Describe the fit indices (good, acceptable, poor).  
+    c.	Include the reliabilities for each factor.
+        i.	Are the reliabilities acceptable?
+    d.	Label the factors based on the questions.
+
+```{r modelfit}
+
+```
+

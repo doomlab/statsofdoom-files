@@ -1,0 +1,92 @@
+---
+title: "Chapter 5 Assignment"
+author: "Enter Yo Name"
+date: "9/16/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Dataset:
+
+600 students participated in a university-wide experiment to test if an educational intervention increased test performance. Half of the students were assigned to be in the control group and half of the students were assigned to be in the experimental group (the experimenters used matching techniques to keep the groups as random as possible). The experimental group was the only group that received the educational intervention. All participants were given exam 1 to assess their initial test-taking ability. Then, for the next 4 weeks, the professors began administering the educational intervention to only the experimental group. All participants then took a midterm. For the last four weeks of class, professors again administered the educational intervention to only the experimental group. All participants then took the final exam. Can it be concluded that the educational intervention worked (e.g., did the experimental group outperform the control group?)?
+
+## Variables: 
+    a) Gender (1 = male, 2 = female)
+    b) Group (1 = control group, 2 = experimental group)
+    c) 3 exam scores, ranging from 2-100 points (students received two points for writing their name and no extra credit was available). Decimals are possible!
+        i) Beginning
+        ii)	Midterm
+        iii)	Final exam
+
+```{r starting}
+
+```
+
+
+# Data screening:
+
+## Accuracy:
+    a)	Include output and indicate how the data are not accurate.
+    b)	Include output to show how you fixed the accuracy errors, and describe what you did.
+    
+```{r accuracy}
+
+```
+
+## Missing data:
+    a)	Include output that shows you have missing data.
+    b)	Include output and a description that shows what you did with the missing data.
+        i)	Replace all participant data if they have less than or equal to 20% of missing data by row. 
+        ii)	You can leave out the other participants (i.e. you do not have to create allrows). 
+```{r missing}
+
+```
+
+## Outliers:
+    a)	Include a summary of your mahal scores that are greater than the cutoff.
+    b)	What are the df for your Mahalanobis cutoff?
+    c)	What is the cut off score for your Mahalanobis measure?
+    d)	How many outliers did you have?
+    e)	Delete all outliers. 
+    
+```{r outliers}
+
+```
+
+# Assumptions:
+
+## Additivity: 
+    a)  Include the symnum bivariate correlation table of your continuous measures.
+    b)  Do you meet the assumption for additivity?
+    
+```{r additivity}
+
+```
+
+## Linearity: 
+    a)  Include a picture that shows how you might assess multivariate linearity.
+    b)  Do you think you've met the assumption for linearity?
+    
+```{r linearity}
+
+```
+
+## Normality: 
+    a)  Include a picture that shows how you might assess multivariate normality.
+    b)  Do you think you've met the assumption for normality? 
+
+```{r normality}
+
+```
+
+## Homogeneity/Homoscedasticity: 
+    a)  Include a picture that shows how you might assess multivariate homogeneity.
+    b)  Do you think you've met the assumption for homogeneity?
+    c)  Do you think you've met the assumption for homoscedasticity?
+
+```{r homog-s}
+
+```

@@ -1,0 +1,161 @@
+---
+title: "Chapter 9 Assignment"
+author: "Enter Yo' Name"
+date: "10/1/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Abstract
+
+Physical activity promotes health and longevity. Further elaboration of the role of physical activity for human health in epidemiological studies on large samples requires accurate methods that are easy to use, cheap, and possible to repeat. The use of telecommunication technologies such as cell phones is highly interesting in this respect. In an earlier report, we showed that physical activity level (PAL) assessed using a cell phone procedure agreed well with corresponding estimates obtained using the doubly labeled water method. However, our earlier study indicated high within-subject variation in relation to between-subject variations in PAL using cell phones, but we could not assess if this was a true variation of PAL or an artifact of the cell phone technique. Objective: Our objective was to compare within- and between-subject variations in PAL by means of cell phones with corresponding estimates using an accelerometer. In addition, we compared the agreement of daily PAL values obtained using the cell phone questionnaire with corresponding data obtained using an accelerometer.
+
+Loosely based on: Bexelius, C., Sandin, S., Lagerros, Y.T., Litton, J., & Löf, M. (2011). Estimation of physical activity levels using cell phone questionnaires: A comparison with accelerometry for evaluation of between-subject and within-subject variations. Journal of Medical Internet Research, 13, 186-191. 
+
+# Dataset: 
+-	Gender: male and female subjects were examined in this experiment.
+-	PAL_cell: average physical activity values for the cell phone accelerometer (range 0-100).
+-	PAL_acc: average physical activity values for the hand held accelerometer (range 0-100).
+
+APA write ups should include means, standard deviation/error, t-values, p-values, effect size, and a brief description of what happened in plain English.
+
+```{r starting}
+
+```
+
+# Data screening:
+
+## Accuracy:
+    a)	Include output and indicate how the data are not accurate.
+    b)	Include output to show how you fixed the accuracy errors, and describe what you did.
+    
+```{r accuracy}
+
+```
+
+## Missing data:
+    a)	Include output that shows you have missing data.
+    b)	Include output and a description that shows what you did with the missing data.
+        
+```{r missing}
+
+```
+
+## Outliers:
+    a)	Include a summary of your mahal scores that are greater than the cutoff.
+    b)	What are the df for your Mahalanobis cutoff?
+    c)	What is the cut off score for your Mahalanobis measure?
+    d)	How many outliers did you have?
+    e)	Delete all outliers. 
+    
+```{r outliers}
+
+```
+
+# Assumptions:
+
+## Additivity: 
+    a)  We won't need to calculate a correlation table. Why not?
+
+## Linearity: 
+    a)  Include a picture that shows how you might assess multivariate linearity.
+    b)  Do you think you've met the assumption for linearity?
+    
+```{r linearity}
+
+```
+
+## Normality: 
+    a)  Include a picture that shows how you might assess multivariate normality.
+    b)  Do you think you've met the assumption for normality? 
+
+```{r normality}
+
+```
+
+## Homogeneity/Homoscedasticity: 
+    a)  Include a picture that shows how you might assess multivariate homogeneity.
+    b)  Do you think you've met the assumption for homogeneity?
+    c)  Do you think you've met the assumption for homoscedasticity?
+
+```{r homog-s}
+
+```
+
+# Independent t-test:
+
+1)	Run an independent t-test to determine if there are differences in gender for the cell phone measurement of physical activity level.
+    a.	Use the equal variances option to adjust for problems with homogeneity (if necessary). 
+    b.	Include means and sds for your groups. 
+    c.	Is there a significant difference in the ratings? 
+    
+```{r ind1}
+
+```
+
+2)	Effect size: What is the effect size for this difference? Be sure to list which effect size you are using. 
+
+```{r effect1}
+
+```
+
+3)	Power: Determine the number of participants you should have used in this experiment given the effect size you found above. 
+
+```{r power1}
+
+```
+
+4)	Graphs: Include a bar graph of these results.
+
+```{r graph1}
+
+```
+
+5)	Write up: include an APA style results section for this analysis (just the t-test not all the data screening).
+
+# Dependent t-test:
+
+6)	Run a dependent t-test to tell if there are differences in the cell phone and hand held accelerometer results.
+    a.	Include means and sds for your groups. 
+    b.	Is there a significant difference in the ratings? 
+
+```{r dep1}
+
+```
+
+7)	Effect size: What is the effect size for this difference? Be sure to list which effect size you are using. 
+
+```{r effect2}
+
+```
+
+8)	Power: Determine the number of participants you should have used in this experiment given the effect size you found above. 
+
+```{r power2}
+
+```
+
+9)	Graphs: Include a bar graph of these results.
+
+```{r graph2}
+
+```
+
+10)	Write up: include an APA style results section for this analysis (just the t-test not all the data screening).
+
+# Theory:
+
+11)	List the null hypothesis for the dependent t-test.
+
+12)	List the research hypothesis for the dependent t-test.
+
+13)	If the null were true, what would we expect the mean difference score to be?
+
+14)	If the null were false, what would we expect the mean difference score to be?
+
+15)	In our formula for dependent t, what is the estimation of systematic variance?
+
+16)	In our formula for dependent t, what is the estimation of unsystematic variance?

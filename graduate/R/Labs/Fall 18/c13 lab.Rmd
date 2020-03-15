@@ -1,0 +1,72 @@
+---
+title: "Chapter 13 Lab"
+author: "Enter Yo' Name"
+date: "10/22/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Abstract
+
+Researchers and directories have difficulty classifying blogs into categories resulting from the rate at which blogs are created, as well as the overlap in content. To explore this difficulty, as well as the linguistic content of blogs, we examined word use across four high and low status informative blogs with differing topics: politics (The Huffington Post, Washington Wire), technology (Engadget, Techware Labs), entertainment (Deadline Hollywood, Heckler Spray), and business (Money, Life, and More, Financial Sense). We compared the frequency of parts of speech, the frequency of unique words, and the use of low frequency words and found that blog differences were likely based not only on the differing topics, but also on each audience's assumed interests and level of relevant, specialized knowledge. 
+
+*Citation:* Johnson, C.C.*, Buchanan, E.M., & Jordan, K.N. (2014). Blog Topic and Word Frequency: What Predicts High Powered Blogs? Psychology of Popular Media, 3, 154-163. doi: 10.1037/ppm0000036
+
+Dataset:
+-	Huffpo = Huffington post - High status politics blog
+-	Washwire = Washington wire - Low status politics blog
+-	Engadget = High status technology blog
+-	Techware = Techware labs = Low stats technology blog
+-	Deadline = Deadline Hollywood = High status entertainment blog
+-	Heckler = Heckler Spray = Low status entertainment blog
+-	Money = Money, Life, and More = High status business blog
+-	Finsense = Financial Sense = Low status business blog
+-	What do all these numbers mean? Average weighted frequency of words in their blogs.  Each line is a word (i.e. a, blog, was, cheese, etc.).  The numbers are word frequency (as measured by standardized databases) X number of times they used that word.  High averages = lots of frequent words, low averages = less frequent words, more infrequent words (i.e. technical knowledge).
+
+```{r starting}
+
+```
+
+# Questions:
+
+What are the independent variables?
+
+What are the levels of those variables?
+
+How would you describe this ANOVA?
+    a. #x# = 
+    b. Type of research design = 
+
+# Analyses 
+    a. Run a two-way analysis.
+        i. Which effects are significant (just explain, not APA)?
+    b. Interpret the Sphericity test.
+        i. Why did one of IVs not show up?
+        ii. Do we meet the assumption of sphericity?
+        iii. If we do not meet the assumption, which correction should we use?
+
+```{r analyses}
+
+```
+
+# Graph
+Create a plot of the interaction (with all the usual things to check, x/y axes).
+    a. From the plot, how can you tell if there is an interaction?
+    b. Explain that effect - describe how pattern of levels/conditions is different. 
+
+```{r graph}
+
+```
+
+# Simple effect analysis.
+    a. What type of test statistic would you use?
+    b. Why?
+    c. Indicate which effects were significant. 
+
+```{r posthoc}
+
+```
+

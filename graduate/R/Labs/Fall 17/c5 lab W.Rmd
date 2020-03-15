@@ -1,0 +1,117 @@
+---
+title: "Chapter 5 Lab"
+author: "Enter Yo Name"
+date: "9/16/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Dataset:
+350 students were given a short questionnaire about their perception of parking space available on campus. The participants were first asked demographic information: 
+    
+    a) Gender 
+    b)	Class level (freshman, sophomore, junior, senior) 
+
+Next, participants were asked to indicate their opinion on three questions on parking lot space a 1-7 likert-type scale (1 = strongly disagree, 7 = strongly agree).
+    
+    a)	I always drive to campus.
+    b)	I spend several minutes each day looking for parking.
+    c)	I think MSU should build additional parking.
+    
+```{r starting}
+master = read.csv("c5 lab.csv")
+```
+
+# Data screening:
+
+## Accuracy:
+    a)	Include output and indicate how the data are not accurate.
+    b)	Include output to show how you fixed the accuracy errors, and describe what you did.
+    
+```{r accuracy}
+
+```
+
+## Missing data:
+    a)	Include output that shows you have missing data.
+    b)	Include output and a description that shows what you did with the missing data.
+        i)	Replace all participant data if they have less than or equal to 20% of missing data by row. 
+        ii)	You can leave out the other participants (i.e. you do not have to create allrows). 
+        
+```{r missing}
+
+```
+
+## Outliers:
+    a)	Include a summary of your mahal scores that are greater than the cutoff.
+    b)	What are the df for your Mahalanobis cutoff?
+    c)	What is the cut off score for your Mahalanobis measure?
+    d)	How many outliers did you have?
+    e)	Delete all outliers. 
+    
+```{r outliers}
+
+```
+
+# Assumptions:
+
+## Additivity: 
+    a)  Include the symnum bivariate correlation table of your continuous measures.
+    b)  Do you meet the assumption for additivity?
+    
+```{r additivity}
+noout = master 
+names(noout)
+##additivity: correlations
+correlations = cor(noout[,-c(1,2)], use="pairwise.complete.obs")
+correlations
+symnum(correlations)
+```
+
+## Linearity: 
+    a)  Include a picture that shows how you might assess multivariate linearity.
+    b)  Do you think you've met the assumption for linearity?
+    
+```{r linearity}
+##make the random stuff
+random = rchisq(nrow(noout), 7)
+fake = lm(random~., data=noout)
+
+##get the linearity plot
+##create the standardized residuals
+standardized = rstudent(fake)
+{qqnorm(standardized)
+abline(0,1)}
+
+```
+
+## Normality: 
+    a)  Include a picture that shows how you might assess multivariate normality.
+    b)  Do you think you've met the assumption for normality? 
+
+```{r normality}
+library(moments)
+
+##get the values
+skewness(noout[ , -c(1,2)], na.rm=TRUE)
+kurtosis(noout[ , -c(1,2)], na.rm=TRUE)
+
+##multivariate normality
+hist(standardized, breaks=15)
+```
+
+## Homogeneity/Homoscedasticity: 
+    a)  Include a picture that shows how you might assess multivariate homogeneity.
+    b)  Do you think you've met the assumption for homogeneity?
+    c)  Do you think you've met the assumption for homoscedasticity?
+
+```{r homog-s}
+##homogeneity and homoscedaticity
+fitvalues = scale(fake$fitted.values)
+{plot(fitvalues, standardized) 
+abline(0,0)
+abline(v = 0)}
+```

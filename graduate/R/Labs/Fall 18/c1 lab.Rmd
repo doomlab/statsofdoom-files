@@ -1,0 +1,66 @@
+---
+title: "Chapter 1 Lab"
+author: "Enter Yo Name"
+date: "8/22/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Part 1: Variables, Hypothesis, Designs
+
+*Title:* Differential Usage of Anthropogenically Disturbed Forests by White-Footed Sportive Lemurs and Reddish-Grey Mouse Lemurs at Beza Mahafaly Special Reserve, Madagascar
+
+*Abstract:* This study examines the effects of anthropogenic disturbance on two nocturnal lemur species: the white-footed sportive lemur and the reddish-grey mouse lemur, both found within protected and unprotected forest areas in southwestern Madagascar. In order to test the hypothesis that more disturbed forests have fewer sportive lemurs and more mouse lemurs, encounter rates of each species were recorded in ten nighttime censuses along six different transect lines in two forests. Six researchers each walked along a transect line, recording observations of either lemur species (detected through species-specific patterns of eye shine). Censuses were conducted at the most active part of the night in order to maximize sightings. These data were then used to determine the encounter rate, or number of individuals seen per kilometer walked. The researchers found that the main hypothesis was supported, with encounter rates of 5.14/km for sportive lemurs in the protected forest and 1.34/km in disturbed forest, and encounter rates of 4.78/km for mouse lemurs in the protected forest and 6.2/km in the disturbed forest. This suggests different conservation strategies are necessary for each species.
+
+# Answer the following questions about the abstract above:
+
+1)	What is the hypothesis of the researchers?
+
+2)	What are the independent variables?
+
+3)	What is the dependent variable?
+
+4)	What type of research design is the experiment?
+
+# Part 2: Descriptive Statistics
+
+Two students want to find out whether people like chocolate or vanilla ice cream more. They each ask 40 people to state how much they agree with the following statements:
+
+1.	I LOVE chocolate ice cream!
+
+2.	I LOVE vanilla ice cream!
+
+However, the students didn't collaborate beforehand and realized they gave different surveys (one on a 1-5 scale, and one on a 1-7 scale). The scores must be transformed into z-scores to be comparable.
+
+Use the Ice Cream Dataset (c1 lab.csv) to calculate the following information:
+
+```{r}
+##set working directory
+
+##load the dataset 
+
+```
+
+1)	Frequency tables for the original chocolate scores (chocolate S1, chocolate S2).
+```{r}
+
+```
+
+2)	Histograms for the original vanilla scores (vanilla S1, vanilla S2).
+```{r}
+
+```
+
+3)	Convert to z-scores to be able to compare the datasets.
+```{r}
+
+```
+
+4)	Calculate the mean, mode, median, variance, standard deviation, skew, and kurtosis for all four converted variables (z chocolate S1, z chocolate S2, z vanilla S1, z vanilla S2).
+```{r}
+
+```
+

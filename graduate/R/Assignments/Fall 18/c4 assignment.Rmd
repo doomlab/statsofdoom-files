@@ -1,0 +1,96 @@
+---
+title: "Chapter 4 Assignment"
+author: "Enter Yo Name"
+date: "9/3/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+*Citation*: Spinath, B., & Steinmayr, R. (2012). The roles of competence beliefs and goal orientations for change in intrinsic motivation. Journal of Educational Psychology, 104(4), 1135-1148. 
+doi:10.1037/a0028115
+
+*Abstract*: The present study investigated 3 theoretically plausible explanations for changes in school-related intrinsic motivation. A sample of German 11th-grade students was followed for 1 year. At 2 measurement occasions, students completed self-reports regarding their school-related intrinsic motivation, which were separated by time one goal orientations, and competence beliefs. In line with previous studies, cross-lagged analyses provided little evidence for the hypothesis that prior competence beliefs affect subsequent intrinsic motivation after controlling for prior intrinsic motivation. Instead, goals orientation, but not competence, directly predicted the change in students' intrinsic motivation, but not vice versa. Findings are discussed with regard to advancing motivation theory and practical implications. 
+
+Dataset includes:
+    1) Goal orientation - internally or externally goal directed behavior.
+    
+    2)	Competence - low, medium, or high levels of competence in school.
+    
+    3)	Intrinsic _ 1 - motivation scores at time 1.
+    
+    4)	Intrinsic _ 2 - motivation scores at time 2.
+
+On all of these questions, be sure to include a coherent label for the X and Y axes.  You should change them to be "professional looking" (i.e. Proper Case, explain the variable listed, and could be printed in a journal).  The following will be assessed:
+
+    1)	Is it readable?
+    
+    2)	Is X-axis labeled appropriately?
+    
+    3)	Is Y-axis labeled appropriately?
+    
+    4)	Is it the right graph?
+    
+    5) 	Do the labels in the legend look appropriate?
+    
+    6)	Are there error bars when appropriate?
+
+We won't grade for color of bars or background color, but you should consider that these things are usually printed in black/white - so be sure you know how to change those values as well as get rid of that grey background.
+
+Please note that each subpoint (i.e. a, b) indicates a different chart.
+
+```{r starting}
+
+```
+
+
+1)	Make a simple histogram using ggplot:
+a.	Intrinsic motivation time 1
+
+```{r hist1}
+
+```
+
+b.	Intrinsic motivation time 2
+
+```{r hist2}
+
+```
+
+2)	Make a bar chart with two independent variables:
+a.	Intrinsic motivation time 2, competence, goal orientation
+
+```{r bar1}
+
+```
+
+3)	Make a bar chart with two independent variables: 
+a.	Time (time 1, time 2), goal orientation, motivation 
+
+```{r bar2}
+
+```
+
+4)	Make a simple line graph:
+a.	Time (time 1, time 2), motivation 
+
+```{r line}
+
+```
+
+5)	Make a simple scatterplot:
+a.	Intrinsic motivation time 1, intrinsic motivation time 2
+
+```{r scatter1}
+
+```
+
+6)	Make a grouped scatterplot:
+a.	Intrinsic motivation time 1, intrinsic motivation time 2, competence
+
+```{r scatter2}
+
+```
+

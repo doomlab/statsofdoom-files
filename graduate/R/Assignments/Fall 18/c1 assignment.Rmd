@@ -1,0 +1,113 @@
+---
+title: "Chapter 1 Homework"
+author: "Enter Yo Name"
+date: "8/22/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Part 1: Variables, Hypothesis, Designs
+
+*Title:* Differences between vocalization evoked by social stimuli in feral cats and house cats
+
+*Abstract*: To investigate how socialization can affect the types and characteristics of vocalization produced by cats, feral cats (n = 25) and house cats (n = 13) were used as subjects, allowing a comparison between cats socialized to people and non-socialized cats. To record vocalization and assess the cats' responses to behavioral stimuli, five test situations were used: approach by a familiar caretaker, by a threatening stranger, by a large doll, by a stranger with a dog and by a stranger with a cat. Feral cats showed extremely aggressive and defensive behaviour in most test situations, and produced higher call rates than those of house cats in the test situations, which could be attributed to less socialization to other animals and to more sensitivity to fearful situations. Differences were observed in the acoustic parameters of feral cats in comparison to those of house cats. The feral cat produced significantly higher frequency in fundamental frequency, peak frequency, 1st quartile frequency, 3rd quartile frequency of growls and hisses in agonistic test situations. In contrast to the growls and hisses, in meow, all acoustic parameters like fundamental frequency, first formant, peak frequency, 1st quartile frequency, and 3rd quartile frequency of house cats were of significantly higher frequency than those of feral cats. Also, house cats produced calls of significantly shorter in duration than feral cats in agonistic test situations. These results support the conclusion that a lack of socialization may affect usage of types of vocalizations, and the vocal characteristics, so that the proper socialization of cat may be essential to be a suitable companion house cat.
+
+Answer the following questions about the abstract above:
+
+1)	What is the hypothesis of the researchers?
+
+2)	What is one of the independent variables?
+
+    a.	What type of variable is the independent variable?
+
+3)	What is one of the dependent variables?
+
+    a.	What type of variable is the dependent variable?
+    
+4)	What might cause some measurement error in this experiment?
+
+5)	What type of research design is the experiment?
+
+    a.	Why?
+
+6)	How might you measure the reliability of your dependent variable?
+
+7)	Is this study ecologically valid?
+
+8)	Can this study claim cause and effect?
+
+    a.	Why/why not?
+
+9)	What type of data collection did the researchers use (please note that #5 is a different question)?
+
+# Part 2: Use the assessment scores dataset (c1 assignment.csv) to answer these questions.
+
+Three professors are working together to develop a scale to assess students' knowledge of psychology. They decided to test the scale on psychology students in their final semester. Students from each of their classes were administered the test. The professors calculated the students' scores differently but still want to compare test results.
+
+    Professor A scored his test on a 0-100 scale.
+    Professor B scored her test on a 200-600 scale.
+    Professor C scored his test on a 200-800 scale.
+
+Calculate the following information:
+
+1)	Create a frequency table of Professor A's data.
+
+```{r}
+
+```
+
+2)	Create histograms of ALL three professor's data. You will want to add the breaks argument to the hist() function. This argument adds more bars to the histogram, which makes it easier to answer the following questions:
+
+hist(dataset$column, breaks = 15) ##15 is a great number to pick, but it can be any number. For this assignment, try 15 to see a medium number of bars. 
+
+```{r}
+
+```
+
+3)	Examine these histograms to answer the following questions:
+
+    a.	Which professor's data appears the most normal?
+    
+    b.	Which professor's data is bimodal?
+    
+    c.	Which professor's data is multimodal?
+    
+    d.	Which professor's data looks the most skewed (and in which direction positive or negative)?  
+    
+    e.	Which professor's data looks the most kurtotic?
+    
+4)	Calculate the z-scores for each professor, so they are all on the same scale.
+
+```{r}
+
+```
+
+5)	Which professor had the highest median score? (Remember you can't calculate the highest mean score because we've made them all the same - so we can use the middle score to denote the higher average scores).
+
+```{r}
+
+```
+
+6)	How many people's scores were more extreme than 95% of the data (i.e. number of z-scores at a p < .05)?
+
+    a.	For this question, use the View() function to look at the data and sort the columns in RStudio to count the number of values over the cut off score for 95% of the data (find from your notes the cut off score). Sort the data by clicking on the column name in the view window.  
+    However! Once you are done, comment out the View() function. Otherwise the file will not knit. 
+
+```{r}
+
+```
+
+    b.	Professor A
+    
+    c.	Professor B
+    
+    d.	Professor C
+    
+7)	Who had the student:
+
+    a.	With the highest score?
+    
+    b.	With the lowest score?

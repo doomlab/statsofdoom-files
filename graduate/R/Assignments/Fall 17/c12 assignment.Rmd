@@ -1,0 +1,180 @@
+---
+title: "Chapter 12 Assignment"
+author: "Enter Yo' Name"
+date: "10/15/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+# Abstract
+
+Culture and gender shape emotion experience and regulation, in part because the value placed on emotions and the manner of their expression is thought to vary across these groups. This study tested the hypothesis that culture and gender would interact to predict people's emotion responding (emotion intensity). Chinese and American undergraduates viewed photos intended to elicit negative emotions after receiving instructions to either "just feel" any emotions that arose (Just Feel). All participants then rated the intensity of their experienced emotions. Consistent with predictions, culture and gender interacted with experimental condition to predict intensity: Chinese men reported relatively low levels of emotion, whereas American women reported relatively high levels of emotion. These findings suggest that emotion-regulation strategies may contribute to differences in emotional experience across Western and East Asian cultures. 
+
+*Citation:* Davis, E., Greenberger, E., Charles, S., Chen, C., Zhao, L., & Dong, Q. (2012). Emotion experience and regulation in China and the United States: How do culture and gender shape emotion responding?. International Journal of Psychology, 47(3), 230-239.
+
+# Dataset:
+-	Gender of the participant (men/women)
+-	Culture of the participant (American/Chinese)
+-	Emotion intensity: 1 to 7 scale on intensity of emotions from the negative pictures, where 7 is high intensity.
+
+```{r starting}
+
+```
+
+# Data Screening:
+
+## Accuracy
+Check for accuracy in your data and include output that indicates if it is accurate. Fix all accuracy errors and include output that shows they are fixed.
+
+```{r accuracy}
+
+```
+
+## Missing Data
+Even though missing data would be larger than 5%, impute the missing data with mice. Since you do not have missing data in your categorical variables, you do not need to exclude those columns to run mice. It will ignore them. Include a summary that shows you replaced the data. 
+
+```{r missing}
+
+```
+
+## Outliers
+    a.	Examine the dataset for outliers.
+    b.	How many outliers did you have?
+    c.	Exclude all outliers.
+    
+```{r outliers}
+
+```
+
+# Assumptions
+
+## Normality: 
+    a.	Include a picture that you would use to assess multivariate normality. 
+    b.	Do you think you've met the assumption for normality? 
+
+```{r normality}
+
+```
+
+## Linearity:
+    a.	Include a picture that you would use to assess linearity.
+    b.	Do you think you've met the assumption for linearity?
+
+```{r linearity}
+
+```
+
+## Homogeneity/Homoscedasticity: 
+    a.	Include a picture that you would use to assess homogeneity and homoscedasticity.
+    b.	Include the output from Levene's test.
+    c.	Do you think you've met the assumption for homogeneity? (Talk about both components here). 
+    d.	Do you think you've met the assumption for homoscedasticity?
+
+```{r homogs}
+
+```
+
+# Hypothesis Testing:
+
+List the type of ANOVA used in this analysis (use the #X# type ANOVA distinction).  
+
+Run the ANOVA test.
+    a.	Include the output from the ANOVA test.
+    b.	Was the omnibus ANOVA test significant (three answers here)?
+    
+```{r anova}
+
+```
+
+Descriptives using tapply:
+    a.	Include your marginal means for each IV.
+    b.	Include the interaction means.
+
+```{r descriptives}
+
+```
+
+Calculate the following effect sizes:
+    a.	$\eta_{p}^2$ for the interaction
+    b.	$\omega_{p}^2$ for the interaction 
+
+```{r effect}
+eta = 12 ##fill in the number here use for power below for the interaction
+eta
+
+```
+
+Given the $\eta_{p}^2$ effect size for the interaction, how many participants would you have needed to find a significant effect? 
+
+```{r power}
+
+```
+
+Run a simple effect analysis by splitting on gender.
+    a. What type of follow up test did you use?  Why?
+    b. What type of correction did you use? 
+
+```{r simple-effects}
+
+```
+
+Calculate the pairwise effect sizes for the post hoc comparisons.
+
+```{r effectsize}
+
+```
+
+Fill in the following table with your post hoc results and add effect sizes:
+
+```{r posthoc, results='asis'}
+tableprint = matrix(NA, nrow = 2, ncol = 4)
+
+##row 1
+##fill in where it says NA with the values for the right comparison
+##fill in Group 1 or 2 label with the group name
+tableprint[1, ] = c("Group 1 Label", "Group 2 Label", NA, NA)
+
+##row 2
+tableprint[2, ] = c("Group 1 Label", "Group 2 Label", NA, NA)
+
+kable(tableprint, 
+      digits = 3,
+      col.names = c("Group 1", "Group 2", "p value", "d value"))
+```
+
+Include a figure of the interaction, and be sure to check the following:
+    a.	X-Axis Label/Group Labels
+    b.	Legend and Labels
+    c.	Y-Axis Label
+    d.	Y-Axis Length 
+    e.	Error Bars
+    
+```{r graph}
+
+```
+
+Include a write up of the results of your study.  Things to include:
+    a.	Brief description of the variables.
+    b.	Type of analysis used (i.e. ANOVA).
+    c.	Test statistics for both main effects and interaction.
+    d.	Test statistics for post hoc tests.
+    e.	List which type of error correction you used.
+    f.	A reference to your figure.
+    g.	Effect sizes for all statistics.
+    h.	Two decimal places for statistics.
+
+# Theory Questions:
+Explain the types of variance components - indicate what each section is calculating rather than just the formula (i.e. this answer should be in English):
+    a.	SS Total
+    b.	SS Model
+    c.	SS Residual
+
+What are marginal means?
+
+Why do you NOT run post hocs on independent variables with only two levels?
+
+Explain the difference between familywise and experimentwise error correction.

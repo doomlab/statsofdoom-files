@@ -1,0 +1,92 @@
+---
+title: "Chapter 7 Lab"
+author: "Enter Yo Name"
+date: "11/8/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Abstract
+
+This study investigated associations between working memory (measured by complex memory tasks) and both reading and mathematics abilities, as well as the possible mediating factors of fluid intelligence, verbal abilities, short-term memory (STM), and phonological awareness, in a sample of 6- to 11-year-olds with reading disabilities. As a whole, the sample was characterized by deficits in complex memory and visuospatial STM and by low IQ scores; language, phonological STM, and phonological awareness abilities fell in the low average range. Severity of reading difficulties within the sample was significantly associated with complex memory, language, and phonological awareness abilities, whereas poor mathematics abilities were linked with complex memory, phonological STM, and phonological awareness scores. These findings suggest that working memory skills indexed by complex memory tasks represent an important constraint on the acquisition of skill and knowledge in reading and mathematics. Possible mechanisms for the contribution of working memory to learning, and the implications for educational practice, are considered.
+
+*Citation:* Gathercole, S. E., Alloway, T. P., Willis, C., & Adams, A. M. (2006). Working memory in children with reading disabilities. Journal of Experimental Child Psychology, 93(3), 265-281.
+
+# Dataset:
+
+    -	Dependent variable (Y): Reading - reading skills of the 6 to 11 year olds
+    -	Independent variables (X):
+        - Verbal - a measure of verbal ability (spelling, phonetics, etc.)
+        - Math - a measure of math ability
+        - Work_mem - working memory score
+
+```{r starting}
+
+```
+
+# Data screening:
+
+## Accuracy
+
+Assume the data is accurate with no missing values. You will want to screen the dataset using all the predictor variables to predict the outcome in a simultaneous multiple regression (all the variables at once). This analysis will let you screen for outliers and assumptions across all subsequent analyses/steps.
+
+## Outliers
+    
+    a.	Leverage:
+        i.	What is your leverage cut off score?
+        ii.	How many leverage outliers did you have?
+
+```{r leverage}
+
+```
+        
+    b.	Cook's:
+        i.	What is your Cook's cut off score?
+        ii.	How many Cook's outliers did you have?
+        
+```{r cooks}
+
+```
+        
+    c.	Mahalanobis:
+        i.	What is your Mahalanobis df?
+        ii.	What is your Mahalanobis cut off score?
+        iii.	How many outliers did you have for Mahalanobis?
+        
+```{r mahal}
+
+```
+        
+    d.	Overall:
+        i.	How many total outliers did you have across all variables?
+        ii.	Delete them!
+
+```{r overall}
+
+```
+
+# Hierarchical Regression:
+
+    a.	In step 1, control for verbal ability of the participant predicting reading scores. 
+    b.	In step 2, test if working memory is related to reading scores.
+    c.	In step 3, test if math score is related to reading scores.
+    d.  Include the summaries of each step, along with the ANOVA of the change between each step.
+
+```{r hierarchical}
+
+```
+
+# Moderation:
+
+    a. Examine the interaction between verbal and math scores predicting reading scores.
+    b. Include the simple slopes for low, average, and high math levels (split on math) for verbal predicting reading. 
+    c. Include a graph of the interaction. 
+
+```{r moderation}
+
+```
+
+

@@ -1,0 +1,141 @@
+---
+title: "Chapter 7 Assignment"
+author: "Enter Yo Name"
+date: "11/8/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Abstract
+
+One of the most widely believed maxims of management is that a happy worker is a productive worker. However, most research on the nature of the relationship between job satisfaction and job performance has not yielded convincing evidence that such a relationship exists to the degree most managers believe. One reason for this might lie in the way in which job performance is measured. Numerous studies have been published that showed that using Organizational Citizenship Behavior to supplant more traditional measures of job performance has resulted in a more robust relationship between job satisfaction and job performance. Yet, recent work has suggested that the relationship between job satisfaction and citizenship may be more complex than originally reported. This study investigated whether the relationship between job satisfaction and citizenship could depend upon the nature of the job satisfaction measure used. Specifically, it was hypothesized that job satisfaction measures which reflect a cognitive basis would be more strongly related to OCB than measures of job satisfaction, which reflect an affective basis. Results from data collected in two midwestern companies show support for the relative importance of cognition based satisfaction over affect based satisfaction. Implications for research on the causes of citizenship are discussed.
+
+*Citation*: Moorman, R. H. (1993). The influence of cognitive and affective based job satisfaction measures on the relationship between satisfaction and organizational citizenship behavior. Human relations, 46(6), 759-776.
+
+# Dataset:
+    
+    - Dependent variable (Y): OCB - Organizational citizenship behavior measure
+    -	Independent variables (X)
+        - Affective - job satisfaction measures that measure emotion
+        - Cognitive - job satisfaction measures that measure cognitions (thinking)
+        -	Years - years on the job
+        -	Type_work - type of employee measured (secretary, assistant, manager, boss)	
+
+# Data Screening:
+
+Assume the data is accurate with no missing values.  You will want to screen the dataset using all the predictor variables to predict the outcome in a simultaneous multiple regression (all the variables at once).  This analysis will let you screen for outliers and assumptions across all subsequent analyses/steps. Be sure to factor type_work.
+
+```{r starting}
+
+```
+
+## Outliers
+    
+    a.	Leverage:
+        i.	What is your leverage cut off score?
+        ii.	How many leverage outliers did you have?
+
+```{r leverage}
+
+```
+        
+    b.	Cook's:
+        i.	What is your Cook's cut off score?
+        ii.	How many Cook's outliers did you have?
+        
+```{r cooks}
+
+```
+        
+    c.	Mahalanobis:
+        i.	What is your Mahalanobis df?
+        ii.	What is your Mahalanobis cut off score?
+        iii.	How many outliers did you have for Mahalanobis?
+        
+```{r mahal}
+
+```
+        
+    d.	Overall:
+        i.	How many total outliers did you have across all variables?
+        ii.	Delete them!
+
+```{r overall}
+
+```
+
+# Assumptions:
+
+## Additivity:
+
+    a.	Include a correlation table of your independent variables.
+    b.	Do your correlations meet the assumption for additivity (i.e. do you have multicollinearity)?
+
+```{r additivity}
+
+```
+
+## Linearity: 
+
+    a.	Include a picture that shows how you might assess multivariate linearity.
+    b.	Do you think you've met the assumption for linearity? 
+
+```{r linearity}
+
+```
+
+## Normality: 
+
+    a.	Include a picture that shows how you might assess multivariate normality.
+    b.	Do you think you've met the assumption for normality? 
+
+```{r normality}
+
+```
+
+## Homogeneity and Homoscedasticity: 
+
+    a.	Include a picture that shows how you might assess multivariate homogeneity.
+    b.	Do you think you've met the assumption for homogeneity?
+    c.	Do you think you've met the assumption for homoscedasticity?
+    
+```{r homogs}
+
+```
+
+# Hierarchical Regression:
+
+    a.	First, control for years on the job in the first step of the regression analysis.
+    b.	Then use the factor coded type of job variable to determine if it has an effect on organizational citizenship behavior.
+    c.	Last, test if cognitive and affect measures of job satisfaction are predictors of organizational citizenship behavior. 
+    d.  Include the summaries of each step, along with the ANOVA of the change between each step.
+    
+```{r hierarchical}
+
+```
+
+# Mediation
+
+    a.  Calculate a mediation model wherein the number of years mediates the relationship between affective measurements and OCB.
+    b.  Include each path and summaries of those models.
+    c.  Include the Sobel test.
+    d.  Include the bootstrapped indirect effect. 
+
+```{r mediation}
+
+```
+
+# Write up:
+    
+    Hierarchical regression only!
+    a.	Include a brief description of the experiment, variables, and order entered into steps.
+    b.	Include a brief section on the data screening/assumptions.
+    c.	Include the all F-values for each step of the model - you can reference the above table.
+    d.	Include all the b or beta values for variables in the step they were entered.  So, you will not have double b values for any predictor - you can reference the above table.
+    e.	Include an interpretation of the results (dummy coding, do our results match the study results, etc.).
+
+
+

@@ -1,0 +1,59 @@
+---
+title: "Chapter 12 Lab"
+author: "Enter Yo’ Name"
+date: "10/15/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Abstract
+
+Based on social-learning and self-determination motivational theories, the purpose of this study was to determine the sources of motivation in youth and young adults with intellectual disability (ID) who participate in Special Olympics (SO) competitions and those of typically developed (TD) age- and activity-matched athletes. A convenience sample of SO and TD athletes was retrieved through communication with local club coaches. For analysis purposes four age groups were created (< 15, 15–17, 18–20, > 20 years). Participants completed the 13-item, two factor Task and Ego Orientation in Sport Questionnaire (TEOSQ) and a 16-item four-factor abridged version of the Sport Motivation Scale (SMS). Groups with and without ID were compared by means of ANOVA with Tukey HSD post hoc comparisons across disability and age groups. These differences should be considered when developing training and competition programs. 
+
+*Citation:* Hutzler, Y., Oz, M., & Barak, S. (2013). Goal perspectives and sport participation motivation of Special Olympians and typically developing athletes. Research in Developmental Disabilities, 34, 2149-2160.
+
+# Dataset:
+-	Athlete type: either Special Olympics or typically developed.
+-	Age group: dichotomized variable for <15, 15-17, 18-20, >20 age groups.
+-	Task orientation: average task orientation score from the TEOSQ (range 1-7).
+
+```{r starting}
+
+```
+
+# Questions:
+List the type of ANOVA used in this analysis (use the #X# type ANOVA distinction):
+
+What are the independent variables (be sure to put an answer here): 
+    a.	What are the levels of those variables:
+    b.	What are the conditions:
+
+Run the ANOVA to get Levene's test.
+    a. Did you meet the homogeneity assumption?
+    b. Is the omnibus ANOVA significant (three answers here)?
+
+```{r levenes-anova}
+
+```
+
+Descriptives:
+    a.	Include your marginal means for each IV.
+    b.	Include the interaction means.
+    c.	You should get these numbers by using tapply. 
+
+```{r descriptives}
+
+```
+
+Run a simple effect analysis splitting on age group.
+    a. What type of follow up test did you use?  Why?
+    b. What type of correction did you use? 
+
+```{r simple-effects}
+
+```
+
+In plain English (aka describe this to an uninformed person), what happened in the study? Essentially, you should describe the results of the simple effects analysis.

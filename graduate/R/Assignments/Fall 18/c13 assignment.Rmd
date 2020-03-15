@@ -1,0 +1,158 @@
+---
+title: "Chapter 13 Assignment"
+author: "Enter Yo' Name"
+date: "10/22/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+NFL team data was compiled on the number of passes attempted by quarterbacks for each team to determine if each quarterback (first and second string) was able to attempt different numbers of passes in each of three weeks.
+
+Dataset:
+    - Week number - three consecutive weeks within one season (w1, w2, w3)
+    -	Quarterback - first and second string quarterbacks for each time (qb1, qb2)
+
+```{r starting}
+
+```
+
+# Data Screening:
+
+How would you describe this ANOVA?
+        a.	#x# = 
+        b.	Type of research design = 
+
+##Accuracy:
+    a.	If a person has a zero score, we should make these points into missing data, as they did not actually throw zero passes, they did not play a game.
+    b.	Show how the data includes those zeros.
+    c.	Make those zeros missing data.
+
+```{r accuracy}
+
+```
+
+## Missing data:
+    a.	Since we created missing data above, indicate the percent missing by:
+        i.	Participant
+        ii.	Column
+    b.	To practice mice, impute all missing data (regardless of frequency).
+
+```{r missing}
+
+```
+
+## Outliers:
+    a.	Include a summary of your mahal < cutoff scores.
+    b.	What are the df for your Mahalanobis cutoff?
+    c.	What is the cut off score for your Mahalanobis measure?
+    d.	How many outliers did you have?
+    e.	Delete all outliers.  
+
+```{r outliers}
+
+```
+
+# Assumptions:
+
+## Additivity: 
+    a.	Include the symnum bivariate correlation table of your continuous measures.
+    b.	Do you meet the assumption for additivity?
+
+```{r additivity}
+
+```
+
+## Linearity: 
+    a.	Include a picture that shows how you might assess multivariate linearity.
+    b.	Do you think you've met the assumption for linearity? 
+
+```{r linearity}
+
+```
+
+## Normality: 
+    a.	Include a picture that shows how you might assess multivariate normality.
+    b.	Do you think you've met the assumption for normality? 
+
+```{r normality}
+
+```
+
+## Homogeneity and Homoscedasticity: 
+    a.	Include a picture that shows how you might assess multivariate homogeneity and homoscedasticity.
+    b.	Do you think you've met the assumption for homogeneity?
+    c. Do you think you've met the assumption for homoscedasticity?
+
+```{r homog-s}
+
+```
+
+## Sphericity:
+    a.	Include Mauchly's test for sphericity.
+    b.	Do you meet the assumption for sphericity?
+    c.	If you do not meet the assumption, which correction should you use?
+
+```{r sphericity}
+
+```
+
+# Hypothesis Testing:
+    a. Run a two-way analysis. Which effects are significant?
+
+```{r anova}
+
+```
+
+## Descriptives
+    a.	Calculate the marginal means, and include your output.
+    b.	Calculate the conditional means, and include your output.
+
+```{r descriptives}
+
+```
+
+## Include a figure of the interaction, and be sure to check the following:
+    a.	X-Axis Label/Group Labels
+    b.	Legend and Labels
+    c.	Y-Axis Label
+    d.	Error Bars
+
+```{r graph}
+
+```
+
+## Simple effects analysis:
+    a.	What type of test statistic would you use?
+    b.	What post hoc correction would you use?
+    c.	Calculate the post hoc and dav for each pairwise comparison. 
+
+```{r posthoc}
+
+```
+
+## How many participants would you need to find a significant interaction effect?
+
+```{r power}
+
+```
+
+##	Include a write up of the results of your study.  Things to include:
+    a.	Brief description of the variables.
+    b.	Type of analysis used (i.e. ANOVA).
+    c.	Test statistics for both main effects and interaction.
+    d.	Test statistics for post hoc tests.
+    e.	List which type of error correction you used.
+    f.	A reference to your figure.
+    g.	Effect sizes for all statistics.
+    h.	Two decimal places for statistics.
+
+# Theory questions:
+Why are repeated measures designs more powerful?
+
+What are the two parts to the sphericity assumption?
+
+If you decide to correct for sphericity, how do you decide which correction should you pick? 
+

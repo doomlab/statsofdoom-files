@@ -1,0 +1,112 @@
+---
+title: "Chapter 6 Lab"
+author: "Enter Yo Name"
+date: "11/12/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Abstract
+
+People are selfish, yet morally motivated. Morality is universal, yet culturally variable. Such apparent contradictions are dissolving as research from many disciplines converges on a few shared principles, including the importance of moral intuitions, the socially functional (rather than truth-seeking) nature of moral thinking, and the coevolution of moral minds with cultural practices and institutions that create diverse moral communities. I propose a fourth principle to guide future research: Morality is about more than harm and fairness. More research is needed on the collective and religious parts of the moral domain, such as loyalty, authority, and spiritual purity.
+
+Participants were asked to take a morality survey, where they marked questions as "whether something is right or wrong" and how relevant the question was to moral judgment (1 = never, 10 = always). These questions were grouped into five categories: harm, fairness, ingroup, authority, and purity. Participants were also coded on their political views in a partially continuous scale as very liberal to very conservative.
+
+*Citation:* Haidt, J. (2007). The new synthesis in moral psychology. Science, 316, 998-1002.
+
+# Dataset:
+
+    - Politics – coding of the participant political views (1=Democrat, 2=Republican)
+    - Right_wrong – number of items marked wrong (low numbers indicate lower morality cues)
+    - Ratings of how relevant to morality the question was (grouped by topic of question):
+        -	Harm
+        -	Fairness
+        -	Ingroup
+        -	Authority
+        -	Purity
+
+```{r starting}
+
+```
+
+# Scatterplots:
+
+Create a scatter plot of right_wrong and fairness.
+
+    a.	Be sure to check x/y axis labels and length.
+    b.	What type of relationship do these two variables appear to have?
+
+```{r plot1}
+
+```
+
+Create a scatter plot of harm and authority.
+
+    a.	Include a linear line on the graph. 
+    b.	Be sure to check x/y axis labels and length.
+    c.	What type of relationship do these two variables appear to have?
+    
+```{r plot2}
+
+```
+    
+Create a scatter plot of ingroup and purity, grouping by politics.
+
+    a.	Include a linear line on the graph. 
+    b.	Be sure to check x/y axis labels and length.
+    c.	What type of relationship do these two variables appear to have for each group?
+    
+```{r plot3}
+
+```
+ 
+# Correlation tests 
+
+Include a correlation test (cor.test) for right_wrong and one of the morality variables (your choice).
+
+    a.	Include the Pearson output.
+    b.	Include the Spearman output. 
+    c.	Include the Kendall output. 
+    d.	Was the correlation significant?
+    e.	Which correlation was strongest?
+    
+```{r correl1}
+
+```
+    
+Include a correlation of politics and right_wrong.
+    
+    a.	What type of correlation is this answer?
+    b.	Was the correlation significant?
+    c.	What is the interpretation for that correlation? 
+    
+```{r correl2}
+
+```
+
+Calculate the difference in correlations for Republicans and Democrats on right_wrong and harm variables.
+    
+    a.	Include the output from the test.
+    b.	Is there a significant difference in their correlations?
+    
+```{r correl3}
+
+```
+    
+Calculate the difference in correlations for fairness with purity and right_wrong with purity.
+    
+    a.	Include the output from the test up to Pearson’s test.
+    b.	Is there a significant difference in their correlations?
+
+```{r correl4}
+
+```
+    
+Calculate the partial AND semipartial correlations for all variables, and include the output. 
+
+```{r partials}
+
+```

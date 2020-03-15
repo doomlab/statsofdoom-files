@@ -1,0 +1,66 @@
+---
+title: "Chapter 4 Lab"
+author: "Enter Yo Name"
+date: "9/3/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+*Citation*: Cheng, R., & Lam, S. (2013). The interaction between social goals and self-construal on achievement motivation. Contemporary Educational Psychology, 38(2), 136-148. doi:10.1016/j.cedpsych.2013.01.001
+
+*Abstract*: The motivational effects of mastery goals and performance goals have been widely documented in previous research on achievement motivation. However, recent studies have increasingly indicated a need to include social goals so as to gain a more comprehensive understanding of achievement motivation. The purpose of the present research was to examine how social goals predicted achievement motivation among students with different self-construals (independent versus interdependent). In Study 1, Chinese 8th graders completed a questionnaire on self-construal, social goals, and avoidance behaviors. In Study 2, the causal effect of self-construal and social goals on students' willingness to take a course for improvement after failure was examined with experimental manipulation. The research sheds light on the theoretical framework of achievement motivation that goes beyond mastery and performance goals. 
+
+Dataset includes:
+
+    1) Self-construal results categorized by independent and interdependent groups.
+    
+    2) Social goals - an average Likert scale variable ranging from 1-7, where higher scores indicate more social oriented goals.
+    
+    3) Avoidance - an average Likert scale variable ranging from 1-7, where higher scores indicate more avoidance.
+    
+    4) Improvement course - a variable denoting if participants were willing to retake a course they thought they had failed.
+
+On all of these questions, be sure to include a coherent label for the X and Y axes.  You should change them to be "professional looking" (i.e. Proper Case, explain the variable listed, and could be printed in a journal).
+
+1)	Which variables are the continuous variables?
+
+2)	Which variables are the categorical variables?
+
+```{r starting}
+
+```
+
+
+3)	Create a histogram of one of your continuous variables using ggplot.
+
+```{r histogram}
+
+```
+
+
+4)	Make a bar chart of a continuous and categorical variable combination. Please note this bar chart must have error bars.
+
+```{r bar-graph}
+
+```
+
+5)	Make a bar chart of both your continuous measures at once (repeated measures). Please note this bar chart must have error bars.
+
+```{r bar-graph2}
+##melt the data
+
+##make the chart
+
+```
+
+6)	Make a simple scatter plot of your two continuous measures measures with a linear line of best fit.
+
+```{r scatter}
+
+```
+
+
+

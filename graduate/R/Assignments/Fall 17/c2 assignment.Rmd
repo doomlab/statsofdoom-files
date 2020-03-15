@@ -1,0 +1,85 @@
+---
+title: "Chapter 2 Assignment"
+author: "Enter Yo Name"
+date: "8/27/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Part 1: Experiment Design
+
+*Citation*: Murray, A. A., Wood, J.M., and Lilienfeld, S. O. (2012). Psychopathic personality traits and cognitive dissonance: Individual differences in attitude change. Journal of Research in Personality 46, 525-536.
+
+*Abstract*: In a study using a classic cognitive dissonance paradigm, 164 undergraduate participants were induced to deceive a fellow student; half were directly instructed to lie whereas the other half were politely requested but not instructed to lie. Participants were assessed for psychopathic traits using the Psychopathic Personality Inventory-Revised: Short Form and the Levenson Self-Report Psychopathy Scale, and for Machiavellianism using the MACH-IV. As predicted, participants low in psychopathic traits exhibited classic cognitive dissonance effects following their lie whereas participants high in psychopathic traits did not. Results for Machiavellianism were nonsignificant. These results indicate that cognitive dissonance effects in an induced compliance paradigm are reduced or eliminated among individuals with high levels of psychopathic traits. 
+
+1)	What would be one possible null hypothesis based on this study?
+
+2)	What would be one possible alternative hypothesis based on this study?
+
+3)	Who are they sampling in this study?
+
+4)	Who is the intended population in this study?
+
+5)	Give an example of type 1 error based on this study (do not just define, explain in context how it might have happened here).
+
+6)	Give an example of type 2 error based on this study (do not just define, explain in context how it might have happened here).
+
+# Part 2: Use the C2 Assignment data to complete this portion.
+```{r import-data}
+
+```
+
+Participants were grouped into high and low psychopathic personality scores based on the scales described in the abstract. Machiavellianism was measured (mach) as well as an average cognitive dissonance (cog_diss) score based on experimental condition (group).
+
+1)	For each IV list the levels (next to a, b):
+
+    a.	Psychopathic personality: 
+
+    b.	Experimental group:
+    
+2)	What are the conditions in this experiment?
+
+3)	For each condition list the means, standard deviations, and standard error for Machiavellianism and Cognitive Dissonance. Please note that means you should have several sets of M, SD, and SE. Be sure you name the sets of means, sd, and se different things so you can use them later.
+
+```{r descriptives}
+
+```
+
+4)	Which condition appears to have the best model fit using the mean as the model (i.e. smallest error) for cognitive dissonance?
+
+5)	What are the df for each condition?
+```{r df}
+
+```
+
+6)	What is the confidence interval (95%) for the means?
+
+```{r conf-interval}
+##Machiavellianism
+
+##Cognitive Dissonance
+
+```
+
+7)	Use the MOTE library to calculate the effect size for the difference between cognitive dissonance scores for the following comparisons (that means you'll have to do this twice):
+
+```{r MOTE}
+##Experimental groups (request versus told) when psychopathology is high
+
+##Experimental groups (request versus told) when psychopathology is low
+
+```
+
+8)	What can you determine about the effect size in the experiment - is it small, medium or large?
+
+9)	How many people did we need in the study for each comparison?
+
+```{r pwr}
+##Experimental groups (request versus told) when psychopathology is high
+
+##Experimental groups (request versus told) when psychopathology is low
+
+```

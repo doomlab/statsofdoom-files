@@ -1,0 +1,11 @@
+variable1,stuff2,thing3
+3,cheese,TRUE
+4,feta,FALSE
+6,swiss,TRUE
+4,cheese,FALSE
+7,feta,FALSE
+2,swiss,TRUE
+8,cheese,FALSE
+9,feta,FALSE
+3,swiss,TRUE
+4,,FALSE

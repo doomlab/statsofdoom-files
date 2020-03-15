@@ -1,0 +1,156 @@
+---
+title: "Chapter 14 Homework"
+author: "Enter Yo' Name"
+date: "10/29/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Abstract
+
+The present preliminary trials tested whether undergraduate peer leaders can effectively deliver a dissonance-based eating disorder prevention program, which could facilitate broad dissemination of this efficacious intervention. In Study 1, female undergraduates were randomized to peer-led groups, clinician-led groups, or an educational brochure control condition. Participants in peer- and clinician-led groups showed significantly greater pre–post reductions in eating disorder symptoms than controls, though clinician- versus peer-led groups produced stronger effects at posttest and at 1-year follow-up. Results provide novel evidence that dissonance-based eating disorder prevention groups led by undergraduate peers are feasible and produce greater reductions in eating disorder risk factors and symptoms than minimal-intervention control conditions, but indicate that effects are smaller for peer- versus clinician-led groups.
+
+*Citation:* Stice, E., Rohde, P., Durant, S., Shaw, H., & Wade, E. (2013). Effectiveness of peer-led dissonance-based eating disorder prevention groups: Results from two randomized pilot trials. Behaviour research and therapy, 51(4), 197-206.
+
+# Dataset:
+
+    - Type of prevention program: peer-led, clinician-led, educational brochure
+    - Testing time: eating disorder symptoms average, 1-10 scale where low scores indicate fewer symptoms 
+        - Pre-test
+        - Post-test
+        - 1 year follow up
+
+```{r starting}
+
+```
+
+# Questions:
+Label the following:
+
+    a.	The between subjects factor:
+    b.	The repeated measures factor:
+    
+What is the dependent variable?
+
+How would you describe this ANOVA?
+
+    a.	#x# = 
+    b.	Type of research design = 
+
+# Data Screening:
+
+Assume the data are accurate and there are no missing data points. 
+
+## Outliers:
+
+    a.	Include a summary of your mahal < cutoff scores.
+    b.	What are the df for your Mahalanobis cutoff?
+    c.	What is the cut off score for your Mahalanobis measure?
+    d.	How many outliers did you have?
+    e.	Delete all outliers.  
+
+```{r datascreening}
+
+```
+
+# Assumptions:
+
+## Additivity: 
+
+    a.	Include the symnum bivariate correlation table of your continuous measures.
+    b.	Do you think you've met the assumption for additivity?
+    
+```{r additivity}
+
+```
+
+## Linearity: 
+    
+    a.	Include a picture that shows how you might assess multivariate linearity.
+    b.	Do you think you've met the assumption for linearity? 
+
+```{r linearity}
+
+```
+
+## Normality: 
+    
+    a.	Include a picture that shows how you might assess multivariate normality.
+    b.	Do you think you've met the assumption for normality? 
+
+```{r normality}
+
+```
+
+## Homogeneity and Homoscedasticity: 
+    
+    a.	Include a picture that shows how you might assess multivariate homogeneity and homoscedasticity.
+    b.  Include Levene's and Mauchly's Test.
+    c.	Do you think you've met the assumption for homogeneity?
+    d.  Do you meet the assumption for sphericity?
+    e.  If you do not meet the assumption, which correction should you use?
+    f.  Do you think you've met the assumption for homoscedasticity?
+
+```{r homogs}
+
+```
+
+# Hypothesis Testing:
+
+## ANOVA
+
+Run a two-way analysis.
+
+    a.	Which effects are significant?
+    b.	Calculate the marginal means, and include your output.
+    c.	Calculate the conditional means, and include your output.
+
+```{r anova-descriptives}
+
+```
+
+## Graph 
+
+Include a figure of the interaction, and be sure to check the following:
+    
+    a.	X-Axis Label/Group Labels
+    b.	Legend and Labels
+    c.	Y-Axis Label
+    d.	Error Bars
+
+```{r graph}
+
+```
+
+## Simple effects analysis:
+    
+    a.	What type of test statistic would you use?
+    b.	What post hoc correction would you use?
+
+```{r posthoc}
+
+```
+
+## Effect size:
+
+Calculate a measure of effect size for three of the pairwise comparisons. 
+
+```{r effectsize}
+
+```
+
+## Write Up 
+
+Include a write up of the results of your study.  Things to include:
+    
+    a.	Brief description of the variables.
+    b.	Type of analysis used (i.e. ANOVA).
+    c.	Test statistics for both main effects and interaction.
+    d.	Test statistics for three of your post hoc tests.
+    e.	List which type of error correction you used.
+    f.	A reference to your figure.
+    g.	Effect sizes for all statistics.
+    h.	Two decimal places for statistics.

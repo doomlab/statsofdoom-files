@@ -1,0 +1,94 @@
+---
+title: "Chapter 10 Lab"
+author: "Enter Yo’ Name"
+date: "10/8/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+#Abstract 
+The current study examined self-objectification and hope in a sample of undergraduate men from a Midwestern university in the United States. Specifically, an online survey utilizing self-report measures examined the associations between body surveillance and body shame through the lenses of Objectification Theory and the Broaden and Build Theory of Positive Emotions. 
+
+*Citation*: Cole, B. P., Davidson, M., & Gervais, S. J. (2013). Body surveillance and body shame in college men: Are men who self-objectify less hopeful?. Sex Roles, 69, 29-41. doi:10.1007/s11199-013-0282-3
+
+# Dataset:
+-	Body surveillance: participants were pre-screened on their body checking and grouped into (1) none/very little, (2) moderate, and (3) extreme checking levels.
+-	Body shame: participants were given a questionnaire on their levels of body shame, where high levels indicate high shame.  Scale is an average score that ranges from 0 to 10 points.
+
+```{r starting}
+
+```
+
+Run Levene’s test to determine if you’ve met the homogeneity assumption. You will have to run ez to get this analysis. 
+    a.	Did you meet the homogeneity assumption? 
+    b.	Why or why not?
+    
+```{r levenes}
+
+```
+
+Run the one-way ANOVA based on these results. You can refer to the code above if you meet the assumption.
+    a.	Was the omnibus ANOVA test significant?
+    
+```{r anova}
+
+```
+
+Calculate the following effect sizes:
+    a.	$\eta^2$ - fill in from the ez output.
+    b.	$\omega^2$
+
+```{r effect}
+
+
+```
+
+Run a post hoc independent t-test with a Bonferroni correction.  
+
+```{r posthoc}
+
+```
+
+Include the effect sizes for each comparison. 
+
+```{r effectsize}
+
+```
+
+Create a table of the post hoc and effect size values:
+
+```{r table, results='asis'}
+tableprint = matrix(NA, nrow = 3, ncol = 3)
+
+##row 1
+##fill in where it says NA with the values for the right comparison
+##column 2 = p value from post hoc
+##column 3 = d value from post hoc
+
+##row 1
+tableprint[1, ] = c("None to Moderate", NA, NA)
+
+##row 2
+tableprint[2, ] = c("None to Extreme", NA, NA)
+
+##row 3
+tableprint[3, ] = c("Moderate to Extreme", NA, NA)
+
+kable(tableprint, 
+      digits = 3,
+      col.names = c("Comparison", 
+                    "p-value", 
+                    "d-value"))
+```
+
+Run a trend analysis.
+    a.	Is there a significant trend?  
+    b.	Which type?
+    
+```{r trend}
+
+```

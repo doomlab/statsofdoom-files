@@ -1,0 +1,60 @@
+---
+title: "Chapter 9 Lab"
+author: "Enter Yo' Name"
+date: "10/1/2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Abstract
+
+A study was conducted to investigate the relationship between physical attractiveness and impression management behaviors and to determine what, if any, effect these qualities have on performance evaluations. Previous research on the effects of physical attractiveness has shown that a person's exterior can enhance or diminish perceived evaluations of their performance. However, impression management research has not been as clear. Lack of replication for impression management's effects is replete in the literature. Participants read scenarios with the following characteristics: either self-promotion or ingratiation for impression management and low and high attractiveness levels of attached pictures.  Participants then rated employee performance on two separate scales via a 5-point forced-choice rating scale. Implications are that performance ratings are often based on information that has no apparent relation to actual performance on the job.
+
+Based loosely on: Montgomery, M.D. (2005). Contemplating a different beauty: perceptions of attractiveness and impression management in performance evaluations, unpublished master's thesis.
+
+# Dataset: 
+    1) Attractiveness: manipulated physical attractiveness of the employee photograph using pre-piloted data. Groups are either low or high.
+        a) Low = 0, High = 1
+    2) Impression management: employees either self-promoted their work or ingratiated themselves with the reviewer.
+        a) Self-promote = 0, Ingratiated = 1
+    3) Performance: Participant score of employee performance on a 1-5 Likert type scale, where 1 is a low score and 5 is a high performance score.
+    4) Performance_goals: Participant score of employee performance based on preset organizational goals on a 1-5 Likert type scale, where 1 is a low score and 5 is a high performance score.
+
+Use equal variances assumptions for these tests. 
+
+```{r starting}
+
+```
+
+
+## Independent t-test:
+1)	Run an independent t-test to determine if there are differences in performance ratings for attractiveness (only performance).
+    a)	Include means and sds for your groups. 
+    b)	Is there a significant difference in the ratings? List the criteria you used to make this determination.
+    c)  What is the effect size for this difference? Be sure to list which effect size you are using. 
+    
+```{r ind1}
+
+```
+
+2)	Run an independent t-test to determine if there are differences in performance goal ratings for impression management (only performance goals).
+    a)	Include means and sds for your groups. 
+    b)	Is there a significant difference in the ratings? List the criteria you used to make this determination.
+    c)	What is the effect size for this difference? Be sure to list which effect size you are using.
+
+```{r ind2}
+
+```
+
+## Dependent t-test:
+3)	Run a dependent t-test to tell if there are differences in participant ratings of performance and performance goals.
+    a)	Include means and sds for your groups. 
+    b)	Is there a significant difference in the ratings? List the criteria you used to make this determination.
+    c)	What is the effect size for this difference? Be sure to list which effect size you are using.
+    
+```{r dep1}
+
+```

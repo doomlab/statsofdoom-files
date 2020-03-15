@@ -1,0 +1,122 @@
+---
+title: 'Similarity Assignment'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Create the Data
+
+- One of the corpora here: https://corpus.byu.edu/corpora.asp 
+- Collect two bigrams that you can compare using the association measures listed (does not have to be X-Y, Z-Y, but that would help you compare them)
+- Create a dataframe like the one from lecture of those bigrams
+
+```{r createdata}
+##r chunk
+
+```
+
+## Load the Libraries + Functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+```{r libraries}
+##r chunk
+
+```
+
+The python section will load the libraries below.
+
+## Attraction and Reliance
+
+Calculate the attraction for your bigrams.
+
+```{r attract}
+##r chunk
+
+```
+
+Calculate the reliance for your bigrams.
+
+```{r reliance}
+##r chunk
+
+```
+
+## Log Likelihood
+
+Calculate the LL values for your bigrams.
+
+```{r LL}
+##r chunk
+
+```
+
+## Pointwise Mutual Information
+
+Calculate the PMI for your bigrams. 
+
+```{r PMI}
+##r chunk
+
+```
+
+## Odds Ratio
+
+Calculate the OR for your bigrams. 
+
+```{r OR}
+##r chunk
+
+```
+
+## Interpret your results
+
+Given the statistics you have calculated above, what is the relation of your bigrams? Write a short summary of the results, making sure to answer the following: 
+
+- Are they related?
+- Do they attract or repel each other?
+- Are there differences between the separate bigrams?
+
+## Python Application
+
+Load all the libraries you will need for the Python section. You can also put in the functions for normalizing the text and calculating the top 5 related objects.
+
+```{python}
+##python chunk
+
+```
+
+Import the `completed_clean_data` and convert to a `pandas` dataframe. This dataset includes a list of scientific research articles that all appeared when I searched for "databases", "corpus", and "linguistic norms". 
+
+```{python}
+##python chunk
+
+```
+
+Use the normalizing text function to clean up the corpus - specifically, focus on the `ABSTRACT` column as our text to match.
+
+```{python}
+##python chunk
+
+```
+
+Calculate the cosine similarity between the abstracts of the attached documents. 
+
+```{python}
+##python chunk
+
+```
+
+Using our moving recommender - pick a single article (under `TITLE`) and recommend five other related articles.
+
+```{python}
+##python chunk
+
+```
+
+

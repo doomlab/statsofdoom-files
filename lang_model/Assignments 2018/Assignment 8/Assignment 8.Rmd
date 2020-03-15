@@ -1,0 +1,63 @@
+---
+title: 'Assignment 8: Semantic Vector Spaces'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load the libraries + functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+```{r libaries}
+library(gutenbergr)
+library(stringr)
+```
+
+## The Data
+
+You will want to use some books from Project Gutenberg to perform either a Topic or LSA model. The code to pick the books has been provided for you, so all you would need to do is change out the titles. 
+
+```{r project_g}
+##pick some titles from project gutenberg
+titles = c("Twenty Thousand Leagues under the Sea", "The War of the Worlds",
+            "Pride and Prejudice", "Great Expectations")
+
+##read in those books
+books = gutenberg_works(title %in% titles) %>%
+  gutenberg_download(meta_fields = "title") %>% 
+  mutate(document = row_number())
+
+create_chapters = books %>% 
+  group_by(title) %>%
+  mutate(chapter = cumsum(str_detect(text, regex("^chapter", ignore_case = TRUE)))) %>% 
+  ungroup() %>%
+  filter(chapter > 0) %>%
+  unite(document, title, chapter) 
+
+by_chapter = create_chapters %>% 
+  group_by(document) %>% 
+  summarise(text=paste(text,collapse=' '))
+
+#by_chapter
+```
+
+The `by_chapter` data.frame can be used to create a corpus with `VectorSource` by using the `text` column.
+
+## Your Analysis
+
+1) Pick either LSA or Topics Models (pick just one version of the topics math).
+2) Create a corpus from the data above.
+3) Build the semantic vector space. 
+4) Explore the vector space:
+  - Include at least one graphic of the vector space that interests you. 
+  - Include some statistics for your model (LSA: might be coherence for a chapter, cosine, etc.; Topics: might be alpha, entropy, etc.)
+
+Include these steps with a brief explanation of what you are doing. For example, you could write "I am doing LSA, this part creates the corpus and the space.", and then include an r-chunk underneath it that runs the analysis. You should end up with a report that explains the space - you can assume the person reading it knows the terminology, but explain why/what you are doing at each step. Therefore, you don't have to explain what alpha is but just simply that you are calculating it and what the interpretation of your results might be. 
+  
+
+

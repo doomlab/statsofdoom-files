@@ -1,0 +1,126 @@
+---
+title: 'Latent Semantic Analysis'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load the libraries + functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+```{r libaries}
+##r chunk
+library(gutenbergr)
+library(stringr)
+library(dplyr)
+library(tidyr)
+```
+
+Load the Python libraries or functions that you will use for that section. 
+
+```{python}
+##python chunk
+```
+
+## The Data
+
+You will want to use some books from Project Gutenberg to perform a Latent Semantic Analysis. The code to pick the books has been provided for you, so all you would need to do is *change out* the titles. Be sure to pick different books - these are just provided as an example. Check out the book titles at https://www.gutenberg.org/. 
+
+```{r project_g}
+##r chunk
+##pick some titles from project gutenberg
+titles = c("Twenty Thousand Leagues under the Sea", "The War of the Worlds",
+            "Pride and Prejudice", "Great Expectations")
+
+##read in those books
+books = gutenberg_works(title %in% titles) %>%
+  gutenberg_download(meta_fields = "title") %>% 
+  mutate(document = row_number())
+
+create_chapters = books %>% 
+  group_by(title) %>%
+  mutate(chapter = cumsum(str_detect(text, regex("\\bchapter\\b", ignore_case = TRUE)))) %>% 
+  ungroup() %>%
+  filter(chapter > 0) %>%
+  unite(document, title, chapter) 
+
+by_chapter = create_chapters %>% 
+  group_by(document) %>% 
+  summarise(text=paste(text,collapse=' '))
+
+#by_chapter
+```
+
+The `by_chapter` data.frame can be used to create a corpus with `VectorSource` by using the `text` column. 
+
+## Create the Vector Space
+
+Use `tm_map` to clean up the text. 
+
+```{r}
+##r chunk 
+
+```
+
+Create a latent semantic analysis model in R. 
+
+```{r}
+##r chunk
+
+```
+
+Explore the vector space:
+  - Include at least one graphic of the vector space that interests you. 
+  - Include some statistics for your model: coherence, cosine, neighbors, etc. 
+
+```{r}
+##r chunk
+
+```
+
+Transfer the `by_chapter` to Python and convert it to a list for processing. 
+
+```{python}
+##python chunk
+
+```
+
+Process the text using Python. 
+
+```{python}
+##python chunk
+
+```
+
+Create the dictionary and term document matrix in Python.
+
+```{python}
+##python chunk
+
+```
+
+Find the most likely number of dimensions using the coherence functions from the lecture. 
+
+```{python}
+##python chunk
+
+```
+
+Create the LSA model in Python with the optimal number of dimensions from the previous step.
+
+```{python}
+##python chunk
+
+```
+
+## Interpretation
+
+Interpret your space - can you see the differences between books/novels? Explain the results from your analysis (more than one sentence please). 
+  
+
+

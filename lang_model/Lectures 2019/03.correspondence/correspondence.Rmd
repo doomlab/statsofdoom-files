@@ -1,0 +1,422 @@
+---
+title: "Correspondence Analysis"
+author: "Erin M. Buchanan"
+date: "11/11/2019"
+output:
+  slidy_presentation:
+    increment: yes
+---
+
+```{r echo = F}
+options(scipen = 999)
+```
+
+## Language Topics Discussed
+
+- A reanalysis of color terms and categories
+
+```{r}
+##r chunk
+library(reticulate)
+py_config()
+#py_install("prince")
+```
+
+## Basic Color Terms
+
+- Berlin and Kay (1969) proposed a theory about our linguistic interpretations of colors, mainly that color vocabulary falls into universal categories:
+
+```{r berlinkay, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("berlinkay.png")
+```
+
+## Simple Correspondence Analysis
+
+- Data is from the Corpus of Contemporary American English (COCA)
+- Counts of adjective use of color terms
+
+```{r}
+##r chunk
+library(Rling)
+data(colreg)
+head(colreg)
+```
+
+## Chi-square
+
+- Chi-square analyses tell us if specific category frequencies are different than we might expect.
+- Let's look at a simple combination to understand the math behind chi-square.
+
+```{r}
+##r chunk
+cs_example = colreg[1:2, 1:2]
+cs_example
+```
+
+## Expected values
+
+$$E = \frac{Row*Column}{N}$$
+
+```{r}
+##r chunk
+cs_example_e = cs_example
+rows = rowSums(cs_example)
+columns = colSums(cs_example)
+
+cs_example_e[1,1] = rows[1]*columns[1]/sum(cs_example)
+cs_example_e[1,2] = rows[1]*columns[2]/sum(cs_example)
+cs_example_e[2,1] = rows[2]*columns[1]/sum(cs_example)
+cs_example_e[2,2] = rows[2]*columns[2]/sum(cs_example)
+cs_example_e
+```
+
+## Using chisq.test
+
+```{r}
+##r chunk
+cs_test = chisq.test(cs_example)
+cs_test$expected
+cs_example
+```
+
+## Chi-square Formula
+
+$$\chi^2 = \Sigma \frac{(O-E)^2}{E}$$
+```{r}
+##r chunk
+sum((cs_example - cs_example_e)^2 / cs_example_e)
+cs_test$statistic
+```
+
+## Chi-Square - What Next?
+
+- This test doesn't tell you *what* was different though, much like ANOVA
+- The way to know what cells were higher/lower than expected would be to use standardized residuals
+
+## Residuals 
+
+- Residuals are (O-E)/sqrt(E), whereas standardized residuals are standardized format akin to z-scores (O-E)/ sqrt(var(residuals))
+
+```{r}
+##r chunk
+cs_test$residuals #(cs_example - cs_example_e) /sqrt(cs_example_e)
+cs_test$stdres
+```
+
+## Mosaic Plots
+
+- A visualization of the standardized residuals from a chi-square type analysis
+- The box size is related to the observed cell size 
+- Coloring is shaded based on direction and strength of the residuals
+
+## Mosaic Plots - Small Example
+
+```{r}
+##r chunk
+mosaicplot(colreg[1:2, 1:2], #data frame
+           las = 2, #axis label style (perpendicular)
+           shade = T, #color in the boxes
+           main = "Register Variation")
+```
+
+## Mosaic Plot - Full Data
+
+```{r}
+##r chunk
+mosaicplot(colreg, #data frame
+           las = 2, #axis label style (perpendicular)
+           shade = T, #color in the boxes
+           main = "Register Variation")
+```
+
+## Simple Correspondence Analysis 
+
+- Identifies systematic relationships between variables in low dimensional space
+- Similar to MDS, PCA, EFA
+
+```{r}
+##r chunk
+library(ca)
+sca_model = ca(colreg)
+```
+
+## What's in the output?
+
+```{r}
+##r chunk
+summary(sca_model)
+```
+
+## Inertia
+
+- Top part is the table of inertias, which explain how much variation is accounted for by each dimension
+- These are similar to eigenvalues that we've seen in the last several analyses 
+
+## Inertia
+
+- Try to represent the relationship between variables in as few dimensions as possible
+- Here we see that the first two dimensions capture 97% of the variance
+- And the third dimension captures all the variance 
+
+Principal inertias (eigenvalues):
+
+ dim    value      %   cum%   scree plot               
+ 1      0.043730  77.9  77.9  *******************      
+ 2      0.010787  19.2  97.1  *****                    
+ 3      0.001650   2.9 100.0  *                        
+        -------- -----                                 
+ Total: 0.056167 100.0   
+ 
+## Visualize the Dimensions
+
+```{r}
+##r chunk
+plot(sca_model)
+```
+
+## Key Differences
+
+- How are these plots different than the ones we've been making?
+  - Terms are close together if they have similar frequency counts
+  - This means the rows have similar *profiles* - rather than similar relationships to a latent variable 
+  - The distances on the map are a representation of the $\chi^2$ values of each row/column to the average profile
+  
+## Does this match theory?
+
+```{r berlinkay2, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("berlinkay.png")
+
+plot(sca_model)
+```
+
+## Some other interesting notes
+
+- Press is close to green-red because of the political orientation for these terms and proper names (Red Cross/Green Bay Packers)
+- Fiction is likely close to the later color terms because of the requirement to "paint a picture" for readers
+- Appears academics and spoken speech are pretty boring in their use of color terms
+
+## How do we analyze CA in Python?
+
+```{python}
+##python chunk
+import prince
+col_reg = r.colreg #convert the data over from R
+
+ca = prince.CA( ##set up the ca model 
+    n_components=2,
+    n_iter=3,
+    copy=True,
+    check_input=True,
+    engine='auto',
+    random_state=42)
+    
+ca = ca.fit(col_reg) #run the ca model 
+
+ca.explained_inertia_ #get the inertias
+```
+
+## How do we graph CA in Python? 
+
+```{python}
+##python chunk
+import matplotlib
+matplotlib.use('Agg')
+ax = ca.plot_coordinates(
+    X=col_reg,
+    ax=None,
+    figsize=(6, 6),
+    x_component=0,
+    y_component=1,
+    show_row_labels=True,
+    show_col_labels=True
+)
+ax.get_figure()
+```
+
+## 3D Plots in R
+
+```{r}
+##r chunk
+plot3d.ca(sca_model, #model
+       labels = c(1,1)) #see both row and column labels
+```
+
+## A Category Example
+
+- Is there a difference between the categories for *stuhl* (chair) and *sessel* (armchair)?
+- Gipper (1959) had subjects name pictures of chairs to determine their relative frequencies
+- The difference appeared to be that chairs are functional, while armchairs are about comfort
+
+## The Data
+
+- Data was coded from an online shopping place based on their text descriptions and other chair related variables 
+
+```{r}
+##r chunk
+data(chairs)
+head(chairs)
+```
+
+## Multiple Correspondence Analysis
+
+```{r}
+##r chunk
+library(FactoMineR)
+mca_model = MCA(chairs[ , -c(1:3)], #dataset minus the first columns
+                graph = FALSE)
+summary(mca_model)
+```
+
+## Plot the MCA
+
+```{r}
+##r chunk
+plot(mca_model, cex = .7, 
+     col.var = "black",  #color the variable names
+     col.ind = "gray")
+    # invis = "ind") #color the indicators
+```
+
+## How Useful are the Variables?
+
+```{r}
+##r chunk
+dimdesc(mca_model)
+```
+
+## Interpretation
+
+- $R^2$ values representing the variables association with the dimension
+- $p$ value strength of that association
+- Then the `$category` section represents the directionality of the relationship
+  - If this value is positive, shows on the right hand side of plot, representing a positive coefficient (and vice versa)
+  
+## Overall interpretation
+
+- First dimension seems to represent comfort chairs versus not
+- Second dimensions seems to represent functionality (work versus home)
+- Third is harder to understand 
+- Appears to separate chairs into three categories:
+  - Comfortable relaxation chairs
+  - Comfortable adjustable chairs for work
+  - Multifunctional chairs for the house
+
+## Using the chair label
+
+- We did not use the type of chair that is found in column 3 of our dataset
+- We can map it onto our analysis using it as a supplementary variable 
+
+## Running that analysis
+
+```{r}
+##r chunk
+mca_model2 = MCA(chairs[ , -c(1,2)], 
+                 quali.sup = 1, #supplemental variable
+                 graph = FALSE)
+```
+
+## Plot that analysis
+
+```{r}
+##r chunk
+plot(mca_model2, invis = "ind", col.var = "darkgray", col.quali.sup = "black")
+#the invis turned off the individual points
+```
+
+## Examine the prototypes
+
+```{r}
+##r chunk
+plotellipses(mca_model2, keepvar = 1, #use column 1 to label
+             label = "quali")
+```
+
+## Interpretation
+
+- These confidence ellipses do not overlap, so we could consider the prototypes distinct entities 
+- We can also create a more traditional 95% CI type interval
+
+## 95% Ellipses 
+
+- Now you can see that the categories themselves overlap a lot, so likely a representation of the fuzzy boundaries that categories appear to have. 
+
+```{r}
+##r chunk
+plotellipses(mca_model2, 
+             means = F,
+             keepvar = 1, #use column 1 to label
+             label = "quali")
+```
+
+## The plot
+
+```{r graph2, echo = F}
+##r chunk
+plotellipses(mca_model2, 
+             means = F,
+             keepvar = 1, #use column 1 to label
+             label = "quali")
+```
+
+## But what about inertia? 
+
+```{r}
+##r chunk
+mca_model2$eig
+```
+
+## Inertia part 2
+
+```{r}
+##r chunk
+mca_model3 = mjca(chairs[ , -c(1:3)])
+summary(mca_model3)
+```
+
+## MCA in Python
+
+```{python, message = F,  warning = F}
+##python chunk
+mca = prince.MCA( ##set up the mca analysis
+    n_components=2,
+    n_iter=3,
+    copy=True,
+    check_input=True,
+    engine='auto',
+    random_state=42)
+    
+chairs = r.chairs
+chairs = chairs.drop(['Shop', 'WordDE', 'Category'], axis=1)
+mca = mca.fit(chairs)
+mca.explained_inertia_
+```
+
+## Plot MCA in Python
+
+```{python}
+##python chunk
+ax = mca.plot_coordinates(
+    X=chairs,
+    ax=None,
+    figsize=(6, 6),
+    show_row_points=True,
+    row_points_size=10,
+    show_row_labels=False,
+    show_column_points=True,
+    column_points_size=30,
+    show_column_labels=False,
+    legend_n_cols=1
+)
+ax.get_figure()
+```
+
+## Further work
+
+- From here, you could take the dimension scores `mca_model2$ind$coord` and use them to predict the categories or other variables
+- This analysis would tell you how good at representing their categories each dimension does 
+
+## Summary
+
+- We applied new models to basic color terms and category groupings
+- We learned how to do simple and multiple correspondence analysis
+

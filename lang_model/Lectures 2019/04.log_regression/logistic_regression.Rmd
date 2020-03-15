@@ -1,0 +1,366 @@
+---
+title: "Logistic Regression"
+author: "Erin M. Buchanan"
+date: "01/29/2020"
+output:
+  slidy_presentation:
+    increment: yes
+---
+
+```{r echo = F}
+options(scipen = 999)
+```
+
+## Language Topics Discussed
+
+- Grammatical slots: how can we predict what word should come next?
+- Understanding word choice based on contextual features
+
+## Synonyms
+
+- How do we decide which word to use when we have multiple words that share the same meaning?
+- I ____ to go to the mall this week.
+  - Planned
+  - Decided
+  - Scheduled
+  - am going to go 
+- She is very _____.
+  - Pretty
+  - Beautiful
+  - Alluring
+
+## More examples
+
+- May versus might: depending on certainty
+- Gown versus dress: formality in social situation
+- Soda versus coke versus pop: cultural factors
+
+## Causative Constructions
+
+- Phrases like: might/have/get/cause X to do Y
+- Combines conjugated 'to have' or 'to get' +  direct object + main verb
+- When one does not carry out an action oneself but rather has the action done by someone else
+- I *had* him *paint* my house.
+- Causee is the actor, does the action
+- Causer is the person/thing who required the action
+
+## Causative Constructions
+
+- Do versus let in Dutch
+- Do appears to be a direct causation
+  - "If the energy is put in, the result is inevitable"
+  - He reminded me of my father (causation is involuntary)
+- Let appears to be an indirect causation
+  - Enablement and permission
+  - I let him paint my house 
+
+## Cause for Cause
+
+- Verb:
+  - State or action: does it apply to state verbs or action verbs
+  - Transitivity: why types of verbs, transitive, intransitive or both?
+  
+## Cause for Cause
+
+- The action being caused:
+  - Control: does the causee have control?
+  - Volition: does the causee act willingly?
+  - Affectedness: how is the causee affected?
+  
+## Cause for Cause
+
+- Related to the causer:
+  - Directness: of the causer
+  - Intention: accidental or intentional
+  - Natural: natural activity or with effort
+  - Involvement: the causer's involvement in activity
+
+## Criteria for Do Let
+
+- Inducive: mental causer (human) to mental causee (let)
+- Volitional: mental causer to non-mental causee (neither)
+- Affective: non-mental causer to mental causee (do)
+- Physical: non-mental causer to non-mental causee (do)
+
+## Logistic Regression
+
+Linear regression model examining a continuous outcome measure y:
+
+$${\hat{y_i}} = b_0 + b_1x_{1i} + b_2x_{2i} ... + \epsilon_i$$
+Logistic regression model examining a categorical outcome measure y:
+
+$$g(y) = b_0 + b_1x_{1i} + b_2x_{2i} ... + \epsilon_i$$
+
+## Logistic Regression
+
+- Main distinction is g(y): which is the logit or log odds of the outcome. 
+- Two options: binomial logistic regression
+- More than two options: multinomial or polytomous regression 
+- g(y) represents the odds of one choice over another. 
+
+## Logistic Regression
+
+- Otherwise, information is the same as a linear model:
+  - $b_0$: intercept, chances of outcome when all predictors are zero
+  - $b_1$: slope for one X variable, coefficient
+  - ... etc. But we will also add better interpretation for the predictors to help understand likelihood of outcome (i.e., since the data is categorical)
+
+## Requirements for Logistic Regression
+
+- Large enough sample size for the outcome variable
+- How big? 
+
+```{r}
+##r chunk
+library(Rling)
+data("doenLaten")
+table(doenLaten$Aux)
+```
+
+## Running a Binary Logistic Regression
+
+```{r, message=FALSE}
+##r chunk
+#install.packages("rms") #if you have not used it before
+library(rms)
+#you can also use glm() for log regression but rms has cool options
+head(doenLaten)
+```
+
+## Run your model!
+
+```{r}
+##r chunk
+model = lrm(Aux ~ Causation + EPTrans + Country, #model formula like lm()
+            data = doenLaten)
+model
+```
+
+## Frequency
+
+- Important for data screening
+
+```{r}
+##r chunk
+model$freq
+```
+
+## Overall Predictiveness
+
+- Likelihood ratio test = $\chi^2$ test
+- Similar to the F-test in regression
+- $\chi^2$(5) = 271.35, p < .001
+- Compared to a model of no predictors, should have less error (deviance)
+
+```{r}
+##r chunk
+model$stats
+```
+
+## Goodness of Fit
+
+- Effect size of how well the model fit the data
+- $R^2$ - much like regression, albeit more difficult to interpret. 
+  - In the output that's Nagelkerke's pseudo-$R^2$
+
+```{r}
+##r chunk
+model$stats
+```
+
+## Goodness of Fit
+
+- Concordance index C
+  - For each $Y_i$, a probability of the outcome is created
+  - C is the number of times that the probability of the outcome matches the actual outcome
+- Interpretation:
+  - < .5: no discrimination
+  - .7 <= C < .8: acceptable
+  - .8 <= C < .9: excellent
+  - <= .9 outstanding
+
+## Coefficients
+
+- Under Coef, these are represented as log odds 
+- Odds ratios are centered around one (like 6 to 1, 4 to 1)
+- Log odds ratio are centered around zero
+  - Positive numbers indicate a higher probability for the coded group
+  - Negative numbers indicate a higher probability for the comparison group 
+- What is coded versus comparison?
+
+```{r}
+##r chunk
+levels(doenLaten$Aux)
+```
+
+## Coefficients
+
+```{r}
+#model
+ #                      Coef    S.E.   Wald Z Pr(>|Z|)
+ # Intercept             1.8631 0.3771  4.94  <0.0001 
+ # Causation=Inducive   -3.3725 0.3741 -9.01  <0.0001 
+ # Causation=Physical    0.4661 0.6275  0.74  0.4576  
+ # Causation=Volitional -3.7373 0.4278 -8.74  <0.0001 
+ # EPTrans=Tr           -1.2952 0.3394 -3.82  0.0001  
+ # Country=BE            0.7085 0.2841  2.49  0.0126  
+```
+
+## Coefficients
+
+```{r}
+##r chunk
+ # Causation=Inducive   -3.3725 0.3741 -9.01  <0.0001 
+ # Causation=Physical    0.4661 0.6275  0.74  0.4576  
+ # Causation=Volitional -3.7373 0.4278 -8.74  <0.0001 
+
+table(doenLaten$Aux, doenLaten$Causation)
+```
+
+## Coefficients
+
+```{r}
+##r chunk
+ # EPTrans=Tr           -1.2952 0.3394 -3.82  0.0001  
+ # Country=BE            0.7085 0.2841  2.49  0.0126  
+
+table(doenLaten$Aux, doenLaten$EPTrans)
+table(doenLaten$Aux, doenLaten$Country)
+```
+
+## Interactions
+
+```{r}
+##r chunk
+model1 = glm(Aux ~ Causation + EPTrans + Country, #model formula like lm()
+             family = binomial,
+             data = doenLaten)
+model2 = glm(Aux ~ Causation + EPTrans*Country, #model formula like lm()
+             family = binomial,
+             data = doenLaten)
+anova(model1, model2, test = "Chisq")
+```
+
+## Interactions
+
+```{r}
+#summary(model2)
+# Coefficients:
+#                     Estimate Std. Error z value             Pr(>|z|)    
+# (Intercept)           2.0991     0.4079   5.146          0.000000267 ***
+# CausationInducive    -3.4463     0.3892  -8.854 < 0.0000000000000002 ***
+# CausationPhysical     0.3898     0.6336   0.615              0.53839    
+# CausationVolitional  -3.7795     0.4364  -8.661 < 0.0000000000000002 ***
+# EPTransTr            -1.8825     0.4919  -3.827              0.00013 ***
+# CountryBE             0.3693     0.3416   1.081              0.27966    
+# EPTransTr:CountryBE   1.0827     0.6215   1.742              0.08149 .  
+```
+
+## Interactions
+
+```{r}
+##r chunk
+library(visreg)
+visreg(model2, "EPTrans", by = "Country")
+```
+
+## Outliers
+
+```{r message = F}
+##r chunk
+library(car)
+influencePlot(model1)
+```
+
+## Assumptions
+
+- Observations are independent
+- No multicollinearity (remember VIF > 5 or 10 is bad)
+- Overprediction (complete/quasi complete separation)
+
+```{r}
+##r chunk
+rms::vif(model) #use the rms:: to distinguish between car::vif and rms::vif
+```
+
+## A Python Application
+
+- Load the reticulate library to get started in Python
+
+```{r}
+##r chunk
+library(reticulate)
+```
+
+## Format the data
+
+- *R* naturally does dummy coding on character or factor labeled columns
+- In Python, we have to figure these out ourselves
+- We can use the `get_dummies` option to do dummy coding  
+
+## Format the data 
+
+```{python}
+##python chunk
+import pandas as pd
+
+X = pd.get_dummies(r.doenLaten[["Causation", "EPTrans", "Country"]])
+y = pd.get_dummies(r.doenLaten["Aux"])
+
+X.head()
+X.columns
+X = X[['Causation_Inducive', 'Causation_Physical',
+       'Causation_Volitional', 'EPTrans_Tr', 'Country_BE']]
+y = y['doen']
+```
+
+## Build a logistic model 
+
+```{python}
+##python chunk
+from sklearn.linear_model import LogisticRegression
+
+# build a blank model
+logreg = LogisticRegression(solver = 'lbfgs')
+
+# fit the model with data
+logreg.fit(X,y)
+```
+
+## Examine model fit
+
+```{python}
+##python chunk
+# look at the predicted category
+y_pred = logreg.predict(X)
+
+#how accurate are we?
+from sklearn import metrics
+metrics.confusion_matrix(y, y_pred)
+metrics.accuracy_score(y, y_pred)
+```
+
+## Examine coefficients
+
+- Print out the coefficients from the model
+- Print out the X column names so you can remember what they were
+
+```{python}
+logreg.coef_
+X.columns
+```
+
+## A caveat
+
+- Python logistic modeling is often used as a machine learning algorithm
+- As such, the metrics for traditional statistics are not as easily programmed
+- We will use this code later in the semester to predict categories in a "python" way
+
+## Summary
+
+- We can model word choice with various predictors by using logistic regression with two outcomes.
+  - You can extend that to multinomial logistic regression with `mlogit` 
+  - https://www.youtube.com/watch?v=c78eMWw43I0 is a tutorial from Dr. B (if you are interested for your final project)
+- You learned how to run and use a logistic regression, along with assumptions checks and understanding the output
+
+

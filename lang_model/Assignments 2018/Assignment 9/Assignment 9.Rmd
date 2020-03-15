@@ -1,0 +1,95 @@
+---
+title: 'Assignment 9: MDS/PCA/EFA'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load the libraries + functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+```{r libaries}
+
+```
+
+## The Data
+
+The data is provided as `liwc_house_conflict.csv`. We collected over 1000 different speeches given on the floor of the US House of Representatives that discussed different war time conflicts with Iraq, Kuwait, Russia, Syria, Iran, and a few others. This data was then processed with the Linguistic Inquiry and Word Count software, which provides a linguistic frequency analysis for many categories. 
+
+You should pick 15-20 categories that you think might cluster together and/or be interesting to examine for their register relatedness. You can learn more about the categories by checking out the attached manual starting on page four. Do not use the "total" categories with their subgroups or you might get a singular matrix error. You might also consider running a quick summary on your choosen categories as well, to make sure they are not effectly zero frequency (i.e., most of the informal language ones will be very small percents due to the location of the speech).
+
+Import your data and create a data frame here with only the categories you are interested in.
+
+```{r thedata}
+
+```
+
+## Calculate a MDS
+
+- Calculate a MDS on your data - you can use 1, 2, 3 factors.
+- First, you will need to create distance scores for this analysis to run. Fill in `YOUR.DF` with the name of the data.frame you created above. 
+- Note: I included the `t()` function to transpose the matrix, so that the categories are the rows that are clustered together for this analysis. Leave that code there!
+
+```{r runmds}
+##create distance scores
+distances = dist(t(YOUR.DF), method = "euclidean")
+
+##run the MDS
+```
+
+## Plot the MDS
+
+- Include a plot of the results from the MDS.
+
+```{r plotmds}
+
+```
+
+## Create a Shepard Plot
+
+- Include a Shepard Plot to see if any large mis-fit exists. You don't have to interpret where, but just to see if we might expect to see some poor item loadings in the PCA/EFA.
+
+```{r shepard}
+
+```
+
+## Before you start
+
+- Include Bartlett's test and the KMO statistic to determine if you have adequate correlations and sampling before running a PCA/EFA. 
+
+```{r beforeyougo}
+
+```
+
+## How many factors/components?
+
+- Explore how many factors/components you should use.
+  - Include a parallel analysis and scree plot.
+  - Sum the Kaiser criterion.
+  - Go with the smaller number of items or the most agreement between different criteria. 
+
+```{r howmany}
+
+```
+
+## Simple structure - run the PCA/EFA
+
+- Choose to run either a PCA or an EFA. 
+  - Include the saved `fa` or `principal` code, but then be sure to print out the results, so the summary is on your report.
+  - Plot the results from your analysis. 
+
+```{r runit}
+##save it
+
+##print it out
+```
+
+## Adequate solution
+
+- Examine the fit indice(s). Are they any good? How might you interpret them?
+- Examine the results - what do they appear to tell you? Are there groupings of variables in these analyses that might explain different structures/jargons/registers in language we find in Congress? 

@@ -1,0 +1,28 @@
+---
+title: 'Getting Started Final Project'
+author: "STUDENT NAME"
+date: "Sys.Date()"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Objective
+
+This project should allow you to apply the information you've learned in the course to a new dataset. While the structure of the final project will be more of a research project, you can use this knowledge to appropriately answer questions in all fields, along with the practical skills of writing a report that others can read. The dataset must be related to language or language processing in some way. You must use an analysis we learned in class. 
+
+Please note that the final project has *more* information in it - this analysis is to get you started. You can change analyses or data between now and the final project. 
+
+### Method - Data - Variables
+
+Explain the data you have selected to study. You can find data through many available corpora or other datasets online (ask for help here for sure!). How was the data collected? Who/what is in the data? Identify what the independent and dependent variables are for the analysis. How do these independent and dependent variables fit into the analyses you selected?
+
+### Statistical Analysis Results
+
+Analyze the data given your statistical plan. Report the appropriate statistics for that analysis (see lecture notes). Include figures! Include the R-chunks so we can see the analyses you ran and output from the study. Note what you are doing in each step. 
+
+On this step, you just need to get started - list out the analysis you are going to use that we have covered already in class. Your data must be languge related! 
+
+Turn in the Rmd file with the data imported and the analyses code started. You do not have to knit the file for this assignment because you are only expected to have some data and code. 

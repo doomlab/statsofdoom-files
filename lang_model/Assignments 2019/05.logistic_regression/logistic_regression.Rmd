@@ -1,0 +1,89 @@
+---
+title: 'Logistic Regression'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load the Libraries + Functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+The data for this project has already been loaded. Here you will be distinguishing between the uses for *let*, *allow*, and *permit*. You should pick two of these verbs to examine and subset the dataset for only those columns. You can use the `droplevels()` function to help drop the empty level after you subset.  
+
+```{r libraries}
+library(Rling)
+data(let)
+head(let)
+```
+
+## Description of the Data
+
+The data is from the COCA: Corpus of Contemporary American English investigating the verb choice of *let*, *allow*, and *permit*. These are permissive constructions that are often paired with the word *to*. Predict the verb choice in the `Verb` column with the following independent variables:
+
+  - Reg: Spok for spoken conversations, Mag for magazine articles. 
+  - Permitter: semantic class of the clause subject, Anim for animate, Inanim for inanimate and Undef for undefined.
+  - Imper: yes for the imperative, no for not.
+  - *Note*: Year is in the dataset, which would be awesome but gave me trouble. You can try adding it if you want. 
+
+## Sample Size Requirements
+
+- Is the split between your choosen verbs even enough to think you could predict them?
+
+```{r samplesize}
+
+```
+
+## Running a Binary Logistic Regression
+
+- Run the logistic regression using the `rms` package. 
+  - Use the $\chi^2$ test - is the overall model predictive of verb choice? Is it significant?
+  - What is Nagelkerke's pseudo-$R^2$? What does it tell you about goodness of fit?
+  - What is the C statistic? How well are we predicting?
+
+```{r runrms}
+
+```
+
+## Coefficients
+
+- Explain each coefficient - are they significant? What do they imply if they are significant (i.e., which verb does it predict)?
+    - Reg:
+    - Permitter: 
+    - Imper: 
+
+## Interactions
+
+- Add the interaction between Imper and Reg by doing `Imper*Reg`, but remember you will need to do a `glm` model.
+- Use the `anova` function to answer if the addition of the interaction was significant.
+  - Is the interaction useful?
+- Use the `visreg` library and funtion to visualize the interaction.
+  - How would you explain that interaction? 
+  
+
+```{r interaction}
+
+```
+
+## Outliers
+
+- Use the `car` library and the `influencePlot()` to create a picture of the outliers. 
+  - Are there major outliers for this data?
+
+```{r outliers}
+
+```
+
+## Assumptions
+
+- Explore the `vif` values of the original model (not the interaction model) and determine if you meet the assumption of additivity (meaning no multicollinearity). 
+
+```{r vif}
+
+```
+
+No Python in this section! You will use the functions from this week in a few assignments coming up!

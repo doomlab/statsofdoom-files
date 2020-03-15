@@ -1,0 +1,157 @@
+---
+title: 'Linear Regression'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Import the Data
+
+Import the data from the Dutch Lexicon Project `DLP_words.csv`. All materials are from here:
+http://crr.ugent.be/programs-data/lexicon-projects
+
+Variables we are going to use:
+- `rt`: Response Latency to the Lexical Decision Task
+- `subtlex.frequency`: The frequency of the word from the Dutch Subtitle Project.
+- `length`: Length of the word.
+- `POS`: part of speech.
+- `bigram.freq`: Summed frequency of the bigrams in the word (the sum of each two-letter combination frequency). 
+
+```{r importdata}
+
+```
+
+## Load the Libraries + Functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+```{r libraries}
+
+```
+
+## Clean Up Part of Speech
+
+Update the part of speech variable so that the Nouns are the comparison category. Here's what the labels mean:
+
+ADJ - Adjective
+N - Noun
+WW - Verbs
+
+```{r pos}
+
+```
+
+## Deal with Non-Normality
+
+Since we are using frequencies, we should consider the non-normality of frequency. 
+- Include a histogram of the original `subtlex.frequency` column.
+- Log-transform the `subtlex.frequency` column. 
+- Include a histogram of `bigram.freq` - note that it does not appear extremely skewed. 
+
+```{r nonnormal}
+
+```
+
+## Create Your Linear Model
+
+See if you can predict response latencies (DV) with the following IVs: subtitle frequency, length, POS, and bigram frequency. 
+
+```{r lmrt}
+
+```
+
+## Interpret Your Model
+
+### Coefficients
+
+- Which coefficients are statistically significant? 
+- What do they suggest predicts response latency? (i.e., give the non-stats interpretation of the coefficients)
+- Which coefficients appear to predict the most variance? Calculate the $pr^2$ values below:
+
+```{r pr2}
+
+```
+
+- What do the dummy coded POS values mean? Calculate the means of each group below to help you interpret:
+
+```{r posmeans}
+
+```
+
+### Overall Model
+
+- Is the overall model statistically significant?
+- What is the practical importance of the overall model? 
+
+## Diagnostic Tests
+
+### Outliers
+
+Create an influence plot of the model using the `car` library. 
+- Which data points appear to have the most influence on the model?
+
+```{r influence}
+
+```
+
+### Additivity
+
+Do we have additivity in our model?
+- Show that the correlations between predictors is less than .9.
+- Show the VIF values. 
+
+```{r additivity_vif}
+
+```
+
+### Linearity
+
+Is the model linear? 
+- Include a plot and interpret the output.
+
+```{r qqplot}
+
+```
+
+### Normality 
+
+Are the errors normally distributed?
+- Include a plot and interpret the output. 
+
+```{r normal}
+
+```
+
+### Homoscedasticity/Homogeneity
+
+Do the errors meet the assumptions of homoscedasticity and homogeneity?
+- Include a plot and interpret the output (either plot option). 
+
+```{r homogs}
+
+```
+
+### Bootstrapping 
+
+Use the function provided from class (included below) and the `boot` library to bootstrap the model you created 1000 times. 
+- Include the estimates of the coefficients from the bootstrapping.
+- Include the confidence intervals for at least one of the predictors (not the intercept).
+- Do our estimates appear stable, given the bootstrapping results? 
+
+Use the following to randomly sample 500 rows of data - generally, you have to have more bootstraps than rows of data, so this code will speed up your assignment. In the `boot` function use: `data = DF[sample(1:nrow(DF), 500, replace=FALSE),]` for the data argument changing DF to the name of your data frame.
+
+```{r boot}
+bootcoef = function(formula, data, indices){
+  d = data[indices, ] #randomize the data by row
+  model = lm(formula, data = d) #run our model
+  return(coef(model)) #give back coefficients
+}
+```
+
+
+
+

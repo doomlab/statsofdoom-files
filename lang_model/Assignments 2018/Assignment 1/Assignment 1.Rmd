@@ -1,0 +1,98 @@
+---
+title: 'Assignment 1: Descriptive Statistics'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Import the Data
+
+Import the included dataset `BNC_wordfreq.csv`. This file contains the compiled word frequencies for the British National Corpus.
+
+```{r importdata}
+
+```
+
+## Load the Libraries + Functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+```{r libraries}
+
+```
+
+## Continuous Basic Statistics
+
+Calculate the following statistics on the word frequencies from the BNC data:
+    - Dispersion: min/max, 1st/3rd quantile, standard deviation
+    - Location: mean, median, mode
+
+```{r cont_describe}
+
+```
+
+## Continuous Graphical Displays
+
+Create a histogram, density plot, and qqnorm plot of the frequencies from the British National Corpus.
+
+```{r cont_plots}
+
+```
+
+## Zipf's Law
+
+Create a plot displaying Zipf's Law on the BNC data. 
+
+```{r zipf_law}
+
+```
+
+## Interpretation of the Frequency Data
+
+Using your results from above, answer the following:
+    - What does the dispersion of the data look like? How much does the data span from minimum to maximum, 1st-3rd quartile, etc. In this question, look at the dispersion statistics and explain what they mean to naive audience.
+    - What do the mean, median, and mode tell us about the use of words in the English Language? How frequent are words in general (mean/median), and what is the most common frequency in the data?
+    - In looking at the pictures of the frequency data, does word frequency appear to be normally distributed (explain, not just yes/no)?
+    - Does the frequency in the BNC follow Zipf's Law (explain, not just yes/no)?
+    
+## Categorical Basic Statistics
+
+Included in the BNC frequency data is the part of speech of each word. Create a summary of the types of parts of speech.
+
+A = Adjective, Adv = Adverb, Conj = Conjunction, Det = Determinant, N = Noun, Prep = Preposition, Pron = Pronoun, V = Verb
+
+```{r cat_describe}
+
+```
+
+## Categorical Graphical Displays
+
+Create a pie chart of the top 5 parts of speech for the BNC data. You can use base `plot` or `ggplot2`.
+
+```{r cat_plot}
+pos_table = #create a table here
+pos_table_top5 = sort(pos_table, decreasing = TRUE)[1:5] #this gives you top 5
+```
+
+## Categorical Dispersion
+
+The nouns *shaving* and *descriptor* have very similar frequencies in the Corpus of Contemporary American English (COCA), namely, 513 and 515. Do you think these words are equally spread across writing types? Use the information below (and the function from class) to calculate their deviations.
+
+```{r deviation}
+freqreg = c(95385672, 90344134, 91044778, 187245672) #word count of COCA categories
+shaving = c(25, 175, 40, 273) #frequencies for shaving
+descriptor = c(6, 7, 462, 40) #frequencies for descriptor
+names(freqreg) = names(shaving) = names(descriptor) = c("Spoken", "Fiction", "Academic", "Press") #categories of the corpus
+```
+
+## Interpretation of the Categorical Data
+
+Using your results from above, answer the following:
+    - What are the most frequent parts of speech by type (i.e., we are only considering each word individually, not the frequency of the words as well)?
+    - What are the least frequent parts of speech by type?
+    - Was shaving or descriptor more "dispersed" throughout the texts? Remember, that values close to zero mean that the concept is represented evenly across corpora, while values closer to one are more likely to appear in one corpus over another. 
+

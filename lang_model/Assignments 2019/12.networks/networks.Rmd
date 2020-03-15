@@ -1,0 +1,101 @@
+---
+title: 'Network Models'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Getting Set Up
+
+You might need to install `devtools` to install this package, but we are going to use a Harry Potter package to analyze the text included.
+
+```{r}
+#install.packages('devtools') #run this line if you need it without the # but add the # back so you don't have it running when you knit
+#devtools::install_github("bradleyboehmke/harrypotter") #same thing here 
+#note that the package on CRAN is not the same!
+```
+
+## Load the libraries + functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+```{r libaries}
+##r chunk
+
+```
+
+## The data
+
+The data is the text in the Harry Potter novels for the following:
+
+    philosophers_stone: Harry Potter and the Philosophers Stone (1997)
+    chamber_of_secrets: Harry Potter and the Chamber of Secrets (1998)
+    prisoner_of_azkaban: Harry Potter and the Prisoner of Azkaban (1999)
+    goblet_of_fire: Harry Potter and the Goblet of Fire (2000)
+    order_of_the_phoenix: Harry Potter and the Order of the Phoenix (2003)
+    half_blood_prince: Harry Potter and the Half-Blood Prince (2005)
+    deathly_hallows: Harry Potter and the Deathly Hallows (2007)
+
+You can pick any book to analyze! When you use a book, the data is structured such that each chapter is a row and there's one column in the data. These are giant text blocks, much like the descriptions in the NASA dataset you just learned about. You might need to coerce the data into a tibble/dataframe to get started depending on the book you select. Second, be sure to add a `chapter` id column so you can keep the chapter number as an id variable. 
+
+## Clean up the data
+
+In this section, you want to create a tibble/dataframe of the individual words from your book. Try using `unnest_tokens` and `anti_join` to create a unigram list of words without stopwords included. 
+
+```{r}
+
+```
+
+## Simple statistics
+
+In this section, use the `count` function to determine the most frequent words used in Harry Potter that are not stopwords. 
+
+```{r}
+
+```
+
+## Collocates clean up
+
+Create a tibble/dataframe that includes the collocate pairs in the Harry Potter book you picked using `pairwise_count`. 
+
+```{r}
+
+```
+
+## Create a network plot
+
+Create a network plot of the collocates - remember you can change the n > XX to a number that keeps a lot of the data, but filters out a lot of the smaller combinations.
+
+```{r}
+
+```
+
+## Strongest pairs
+
+Create a correlation tibble/dataframe of the strongest pairs from your book. 
+
+```{r}
+
+```
+
+## Visualize the pairs
+
+Include a network plot of the correlation data, and you can change the correlation cut off to create the best visualization of the data. 
+
+```{r}
+
+```
+
+## Interpretation
+
+What do the simple statistics and network plots tell you about the book you selected? Interpret your output in a few sentences summarizing your visualizations. 
+
+
+
+
+
+

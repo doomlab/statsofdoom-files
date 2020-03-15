@@ -1,0 +1,46 @@
+---
+title: 'Final Project'
+author: "STUDENT NAME"
+date: "Sys.Date()"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Objective
+
+This project should allow you to apply the information you've learned in the course to a new dataset. While the structure of the final project will be more of a research project, you can use this knowledge to appropriately answer questions in all fields, along with the practical skills of writing a report that others can read. 
+
+## Instructions
+
+The final document should be a knitted HTML/PDF/Word document from a Markdown file. You will turn in the knitted document along with your .Rmd. Be sure to spell and grammar check your work! The following sections should be included: 
+
+### Introduction
+
+Introduce your research topic. What is the background knowledge that someone would need to understand the field or area that you have decided to investigate? In this section, you should include sources that help explain the background area and cite them in APA style. 5-10 articles across the paper would be appropriate. 
+
+### Hypothesis / Problem Statement
+
+What is the data that you are using for you project? What is your hypothesis as to the outcome of the analysis? Why is the problem important for us to study or answer? 
+
+### Statistical Analysis Plan
+
+Explain the statistical analysis that you are using - you can assume some statistical background, but not to the specific design you are mentioning. For example, the person would know what a mean is, but not Lexeme Analysis. 
+
+### Method - Data - Variables
+
+Explain the data you have selected to study. You can find data through many available corpora or other datasets online (ask for help here for sure!). How was the data collected? Who/what is in the data? Identify what the independent and dependent variables are for the analysis. How do these independent and dependent variables fit into the analyses you selected?
+
+### Statistical Analysis Results
+
+Analyze the data given your statistical plan. Report the appropriate statistics for that analysis (see lecture notes). Include figures! Include the R-chunks so we can see the analyses you ran and output from the study. Note what you are doing in each step. 
+
+### Interpret and Discuss
+
+Summarize the results from your study in as plain of language as possible. How does this relate to previous literature? Where the results supportive of your hypotheses? What have we learned from you doing this analysis/study?
+
+### References
+
+Include your references in APA style.

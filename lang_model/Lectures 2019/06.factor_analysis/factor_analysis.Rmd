@@ -1,0 +1,357 @@
+---
+title: "Register Variation and Exploratory Factor Analysis"
+author: "Erin M. Buchanan"
+date: "12/04/2019"
+output:
+  slidy_presentation:
+    increment: yes
+---
+
+```{r echo = F}
+options(scipen = 999)
+```
+
+## Language Topics Discussed
+
+- Registers as an extension of dialect and other cultural norms
+- The Linguistic Inquiry and Word Count (LIWC) will be used for the assignment 
+
+## Registers?
+
+- A register is a language variety associated with the way you are using the language (i.e., email versus face-to-face)
+- Contextual factors that change registers:
+  - Communication channel: writing, speech
+  - Relationship between participants: personal, work, status
+  - Communication purpose: social, transfer of information
+  - Setting: Private, public
+
+## Registers are linguistic
+
+- Registers can also be related to specific linguistic features
+  - So we may see more first person pronouns in person than through email 
+  - We can use clustering to understand these conversations and give them labels without hand coding it
+
+## Biber's work 
+
+- Biber (1988) used factor analysis to analyze conversations for different register variations
+  - Showed dimensions such as:
+    - Involved/Informal Production
+    - Narrative/Non-narrative contexts
+
+## Relation to previous work 
+
+- These variations are obviously related to each other, rather than being distinct categories that we can cleanly separate
+- This sort of overlap does make defining register difficult, but the general categories remain
+- The idea of register is often tied to genre, stylistic choices, jargon, dialect (as defined last week)
+- Sometimes defined as pragmatics - the social use of language
+
+## Thinking about formality
+
+- Register can be considered a ranking of formality (tenor), if we think about it in a social way 
+  - Frozen: "static" text, like the Pledge of Allegiance
+  - Formal: one way conversation aimed at delivering technical knowledge, like a conference presentation 
+  - Consultative: two way conversation with some formality usually delivering knowledge, like student/teacher 
+  - Casual: friends/acquaintances, slang, social settings 
+  - Intimate: family, close friends, non-verbal messages, non-public
+
+## Analyzing register
+
+- We will look at the British National Corpus which has been coded for:
+  - 69 observations of 11 variables
+  - Things like: `Ncomm`: frequencies of common nouns, `Vpres`: frequencies of third present tense verbs, `P1`: first person pronouns, `ConjCoord`: coordinating conjunctions, etc. 
+
+## Let's look at the data
+  
+```{r}
+##r chunk 
+library(reticulate)
+library(Rling)
+library(psych)
+data(reg_bnc)
+head(reg_bnc)
+```
+
+```{python}
+##python chunk
+
+#open library
+import pandas as pd
+
+#move over data from R or import it with pd.read_csv
+reg_bnc_py = r.reg_bnc
+
+#look at the data
+reg_bnc_py.head()
+
+#get rid of extra columns we don't need 
+reg_bnc_py.drop(['Reg'], axis = 1, inplace = True)
+```
+
+## A brief note
+
+- PCA: components are orthogonal (i.e. uncorrelated) linear combinations that maximize capturing the total variance
+  - Often used when you want separate distinction solutions, clustering things together, dimensionality reduction 
+  - Components are not interpretable
+- EFA: factors are linear combinations that maximize the shared portions of the variance 
+  - Often used when you want to identify the underlying "latent" variables, allowing them to be correlated to each other 
+  - Factors are interpretable and labelable 
+- We are going to focus on EFA in this analysis!
+
+## Steps to Analysis
+
+- Things to check before you begin
+- How many factors should you use?
+- Simple structure
+- Adequate solutions
+
+## Before you begin
+
+  - Check correlations - you want things to be correlated, `cortest.bartlett`
+  - Check your sampling adequacy, `KMO`
+  - At least 3-4 items per grouping
+  - Interval measurement
+  - Normal/linear/normal parametric assumptions
+
+## Correlations 
+
+- If non-significant implies that your items are not correlated enough
+
+```{r}
+##r chunk 
+correlations = cor(reg_bnc[ , -1 ])
+cortest.bartlett(correlations, n = nrow(reg_bnc)) 
+
+#for python
+#py_install("factor_analyzer")
+```
+
+## Correlations - Python
+
+- If you see a `TypeError: Series cannot perform the operation -`: you have tried to pass character columns to the correlation matrix, which does not work. 
+
+```{python}
+##python chunk
+
+#import bartlett test
+from factor_analyzer.factor_analyzer import calculate_bartlett_sphericity
+
+#calculate bartlett
+chi_square_value, p_value = calculate_bartlett_sphericity(reg_bnc_py)
+
+#output the answer
+chi_square_value, p_value
+```
+
+## Sampling adequacy
+
+- Kaiser-Meyer-Olkin (KMO) test
+- Compares the ratio between $r^2$ and $pr^2$
+- Scores closer to 1 are better, closer to 0 are bad
+
+## Sampling adequacy
+
+```{r}
+##r chunk 
+KMO(correlations)
+```
+
+```{python}
+##python chunk
+from factor_analyzer.factor_analyzer import calculate_kmo
+kmo_all,kmo_model=calculate_kmo(reg_bnc_py)
+
+#for each variable one at a time
+kmo_all
+
+#for the entire set
+kmo_model
+```
+
+## How many factors do I use?
+
+- Theory
+- Kaiser criterion
+- Scree plots
+- Parallel analysis
+
+## Kaiser criterion
+
+- Old rule: extract the number of eigenvalues over 1
+- New rule: extract the number of eigenvalues over .7
+- What the heck is an eigenvalue? 
+  - A mathematical representation of the variance accounted for by that grouping of items
+
+## Scree plots
+
+```{r scree, echo=FALSE, out.height="500px", out.width="800px", fig.align="center"}
+knitr::include_graphics("scree.png")
+```
+
+## Parallel analysis
+
+- A statistical test to tell you how many eigenvalues are greater than chance
+  - Calculates the eigenvalues for your data
+  - Randomizes your data and recalculates the eigenvalues
+  - Then compares them to determine if they are equal
+
+## Finding factors/components
+
+```{r}
+##r chunk 
+number_items = fa.parallel(reg_bnc[, -1], ##dataset
+                           fm = "ml", ##type of math
+                           fa = "both") #look at both efa/pca
+```
+
+## Finding factors/components - Python
+
+```{python}
+##python chunk
+#save factor analysis function
+from factor_analyzer import FactorAnalyzer
+fa = FactorAnalyzer(n_factors = len(reg_bnc_py.columns),
+                    rotation = None)
+
+#run an analysis just to get the eigenvalues
+fa.fit(reg_bnc_py)
+
+#view the eigenvalues
+ev, v = fa.get_eigenvalues()
+ev
+```
+
+## Scree Plots - Python
+
+```{python}
+##python chunk
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib import pyplot as plt
+
+plt.scatter(range(1,reg_bnc_py.shape[1]+1),ev)
+plt.plot(range(1,reg_bnc_py.shape[1]+1),ev)
+plt.title('Scree Plot')
+plt.xlabel('Factors')
+plt.ylabel('Eigenvalue')
+plt.grid()
+plt.show()
+```
+
+## Eigenvalues
+
+```{r}
+##r chunk 
+sum(number_items$fa.values > 1)
+sum(number_items$fa.values > .7)
+```
+
+```{python}
+##python chunk
+sum(ev > 1)
+sum(ev > .7)
+```
+
+## Simple structure
+
+- Simple structure covers two pieces:
+  - The math used to achieve the solution
+    - PCA: principle components
+    - EFA: maximum likelihood
+  - The rotation to increase communality between items and aid in interpretation (EFA only)
+  
+## Rotation
+
+```{r rotation, echo=FALSE, out.height="500px", out.width="800px", fig.align="center"}
+knitr::include_graphics("rotate.png")
+```
+
+## Rotation
+  
+- Orthogonal assume uncorrelated factors: varimax, quartermax, equamax
+- Oblique allows factors to be correlated: oblimin, promax
+- Why would we even use orthogonal?
+
+## Simple structure/solution
+
+- Looking at the loadings: the relationship between the item and the factor/component
+  - Want these to be related at least .3 
+  - Remember that r = .3 is a medium effect size that is ~10% variance
+  - Can eliminate items that load poorly 
+  - Difference here in scale development versus exploratory clustering
+
+## Run an EFA
+
+```{r}
+##r chunk 
+EFA_fit = fa(reg_bnc[, -1], #data
+             nfactors = 2, #number of factors
+             rotate = "oblimin", #rotation
+             fm = "ml") #math
+```
+
+```{python}
+##python chunk
+fa = FactorAnalyzer(n_factors = 2, rotation = "oblimin")
+fa.fit(reg_bnc_py)
+```
+
+
+## Look at the results
+
+```{r}
+##r chunk 
+EFA_fit$loadings #look at the full results
+EFA_fit
+```
+
+## Look at the results - Python
+
+```{python}
+##python chunk
+fa.loadings_ #notice underscore 
+
+fa.get_factor_variance() ##ss, prop, cumulative
+```
+
+## Plots of the results
+
+- For two factor models, we could also use `matplotlib` to scatterplot the loadings, creating essentially this picture. 
+- The built in plot fuctions from `psych` are fantastic!
+
+```{r}
+##r chunk 
+fa.plot(EFA_fit, 
+     labels = colnames(reg_bnc[ , -1]))
+```
+
+## Plots of the results
+
+```{r}
+##r chunk 
+fa.diagram(EFA_fit)
+#black only related to one side, red it picked a side
+```
+
+## Adequate solution
+
+- Fit indices: a measure of how well the model matches the data 
+  - Goodness of fit statistics: measure the overlap between the reproduced correlation matrix and the original, want high numbers close to 1
+  - Badness of fit statistics (residual): measure the mismatch, want low numbers close to zero 
+- Theory/interpretability 
+
+## Fit statistics
+
+- Python does not provide these in this package. 
+
+```{r}
+##r chunk 
+EFA_fit$rms #Root mean square of the residuals
+EFA_fit$RMSEA #root mean squared error of approximation
+EFA_fit$TLI #tucker lewis index
+```
+
+## Summary
+
+- You learned about registers and how they can be used to classify language
+- You learned how to examine how these group together into orthogonal components versus latent factors
+- You learned about EFA and PCA and the steps to running them 

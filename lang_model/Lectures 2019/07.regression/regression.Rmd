@@ -1,0 +1,400 @@
+---
+title: "Frequency and Response Latencies with Regression"
+author: "Erin M. Buchanan"
+date: "01/16/2019"
+output:
+  slidy_presentation:
+    increment: yes
+---
+
+## Language Topics Discussed
+
+- English Lexicon Project
+- The Subtitle Projects
+- Extension to Priming Projects
+
+## English Lexicon Project
+
+- http://elexicon.wustl.edu/
+- ELP was a large undertaking that helped kick start the recent uptick in standardized behavioral data for language researchers
+  - Corpora have been around, so have databases, but in the last 10 years, this field has grown exponentially
+- The data contains 40K + words and 40K + nonwords with many characteristics
+- Lexical Decision and Naming Tasks included
+
+## English Lexicon Project 
+
+- https://www.psytoolkit.org/experiment-library/ldt.html
+  - However, you would only see one word at a time (in this example you see two)
+- In the naming task, you would be asked to read those words aloud, one at a time
+- Output we are interested in is how the lexical variables might predict the response latencies
+
+## Subtitle Projects
+
+- Starting with Brysbaert and New (several papers), there was a movement to rethink frequency and its relation to predicting language results
+- Traditionally, two sources of frequency were used:
+  - The Brown Corpus: Kucera and Francis (1967)
+  - HAL Corpus: Burgess and Livesay (1998) 
+- However, we weren't sure these were the best estimators of frequency
+
+## Subtitle Projects
+
+- http://subtlexus.lexique.org/
+- Downloaded subtitles from www.opensubtitles.org with 50 million words+
+- Provided both estimates for subtitles and music lyrics
+- Models estimating lexical decision and naming times indicate these estimations of frequency are better predictors
+- Expanded to 15-20 different languages 
+
+## The Semantic Priming Project
+
+- Priming occurs when cognitive processing is speeded because of a previous event
+- Generally, we measure priming using lexical decision and naming tasks
+- Let's say you have two trials:
+  - DOCTOR --> TREE (unrelated)
+  - DOCTOR --> NURSE (related)
+
+## The Semantic Priming Project
+
+- Priming is thought to occur by several different mechanisms: spreading activation, deliberate cognitive processes such as expectancy generation, etc.
+
+```{r echo=FALSE, out.height="300px", out.width="300px", fig.align="center"}
+knitr::include_graphics("spread.png")
+```
+
+## The Semantic Priming Project
+
+- Contains lexical decision and naming response latencies for related, unrelated, and nonword trials
+- Is paired with the ELP and SUBTLEX projects
+- Gives us more data to predict either response latencies or priming latencies
+
+## Regression
+
+- Simple regression is the relationship between one independent and one dependent variable (also correlation)
+- Multiple regression is the relationship between two or more independent variables and one dependent variable
+  - Useful because it allows you to examine the predictive ability of each variable adjusting for the other variables
+- We can fit parametric (linear) models or nonparametric models, depending on the expectation of linearity, as well as the type of dependent variable
+
+## Understand Regression Models
+
+$${\hat{y_i}} = b_0 + b_1x_{1i} + b_2x_{2i} ... + \epsilon_i$$
+
+- Y-hat is the predicted score for each person (i) on the dependent variable
+- B-zero is the y-intercept 
+- B-1+ are the slope values for each predictor
+  - Slopes are interpreted as *for every one unit increase in X, we see B unit increases in Y*
+- X is each individual predictor 
+- Error for each individual person, as we never get their predicted score exactly right
+
+## Understand Regression Models
+
+- Least Squares estimation 
+  - Creates the line of best fit by minimizing the residual error $\epsilon$
+
+```{r echo=FALSE, out.height="400px", out.width="400px", fig.align="center"}
+knitr::include_graphics("regress.png")
+```
+
+## Understand Regression Models
+
+- For the overall model including all variables:
+  - Determine statistical significance by using *p* values from an *F*-test for linear models
+  - Determine practical significance by using $R^2$ 
+- For the individual predictors:
+  - Determine statistical significance by using *p* values from a *t*-test
+  - Determine practical significance by using partial correlation $pr^2$
+
+## Examples Using ELP
+
+- Word is the word presented to the participant 
+- Length is the number of characters in each word
+- SUBTLWF is the subtitle word frequency estimate
+- POS is part of speech
+- Mean_RT is the mean response latency in milliseconds
+
+```{r libraries, echo = T}
+library(Rling)
+data(ELP)
+head(ELP)
+```
+
+## Dealing with Categorical Predictors
+
+- How can we interpret and use categorical predictors?
+- When X is continuous, the interpretation is that *for every one unit increase in X, we see B unit increases in Y*
+- That doesn't work as well for categorical predictors...
+- Instead, we have to use Dummy Coding (well, *R* does it for us)
+
+## Dummy Coding 
+
+- A way to represent categorical data for regression/least squares analyses
+- You will get (categories - 1) predictors
+- How to interpret these predictors?
+  - Each predictor represents the difference in means between the coded group (the one with the 1) and the group coded as all zeroes (the "control" group)
+
+```{r echo=FALSE, fig.align="center"}
+knitr::include_graphics("dummy.jpg")
+```
+
+## Dummy Coding
+
+- POS is a categorical predictor we want to use
+- Three categories: 
+  - JJ: Adjective
+  - NN: Noun
+  - VB: Verb
+- Default is to make the first category the comparison category
+
+```{r pos, echo = T}
+table(ELP$POS)
+```
+
+## Dummy Coding
+
+- Generally, nouns would be considered the comparison group, so let's rearrange them so they are "first". 
+```{r pos2, echo = T}
+ELP$POS = factor(ELP$POS, #the column you want to update
+                 #the values in the data in the order you want
+                 levels = c("NN", "JJ", "VB"), 
+                 #give them better labels if you want
+                 labels = c("Noun", "Adjective", "Verb")) 
+table(ELP$POS)
+```
+
+## Dealing with Non-Normal Data
+
+- One issue in language research is that often we have non-normal data
+- Especially when working with frequency (as it is distributed by Zipf's law)
+
+## Dealing with Non-Normal Data
+
+```{r freq, echo = T}
+hist(ELP$SUBTLWF, breaks = 100)
+```
+
+## Dealing with Non-Normal Data
+
+- The simplest solution is to take the `log` of the variable.
+- Does make interpretation a bit more difficult, but helps with the distribution of the data. 
+
+## Dealing with Non-Normal Data
+
+```{r freq2, echo = T}
+ELP$Log_SUB = log(ELP$SUBTLWF)
+hist(ELP$Log_SUB)
+```
+
+## Build the Linear Model
+
+- To be able to use our output for several purposes, we want to save it 
+  - You can call it whatever you want, I like `model`.
+- Format for `lm` function is:
+  - Y ~ X + X + ...
+  - data = name of data frame
+
+```{r lm, echo = T}
+model = lm(Mean_RT ~ Length + Log_SUB + POS,
+           data = ELP)
+```
+
+## Summarize the Linear Model
+
+```{r lm2, echo = T}
+summary(model)
+```
+
+## Residuals
+
+- A summary of the residuals - remember that residuals are the error terms or how far off we were at predicting the Mean_RT
+- We will use this information as part of our assumptions diagnostics for data screening
+
+```{r lm3, echo = T}
+summary(model$residuals)
+```
+
+## Coefficients
+
+- The coefficients table shows you the individual predictor significance levels
+- If you use *p* < .05 as a criterion, we see that:
+  - Intercept is the average RL
+  - Length is a positive predictor: long words take longer to react to 
+  - Frequency is a negative predictor: more frequent words are faster (i.e. low freq = high RL)
+  - Adjectives and Nouns have the same RL
+  - Verbs and Nouns have different RL
+
+## Coefficients
+
+```{r lm4, echo = T}
+options(scipen = 999)
+round(summary(model)$coefficients, 3)
+```
+
+## Coefficients
+
+- To interpret categorical predictors, it can help to make a means table
+- Now I can see that verbs are responded to faster than nouns, interpreting the categorical predictor
+
+```{r tapply, echo = T}
+tapply(ELP$Mean_RT, #dv 
+       ELP$POS, #iv group variable
+       mean) #function 
+```
+
+## Coefficient Confidence Intervals 
+
+- We can calculate the confidence intervals for the coefficients, to help understand their precision
+
+```{r ci_coef, echo = T}
+confint(model)
+```
+
+## Coefficient Practical Importance
+
+- Calculate $pr^2$: variance accounted for in the DV by that IV after removing all variance due to other IVs
+
+$$ \frac{t_{x_i}}{\sqrt{t_{x_i}^2 + df_{res}}} $$
+```{r prs, echo = T}
+t = summary(model)$coefficients[-1 , 3]
+pr = t / sqrt(t^2 + model$df.residual)
+pr^2
+```
+
+## Overall Model
+
+- So how much better than a random guess are we at predicting?
+  - A good random guess is always the y-intercept or the mean of y. 
+- The *F*-statistic represents the difference of the model from zero
+
+```{r fvalues, echo = T}
+summary(model)$fstatistic
+```
+
+## Overall Model
+
+- $R^2$ represents the overlap in all IV variance with the DV variance
+
+```{r r2value, echo = T}
+summary(model)$r.squared
+```
+
+## Diagnostic Tests
+
+- Outliers and influential observations: data points that have large residuals or are otherwise odd in relation to the rest of the data
+- Assumptions of parametric regression:
+  - Independence
+  - DV is response scale 
+  - Additivity (no multicollinearity)
+  - Linearity
+  - Normality
+  - Homoscedasticity/Homogeneity
+
+## Outliers
+
+- Hat values (or leverage): indicates how much influence on the slope a data point has
+- Studentized residuals: the normalized (z-scored) difference between a participant's predicted and actual score 
+- Cook's values: a measure of influence (both leverage and discrepancy)
+
+## Outliers
+
+```{r outlier, echo = T, message = F}
+library(car)
+influencePlot(model)
+```
+
+## Outliers
+
+- What do we do with them?
+
+```{r outliers, echo = T}
+ELP[c(331,660,498,411), ]
+```
+
+## Assumptions
+
+- Independence - the data is independent from each other (i.e. each data point is from a different "person")
+- Interval scale dependent variable: check!
+
+## Additivity
+
+- No correlation between predictors above .9 (but .7 is actually not good either)
+
+```{r additivity, echo=T}
+summary(model, correlation = T)$correlation[ , -1]
+```
+
+## Additivity
+
+- Small Variance Inflation Scores (VIF) values (less than 5 to 10)
+
+```{r vif, echo = T}
+vif(model)
+```
+
+## Linearity
+
+```{r qqplot, echo = T}
+plot(model, which = 2)
+```
+
+## Normality 
+
+```{r normal, echo=T}
+hist(scale(residuals(model)))
+```
+
+## Homoscedasticity/Homogeneity
+
+```{r homogs, echo = T}
+plot(model, which = 1)
+```
+
+## Homoscedasticity/Homogeneity
+
+```{r homogs2, echo = T}
+{plot(scale(residuals(model)), scale(model$fitted.values))
+  abline(v = 0, h = 0)}
+```
+
+## One Solution to Bad Assumptions
+
+- First, build a function that saves the numbers you want:
+
+```{r boot, echo = T}
+bootcoef = function(formula, data, indices){
+  d = data[indices, ] #randomize the data by row
+  model = lm(formula, data = d) #run our model
+  return(coef(model)) #give back coefficients
+}
+```
+
+## Bootstrapping 
+
+- Next, use the `boot` library to run the bootstraps (lots of runs on randomly sampled data)
+
+```{r boot2, echo = T, message = F}
+library(boot)
+model.boot = boot(formula = Mean_RT ~ Length + Log_SUB + POS,
+                  data = ELP,
+                  statistic = bootcoef,
+                  R = 1000)
+```
+
+## Bootstrapping
+
+```{r boot3, echo = T}
+model.boot
+```
+
+## CIs for Bootstrapped Estimates
+
+```{r bootci, echo = T}
+boot.ci(model.boot, index = 3)
+```
+
+## Summary
+
+- You learned about some linguistic projects that have provided useful data to test hypotheses
+- ... how we can use linear regression to look at predictions
+- ... how to examine assumptions of linear regression
+- ... how to bootstrap in case those assumptions are not met
+
+
+

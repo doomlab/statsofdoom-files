@@ -1,0 +1,143 @@
+---
+title: 'Trees and Forests Assignment'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load the libraries + functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+The data for this project has already been loaded. You will be distinguishing between the categories of *nerd* and *geek* to determine the influence of respective variables on their category definition. 
+
+If you are having trouble with the `Rling` library - the nerd data is avaliable on Canvas, and you can load it directly. 
+
+```{r libraries}
+##r chunk
+library(Rling)
+data(nerd)
+head(nerd)
+```
+
+## Description of the data
+
+Dependent variable: 
+
+- Noun: which category is represented either *nerd* or *geek*.
+
+Independent variables:
+
+- Num: a measure of social group, either pl (plural) or sg (single)
+- Century: time measurement, as XX (20th) or XXI (21st) century
+- Register: information about where the data was coded from ACAD (academic), MAG (magazine), NEWS (newspapers), and SPOK (spoken)
+- Eval: A measure of the semanticity of the word, Neg for negative, Neutral, and Positive
+
+## Conditional inference model
+
+- Add a random number generator to start the model.
+- Use `ctree()` to create a conditional inference model. 
+
+```{r cimodel}
+##r chunk
+
+```
+
+## Make a plot
+
+- Plot the conditional inference model. 
+
+```{r ciplot}
+##r chunk
+
+```
+
+## Interpret the categories 
+
+- Write out an interpretation of the results from the model. You can interpret the branches of the tree to determine what featurally defines each category.
+- With only two categories, you will see the proportion split as the output in the bar graph - look for the group with the larger proportion. 
+
+## Conditional inference model predictiveness
+
+- Calculate the percent correct classification for the conditional inference model. 
+
+```{r cicorrect}
+##r chunk
+
+```
+
+## Random forests
+
+- Create a random forest of the same model for geek versus nerd. 
+
+```{r forestmodel}
+##r chunk
+
+```
+
+## Variable importance
+
+- Calculate the variable importance from the random forest model.
+- Include a dot plot of the importance values. 
+- Which variables were the most important?
+
+```{r forestimportance}
+##r chunk
+
+```
+
+## Forest model predictiveness
+
+- Include the percent correct for the random forest model. 
+- Did it do better than the conditional inference tree?
+
+```{r forestpredict}
+##r chunk
+
+```
+
+## Python model
+
+- In this section, import the data from R to Python.
+- Be sure to convert the categorical data into dummy coded data. 
+
+```{python data_import}
+##python chunk
+
+```
+
+## Create the Tree
+
+- Create a decision tree classification of the `nerd` data. 
+
+```{python decision_tree}
+##python chunk
+
+```
+
+## Printing out the Tree
+
+- Print out a text version of the classification tree. 
+
+```{python class_tree}
+##python chunk
+
+```
+
+## Confusion Matrix
+
+```{python confusion_matrix}
+##python chunk
+
+```
+
+## Thought questions
+
+- Are the models easier to create using R or Python (your own thoughts, they can be different than what I said in the lecture)?
+- Which model gave you a better classification of the categories?
+- What other variables might be useful in understanding the category membership of geek versus nerd? Basically, what could we add to the model to improve it (there's no one right answer here - it's helpful to think about what other facets we have not measured)?
+  

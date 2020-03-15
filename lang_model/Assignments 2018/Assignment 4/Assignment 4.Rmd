@@ -1,0 +1,113 @@
+---
+title: 'Assignment 4: DCA'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Create the Data
+
+Is there a difference in twitter word usage of Donald Trump during his run for president versus while he is president?
+
+- Data from: http://trumptwitterarchive.com/
+- Not Prez data is Jan 2015 to Jan 2017
+- Prez data is from Jan 2017 to Jan 2019
+- Install `tokenizers` package, if you do not have it. 
+
+```{r create_tweets}
+master = read.csv("trump_tweets.csv", stringsAsFactors = F)
+master = na.omit(master)
+
+colnames(master)[1] = "time"
+
+prez = subset(master, time == "prez")
+notprez = subset(master, time == "not prez")
+
+ptemp = tokenizers::tokenize_ngrams(as.character(prez$text),
+                            lowercase = T,
+                            n = 2)
+pdata = as.data.frame(table(unlist(ptemp)))
+
+nptemp = tokenizers::tokenize_ngrams(as.character(notprez$text),
+                            lowercase = T,
+                            n = 2)
+npdata = as.data.frame(table(unlist(nptemp)))
+
+final_data = merge(pdata, npdata, by = "Var1", all = TRUE)
+
+colnames(final_data) = c("Bigram", "Prez", "NotPrez")
+```
+
+## Load the Libraries + Functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+```{r libraries}
+
+```
+
+
+## Deal with NA values
+
+Remember that the NA values just represent options that didn't occur in one time point versus the other. Fill those NA values in with zero. 
+
+```{r updatezeros}
+
+```
+
+## Pick your construction
+
+- Pick a construction to consider, remembering that the data has been put into bigrams (although you can change this to larger numbers above if you want).
+- You can look for a particular word in a construction using regular expressions and the `grep` function. 
+  - the `^` indicates that it should be the start of the bigram. 
+  - the `$` indicates that it should be the last word of the bigram.
+  - I recommend putting a space so you only get that particular word. 
+  - You might consider using the word `make` - so the firstword would be "^make " or the lastword would be " make$". 
+
+```{r reducedata}
+firstword = "^word "
+lastword = " word$"
+
+#change to either first or last word here 
+reduced_data = final_data[grep(firstword, final_data$Bigram), ]
+```
+
+## Summarize the data
+
+Using Not Prez as `a` and Prez as `b`, create the vectors for a, b, c, and d.
+
+```{r createabcd}
+
+```
+
+## Calculate aExp
+
+Calculate the expected value of a for each bigram. 
+
+```{r aExp}
+
+```
+
+## logPF
+
+Calculate the log p-values from the Fisher test. 
+
+```{r logpf}
+
+```
+
+## Calculate the top scores
+
+Create the top 10 bigrams for Not Prez (positive scores) and for Prez (negative scores).
+
+```{r combine}
+
+```
+
+## Interpreting the numbers
+
+What can you gather from the different top scores for Not Prez and Prez? Did he appear to change his style once inaugurated? 

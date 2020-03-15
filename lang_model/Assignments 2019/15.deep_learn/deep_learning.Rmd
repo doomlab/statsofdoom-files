@@ -1,0 +1,24 @@
+---
+title: 'Deep Learning'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## The Model
+
+Since the deep models take a long time to run and often require a lot of computer power, we will just detail where you might use a deep learning model in your own work. 
+
+In this section, detail a classification task you might use a deep learning model for:
+  - What are the class labels? (i.e. what are the groups?)
+  - What would you use to predict the labels? Explain how text is involved in the prediction.
+  - What type of model would you use (RNN, CNN, mix of both)?
+  - How many layers would you include in your model?
+  - What type of layers do you think might be effective to help you predict your classes? 
+  
+
+

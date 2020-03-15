@@ -1,0 +1,141 @@
+---
+title: 'Topics Models'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+For this assignment, you will rework your previous LSA model into a topics model. Note that the first few sections are the same - so use the same data you did before!
+
+## Load the libraries + functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+```{r libaries}
+##r chunk
+library(gutenbergr)
+library(stringr)
+library(dplyr)
+library(tidyr)
+```
+
+Load the Python libraries or functions that you will use for that section. 
+
+```{python}
+##python chunk
+```
+
+## The Data
+
+You will want to use some books from Project Gutenberg to perform a Latent Semantic Analysis. The code to pick the books has been provided for you, so all you would need to do is *change out* the titles. Be sure to pick different books - these are just provided as an example. Check out the book titles at https://www.gutenberg.org/. 
+
+```{r project_g}
+##r chunk
+##pick some titles from project gutenberg
+titles = c("Twenty Thousand Leagues under the Sea", "The War of the Worlds",
+            "Pride and Prejudice", "Great Expectations")
+
+##read in those books
+books = gutenberg_works(title %in% titles) %>%
+  gutenberg_download(meta_fields = "title") %>% 
+  mutate(document = row_number())
+
+create_chapters = books %>% 
+  group_by(title) %>%
+  mutate(chapter = cumsum(str_detect(text, regex("\\bchapter\\b", ignore_case = TRUE)))) %>% 
+  ungroup() %>%
+  filter(chapter > 0) %>%
+  unite(document, title, chapter) 
+
+by_chapter = create_chapters %>% 
+  group_by(document) %>% 
+  summarise(text=paste(text,collapse=' '))
+
+#by_chapter
+```
+
+The `by_chapter` data.frame can be used to create a corpus with `VectorSource` by using the `text` column. 
+
+## Create the Topics Model
+
+Create the corpus for the model in R. 
+
+```{r}
+##r chunk
+
+```
+
+Clean up the text and create the Document Term Matrix. 
+
+```{r}
+##r chunk 
+
+```
+
+Weight the matrix to remove all the high and low frequency words. 
+
+```{r}
+##r chunk
+
+```
+
+Run and LDA Fit model (only!).
+
+```{r}
+##r chunk
+
+```
+
+Create a plot of the top ten terms for each topic.
+
+```{r}
+##r chunk
+```
+
+## Gensim Modeling in Python
+
+Transfer the `by_chapter` to Python and convert it to a list for processing. 
+
+```{python}
+##python chunk
+
+```
+
+Process the text using Python. 
+
+```{python}
+##python chunk
+
+```
+
+Create the dictionary and term document matrix in Python.
+
+```{python}
+##python chunk
+
+```
+
+Create the LDA Topics model in Python using the same number of topics you picked for the LDA Fit R Model. 
+
+```{python}
+##python chunk
+
+```
+
+Create the interactive graphics `html` file. Please note that this file saves in the same folder as your markdown document, and you should upload the knitted file and the LDA visualization html file. 
+
+```{python}
+##python chunk
+
+```
+
+## Interpretation
+
+Interpret your space - can you see the differences between books/novels? Explain the results from your analysis (more than one sentence please). 
+  
+
+

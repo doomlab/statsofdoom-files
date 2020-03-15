@@ -1,0 +1,449 @@
+---
+title: "Latent Semantic Analysis"
+author: "Erin M. Buchanan"
+date: "12/11/2019"
+output:
+  slidy_presentation:
+    increment: yes
+---
+
+```{r echo = F}
+options(scipen = 999)
+```
+
+## Language Topics Discussed
+
+- What is a semantic vector space?
+- What are distributional models?
+- How do we build and use a LSA space? 
+
+## Semantic Vector Space?
+
+- Semantic vector space is a popular term for *distributional* models 
+- Sometimes called "bag of words" models
+- Posit: we learn language from repeated experience, so we can build language models from lots of text (corpus) to mimic this process
+- Firth (1957): "You shall know a word by the company it keeps"
+
+## Distributional models
+
+- Latent Semantic Analysis: Landauer & Dumais (1997) - arguably the most famous of the models
+  - Used to predict: semantic similarity, word categorization, comprehensions, essay scoring 
+  - Criticisms: ignoring word order, exactly how this is performed in the brain, no incremental learning
+
+## Distributional Models 
+
+- Hyperspace Analogue to Language: Burgess & Lund (1996) - a moving window hypothesis   - Gradually "learns" by including text-representation as it scans across a document
+  - Used to predict: semantic task performance, problem solving, similarity, priming
+  - Similar models include COALS: Correlated Occurrence Analogue
+to Lexical Semantics
+
+## Distributional Models:
+
+- A quick comparison:
+  - LSA: Words are similar if they appear in the same contexts
+  - HAL: Words are similar if they appear in similar positions
+
+## Distributional Models
+
+- Further models, such as BEAGLE (Bound Encoding of the Aggregate
+Language Environment) and the Temporal Context Model (TCM) are considered *random vector models*, which combines the LSA-HAL approaches
+- Another set of models, mostly called Topics Models assume that text has an underlying set of topics to be discovered 
+  - Covered next week!
+
+## Using LSA
+
+- How to preprocess text documents to clean them for analysis
+- How to calculate coherence of a text based on a semantic space
+- How to create your own semantic space
+- How to examine semantic neighborhoods to explore text documents
+
+## LSA - Semantic Spaces
+
+- First, you create a term by document matrix where each term is a row and documents are columns.
+- This matrix is processed through singular value decomposition to reduce rows, but capture the relationship between columns (documents).
+- These spaces can be used to measure similarity between terms or larger discourse. 
+
+## Example Term by Document
+
+```{r txd, echo=FALSE, out.height="500px", out.width="500px", fig.align="center"}
+knitr::include_graphics("TXD.png")
+```
+
+## Example Essay Answers
+
+```{r exam_answers, echo = TRUE}
+##r chunk
+exam_answers = read.csv("exam_answers.csv", 
+                        header = F, stringsAsFactors = F)
+```
+
+> exam_answers$V1[1]
+
+[1] "Attention - is what we choose to focus on in any given time, meaning some other information isn't being perceive/processed."
+
+>exam_answers$V1[5]
+
+[1] "Attention is a process that enhances information and inhibits other information. The enhancing is our brains further processing information, while inhibiting other information from interrupting the original processing. There are different roles of attention known as failures of selection and the successes of selection. The failures of selection ..."
+
+## Formatting the Answers
+
+```{r answer_format, echo = TRUE}
+##r chunk
+library(ngram)
+
+# preprocess(x, #a single string
+#            case = "lower", #lower case
+#            remove.punct = FALSE, #take out punctuation
+#            remove.numbers = FALSE, #take out numbers
+#            fix.spacing = TRUE) #fix trailing spaces
+
+exam_answers$processed = apply(exam_answers, 1, preprocess)
+```
+
+## Load Semantic Space
+
+- Semantic spaces are matrices in *R* that include the words as rows and the "contexts/themes" as columns.
+- Several semantic spaces are provided in the package `LSAfun`, can be downloaded from the authors, or built using the `lsa` package.  
+
+```{r load-space, echo=TRUE}
+##r chunk
+library(LSAfun, quietly = T)
+wonderland[1:5, 1:4]
+```
+
+## Calculate Coherence
+
+- Coherence can be defined as:
+    - Local: the cosine between two adjacent sentences in the semantic space
+    - Global: the mean cosines of all pairwise sentences
+    - Cosine is a measure of similarity comparable to correlation
+  
+## Coherence Example
+
+```{r coherence, echo = TRUE}
+##r chunk
+coherence(exam_answers$processed[5], #a single text answer
+          tvectors = wonderland) #semantic space matrix
+```
+
+## Space Choice Matters
+
+```{r coherence2, echo = TRUE}
+##r chunk
+#based on English Corpus
+load(file = "engbnc.Rda") #rda files are data files 
+coherence(exam_answers$processed[5], 
+          tvectors = EN_100k_lsa) #use the English Space
+```
+
+## How to Make a Semantic Space
+
+```{r make_space, echo = TRUE, eval = FALSE}
+#Import the pdf of the book 
+#In general the text documents you want to analyze
+library(pdftools)
+book = pdf_text("PSYCHOLOGY_OF_LANGUAGE.pdf")
+```
+
+## How to Make a Semantic Space 
+
+- First, create a "Corpus" object in *R*, which can be done with several functions.
+- Because my file is all one column of data, I used `VectorSource`. 
+
+```{r make_space2, echo = TRUE, eval = FALSE}
+##r chunk
+library(tm)
+#Create a corpus from a vector of documents
+book_corpus = Corpus(VectorSource(book)) 
+```
+
+## How to Make a Semantic Space 
+
+- When you perform these analyses, you usually have to edit the text. 
+- Therefore, we are going to lower case the words, take out the punctuation, and remove English stop words (like the, an, a).
+
+``````{r make_space3, echo = TRUE, eval = FALSE}
+##r chunk
+#Lower case all words
+book_corpus = tm_map(book_corpus, tolower) 
+
+#Remove punctuation for creating spaces
+book_corpus = tm_map(book_corpus, removePunctuation) 
+
+#Remove stop words
+book_corpus = tm_map(book_corpus, 
+                     function(x) removeWords(x, stopwords("english")))
+```
+
+## How to Make a Semantic Space
+
+- Transform the documents you uploaded into a term (words) by document matrix.
+
+```{r make_space4, echo = TRUE, eval = FALSE}
+##r chunk
+#Create the term by document matrix
+book_mat = as.matrix(TermDocumentMatrix(book_corpus))
+```
+
+## How to Make a Semantic Space
+
+- Then you would want to weight that matrix to help control for the sparsity of the matrix. 
+- That means you are controlling for the fact that not all words are in each document, as well as the fact that some words are very frequent.
+
+```{r make_space5, echo = TRUE, eval = FALSE}
+##r chunk
+library(lsa)
+
+#Weight the semantic space
+book_weight = lw_logtf(book_mat) * gw_idf(book_mat)
+```
+
+## How to Make a Semantic Space
+
+- The next step is to run the LSA, which involves using singular value decomposition to find the semantic factors available in your corpus. 
+- The last step converts the LSA object into a matrix so you can use it to run other functions.
+
+```{r make_space6, echo = TRUE, eval = FALSE}
+##r chunk
+#Run the SVD
+book_lsa = lsa(book_weight)
+
+#Convert to textmatrix for coherence
+book_lsa = as.textmatrix(book_lsa)
+```
+
+## Space Choice Matters
+
+```{r load_save, echo = TRUE}
+##r chunk
+load(file = "book_lsa.rda")
+
+#based on Book Corpus, rather than Alice in Wonderland
+#appears that they don't match the book as well as the BNC!
+coherence(exam_answers$processed[5], 
+          tvectors = book_lsa)
+```
+
+## Examine Neighbors
+
+- If you want to create a picture of your data, you could use the plot_neighbors function.
+
+```{r words, echo = TRUE}
+##r chunk
+plot_neighbors("attention", #single word
+               n = 10, #number of neighbors
+               tvectors = book_lsa, #matrix space
+               method = "MDS", #PCA or MDS
+               dims = 2) #number of dimensions
+```
+
+## Examine Neighbors
+
+```{r words_pic, echo = FALSE}
+##r chunk
+plot_neighbors("attention", #single word
+               n = 10, #number of neighbors
+               tvectors = book_lsa, #matrix space
+               method = "MDS", #PCA or MDS
+               dims = 2) #number of dimensions
+```
+
+
+## Calculate Related Values
+
+- You can also pick a random set of related words based on cosine values. 
+- In this function, you can pick a concept, a range of cosine values you wish to target, and the number related words to find.
+
+```{r word_choice, echo = TRUE}
+##r chunk
+choose.target("information", #choose word
+              lower = .3, #lower cosine
+              upper = .4, #upper cosine
+              n = 10, #number of related words to get
+              tvectors = book_lsa)
+```
+
+## Create a Student Corpus
+
+```{r student-space, echo = TRUE, warning = FALSE}
+##r chunk
+library(tm)
+exam_corpus = Corpus(VectorSource(exam_answers$processed))
+exam_corpus = tm_map(exam_corpus, tolower)
+exam_corpus = tm_map(exam_corpus, removePunctuation)
+exam_corpus = tm_map(exam_corpus, function(x) removeWords(x, stopwords("english")))
+#exam_corpus = tm_map(exam_corpus, stemDocument, language = "english")
+```
+
+## Create a Student Corpus
+
+```{r student-space2, echo = TRUE, warning = FALSE}
+##r chunk
+exam_mat = as.matrix(TermDocumentMatrix(exam_corpus))
+exam_weight = lw_logtf(exam_mat) * gw_idf(exam_mat)
+exam_lsa = lsa(exam_weight)
+exam_lsa = as.textmatrix(exam_lsa)
+#save(exam_lsa, file = "exam_lsa.rda")
+```
+
+## Compare that corpus
+
+```{r words2, echo = TRUE}
+##r chunk
+plot_neighbors("attention", n = 10, 
+               tvectors = exam_lsa, 
+               method = "MDS", dims = 2)
+```
+
+## What else is in the corpus?
+
+- We then can look at the relationship of a bunch of concepts at once. 
+- First, pick a set of words. 
+- Then you can plot those words, like the neighbor plot above, and then also see the cosine values between those words you selected.
+
+## What else is in student answers?
+
+```{r student_multiselect, echo = T}
+##r chunk
+#use a multiselect for lists of words
+list1 = c("object", "insignificant", "attention", "endogenous")
+
+#plot all the words selected
+plot_wordlist(list1, #put in the list above 
+              method = "MDS", 
+              dims = 2, #pick the number of dimensions
+              tvectors = exam_lsa)
+```
+
+## What else is in the student answers?
+
+```{r student_multiselect_plot, echo = F}
+##r chunk
+#plot all the words selected
+plot_wordlist(list1, #put in the list above 
+              method = "MDS", 
+              dims = 2, #pick the number of dimensions
+              tvectors = exam_lsa)
+```
+
+## What else is in student answers?
+
+```{r student_multiselect2, echo = T}
+##r chunk
+#look at the cosine of all the words you selected
+multicos(list1, tvectors = exam_lsa)
+```
+
+## Python
+
+```{r}
+##r chunk
+library(reticulate)
+#py_install("gensim")
+```
+
+## Python Packages 
+
+```{python}
+##python chunk
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem.porter import PorterStemmer 
+ps = PorterStemmer()
+
+from gensim import corpora
+from gensim.models import LsiModel
+from gensim.models.coherencemodel import CoherenceModel
+import matplotlib.pyplot as plt
+```
+
+## Transfer the original answers
+
+```{python}
+##python chunk
+exam_answers = list(r.exam_answers["V1"])
+exam_answers[0]
+```
+
+## Process the text!
+
+```{python}
+##python chunk
+##create a spot to save the processed text
+processed_text = []
+
+##loop through each item in the list
+for answer in exam_answers:
+  #lower case
+  answer = answer.lower() 
+  #create tokens
+  answer = nltk.word_tokenize(answer) 
+  #take out stop words
+  answer = [word for word in answer if word not in stopwords.words('english')] 
+  #stem the words
+  answer = [ps.stem(word = word) for word in answer]
+  #add it to our list
+  processed_text.append(answer)
+
+processed_text[0]
+```
+
+## Create a dictionary and TDM
+
+```{python}
+##python chunk
+#create a dictionary of the words
+dictionary = corpora.Dictionary(processed_text)
+
+#create a TDM
+doc_term_matrix = [dictionary.doc2bow(doc) for doc in processed_text]
+```
+
+## Create some functions and figure out dimensions
+
+```{python}
+##python chunk
+##figure out the coherence scores
+def compute_coherence_values(dictionary, doc_term_matrix, clean_text, start = 2, stop = 100, step = 2):
+    coherence_values = []
+    model_list = []
+    for num_topics in range(start, stop, step):
+        # generate LSA model
+        model = LsiModel(doc_term_matrix, num_topics=num_topics, id2word = dictionary)  # train model
+        model_list.append(model)
+        coherencemodel = CoherenceModel(model=model, corpus = doc_term_matrix, texts=clean_text, dictionary=dictionary, coherence='u_mass')
+        coherence_values.append(coherencemodel.get_coherence())
+    return model_list, coherence_values
+
+def plot_graph(dictionary, doc_term_matrix, clean_text, start, stop, step):
+    model_list, coherence_values = compute_coherence_values(dictionary, doc_term_matrix, clean_text, start, stop, step)
+    # Show graph
+    x = range(start, stop, step)
+    plt.plot(x, coherence_values)
+    plt.xlabel("Number of Topics")
+    plt.ylabel("Coherence score")
+    plt.legend(("coherence_values"), loc='best')
+    plt.show()
+    
+start,stop,step=2,12,1
+plot_graph(dictionary, doc_term_matrix, processed_text, start, stop, step)
+```
+
+## Run the model
+
+```{python}
+##python chunk
+#run the LSA
+number_of_topics = 4
+words = 10
+lsamodel = LsiModel(doc_term_matrix, num_topics=number_of_topics, id2word = dictionary)
+print(lsamodel.print_topics(num_topics=number_of_topics, num_words=words))
+```
+
+## Summary
+
+- We could use local or global coherence measures to help score exam documents.
+- The definition of semantic space will heavily influence these scores.
+- Neighborhoods can be examined to determine the most related themes in a semantic space.
+- You can calculate cosine values on individual words for semantic similarity - this may predict other semantic variables like priming. 
+- The goal of these models is to build and explore their facets - which can then be used to predict other future information. 

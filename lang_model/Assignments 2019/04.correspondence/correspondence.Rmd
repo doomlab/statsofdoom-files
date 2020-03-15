@@ -1,0 +1,155 @@
+---
+title: 'Correspondence Assignment'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load the libraries + functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+```{r libaries}
+##r chunk
+
+```
+
+## Simple Correspondence Analysis
+
+### The Data
+
+Women and metonymy in Ancient Chinese: the data concerns metonymic patterns that were used to refer to women in texts of the Ming dynasty in China (1368 – 1644). The rows are different types of female referents, namely, imperial woman (queen or emperor's concubine), servant girl, beautiful woman, mother or grandmother, unchaste woman (prostitute or mistress), young girl, wife (or concubine). The columns are six metonymic patterns:
+
+- Action for agent or patient, e.g. "to ruin state" for "beautiful woman"
+- Body part for whole, e.g. "powder-heads" for "prostitutes"
+- Location for located, e.g. "the middle palace" for "queen"
+- A piece of clothing for person, e.g. "red dress" for "beautiful woman"
+- Characteristic for person, e.g. "respectable-kind" for "mother"
+- Possessed for possessor, e.g. "blusher and powder" for "beautiful woman"
+
+Import the data and create a mosaic plot to visualize the differences in usage across women references. 
+
+```{r}
+##r chunk
+
+```
+
+### The Analysis
+
+Run a simple correspondence analysis on the data. 
+
+```{r}
+##r chunk 
+
+```
+
+What do the inertia values tell you about the dimensionality of the data?
+
+Create a 2D plot of the data. 
+
+```{r}
+##r chunk
+
+```
+
+What can you tell about the word usage from examining this plot? 
+
+## Multiple Correspondence Analysis
+
+The data included is from a large project examining the definitions of words, thus, exploring their category requirements. The following columns are included:
+
+- Cue: the word participants saw in the study, what they gave a definition for.
+- POS_Cue: the part of speech of the cue word.
+- POS_Feature: the part of speech for the feature word they listed (i.e. zebra-stripes, stripes would be the feature).
+- POS_Translated: these features were then translated into a root form, and this column denotes the part of speech for the translated word.
+- A1 and A2: the type of affix that was used in the feature. For example, ducks would be translated to duck, and the difference is a numerical marker for the affix of s.
+
+Run a multiple correspondence analysis on the data, excluding the cue column. 
+
+```{r}
+##r chunk
+
+```
+
+Plot the variables in a 2D graph. Use `invis = "ind"` rather than `col.ind = "gray"` so you can read the plot better. 
+
+```{r}
+##r chunk
+
+```
+
+Use the `dimdesc` function to show the usefulness of the variables and to help you understand the results. Remember that the markdown preview doesn't show you the whole output, use the console or knit to see the complete results. 
+
+```{r}
+##r chunk
+
+```
+
+What are the largest predictors (i.e., R^2 over .25) of the first dimension? 
+
+Looking at the category output for dimension one, what types of features does this appear to represent? (Try looking at the largest positive estimates to help distinguish what is represented by this dimension). 
+
+### Simple Categories
+
+To view simple categories like we did in the lecture, try picking a view words out of the dataset that might be considered similar. I've shown how to do this below with three words, but feel free to pick your own. Change the words and the `DF` to your dataframe name. We will overlay those as supplemental variables. 
+
+```{r}
+##r chunk
+#pick any several interesting words 
+words = c("mom", "family", "relative")
+
+mca_model2 = MCA(DF[DF$cue %in% words , ], 
+                 quali.sup = 1, #supplemental variable
+                 graph = FALSE)
+```
+
+Create a 2D plot of your category analysis. 
+
+```{r}
+##r chunk 
+
+```
+
+Add the prototype ellipses to the plot. 
+
+```{r}
+##r chunk
+
+```
+
+Create a 95% CI type plot for the category.
+
+```{r}
+##r chunk
+
+```
+
+What can you tell about the categories from these plots? Are they distinct or overlapping? 
+
+## Run a MCA in Python
+
+In this section, run the same MCA from above in Python. Include the MCA code and print out the inertia values for your analysis. 
+
+```{python}
+##python chunk 
+
+```
+
+## Plot the Results
+
+Plot the results of your MCA using Python in the section below. I have included Python code below that will help if you are completing this assignment on the cloud. 
+
+```{python}
+##python chunk
+import matplotlib
+matplotlib.use('Agg')
+
+```
+
+## Explore the differences
+
+Do the R and Python results from the MCA show you the answer? Do you detect any differences between the outputs? 

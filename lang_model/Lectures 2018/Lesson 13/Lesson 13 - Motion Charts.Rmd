@@ -1,0 +1,90 @@
+---
+title: "Lesson 13 - Motion Charts"
+author: "Erin M. Buchanan"
+date: "04/11/2019"
+output:
+  ioslides_presentation:
+    increment: yes
+  beamer_presentation:
+    incremental: no
+---
+
+```{r echo = F}
+options(scipen = 999)
+```
+
+## Language Topics Discussed
+
+- Language change over time!
+
+## Future Markers
+
+- Future markers are words like *will* and *going to*, which we can examine their change over time
+- *Shall* was used for a long time, but it changed over to *will*
+- Farming n-grams for trends in the data, like the culturomics lecture
+- https://books.google.com/ngrams/graph?content=will%2C+shall%2C+going+to&year_start=1800&year_end=2000&corpus=15&smoothing=3&share=
+
+## Motion Charts
+
+- Allow you to see change over time
+- Visualize the relative frequency of different lexemes in constructional slots
+- So you could do something like we did in previous lectures over time 
+
+## Motion Charts
+
+- Specifically, we can examine the "territory" of words - when a dominant word in the lexicon is slowly taken over by a synonym
+- Using data from Corpus of Historical American English
+- Usually these charts are two different collexemes paired with a bunch of words like distinctive collexeme analysis over time
+
+## Motion Charts 
+
+- For this example, we will look at *will* versus *going to* paired with other verbs 
+- This analysis will tell us if there is semantic change over time 
+- You will use the `googleVis` package, with an internet connection and Flash
+
+## Look at the data
+
+```{r}
+library(Rling)
+library(googleVis)
+data(fut)
+head(fut)
+```
+
+## Charts
+
+- Words are plotted against each other
+- Bubbles show the relative frequencies (like ratios of one to the other) so check out the x and y axis strengths
+- You can click the button to watch it over time - slow motion indicates a slow take over versus fast motion meaning a quick change 
+
+## Let's look at a chart!
+
+```{r}
+motionchart = gvisMotionChart(fut, idvar = "Verb", timevar = "Period")
+plot(motionchart)
+```
+
+## Results
+
+- Will is still popular, but slowly changing to going to
+- If you pick a specific word, you can view it's trail over time
+- Use this to help determine what other analyses you might want to run with logistic regression, etc.
+
+## One more version
+
+```{r}
+data(should_ought)
+head(should_ought)
+```
+
+## Motion chart
+
+```{r}
+motionchart2 = gvisMotionChart(should_ought, idvar = "Verb", timevar = "Year")
+plot(motionchart2)
+```
+
+## Summary
+
+- Learned how to view change in terms over time
+- Paired with geographic change charts, we could examine trends in time and space 

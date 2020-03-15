@@ -1,0 +1,355 @@
+---
+title: "Lesson 1 - What is Language?"
+author: "Erin M. Buchanan"
+date: "12/31/2018"
+output: 
+  ioslides_presentation:
+    increment: TRUE
+  beamer_presentation:
+    incremental: no
+---
+
+## What is this course about?
+
+- Computational Linguistics
+- Dealing with language (which is messy)
+- Learning special analyses for language in *R*
+- Make reports of your work in *Rmarkdown*
+
+## What will you learn?
+
+- What is computational linguistics and language processing?
+- How can we apply statistics to answer questions about qualitative data (i.e. language at any level)?
+- What are the popular ways to measure language association and model human language?
+
+## Syllabus
+
+- You should read the syllabus for course policies and other important information. 
+- You will use Moodle for all course related activities. 
+- Let's check those things out now.
+
+## Writing
+
+- You will be expected to write reports with code and text embedded. 
+- You will want to embed or otherwise cite your sources for material you are referencing.
+- Please use APA style on how to citations (search Purdue OWL for tips).
+
+## Human Language
+
+Things to think about:
+
+- What was the last thing you said to someone?
+- ... the last thing you wrote down?
+- ... the last thing you heard?
+- How exactly did you do those things?
+
+## Parts to Human Language
+
+- Biological: brain areas, mouth, tongue, larynx
+- Cognitive: symbol systems, word order
+- Social: knowledge of other users, social rules, attitudes
+
+## Language Purpose
+
+- Communication
+- Emotional expression
+- Social interaction
+- Thinking
+
+## Studying Language
+
+- Linguistics: study of language
+- Psycholinguistics: psychological processes involved in language and the individual (sometimes called cognitive linguistics)
+- Computational linguistics: analysis of language through the lens of computer science 
+- ... even more names, as we expand and cross over with other fields
+
+## What is Language?
+
+- System of symbols and rules that enable us to communicate 
+- Some terms to know:
+
+    - Semantics: study of meaning
+    - Syntax/grammar: system of rules for language to be well formed
+    - Morphology: study of words
+    - Pragmatics: study of language use
+    - Lexicon: mental dictionary, word storage
+    
+## History of Studying Language
+
+- Before/around 1900: Galton and Freud
+- 1950s: Famous conference at Cornell, Dartmouth
+- Chomsky and Skinner
+- Influenced heavily by research on artificial intelligence, computing power increases, thinking about modeling language with computers
+
+## Basic Language Terminology
+
+- Phoneme: basic unit of sound 
+    - The Many to Many Problem with English
+    - Vowels and Consonants
+- Syllables: rhythmic unit of speech
+- Morphemes: smallest unit of meaning in a word
+- Words: smallest element in isolation with meaning
+    - Token: total number of words in a text
+    - Types: number of distinct words 
+
+## Basic Language Terminology
+
+- Categories of words:
+    - Nouns
+    - Adjectives
+    - Verbs
+    - Adverbs
+    - Determinants
+    - Pronouns
+    - Prepositions
+    - Conjunctions
+
+## Basic Language Terminology
+
+- Phrases: group of words forming a grammatical unit (noun versus verb)
+- Allows you to make tree diagrams of sentences
+
+```{r echo=FALSE, out.height="300px", out.width="300px", fig.align="center"}
+knitr::include_graphics("lesson1-tree.png")
+```
+
+## Defining Human Language
+
+Hockett's Feature Design: communalities between languages that define language as separate from other communication systems (i.e., animals)
+
+- Semanticity: symbols are tied to meaning
+- Arbitrariness: symbols are arbitrary (not tied to meaning)
+- Discreteness: symbols can be broken down and recombined (morphemes)
+- Productivity: users can create and understand novel text (creativity)
+
+## Applying Statistics to Language
+
+- Originally, studying language was part of a qualitative skill set
+- Statistics were  simple percentages/means
+- Language was considered innate -> so all humans had the same underlying system
+- We just had to figure out what that system was ...
+
+## Applying Statistics to Language
+
+- However: statistical language learning and the interaction with the environment could not be ignored
+- Language knowledge is shaped by language use 
+- As we learn and use a language, we are "intuitive statisticians" - this implies that language can be analyzed with statistics 
+
+## Influence of Our Surroundings
+
+- Frequency, frequency, frequency
+- Cognitive mechanisms
+    - Probabilistic structure of categories 
+- Social mechanisms
+    - Representations of word meanings
+    - New words in your lifetime
+    - Slang
+
+## Language and Statistics Now
+
+Examples:
+
+- Model word choice
+- Corpora!
+- Behavioral profiles
+- Semantic Vector models
+- Along with experimental results relying on traditional statistics: t-tests, ANOVA, correlation, regression, etc. 
+
+## Install the Packages
+
+- You will need to know *R* for this course
+- Be sure to have the newest version of *R* (3.5.2) and *RStudio* (1.1.463 or the dev version 1.2+)
+- The package for the book is *Rling* - it's included online for you to download
+
+```{r install_package, echo = T, eval = F}
+install.packages(file.choose(), repos = NULL, type = "source")
+
+install.packages("modeest")
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("genefilter", version = "3.8")
+```
+
+## Load the Libraries
+
+```{r libraries, echo=T}
+library(Rling)
+library(modeest)
+data(ldt)
+head(ldt)
+```
+
+
+## Basic Statistics (Continuous)
+
+- Using the English Lexicon Project, what can we learn about word length and response latencies?
+    - What is the ELP?
+    - What is length?
+    - What is response latency?
+    
+## Basic Statistics (Continuous)
+
+- Variables we can calculate: 
+    - `summary`: min, 1st quartile, median, mean, 3rd quartile, max
+    - `mlv`: mode from *modeest* package
+    - `sd`: standard deviation
+
+## Basic Statistics (Continuous)
+
+```{r elp1, echo = T}
+summary(ldt$Length)
+mlv(ldt$Length)
+sd(ldt$Length)
+```
+
+## Graphical Displays (Continuous)
+
+```{r elp2, echo=T, eval=F}
+
+par(mfrow = c(1, 3))
+
+hist(ldt$Mean_RT, main = "Histogram of Mean Response Latencies", 
+     xlab = "Response Latencies in ms")
+
+plot(density(ldt$Mean_RT), main = "Density Plot of Mean Response Latencies", 
+     xlab = "Response Latencies in ms")
+
+{qqnorm(ldt$Mean_RT)
+qqline(ldt$Mean_RT)}
+```
+
+## Graphical Displays (Continuous)
+
+```{r elp2.2, echo=F}
+
+par(mfrow = c(1, 3))
+
+hist(ldt$Mean_RT, main = "Histogram of Mean Response Latencies", 
+     xlab = "Response Latencies in ms")
+
+plot(density(ldt$Mean_RT), main = "Density Plot of Mean Response Latencies", 
+     xlab = "Response Latencies in ms")
+
+{qqnorm(ldt$Mean_RT)
+qqline(ldt$Mean_RT)}
+```
+
+## Graphical Displays (Continuous)
+
+- Data appears to indicate a bit of skew and some outliers:
+    - Use `boxplot` to view those outliers
+    - We can view those outliers by using z-scores
+
+```{r elp3, echo=T}
+summary(ldt$Mean_RT)
+ldt[abs(scale(ldt$Mean_RT)) > 3, ]
+```
+
+## Graphical Displays (Continuous)
+
+```{r elp3.2, echo=T}
+boxplot(ldt$Mean_RT, main = "Mean Response Latencies", 
+        ylab = "Response Latencies in ms")
+```
+
+## Zipf's Law (Continuous)
+
+- Zipf's Law: word frequency is inversely related to its frequency rank.
+    - Therefore the first word is twice as likely as the second word, three times as likely as the third word, etc. 
+
+## Zipf's Law (Continuous)
+
+```{r elp4, echo=T}
+plot(sort(ldt$Freq, decreasing = TRUE), 
+     type = "b", main = "Zipf's Law", ylab = "Word Frequency")
+```
+
+## Basic Statistics (Categorical)
+
+- What do we need to do differently to visualize/understand categorical data?
+
+```{r sent1, echo=T}
+data(sent)
+head(sent)
+```
+
+## Basic Statistics (Categorical)
+
+- Dataset contains 20 sentences marked with the types of verbs in each clause:
+    - Intransitive: subject + no objects: He sneezed.
+    - Transitive: subject + one object: The cat bit him.
+    - Ditransitive: subject + two objects: He gave Mary ten dollars.
+
+```{r sent2, echo=T}
+summary(sent$clause)
+```
+
+## Basic Statistics (Categorical)
+
+```{r sent2.2, echo=T}
+sent.t = table(sent$clause)
+prop.table(sent.t)
+```
+
+## Graphical Displays (Categorical)
+
+```{r sent3, echo=T}
+pie(sent.t,
+    main = "Pie Chart of Verb Types", 
+    col = c("black", "grey40", "grey80"),
+    labels = paste(names(sent.t), prop.table(sent.t)*100))
+```
+
+## Basic Color Terms
+
+- Berlin and Kay (1969) proposed a theory about our linguistic interpretations of colors, mainly that color vocabulary falls into universal categories:
+
+```{r berlinkay, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("lesson1-berlinkay.png")
+```
+
+## Basic Color Terms
+
+- Data is from the Corpus of Contemporary American English (COCA)
+- Counts of adjective use of color terms
+- Problems with simple frequency count is corpus size
+
+```{r color, echo=T}
+data(colreg)
+head(colreg)
+```
+
+## Basic Color Terms
+
+- We know the corpus size (number of words) from looking at COCA statistics
+- We can calculate the deviation of those proportions (like standard deviation)
+
+```{r color2, echo=T}
+freqreg <- c(95385672, 90344134, 91044778, 187245672)
+
+dev_prop = function (observed_count, expected_count){
+  DP_value = sum(abs(prop.table(observed_count) - prop.table(expected_count)))/2
+  DP_normal = DP_value / (1-min(prop.table(expected_count)))
+  return(DP_normal)
+}
+```
+
+## Basic Color Terms
+
+- Values close to zero indicate spread is similar given corpus size
+- Values close to one indicates one of the subsets is favored more strongly 
+
+```{r color3, echo=T}
+dev_prop(colreg["black", ], freqreg)
+dev_prop(colreg["gray", ], freqreg)
+```
+
+## Summary
+
+- In this lecture, you learned:
+    - What is human language?
+    - History of analyzing human language
+    - Simple statistics for continuous and categorical variables
+    - Simple graphs for continuous and categorical variables
+- Next: Linear Regression + Frequency/Response Latencies

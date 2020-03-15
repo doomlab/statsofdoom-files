@@ -1,0 +1,1 @@
+This experiment replicated pretty well, but the typical results I included on slide 8 don't really look like what we actually obtained.  Both lines were pretty much straight, which is the important part, but they weren't parallel.  You may want to modify this graph.

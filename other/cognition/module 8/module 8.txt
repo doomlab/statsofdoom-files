@@ -1,0 +1,173 @@
+Hippocampus
+area of the brain involved in consolidation of memory
+
+
+Prefrontal regions
+area of the brain involved in the making of memories (paying attention)
+
+
+Lashley
+researcher who studied how information is stored in memory
+
+
+Atkinson and Shriffrin Model of memory
+three stage model of memory that shows how information comes into sensory memory and is stored in long term memory
+
+
+Sensory memory
+first stage of memory, temporary store for sensation
+
+
+Studying sensory memory (sperling)
+Sperling showed that sensory memory is brief but large by using a quick visual task that people had to report specific lines of a square of text
+
+
+Iconic
+visual store in sensory memory
+
+
+Echoic
+auditory store in sensory memory
+
+
+Short term memory
+second stage of memory that is the working area of memory
+capacity is limited (7 +/- 2) and temporary duration without rehearsal 
+
+
+Working memory
+in short term memory the area where information is being actively processed
+
+
+Memory span
+the number of items a person can work with in working memory
+
+
+Chunking
+grouping information into logical pieces to help with memory
+ 
+
+Baddeley’s theory of working memory
+three part model of working memory with the phonological loop, central executive, and visuo-spatial sketchpad
+
+
+Phonological loop
+the verbal store for working memory
+
+
+Central executive
+the cop system that controls information going into other components of working memory
+
+
+Visuo-spatial sketchpad
+the visual and spatial store for working memory
+
+
+Measuring Working Memory
+using span tasks such as the OSPAN, digit span, etc.
+
+
+Attention + WM
+the idea that working memory is the ability to focus attention
+
+
+Anti saccade
+the task used to study working memory and attention
+must look away from a cue on the screen
+
+
+Cocktail party
+the effect wherein you hear your name more often than anything else
+the task used to study working memory and attention
+
+
+Inhibition + WM
+the idea that working memory is the ability to filter other things out
+
+
+Expertise
+working memory shows expertise effects with being able to chunk better
+
+
+Long Term memory
+the permanent store of information
+
+
+Declarative
+explicit memory that we can consciously recall
+
+
+Semantic Memory
+our fact based system, mental dictionary
+
+
+Episodic Memory
+our life event based system, mental diary
+
+
+Source amnesia
+not remembering where/when/who you learned something from
+
+
+HM
+patient with no hippocampus that had no new learning of memories (episodic) with very little semantic memory
+
+
+Encoding
+the process of storing information to go into long term memory from short term memory
+
+
+Consolidation
+the process of making memories permanent 
+
+
+Elaboration
+linking new information to older information already in memory
+
+
+Attention + LTM
+the idea that information not attended to will not go into long term memory
+
+
+Levels of processing
+the idea that information that is processed at a deeper level (i.e. semantically) will be remembered better
+
+
+Incidental learning
+the idea that some information is learned by accident when you are not trying
+
+
+Transfer appropriate processing
+the idea that information is learned better when the encoding and retrieval processes match
+
+
+Encoding specificity
+the idea that information is learned better when the encoding and retrieval situations match
+
+
+Generation effect
+information that you come up with is learned better than information given to you to learn
+
+
+Spacing effect
+learning across many trials spaced out is better
+
+
+Non-declarative
+implicit memory, unconscious processes
+
+
+Priming
+the idea that the second time a stimulus is seen/heard you will be faster/better
+
+Perceptual
+increased performance for visual objects
+
+
+Conceptual
+increased performance for semantically related objects
+
+
+Classical conditioning
+stimulus response learning
+

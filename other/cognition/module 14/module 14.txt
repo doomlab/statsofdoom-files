@@ -1,0 +1,124 @@
+Psycholinguistics
+study of the psychology of language
+
+
+Language is special theory
+theory that language is a special mental module that is different from other cognitive processes
+chomsky, pinker
+nature, nativist
+
+
+Language is like everything else theory
+theory that language is learned and processed just like every other sound in the brain
+tomasello
+emergent, nurture
+
+
+Cross linguistic consistencies
+idea that all languages share different language rules that shouldn't happen if they were truly learned
+semanticity, arbitrary, flexibility, naming, displacement, productivity
+
+
+Critical periods
+supports both theories
+idea that there is a window of time (genetics) that we have to hear language (environment) to get language fully
+
+
+Broca's 
+speech production center, syntax is impaired in aphasia
+
+
+Wernicke's 
+speech comprehension center, semantics is impaired in aphasia
+
+
+Universal grammar
+Chomsky's idea of prebuilt grammar, since only two possible word orders are commonly represented
+
+
+Transformational grammar
+how we comprehend sentence structure into meaning
+does not explain how we interpret ambiguity
+
+
+Plasticity
+recovery from brain damage
+
+
+Grammar 
+understanding structure in language
+
+
+Discourse
+larger structure of language (like paragraphs)
+
+
+Propositions
+smaller chunks of language (like clauses)
+
+
+Syntax
+grammatical rules between words in a sentence
+
+
+Phrase structure tree
+sometimes called parse tree
+hierarchical structure of a sentence
+
+Aphasia
+a language or speech disruption
+
+
+Morphemes
+smallest unit of meaning
+
+
+Phonemes
+smallest unit of sound
+
+
+Ambiguity
+more than one interpretation of a sentence
+
+
+Garden path sentences
+ways to study ambiguity by leading the reader astray
+
+
+Spectrogram
+a way to display articulation of speech
+
+
+Coarticulation
+overlapping of phonemes
+
+
+Phoneme restoration 
+where you fill in missing sounds to complete the most likely word you heard
+
+
+Cohort
+a list of words that sound or look the same to the target word
+
+
+McGurk effect
+differences in speech perception because visual and auditory cues do not match
+
+
+Profanity
+words that are used socially to be rude/insulting
+now we think of them as ways to connect to audience
+
+
+Uses of cursing
+dysphemistic, abusive, idiomatic, empathic, cathartic
+
+
+Strength of cursing
+goes up for racial slurs
+goes down with interaction in environment (exposure)
+depends on culture
+
+
+Differences in word origin
+fuck versus bitch show interesting patterns of usage that imply the sociocultural change of word use across time

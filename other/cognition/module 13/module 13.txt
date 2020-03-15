@@ -1,0 +1,62 @@
+Decisions
+a choice between alternatives
+
+
+Decision Trees
+a map of available choices outcomes and their likelihoods
+
+
+Expected Utility Model
+descriptive model of decision making that argues we will make a decision tree when trying to decide
+
+
+Decision Weights
+The estimation of a likelihood of something happening (usually not to you, as in the likelihood of violent crime)
+
+
+Beliefs
+The estimation of the likelihood of a outcome for a choice
+
+
+Consequences
+the positive and negative values attached to outcomes within a choice
+
+
+Value
+the weight of an outcome to you
+
+
+Subjective utility
+The weighted beliefs, consequences, and values to determine a choice
+
+
+Bounded Rationality
+we are only rational in our decision making in the sense that the decision stays within our cognitive processing limits
+
+
+Satisficing
+the good enough principle that says we make a decision once we find something good enough
+
+
+Procedural Invariance
+the problem where asking a question two different ways gives you two difference answers
+
+
+Transitivity
+when participants seemingly switch their answer choices based on the comparisons made
+
+
+Normative Models
+decision making models that prescribe (tell you what to do)
+
+
+Descriptive Models
+decision making models that describe our behavior
+
+
+Iowa Gambling Task
+a task using to study decision making with four card decks that are good/bad for the task
+
+
+Endowment effect
+owning something automatically makes it worth more to us

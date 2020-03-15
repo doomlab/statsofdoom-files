@@ -1,0 +1,76 @@
+Problem Solving
+a situation in which we have to overcome obstacles to get to a goal
+
+
+Ill-Defined Problems
+problems without clearly defined operators, initial or goal states
+
+
+Well-Defined Problems
+problems with clearly defined operators, initial, and goal states
+
+
+Insight problems
+ill defined problems wherein the answer comes to you in an AHA moment
+cake problem, nine dot problem, etc.
+
+
+Problem Space Theory
+theory that states that we solve problems by examining all the possible steps/options from initial to goal state
+
+
+Goal States
+initial state is the start of the problem, while the goal state is the end of the problem
+
+
+Operators
+available actions we have to work through the states of a problem
+
+
+Search Trees
+the map of all possible states from initial to goal state
+
+
+Heuristics
+an operator that's may solve the problem, usually considered a rule of thumb
+
+
+Random Search
+a heuristic that is trial and error to solving the problem
+
+
+Hill Climbing
+a heuristic that is always moving one step closer to the goal
+
+
+Means-Ends Analysis
+a heuristic that breaks down large goals into subgoals
+
+
+Backup avoidance
+a problem that you see with children and damage to the pre-frontal cortex wherein people do not want to undo a step that they have previously done even if it is required to solve the problem
+
+
+Analogies
+operator that says we use similar problems to solve current problems
+
+
+Analogy steps
+retrieval, mapping, evaluating, testing an analogy to determine if it helps solve the problem
+
+
+Algorithms
+operator that always solves the problem, albeit slowly
+
+
+Brain
+problem solving appears to be in the prefrontal cortex
+
+
+Tower of Hanoi
+a well defined problem where people move disks among pegs with specific operators
+
+
+Functional Fixedness
+getting stuck in a problem
+you can only think of the typical usage for an object

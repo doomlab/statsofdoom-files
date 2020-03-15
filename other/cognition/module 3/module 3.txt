@@ -1,0 +1,78 @@
+Neurons
+cells that send messages in the brain
+
+
+Types of Neurons
+sensory, motor, interneurons, each connected to their systems
+
+
+Myelin
+the coating on the axon that controls the speed of processing for the action potential
+
+
+Synapse
+the space between cells, used to communicate between neurons
+
+
+The Mexican Wave / Action potentials 
+the electrical process of communication for the neuron
+
+
+Neurotransmitters
+the chemical process of communication for the neuron, dopamine
+
+
+Frontal Lobe
+the front of the brain that controls abstract thinking
+
+
+Motor cortex
+in the frontal lobe that controls movement
+
+
+Broca’s
+in the frontal lobe that controls speech production (what to say)
+
+
+Parietal Lobe
+the top of the brain that controls memory and spatial locations
+
+
+Sensory Cortex (somatosensory)
+in the parietal lobe that controls sensation
+
+
+Occipital Lobe
+back of the brain that controls vision
+
+
+Temporal Lobe
+side of the brain that controls hearing and memory
+
+
+Wernicke’s
+in the temporal lobe that controls speech comprehension
+
+
+Sub-cortical areas
+hippocampus and amygdala controlling memory and emotion
+
+
+Corpus Callosum
+thick band of neurons that controls the connection between the left and right hemisphere
+
+
+Sperry’s Split Brain
+study that showed how the connections between the left and right hemisphere were important
+
+Correlational brain research
+EEG, EMG, ERP, PET scans, fMRIs, optics, etc. (be sure to know good/bad for these)
+
+Causal brain research
+lesions, aphasias, drugs, TMS (be sure to know pros/cons)
+
+Behavioral research
+judgments, protocol collection, response times, accuracy (be sure to know pros/cons)
+
+Computer Modeling
+a way to explain the neural connections using a computer 

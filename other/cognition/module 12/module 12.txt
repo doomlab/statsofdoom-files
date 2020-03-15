@@ -1,0 +1,42 @@
+Reasoning
+cognitive process that uses inferences from background knowledge to draw conclusions
+
+
+Inductive reasoning
+drawing inferences about unknown instances using our knowledge about specific instances
+
+
+Specific Induction
+inferring about known instances to specific instances
+
+
+General Induction
+generalizing from known instances to all instances
+
+
+Atmosphere effect
+when the use of specific words in a syllogisms creates a mood that supports the incorrect logical decision
+
+
+Categorical Syllogisms
+relationship between items, two statements and a conclusion that you have to determine if it is true or false
+
+
+Conditional Syllogisms
+if p, then q type of statement for you to determine if it is true or false
+
+
+Matching Bias
+determining a syllogism is true because the syntax of a conditional matches
+
+
+Wason Card Task
+a card flipping task that examines reasoning logic
+ 
+
+Modus Ponens
+checking if P is true, then checking if Q is true to determine conditional logic
+
+
+Modus Tollens
+checking if Q is false, then checking if P is false to determine conditional logic

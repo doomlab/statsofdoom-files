@@ -1,0 +1,50 @@
+Cognitive Psychology
+Study of the thinking mind
+
+
+Things to get from the class
+Cognition is a science, we don’t like think hard, we like new shiny things
+
+
+Germany folks (who/goodness/badness)
+Titchner, wundt
+
+
+Germany folks good
+Good things included starting the systematic study of psychology, word associations
+
+
+Germany folks bad
+The use of subjective introspection
+
+
+Why cognition started
+Development of the computer, 1956 MIT symposium, miller’s magic number, reaction to behaviorism
+
+
+Artificial Intelligence
+The design of a computer to mimic the mind/act like a human, inspires other research on cognition
+
+
+Mind-Brain
+The mind-brain approach attempts to determine where the mind and brain connect 
+
+
+Information Processing Approach
+Using the computer as a way to understand human thinking
+
+
+Mental Representations
+A physical depiction of an object – can be neural, paper, stop sign, etc. This definition is our term for the building blocks of knowledge/memory.
+
+
+Mental Processing (there are 3 parts)
+Process, processing system, algorithm – the ways we define the information processing process
+
+
+Experiments
+Looking for causal relationships between variables, must manipulate variables
+
+
+IV/DV/Noise
+Independent variables are the manipulated factors, dependent variables are the measured variable we hope to change, noise variables are those factors that we know interact with our variable but we don’t care about them.

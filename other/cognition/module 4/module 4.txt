@@ -1,0 +1,110 @@
+Perception
+the interpretation of the input into the system (brain)
+
+
+Sensation
+the processing of raw input into the system (brain)
+
+
+Eye Processing
+cornea, iris/pupil, lens, retina
+understanding rods and cones, blind spots, the optic nerve
+
+
+Dorsal pathway
+the where system
+
+
+Ventral pathway
+the what system
+
+
+Bottom Up processing
+creating a picture of perception based on the sensory input
+
+
+Top down processing
+creating a picture of perception based on background knowledge, expectations
+
+
+Visual field
+the outside world that you are getting sensation from
+
+
+Receptive Field
+the area of the brain that processes specific sensations
+
+
+Cells (off-on)
+cells that control color/motion/edge detection that are paired to responding positive to one thing and negatively to another
+
+
+Figure/Ground
+foreground and background information in perception
+
+
+Grouping Principles
+closure, similarity, good continuation, proximity
+
+
+Depth Processing (Visual Cliff)
+study showed that processing is learned
+
+
+Binocular Cues
+retinal disparity, motion parallax
+
+
+Monocular Cues
+linear perspective, aerial perspective, light/dark, occlusion, texture gradient
+
+
+Visual Agnosia
+a problem with perception, apperceptive (simple objects), associative (complex objects)
+
+Recognition
+the process of matching a stored representation to current sensory input
+
+
+Template matching theory
+says we match everything to a specific template stored in the brain
+
+
+Feature Matching theory
+says we match things based on a set of specific features required for the object
+
+
+Recognition by components theory
+tries to explain 3D perception with geons
+
+
+Configural models
+best explains face processing by looking at required configurations of objects
+
+
+Word superiority
+the way we perceive letters to always spell a word
+
+
+Constancies
+our perceptions stay the same even if the brightness, color, size, shape change
+
+
+Illusions
+inaccurate perceptions
+
+
+Meuller-Lyer
+linear perspective illusion
+
+
+Ames Room Illusion
+illusion that explores our rectangularity assumptions
+
+
+Nystagmus
+eye jitters 
+
+
+Gardner Dragon
+illusion that explores face perception (depth cues) based on a hollow face

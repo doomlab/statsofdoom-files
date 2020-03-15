@@ -1,0 +1,1 @@
+This demonstration did exactly what it was supposed to do, but most of the students figure it out pretty quickly and the whole thing took like five minutes.  Consider starting with more than 3 or 4 discs, and then show how it would work with just 3.

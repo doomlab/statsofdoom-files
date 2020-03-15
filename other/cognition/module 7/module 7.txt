@@ -1,0 +1,95 @@
+Knowledge
+information that is represented memory 
+
+
+Intentionality criterion
+representations must be constructed on purpose and carry information
+
+
+Modality specific
+representations that match the way they were first input (images, words)
+
+
+Image representations
+include a spatiotemporal window, storage unites, and stored information about a scene
+
+
+Feature records
+the combinations of many different perceptual inputs
+
+
+Amodal symbols
+frames, semantic networks, and property lists
+things that are not represented as visual or verbal information 
+
+
+Neural nets
+statistical approach to understanding representations in the brain, memories are like bar codes
+
+
+Categories
+representation of specific knowledge in a generalized way
+
+
+Feature Comparison Theory
+category creation theory that says we store a list of necessary features for a concept to compare against
+
+
+Defining/Characteristic
+the types of necessary features in feature comparison theory
+
+
+Typicality Effect
+responses are faster to typical features over atypical features (dogs have fur versus skin)
+
+
+Prototypes
+an abstract concept that is used to determine if a new member is part of a category
+
+
+Prototypicality
+responses are faster to typical members over atypical members of a category (robin > penguin)
+
+
+Superordinate
+the highest level of category structure, considered the most abstract
+
+
+Basic Level
+the special level of category structure, usually used for naming, mostly where the prototype/exemplar is stored
+
+
+Subordinate
+the most concrete level of category structure, where concepts are specific members of a category
+
+
+Brains for category structure
+see different activations for superordinate (PFC) and subordinate (parietal/occipital)
+
+
+Exemplars
+specific examples of a concept are used to determine category membership
+
+
+Network Models
+the combination of feature comparison, prototype and exemplar theory that emphasizes the connections between items
+
+
+Parallel Distributed processing
+type of network model proposed for category learning
+
+
+Schemas 
+a heuristic for understanding specific types of categories
+
+
+Scripts
+a set of steps/procedures for schemas
+
+
+Frames
+details about the specific events within a script
+
+
+Default Values
+the most common values within a schema

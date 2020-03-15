@@ -1,0 +1,73 @@
+Attention
+the ability to focus on some things while ignoring others
+
+
+Change Blindness
+missing a change in your visual field
+
+
+Focused attention
+doing one thing at a time
+
+
+Divided attention
+performing multiple tasks at the same time
+
+
+Attention blink
+when we miss a target presented 200-500 msec after a first target appears
+
+
+Two-stage model
+tries to explain the attention blink as a decay (wait) process
+
+Interference model
+tries to explain the attention blink as an interference process (fight)
+
+Combination model
+says that the attention blink is both intereference and decay processes
+
+
+Central interest information
+explanation of why we miss changes because we are so focused on these pieces
+
+
+Endogenous attention
+controlled attention from top down processes
+
+
+Exogenous attention
+uncontrolled attention from bottom up processes
+
+
+
+Posner Cueing Paradigm
+a visual cue task that showed the differences between endogenous and exogenous attention
+
+
+Visual Search
+a task that showed how conjunctive and disjunctive searches worked for targets
+
+
+Dichotic Listening Task
+a task that required you to shadow (repeat) one ear back while ignoring the other ear
+
+
+Early bottleneck
+says that the information is filtered before we process for semantics
+
+
+Late bottleneck 
+says that the information is filtered after we process for semantics
+
+
+Attenuation theory
+says that the information is just turned down and we can go back to it if it becomes important to us
+
+
+Feature Integration theory
+an understanding of how we put together different features in our visual field
+
+
+Brains
+

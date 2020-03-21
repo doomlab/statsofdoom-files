@@ -1,5 +1,5 @@
 ---
-title: 'Set Up Virtual Machine'
+title: 'Set Up Your Computer or Virtual Machine'
 author: "STUDENT NAME"
 date: "`r Sys.Date()`"
 output: html_document
@@ -10,10 +10,27 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Install Software
+For this semester, you have two options:
+
+- Use your own computer.
+  - If you have an older machine, you are likely to have problems with some of the installation of packages. If you have a MacBook Air or other "mini" type machine, you will potentially find you do not have the space for the installed packages. 
+  - I will help you troubleshoot during the completion of this assignment, but all other problems (and later in the semester) you will need to use google/stack overflow/etc. to fix for yourself. 
+  
+- Use the provided RStudio virtual machine. 
+  - https://class.aggieerin.com/auth-sign-in
+  - Nearly all packages have been installed for you already!
+  - Be sure to save your work on your own machine as well, this server is reset at the end of each semester. 
+
+**Only complete the part of the assignment based on your choice for computer or virtual machine!!**
+
+## Your Own Computer 
+
+### Install Software
 
 - Most recent version of R: https://cloud.r-project.org/
 - Most recent version of RStudio: https://rstudio.com/products/rstudio/download/#download
+- Java JDK: https://www.oracle.com/technetwork/java/javase/downloads/index.html
+- Most Recent Java: https://www.java.com/en/
 
 ```{r}
 ##r chunk - do not change these
@@ -21,11 +38,27 @@ R.version
 #RStudio.Version() run this line but it won't knit with it "on"
 ```
 
-What version of Rstudio are you using?
+ANSWER: What version of Rstudio are you using? Please note it should be the latest version! 
 
-## Set up your python
+### Install all the R Packages
 
-- Install the `reticulate` package (do not include this code).
+- Install the following packages, that you will need all semester:
+- markdown, knitr, reticulate, party, ca, FactoMineR, rgl, rms, visreg, pvclust, car, boot, psych, ngram, LSAfun, tm, topicmodels, tidytext, tidyverse, ggraph, igraph, memnet, widyr, stringdist
+- Run this: Sys.setenv(TZ = "America/New_York") if you see the TZ errors. 
+- You may need to pay attention to the rlang package, I had to uninstall rlang and reinstall it. 
+- Do not include code for knitting purposes. 
+
+### Install the special R Packages
+
+- Use the following code to install the special packages for R. 
+- Change `eval = TRUE` to `eval = FALSE` once you have them installed. 
+
+```{r eval = TRUE}
+install.packages("https://osf.io/ak7gq/download", repos = NULL, method = "libcurl", type = "source")
+```
+
+### Set up your python
+
 - Load the `reticulate` library.
 
 ```{r python_setup}
@@ -33,7 +66,7 @@ What version of Rstudio are you using?
 
 ```
 
-## Install Miniconda
+### Install Miniconda
 
 Try typing `py_config()` below. You should get a prompt to install Miniconda. If not, use `install_miniconda()`.
 
@@ -42,7 +75,7 @@ Try typing `py_config()` below. You should get a prompt to install Miniconda. If
 
 ```
 
-## Show you've installed Python
+### Show you've installed Python
 
 Run `py_config()` in the *R* chunk below. 
 
@@ -51,7 +84,82 @@ Run `py_config()` in the *R* chunk below.
 
 ```
 
-## Let's do some R
+### Windows Machines
+
+Windows machines need special programs to make all this work: 
+
+- Rtools: https://cran.r-project.org/bin/windows/Rtools/ 
+- Visual Studio Build Tools 2019: https://visualstudio.microsoft.com/downloads/#build-tools 
+- WordNet: https://wordnet.princeton.edu/download/current-version
+
+### Install Python Packages
+
+- Install the python packages by typing in R (the reticulate library must be loaded!): `py_install("package_name", pip = T)`
+- Change `eval = TRUE` to `eval = FALSE` once you have them installed. 
+
+Packages: nltk, matplotlib, PyQt5, scikit-learn, numpy, pandas, prince, factor-analyzer, gensim, pyLDAvis, bs4
+
+```{r eval = TRUE}
+
+```
+
+### Special Python Extras
+
+For nltk, you will need to add a few other pieces. Type the following into R console: 
+ - library(reticulate)
+ - repl_python() 
+ - Here you should notice you have switched from > to >>> which indicates you are in Python:
+
+  - import nltk
+  - nltk.download("popular")
+  - nltk.download("nps_chat")
+  - nltk.download("webtext")
+  - nltk.download("abc")
+
+To get out of >>> python, type exit or hit the Esc key.
+
+Click on terminal > type in:
+   - python -m spacy download en_core_web_sm
+   - This will download the English language spacy module.
+   - pip install lxml
+
+## Virtual Machine
+
+Go to: https://class.aggieerin.com/auth-sign-in
+
+Your log in is:
+
+  -	Username: firstname_lastname
+  -	Password: firstnameidnumber
+  -	Fill in first and last name with your first and last name, while ID number is your HU ID number.
+
+### Python Set Up
+
+- Click on terminal and run the following lines:
+  
+  - pip3 install -U spacy
+  - python3 -m spacy download en_core_web_sm
+  - pip3 install nltk
+  - pip3 install gensim
+  - python3 -m nltk.downloader popular
+  - pip3 install prince
+  - pip3 install factor-analyzer
+  - pip3 install pyLDAvis
+  - python3 -m nltk.downloader abc
+
+### Turn off Miniconda
+
+When you run py_config() the first time, it will ask you to install miniconda. Say no! We already have python3 installed on the server. 
+
+```{r}
+##r chunk
+library(reticulate)
+py_config()
+```
+
+## Everyone
+
+### Let's do some R
 
 - In this chunk, we will load a dataset - use `data(rock)` to load it. 
 - Use the `head()` function to print out the first six rows of the dataset. 
@@ -61,27 +169,7 @@ Run `py_config()` in the *R* chunk below.
 
 ```
 
-## Let's do some Python
-
-- First, let's install some packages. 
-- You will need `numpy`, `nltk`, `spacy`, `scikit-learn` and `pandas` for starters. 
-- You can check if you have them first by using `py_module_available("PACKAGE")`.
-- Note: `scikit-learn` is a special package, you can check if it's avaliable by using `sklearn` but you install it with `scikit-learn`. 
-
-```{r check_install}
-##r chunk
-
-```
-
-- If any of these return `FALSE`, then install them using `py_install("PACKAGE")`. If you receive an error saying it cannot be found on Minicode, use `py_install("PACKAGE", pip = T)`.
-
-```{r install_packages}
-#if they are all TRUE, leave this blank
-##r chunk
-
-```
-
-## Call a dataset in Python
+### Call a dataset in Python
 
 - First, load the `sklearn` library, it has several sample datasets. You load python packages by using `import PACKAGE`. Note that you install and call this package different names (scikit-learn = sklearn).
 - Next, import the datasets part of sklearn by doing `from PACKAGE import FUNCTION`. Therefore, you should use `from sklearn import datasets`. 

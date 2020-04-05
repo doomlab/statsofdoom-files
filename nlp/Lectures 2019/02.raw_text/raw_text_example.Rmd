@@ -105,8 +105,7 @@ clean_text_py[1000:2000]
 
 ```{python}
 ##python chunk
-for contraction, expansion in contractions_dict.items():
-  clean_text_py = clean_text_py.replace(contraction, expansion) 
+clean_text_py = contractions.fix(clean_text_py)
 
 clean_text_py[1000:2000]
 ```
@@ -115,8 +114,8 @@ clean_text_py[1000:2000]
 
 ```{r}
 ##r chunk
-spelling.errors <- hunspell(clean_text_r)
-spelling.sugg <- hunspell_suggest(unlist(spelling.errors), dict = dictionary("en_US"))
+spelling.errors <- hunspell(wordlist)
+spelling.sugg <- hunspell_suggest(unique(unlist(spelling.errors)), dict = dictionary("en_US"))
 
 ##rest of code goes here
 ```

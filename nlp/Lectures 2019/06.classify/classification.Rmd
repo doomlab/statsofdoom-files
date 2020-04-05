@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Classification
 
 - Text or document classification is an important area of text analytics
-- Used to classify, cluster, categorize, or otherwise group dcouments based on the attributes of that document
+- Used to classify, cluster, categorize, or otherwise group documents based on the attributes of that document
 - This work is especially useful when you have lots of documents and don't have the time or energy to read them all!
 - This work is not only for documents, but can be applied to music, images, video, etc.
 
@@ -123,7 +123,6 @@ from contractions import contractions_dict
 
 ## 20 Newsgroups
 
-- A dataset of 20 categories with 18,000 posts on a newgroups website
 - Difficult classification task if you use all 20 categories 
 - We need to clean out the formatting (headers, footers, etc.), take out empty posts, and do other text processing that we discussed earlier in the semester 
 
@@ -175,6 +174,7 @@ data_df['Article'] = [BeautifulSoup(str(text)).get_text() for text in data_df['A
 data_df['Article'] = data_df['Article'].str.lower()
 
 #contractions
+#data_df['Article'] = [contractions.fix(text) for text in data_df['Article'].tolist()]
 for contraction, expansion in contractions_dict.items():
   data_df['Article'] = data_df['Article'].str.replace(contraction, expansion)
 
@@ -239,7 +239,7 @@ tsd = dict(Counter(test_label_names))
 ## Feature Extraction
 
 - What are features?
-  - They are measureable (meaning you can put a number to them)
+  - They are measurable (meaning you can put a number to them)
   - Generally, they can be counted or coded as binary (present or not)
   - We have to figure out how to transform text data into features
 
@@ -339,7 +339,7 @@ logistic.fit(X_train,y_train)
 
 ## Confusion Matrices
 
-```{r}
+```{r eval = T}
 ##r chunk
 source_python("model_evaluation_utils.py")
 ```
@@ -365,7 +365,7 @@ knitr::include_graphics("confusion.png")
 - True positive: instances breast cancer was indicated and it's actually breast cancer 
 - False positive: instances breast cancer was indicated and it's NOT breast cancer
 - True negative: instances that breast cancer was NOT indicated and it's NOT breast cancer
-- Fasle negative: instances that breast cancer was NOT indicated and it's breast cancer
+- False negative: instances that breast cancer was NOT indicated and it's breast cancer
 
 ```{python}
 ##python chunk
@@ -436,6 +436,7 @@ print('Manually Computed Recall:', mc_rec)
 - F1 Score: harmonic mean of the precision and recall scores 
 
 $$ \frac{2 \times Precision \times Recall}{Precision + Recall} $$ 
+
 ## F1 Score
 
 ```{python}
@@ -550,13 +551,27 @@ print(classification_report(test_label_names, y_pred))
 knitr::include_graphics("naive_bayes_bargraph.png")
 ```
 
-## MNB in Python
+## Multinomial Naive Bayes in Python
 
 ```{python}
 ##python chunk
-from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import MultinomialNB
 
-gnb = GaussianNB()
+mnb = MultinomialNB(alpha=1)
+```
+
+## MNB in Python
+
+```{python}
+#fit the model                        
+mnb.fit(cv_train_features, train_label_names)
+
+#predict new cases
+y_pred = mnb.predict(cv_test_features)
+
+#print out results
+print('accuracy %s' % accuracy_score(test_label_names, y_pred))
+print(classification_report(test_label_names, y_pred))
 ```
 
 ## Linear Support Vector Machine (SVM)
@@ -593,6 +608,7 @@ print(classification_report(test_label_names, y_pred))
 ## TF-IDF
 
 - Remember the TF-IDF is a weighting scheme that lessens the importance of very frequent and very infrequent words
+
 ```{python}
 ##python chunk
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -624,8 +640,6 @@ print(classification_report(test_label_names, y_pred))
 
 ```{python}
 ##python chunk
-from sklearn.naive_bayes import MultinomialNB
-mnb = MultinomialNB(alpha=1)
 mnb.fit(tv_train_features, train_label_names)
 y_pred = mnb.predict(tv_test_features)
 print('accuracy %s' % accuracy_score(test_label_names, y_pred))
@@ -764,6 +778,18 @@ avg_wv_test_features = avg_wv_test_features + 4
 mnb = MultinomialNB(alpha=1)
 mnb.fit(avg_wv_train_features, train_label_names)
 y_pred = mnb.predict(avg_wv_test_features)
+print('accuracy %s' % accuracy_score(test_label_names, y_pred))
+print(classification_report(test_label_names, y_pred))
+```
+
+## Test with SVM
+
+```{python}
+svm = LinearSVC(penalty='l2', C=1, random_state=42)
+svm.fit(avg_wv_train_features, train_label_names)
+y_pred = svm.predict(avg_wv_test_features)
+
+#print out results
 print('accuracy %s' % accuracy_score(test_label_names, y_pred))
 print(classification_report(test_label_names, y_pred))
 ```

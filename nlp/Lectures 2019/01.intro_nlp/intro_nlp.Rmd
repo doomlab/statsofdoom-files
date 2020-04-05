@@ -174,7 +174,7 @@ barplot(ELP$SUBTLWF, names.arg = ELP$Word,
         xlab = "Top 100 Words", ylab = "Frequency")
 ```
 
-```{r python_setup, echo = F}
+```{r python_setup, echo = F, message = F}
 ##r chunk
 #library
 library(reticulate)

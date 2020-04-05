@@ -55,10 +55,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 - A dog is an animal.
 - Stage 1: overall feature similarity is computed. 
-  - If you have lots of features overlapping, sentence RL is fast. 
-  - If you have no overlap, sentence RL is fast.
+  - If you have lots of features overlapping, sentence response latency is fast. 
+  - If you have no overlap, sentence response latencyis fast.
 - Stage 2: consider the "defining" features.
-  - These longer RL show the gray areas or fuzzy boundaries of categories. 
+  - These longer response latencies show the gray areas or fuzzy boundaries of categories. 
 
 ## Probabilistic Feature Model
 

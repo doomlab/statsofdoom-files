@@ -111,7 +111,7 @@ stringdist(words1, words2, method = "cosine")
 
 ## Association Measures
 
-```{r pic2, echo=FALSE, out.height="200px", out.width="200px", fig.align="center"}
+```{r pic2, echo=FALSE, fig.align="center"}
 knitr::include_graphics("associationtable.png")
 ```
 
@@ -133,20 +133,20 @@ knitr::include_graphics("associationtable.png")
 ##r chunk
 #collocate table for cellar (Y) and door (X)
 #common to put collexeme on X, lexeme on Y
-a = 146
-b = 145429
-c = 2622 
+a = 228
+b = 210170 - a
+c = 4026 - a   
 d = 560000000-a-b-c
-#P(Y|X) probability of cellar given door (door to cellar)
+#P(XY|X) probability of combination given door
 a/(b+a) * 100
-#P(X|Y) probability of door given cellar (cellar to door)
+#P(XY|Y) probability of combination given cellar
 a/(c+a) * 100
 ```
 
 ## Conditional Probability
 
-- Attraction: conditional probability of lexeme given construction
-- Reliance/Faith: conditional probability of construction given lexeme
+- Attraction: conditional probability of construction given lexeme 1
+- Reliance/Faith: conditional probability of construction given lexeme 2
 - As noted, these are not necessarily going to be the same
 
 ## Another consideration
@@ -167,8 +167,8 @@ he_she
 
 ## Attraction
 
-- Attraction: probability of X given Y
-- X here is can, Y is he or she
+- Attraction: probability of XY given Y
+- Lexeme-can, Y is he or she
 
 ```{r attraction, include=T}
 ##r chunk
@@ -179,8 +179,8 @@ rownames(he_she)
 
 ## Reliance
 
-- Reliance: probability of Y given X
-- X here is can, Y is he or she
+- Reliance: probability of XY given X
+- Lexeme-can, X is can 
 
 ```{r reliance, include=T}
 ##r chunk
@@ -193,11 +193,11 @@ rownames(he_she)
 
 ```{r deltaP, include = T}
 ##r chunk
-#treats it as Y to X (lexeme to collexeme) so he-can, she-can similar to attraction
+#similar to attraction
 dp_YX = he_she$a / (he_she$a + he_she$c) - he_she$b / (he_she$b + he_she$d)
 dp_YX
 
-#treats as X to Y so can-he, can-she similar to reliance
+#similar to reliance
 dp_XY = he_she$a / (he_she$a + he_she$b) - he_she$c / (he_she$c + he_she$d)
 dp_XY
 ```
@@ -242,7 +242,7 @@ LL1
 
 ## Pointwise Mutual Information
 
-- Ratio of the probability of Y given X divided by the probability of Y
+- Ratio of the probability of XY given X divided by the probability of XY
 
 ```{r pmi, include = T}
 ##r chunk
@@ -252,7 +252,7 @@ PMI
 
 ## Log Odds Ratio
 
-- Ratio of the likelihood of Y given the presence of X to Y given not the presence of X
+- Ratio of the likelihood of XY and not XY to X and Y individually 
 
 ```{r OR, include = T}
 ##r chunk

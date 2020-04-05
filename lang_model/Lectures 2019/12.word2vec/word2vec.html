@@ -551,7 +551,7 @@ Erin M. Buchanan
 <div id="a-simple-example-1" class="slide section level2">
 <h1>A simple example</h1>
 <ul class="incremental">
-<li>Use the <code>gensim</code> package to build a word2vec model - notice how you are inputting sentences into the model</li>
+<li>Use the <code>gensim</code> package to build a word2vec model - notice how you are inputting tokenized documents into the model (.sents() is a list of lists of words)</li>
 <li>Use the model to pull out vocabulary (i.e., the words it used as input)</li>
 <li>Find a similar word based on context</li>
 <li>The numbers presented are cosine similarity</li>
@@ -560,7 +560,7 @@ Erin M. Buchanan
 <a class="sourceLine" id="cb3-2" data-line-number="2">model <span class="op">=</span> gensim.models.Word2Vec(abc.sents())</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">X <span class="op">=</span> <span class="bu">list</span>(model.wv.vocab)</a>
 <a class="sourceLine" id="cb3-4" data-line-number="4">model.wv.most_similar(<span class="st">'science'</span>)</a></code></pre></div>
-<pre><code>## [('law', 0.9384207725524902), ('policy', 0.9226768016815186), ('agriculture', 0.922425389289856), ('practice', 0.9172252416610718), ('general', 0.9145150184631348), ('media', 0.912530243396759), ('referred', 0.9103995561599731), ('discussion', 0.909062385559082), ('reservoir', 0.9085561037063599), ('board', 0.90570068359375)]</code></pre>
+<pre><code>## [('law', 0.9375042915344238), ('agriculture', 0.9255149364471436), ('policy', 0.9241334795951843), ('general', 0.9212994575500488), ('media', 0.9192588925361633), ('practice', 0.917853832244873), ('discussion', 0.9158795475959778), ('Crean', 0.9122456908226013), ('reservoir', 0.910957932472229), ('tight', 0.9077877998352051)]</code></pre>
 </div>
 <div id="activation" class="slide section level2">
 <h1>Activation</h1>
@@ -637,9 +637,9 @@ Erin M. Buchanan
 <h1>Let’s see what happened!</h1>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co">##python chunk</span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">model.wv.most_similar(<span class="st">&quot;elinor&quot;</span>)</a></code></pre></div>
-<pre><code>## [('edward', 0.9998732805252075), ('lucy', 0.9998601078987122), ('however', 0.9998524188995361), ('this', 0.9998480081558228), ('even', 0.9998342394828796), ('often', 0.9998267292976379), ('then', 0.9998241066932678), ('willoughby', 0.9998236298561096), ('himself', 0.9998212456703186), ('though', 0.9998184442520142)]</code></pre>
+<pre><code>## [('himself', 0.9998486042022705), ('lucy', 0.9998469352722168), ('though', 0.9998453855514526), ('then', 0.9998408555984497), ('however', 0.9998393058776855), ('willoughby', 0.9998388290405273), ('fanny', 0.9998288154602051), ('great', 0.9998273849487305), ('enough', 0.9998204708099365), ('determined', 0.9998182058334351)]</code></pre>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" data-line-number="1">model.wv.most_similar(<span class="st">&quot;duty&quot;</span>)</a></code></pre></div>
-<pre><code>## [('towards', 0.9991384744644165), ('greater', 0.9991167783737183), ('years', 0.9991097450256348), ('place', 0.9991061687469482), ('distress', 0.9990966320037842), ('heart', 0.9990953803062439), ('year', 0.999089777469635), ('seeing', 0.999082624912262), ('delaford', 0.9990757703781128), ('common', 0.999072790145874)]</code></pre>
+<pre><code>## [('girl', 0.9991443753242493), ('again', 0.9991422891616821), ('off', 0.9991315603256226), ('therefore', 0.9991309642791748), ('object', 0.9991263151168823), ('less', 0.9991183280944824), ('farther', 0.9991124272346497), ('out', 0.9991103410720825), ('where', 0.9991059303283691), ('barton', 0.9991020560264587)]</code></pre>
 </div>
 <div id="lets-try-skip-gram" class="slide section level2">
 <h1>Let’s try Skip Gram</h1>
@@ -653,9 +653,9 @@ Erin M. Buchanan
 <a class="sourceLine" id="cb13-8" data-line-number="8">        sg <span class="op">=</span> <span class="dv">1</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co">##python chunk</span></a>
 <a class="sourceLine" id="cb14-2" data-line-number="2">model2.wv.most_similar(<span class="st">&quot;elinor&quot;</span>)</a></code></pre></div>
-<pre><code>## [('marianne', 0.9819917678833008), ('lucy', 0.9723008871078491), ('already', 0.9683875441551208), ('edward', 0.9676363468170166), ('himself', 0.9639748334884644), ('speak', 0.9631645679473877), ('great', 0.9625767469406128), ('willoughby', 0.9618039131164551), ('sent', 0.9617891311645508), ('really', 0.9611401557922363)]</code></pre>
+<pre><code>## [('marianne', 0.9862908124923706), ('lucy', 0.9790637493133545), ('edward', 0.9663791060447693), ('great', 0.9663112163543701), ('little', 0.9620670676231384), ('speak', 0.9572827816009521), ('mentioned', 0.9565352201461792), ('warmly', 0.9552662372589111), ('himself', 0.9550434350967407), ('bring', 0.9540374279022217)]</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb16-1" data-line-number="1">model2.wv.most_similar(<span class="st">&quot;duty&quot;</span>)</a></code></pre></div>
-<pre><code>## [('telling', 0.9983949661254883), ('buy', 0.9983842968940735), ('dreadful', 0.9983071088790894), ('credit', 0.9982510805130005), ('persuading', 0.9982239603996277), ('mine', 0.9982233047485352), ('getting', 0.9981935024261475), ('scheme', 0.9981521964073181), ('friendship', 0.9981381893157959), ('concealment', 0.998069703578949)]</code></pre>
+<pre><code>## [('horse', 0.9988328814506531), ('mistake', 0.9987471103668213), ('match', 0.9986180067062378), ('goodness', 0.9985591173171997), ('solicitude', 0.9985554814338684), ('circumstance', 0.9985383749008179), ('poverty', 0.9984719753265381), ('raise', 0.998408317565918), ('importance', 0.9983999729156494), ('repeat', 0.9983827471733093)]</code></pre>
 </div>
 <div id="want-to-learn-more" class="slide section level2">
 <h1>Want to learn more?</h1>
@@ -709,7 +709,7 @@ Erin M. Buchanan
 <div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co">##python chunk</span></a>
 <a class="sourceLine" id="cb20-2" data-line-number="2">REPLACE_BY_SPACE_RE <span class="op">=</span> re.<span class="bu">compile</span>(<span class="st">'[/()</span><span class="sc">{}</span><span class="st">\[\]\|@,;]'</span>) <span class="co">#remove symbols with space</span></a>
 <a class="sourceLine" id="cb20-3" data-line-number="3">BAD_SYMBOLS_RE <span class="op">=</span> re.<span class="bu">compile</span>(<span class="st">'[^0-9a-z #+_]'</span>) <span class="co">#take out symbols altogether</span></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4">STOPWORDS <span class="op">=</span> <span class="bu">set</span>(stopwords.words(<span class="st">'english'</span>)) <span class="co">#stopwrods</span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">STOPWORDS <span class="op">=</span> <span class="bu">set</span>(stopwords.words(<span class="st">'english'</span>)) <span class="co">#stopwords</span></a>
 <a class="sourceLine" id="cb20-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb20-6" data-line-number="6"><span class="kw">def</span> clean_text(text):</a>
 <a class="sourceLine" id="cb20-7" data-line-number="7">    text <span class="op">=</span> BeautifulSoup(text, <span class="st">&quot;lxml&quot;</span>).text <span class="co"># HTML decoding</span></a>
@@ -850,13 +850,13 @@ Erin M. Buchanan
 <a class="sourceLine" id="cb29-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb29-5" data-line-number="5"><span class="co">#print out results</span></a>
 <a class="sourceLine" id="cb29-6" data-line-number="6"><span class="bu">print</span>(<span class="st">'accuracy </span><span class="sc">%s</span><span class="st">'</span> <span class="op">%</span> accuracy_score(y_pred, y_test))</a></code></pre></div>
-<pre><code>## accuracy 0.9316666666666666</code></pre>
+<pre><code>## accuracy 0.93</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="bu">print</span>(classification_report(y_test, y_pred,target_names<span class="op">=</span>my_tags))</a></code></pre></div>
 <pre><code>##               precision    recall  f1-score   support
 ## 
-##       python       0.95      0.93      0.94       424
-##          php       0.94      0.93      0.94       399
-##          c++       0.90      0.93      0.92       377
+##       python       0.96      0.93      0.94       424
+##          php       0.93      0.93      0.93       399
+##          c++       0.90      0.92      0.91       377
 ## 
 ##     accuracy                           0.93      1200
 ##    macro avg       0.93      0.93      0.93      1200
@@ -901,13 +901,13 @@ Erin M. Buchanan
 <a class="sourceLine" id="cb35-3" data-line-number="3">logreg <span class="op">=</span> logreg.fit(avg_ft_train_features, y_train)</a>
 <a class="sourceLine" id="cb35-4" data-line-number="4">y_pred <span class="op">=</span> logreg.predict(avg_ft_test_features)</a>
 <a class="sourceLine" id="cb35-5" data-line-number="5"><span class="bu">print</span>(<span class="st">'accuracy </span><span class="sc">%s</span><span class="st">'</span> <span class="op">%</span> accuracy_score(y_pred, y_test))</a></code></pre></div>
-<pre><code>## accuracy 0.9241666666666667</code></pre>
+<pre><code>## accuracy 0.9216666666666666</code></pre>
 <div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="bu">print</span>(classification_report(y_test, y_pred,target_names<span class="op">=</span>my_tags))</a></code></pre></div>
 <pre><code>##               precision    recall  f1-score   support
 ## 
 ##       python       0.95      0.92      0.94       424
-##          php       0.92      0.94      0.93       399
-##          c++       0.90      0.91      0.90       377
+##          php       0.91      0.94      0.93       399
+##          c++       0.90      0.90      0.90       377
 ## 
 ##     accuracy                           0.92      1200
 ##    macro avg       0.92      0.92      0.92      1200
@@ -1037,8 +1037,8 @@ Erin M. Buchanan
 ## weighted avg       0.12      0.35      0.18      1200
 ## 
 ## 
-## /Users/buchanan/.virtualenvs/r-reticulate/lib/python3.7/site-packages/sklearn/metrics/classification.py:1437: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples.
-##   'precision', 'predicted', average, warn_for)</code></pre>
+## /Users/buchanan/.virtualenvs/r-reticulate/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+##   _warn_prf(average, modifier, msg_start, len(result))</code></pre>
 </div>
 <div id="summary" class="slide section level2">
 <h1>Summary</h1>

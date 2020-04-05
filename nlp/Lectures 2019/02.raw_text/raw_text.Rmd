@@ -44,6 +44,8 @@ string2 = "cheese"
 
 string1 + string2
 string1 + " " + string2
+
+" ".join([string1, string2])
 ```
 
 ## Indexing
@@ -62,7 +64,7 @@ setofstrings[-2]
 ##python chunk
 string1[1]
 string1[0]
-string1[-1]
+string2[-1]
 
 setofstrings = ["swiss", "cheese", "is", "great"]
 setofstrings[0]
@@ -86,6 +88,8 @@ setofstrings[:1]
 setofstrings[:2]
 setofstrings[2:]
 ```
+
+Add <= versus < 
 
 ## Methods
 
@@ -142,8 +146,8 @@ sentence.title()
 - `[^...]` matches a character NOT present in the brackets after the `^`
 - `\d` matches any decimal digits, can also use `[0-9]`
 - `\D` matches any non-digits, can also use `[^0-9]`
-- `\s` matches any whitespace character
-- `\S` matches non-whitespace characters
+- `\s` matches any white space character
+- `\S` matches non-white space characters
 - `\w` matches any alphanumeric characters, can also use `[a-zA-Z0-9_]`
 - `\W` matches any non-alphanumeric characters, can also use `[^a-zA-Z0-9_]`
 
@@ -277,7 +281,7 @@ len(sentences)
 ## Word tokenization 
 
 - Probably one of the most important components to NLP work 
-- Feels like this should be easy because it's just a simple whitespace right?
+- Feels like this should be easy because it's just a simple white space right?
 - Don't forget about contractions! Spelling errors! And languages that are logographic.
 
 ## Word tokenization
@@ -387,15 +391,13 @@ remove_accented_chars(r.characters)
 ##r chunk
 library(textclean)
 
-words = unlist(tokenize_words(clean_text))
-words = str_replace_all(words, pattern = "’", 
+clean_text = str_replace_all(clean_text, 
+                        pattern = "’", 
                         replacement = "'")
 
-words[49]
-
-replace_contraction(words, 
+replace_contraction(clean_text, 
                     contraction.key = lexicon::key_contractions, #default
-                    ignore.case = T)[49] #default
+                    ignore.case = T) #default
 ```
 
 ## Contractions
@@ -407,10 +409,13 @@ replace_contraction(words,
 
 ```{python}
 ##python chunk
-from contractions import contractions_dict
+import contractions
 
-for contraction, expansion in contractions_dict.items():
-  clean_text = clean_text.replace(contraction, expansion)
+contractions.fix(clean_text)
+
+#from contractions import contractions_dict
+#for contraction, expansion in contractions_dict.items():
+#  clean_text = clean_text.replace(contraction, expansion)
 ```
 
 ## Correcting text
@@ -449,11 +454,11 @@ wordlist = c("thse", "wods", "mispelled")
 
 # Spell check the words
 spelling.errors <- hunspell(wordlist)
-spelling.sugg <- hunspell_suggest(unlist(spelling.errors), dict = dictionary("en_US"))
+spelling.sugg <- hunspell_suggest(unique(unlist(spelling.errors)), dict = dictionary("en_US"))
 
 # Pick the first suggestion
 spelling.sugg <- unlist(lapply(spelling.sugg, function(x) x[1]))
-spelling.dict <- as.data.frame(cbind(spelling.errors,spelling.sugg))
+spelling.dict <- as.data.frame(cbind(spelling.errors = unique(unlist(spelling.errors)),spelling.sugg))
 spelling.dict$spelling.pattern <- paste0("\\b", spelling.dict$spelling.errors, "\\b")
 
 #Replace the words 
@@ -461,7 +466,6 @@ stri_replace_all_regex(str = wordlist,
                        pattern = spelling.dict$spelling.pattern,
                        replacement = spelling.dict$spelling.sugg,
                        vectorize_all = FALSE)
-
 ```
 
 ## Spelling
@@ -549,7 +553,7 @@ lemmatize_text(sentence)
 
 ```{r}
 ##r chunk
-head(stopwords(kind = "SMART"))
+head(tm::stopwords(kind = "SMART"))
 removeWords(sentence, stopwords(kind = "SMART"))
 ```
 

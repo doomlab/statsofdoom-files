@@ -508,12 +508,12 @@ Erin M. Buchanan
 <li>A dog is an animal.</li>
 <li>Stage 1: overall feature similarity is computed.
 <ul class="incremental">
-<li>If you have lots of features overlapping, sentence RL is fast.</li>
-<li>If you have no overlap, sentence RL is fast.</li>
+<li>If you have lots of features overlapping, sentence response latency is fast.</li>
+<li>If you have no overlap, sentence response latencyis fast.</li>
 </ul></li>
 <li>Stage 2: consider the “defining” features.
 <ul class="incremental">
-<li>These longer RL show the gray areas or fuzzy boundaries of categories.</li>
+<li>These longer response latencies show the gray areas or fuzzy boundaries of categories.</li>
 </ul></li>
 </ul>
 </div>
@@ -771,14 +771,15 @@ Erin M. Buchanan
 ## pythonhome:     /Users/buchanan/anaconda3:/Users/buchanan/anaconda3
 ## version:        3.7.2 (default, Dec 29 2018, 00:00:04)  [Clang 4.0.1 (tags/RELEASE_401/final)]
 ## numpy:          /Users/buchanan/.virtualenvs/r-reticulate/lib/python3.7/site-packages/numpy
-## numpy_version:  1.17.4
+## numpy_version:  1.18.1
 ## 
 ## python versions found: 
 ##  /Users/buchanan/.virtualenvs/r-reticulate/bin/python
 ##  /usr/bin/python3
 ##  /usr/local/bin/python3
 ##  /usr/bin/python
-##  /Users/buchanan/anaconda3/bin/python</code></pre>
+##  /Users/buchanan/anaconda3/bin/python
+##  /Users/buchanan/.virtualenvs/swiss-cheese/bin/python</code></pre>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">py_module_available</span>(<span class="st">&quot;sklearn&quot;</span>) <span class="co">#make sure sklearn is installed</span></a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
@@ -805,12 +806,12 @@ Erin M. Buchanan
 ## [5 rows x 13 columns]</code></pre>
 <div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb32-1" data-line-number="1">Yvar <span class="op">=</span> pd.get_dummies(r.reduced_data[<span class="st">&quot;Cx&quot;</span>])</a>
 <a class="sourceLine" id="cb32-2" data-line-number="2">Yvar.head()</a></code></pre></div>
-<pre><code>## Cx  cause_toV  have_V  make_V
-## 0           1       0       0
-## 1           1       0       0
-## 2           1       0       0
-## 3           1       0       0
-## 4           1       0       0</code></pre>
+<pre><code>##    cause_toV  have_V  make_V
+## 0          1       0       0
+## 1          1       0       0
+## 2          1       0       0
+## 3          1       0       0
+## 4          1       0       0</code></pre>
 </div>
 <div id="create-the-prediction-classification" class="slide section level2">
 <h1>Create the prediction classification</h1>
@@ -826,23 +827,17 @@ Erin M. Buchanan
 <div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co">##python chunk</span></a>
 <a class="sourceLine" id="cb35-2" data-line-number="2"><span class="co">#check out graph viz if you want other printing options</span></a>
 <a class="sourceLine" id="cb35-3" data-line-number="3"><span class="bu">print</span>(tree.export_text(CIT, feature_names <span class="op">=</span> <span class="bu">list</span>(Xvars.columns)))</a></code></pre></div>
-<pre><code>## |--- CrSem_Anim &lt;= 0.50
-## |   |--- CdEv_Ment &lt;= 0.50
-## |   |   |--- CeSem_Inanim &lt;= 0.50
-## |   |   |   |--- CdEv_Soc &lt;= 0.50
-## |   |   |   |   |--- class: 1
-## |   |   |   |--- CdEv_Soc &gt;  0.50
-## |   |   |   |   |--- class: 1
-## |   |   |--- CeSem_Inanim &gt;  0.50
-## |   |   |   |--- CdEv_Soc &lt;= 0.50
-## |   |   |   |   |--- class: 1
-## |   |   |   |--- CdEv_Soc &gt;  0.50
-## |   |   |   |   |--- class: 1
-## |   |--- CdEv_Ment &gt;  0.50
-## |   |   |--- class: 1
-## |--- CrSem_Anim &gt;  0.50
+<pre><code>## |--- CrSem_Inanim &lt;= 0.50
 ## |   |--- CdEv_Phys &lt;= 0.50
-## |   |   |--- CeSem_Inanim &lt;= 0.50
+## |   |   |--- CeSem_Anim &lt;= 0.50
+## |   |   |   |--- Poss_No &lt;= 0.50
+## |   |   |   |   |--- class: 0
+## |   |   |   |--- Poss_No &gt;  0.50
+## |   |   |   |   |--- Neg_Yes &lt;= 0.50
+## |   |   |   |   |   |--- class: 0
+## |   |   |   |   |--- Neg_Yes &gt;  0.50
+## |   |   |   |   |   |--- class: 0
+## |   |   |--- CeSem_Anim &gt;  0.50
 ## |   |   |   |--- CdEv_Soc &lt;= 0.50
 ## |   |   |   |   |--- Neg_No &lt;= 0.50
 ## |   |   |   |   |   |--- class: 1
@@ -859,25 +854,31 @@ Erin M. Buchanan
 ## |   |   |   |   |   |   |   |--- class: 0
 ## |   |   |   |   |   |--- Poss_Yes &gt;  0.50
 ## |   |   |   |   |   |   |--- class: 0
-## |   |   |--- CeSem_Inanim &gt;  0.50
-## |   |   |   |--- Poss_Yes &lt;= 0.50
-## |   |   |   |   |--- Neg_No &lt;= 0.50
-## |   |   |   |   |   |--- class: 0
-## |   |   |   |   |--- Neg_No &gt;  0.50
-## |   |   |   |   |   |--- class: 0
-## |   |   |   |--- Poss_Yes &gt;  0.50
-## |   |   |   |   |--- class: 0
 ## |   |--- CdEv_Phys &gt;  0.50
 ## |   |   |--- CeSem_Inanim &lt;= 0.50
-## |   |   |   |--- Poss_Yes &lt;= 0.50
+## |   |   |   |--- Neg_No &lt;= 0.50
 ## |   |   |   |   |--- class: 0
-## |   |   |   |--- Poss_Yes &gt;  0.50
-## |   |   |   |   |--- Neg_No &lt;= 0.50
-## |   |   |   |   |   |--- class: 0
-## |   |   |   |   |--- Neg_No &gt;  0.50
+## |   |   |   |--- Neg_No &gt;  0.50
+## |   |   |   |   |--- Poss_No &lt;= 0.50
 ## |   |   |   |   |   |--- class: 1
+## |   |   |   |   |--- Poss_No &gt;  0.50
+## |   |   |   |   |   |--- class: 0
 ## |   |   |--- CeSem_Inanim &gt;  0.50
-## |   |   |   |--- class: 1</code></pre>
+## |   |   |   |--- class: 1
+## |--- CrSem_Inanim &gt;  0.50
+## |   |--- CdEv_Ment &lt;= 0.50
+## |   |   |--- CeSem_Anim &lt;= 0.50
+## |   |   |   |--- CdEv_Soc &lt;= 0.50
+## |   |   |   |   |--- class: 1
+## |   |   |   |--- CdEv_Soc &gt;  0.50
+## |   |   |   |   |--- class: 1
+## |   |   |--- CeSem_Anim &gt;  0.50
+## |   |   |   |--- CdEv_Phys &lt;= 0.50
+## |   |   |   |   |--- class: 1
+## |   |   |   |--- CdEv_Phys &gt;  0.50
+## |   |   |   |   |--- class: 1
+## |   |--- CdEv_Ment &gt;  0.50
+## |   |   |--- class: 1</code></pre>
 </div>
 <div id="how-close-were-we" class="slide section level2">
 <h1>How close were we?</h1>

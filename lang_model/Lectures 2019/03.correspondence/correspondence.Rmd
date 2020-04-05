@@ -132,7 +132,7 @@ mosaicplot(colreg, #data frame
 ## Simple Correspondence Analysis 
 
 - Identifies systematic relationships between variables in low dimensional space
-- Similar to MDS, PCA, EFA
+- Similar to multidimensional scaling, principle components analysis, exploratory factor analysis
 
 ```{r}
 ##r chunk
@@ -150,7 +150,7 @@ summary(sca_model)
 ## Inertia
 
 - Top part is the table of inertias, which explain how much variation is accounted for by each dimension
-- These are similar to eigenvalues that we've seen in the last several analyses 
+- These are similar to eigenvalues that we will cover more with factor analyses 
 
 ## Inertia
 

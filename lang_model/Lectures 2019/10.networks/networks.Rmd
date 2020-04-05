@@ -56,7 +56,7 @@ knitr::include_graphics("local_cluster.png")
 
 - Macroscopic Network Measures are often used to talk about the overall organization of a network.
 - Small world structure (S): will have high local clustering coefficients and short path lengths when compared to a random network
-  - This idea is sometimes related to efficiency - as things are very closely related, you don't have to go very far to rely information. 
+  - This idea is sometimes related to efficiency - as things are very closely related, you don't have to go very far to relay/transmit information. 
 - Assortivity (A): correlation between pairs of node degrees, where zero indicates uncorrelated networks, and higher values indicate more clustering of sections
 
 ## Let's Try Examples

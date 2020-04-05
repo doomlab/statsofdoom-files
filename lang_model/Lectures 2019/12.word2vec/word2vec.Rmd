@@ -100,7 +100,7 @@ from nltk.corpus import abc
 
 ## A simple example
 
-- Use the `gensim` package to build a word2vec model - notice how you are inputting sentences into the model 
+- Use the `gensim` package to build a word2vec model - notice how you are inputting tokenized documents into the model (.sents() is a list of lists of words)
 - Use the model to pull out vocabulary (i.e., the words it used as input)
 - Find a similar word based on context
 - The numbers presented are cosine similarity 

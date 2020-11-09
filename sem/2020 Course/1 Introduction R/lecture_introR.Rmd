@@ -1,0 +1,439 @@
+---
+title: "Introduction to R"
+author: "Erin M. Buchanan"
+date: "`r Sys.Date()`"
+output: 
+  slidy_presentation:
+    incremental: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overall Note
+
+- You can learn R.
+- You will get frustrated.
+- You will get errors that don't help or make sense.
+  - Google is your friend.
+  - Try Googling the specific error message first.
+  - Then try googling your specific function and the error.
+  - Try a bunch of different search terms.
+    
+## Helpful Websites
+
+- Quick-R: www.statmethods.net
+- R documentation: www.rdocumentation.org
+- Swirl: www.swirlstats.com 
+- Stack Overflow: www.stackoverflow.com 
+- Learn Statistics with R: https://learningstatisticswithr.com/
+
+## Download Requirements
+
+- Get R: http://cran.r-project.org/ 
+- Mac: XQuartz https://www.xquartz.org/ (if you find you do not have it)
+- RStudio: http://www.rstudio.org/ 
+
+## Outline
+
+- Commands
+- Object Types 
+- Subsetting 
+- Missing Data
+- Working Directories
+- Packages 
+- Functions
+
+## Commands
+
+- Commands are the code that you tell R to do for you.
+- They can be very simple or complex.
+- Computers do what *you* tell them to do. Mistakes happen! 
+  - Maybe it's a typo, maybe it's a misunderstanding of what the code does 
+
+## Commands
+
+- You can type a command directly into the *console*
+- You can type in a document (*Script* or *Markdown*) and tell it to then run in the *console*
+
+```{r}
+X <- 4
+```
+
+## Commands
+
+- `>` indicates the console is ready for more code
+- `+` indicates that you haven't finished a code block
+- Capitalization and symbols matter 
+- `=` and `<-` are equivalent
+- Hit the up arrow – you can scroll through the last commands that were run
+- Hit the tab key – you'll get a list of variable names and options to select from
+- Use the `?` followed by a command to learn more about it 
+
+## Commands
+
+- Let's take a look and run some simple commands
+  - Where is the console
+  - How do I move them around?
+  - How do I run code?
+  - What is a Script?
+  - What is Markdown? 
+  - How do I run code in those? 
+
+## RStudio
+
+- What are all the windows in RStudio? 
+- Working Area:
+  - Current files that are open like scripts, markdown, etc. 
+- Console, Terminal, Jobs
+    - Where the magic happens 
+    - Where everything runs
+- Environment, History, ...others
+  - Tells you what is saved in your *working* environment
+  - What variables and types of variables you have made
+  - Allows you to click to view them 
+- Files, Plots, Packages, Help, Viewer 
+  - Shows you a file viewer, pictures/plots, packages, and help!
+
+## Object Types
+  
+- Here are some of the basics:
+  - Vectors
+  - Lists
+  - Matrices
+  - Data Frames
+- Within those objects, values can be:
+  - Character 
+  - Factor (a special type of character)
+  - Numeric/Integer/Complex
+  - Logical (True, False)
+  - NaN (versus NA)
+- Last, objects can have attributes (names)
+
+## Objects Example
+
+```{r}
+library(palmerpenguins)
+data(penguins)
+attributes(penguins)
+```
+
+## Objects Example
+
+```{r}
+str(penguins)
+
+names(penguins) #ls(penguins) provides this as well 
+```
+
+## Vectors
+
+- You can think about a vector as one row or column of data
+- All the objects must be the same class
+- If you try to mix and match, it will coerce them into the same type or make them `NA` if not.
+
+```{r}
+X
+```
+
+- `[1]` indicates the number of the first item for each printed row 
+
+```{r}
+penguins$species
+```
+
+## Vector Examples
+
+```{r}
+A <- 1:20
+A
+
+B <- seq(from = 1, to = 20, by = 1)
+B
+
+C <- c("cheese", "is", "great")
+C
+
+D <- rep(1, times = 30)
+D
+```
+
+## Value Types
+
+```{r}
+class(A)
+class(C)
+class(penguins)
+class(penguins$species)
+```
+
+## Functions Vary 
+
+- Functions are the commands we are running --> things like `class()`, `rep()`
+- The code typed into the `()` is called the *arguments*
+- Their output varies based on the type of variable you put in the *arguments*
+
+```{r}
+dim(penguins) #rows, columns
+length(penguins)
+length(penguins$species)
+```
+
+## Lists
+
+- While vectors are one row of data, we might want to have multiple rows or types
+- With a vector, it is *key* to understand they have to be all the same type
+- Lists are a grouping of variables that can be multiple types (between list items) and *can be different lengths*
+- Often function output is saved as a list for this reason 
+- They usually have names to help you print out just a small part of the list
+
+```{r}
+output <- lm(flipper_length_mm ~ bill_length_mm, data = penguins)
+str(output)
+output$coefficients
+```
+
+## Dimensional Data
+
+- Matrices
+  - Matrices are vectors with dimensions (like a 2X3)
+  - All the data *must be the same type*
+- Data Frames / Tibbles 
+  - Like a matrix, but the columns can be different types of classes
+
+## Matrix
+
+- Let's talk about the `[ , ]` 
+- `[row, column]` to *subset* or grab specific values
+
+```{r}
+myMatrix <- matrix(data = 1:10,
+                   nrow = 5,
+                   ncol = 2)
+myMatrix
+```
+
+## Data Frames
+
+- With data frames, we can use `[ , ]`
+- However, they also have attributes that allow us to use the `$` (lists have this too!)
+
+```{r}
+penguins[1, 2:3]
+penguins$sex[4:25] #why no comma?
+```
+
+## Dimensional Data
+
+- What if you want to combine data? We've already talked about `c()`.
+- `rbind()` allows you to put together rows
+- `cbind()` allows you to put together columns 
+
+```{r}
+X <- 1:5
+Y <- 6:10
+# I can use either because they are the same size 
+cbind(X,Y)
+rbind(X,Y)
+```
+
+## Remind R Where Things Are
+
+- Just because you know we have `penguins` open and there's a variable in in called `species` ... you cannot just use `species`
+
+```{r}
+ls()
+ls(penguins)
+```
+
+## Converting Object Types
+
+- You can use `as.` functions to convert between types
+- Show as.<tab> to see what is available 
+- Be careful though!
+
+```{r}
+newDF <- as.data.frame(cbind(X,Y))
+str(newDF)
+as.numeric(c("one", "two", "3"))
+```
+
+## Subsetting
+
+- Subsetting is parceling out the rows/columns that you need given some criteria.
+- We already talked about how to select one row/column with `[1,]` or `[,1]` and the `$` operator.
+- What about cases you want to select based on scores, missing data, etc.?
+
+## Subsetting Examples
+
+- How does the logical operator work?
+  - It analyzes each row/column for the appropriate logical question 
+  - We are asking when bill length is greater than 54 
+  - We only got back the rows that the length was greater than 54
+  - Careful where you put it (before the `,`)
+
+```{r}
+penguins[1:2,] #just the first two rows 
+penguins[penguins$bill_length_mm > 54 , ] #how does this work?
+penguins$bill_length_mm > 54
+```
+
+## Subsetting Examples
+
+```{r}
+#you can create complex rules
+penguins[penguins$bill_length_mm > 54 & penguins$bill_depth_mm > 17, ]
+#you can do all BUT
+penguins[ , -1]
+#grab a few columns by name
+vars <- c("bill_length_mm", "sex")
+penguins[ , vars]
+```
+
+## Subsetting
+
+```{r}
+#another function
+#notice any differences? 
+subset(penguins, bill_length_mm > 54)
+#other functions include filter() in tidyverse
+```
+
+## Missing Values
+
+- Missing values are marked with `NA`
+- `NaN` stands for not a number, which doesn't automatically convert to missing
+- Most functions have an option for excluding the `NA` values *but* they can be slightly different 
+
+```{r}
+head(complete.cases(penguins)) #creates logical
+head(na.omit(penguins)) #creates actual rows
+head(is.na(penguins$body_mass_g)) #for individual vectors
+```
+
+## Working Directories
+
+- Your computer has files and folders, and you have to tell *R* where to look
+- The working directory is where you are currently telling it to look 
+
+```{r}
+getwd()
+```
+
+## Working Directory 
+
+- You can set the working directory by doing something like this
+- I would suggest this is pretty error prone and breaks when you move files!
+
+```{r}
+setwd("/Users/buchanan/OneDrive - Harrisburg University/Teaching/ANLY 580/updated/1 Introduction R")
+```
+ 
+## Working Directory
+
+- Working directories are critical because they allow you to automate
+- Instead of using the point and click options, you can just run code to open your specific files
+- Markdown files are the best!
+- Projects are the best! 
+
+## Importing Files
+
+- There are many ways to import files
+  - You can use base R functions (`readLines`, `read.csv`)
+  - You can use tidyverse (`read_csv`) 
+  - You can use Import Dataset clickable option
+  - Why not use one package that does most of it like magic?
+
+```{r}
+library(rio)
+myDF <- import("assignment_introR.csv")
+head(myDF)
+```
+
+## Packages
+
+- You can install extra functions by installing *packages* or *libraries*
+- These can be downloaded from CRAN using `install.packages()`
+  - You can also install these by using the Packages tab
+- Additional packages can be installed from GitHub and other places
+
+```{r eval = F}
+install.packages("car")
+```
+
+## Packages 
+
+- View what is installed with the Packages window
+- Every time you get a major *R* update, you will likely have to reinstall packages
+- Every time you restart *R*, you will need to reload each package
+  - Helpful to put the library code right at the top of your scripts 
+
+```{r}
+library(car)
+```
+
+## Functions
+
+- Functions are pre-written code to help you run analyses
+- Get help with function, learn what the arguments should be:
+  - Let's flip back to RStudio to see what this did
+
+```{r eval = F}
+?lm
+help(lm)
+```
+
+## Functions
+
+```{r}
+args(lm)
+example(lm)
+```
+
+## Define Your Own Function
+
+- Name the function before `<-`
+- Define the arguments inside `()`
+- Define what the function does inside `{}`
+
+```{r}
+pizza <- function(x){ x^2 }
+pizza(3)
+```
+
+## Example Functions
+
+```{r}
+table(penguins$species)
+summary(penguins$bill_length_mm)
+```
+
+## Examples Functions with Missing Data
+
+```{r}
+mean(penguins$bill_length_mm) #returns NA
+mean(penguins$bill_length_mm, na.rm = TRUE)
+
+cor(penguins[ , c("bill_length_mm", "bill_depth_mm", "flipper_length_mm")])
+cor(penguins[ , c("bill_length_mm", "bill_depth_mm", "flipper_length_mm")],
+    use = "pairwise.complete.obs")
+```
+
+## Other Descriptive Functions
+
+- `cov()`
+- `var()`
+- `sd()`
+- `scale()`
+
+## Wrapping Up
+
+- In this demo, you've learned:
+  - Some basic programming terminology 
+  - Specific *R* defaults and issues
+  - Example functions and use cases
+- How do I get started? 
+  - Practice! 
+
+

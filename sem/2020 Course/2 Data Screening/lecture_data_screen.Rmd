@@ -1,0 +1,260 @@
+---
+title: "Data Screening"
+author: "Erin M. Buchanan"
+date: "`r Sys.Date()`"
+output: 
+  slidy_presentation:
+    incremental: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Screening Overview
+
+- In this lecture, we will give you demonstration of what you might do to data screen a dataset for structural equation modeling. 
+- There are four key steps:
+  
+  - Accuracy: dealing with errors
+  - Missing: dealing with missing data
+  - Outliers: determining if there are outliers and what to do with them
+  - Assumptions: additivity, multivariate normality, linearity, homogeneity, and homoscedasticity
+  
+- Note that the type of data screening may change depending on the type of data you have (i.e., ordinal data has different assumptions) 
+- Mostly, we will focus on datasets with traditional parametric assumptions
+
+## Hypothesis Testing versus Data Screening
+
+- Generally, we set an $alpha$ value, or Type 1 error
+- Often, this translates to "statistical significance", *p* < $alpha$ = significant, where $alpha$ is often defined as .05
+- In data screening, we want things to be very unusual before correcting or eliminating things
+- Therefore, we will often lower our criterion and use *p* < $alpha$ to denote problems with the data, where $alpha$ is lowered to .001
+
+## Order is Important
+
+- While datascreening can be performed many ways, it's important to know that you should fix errors, missing data, etc. before checking assumptions
+- The changes you make effect the next steps
+
+## An Example 
+
+- We will learn about data screening by working an example
+- This data is made up data where people were asked to judge their own learning in different experimental conditions, and they rated their confidence of remembering information, and then we measured their actual memory of a situation 
+
+## Import the Data
+
+```{r}
+library(rio)
+master <- import("lecture_data_screen.csv")
+names(master)
+```
+
+## Accuracy
+
+- Use the `summary()` and `table()` functions to examine the dataset.
+- Categorical data: Are the labels right? Should this variable be factored? 
+- Continuous data: is the min/max of the data correct? Are the data scored correctly? 
+
+## Accuracy Categorical 
+
+```{r}
+#summary(master)
+table(master$JOL_group)
+
+table(master$type_cue)
+```
+
+## Accuracy Categorical 
+
+```{r}
+no_typos <- master
+no_typos$JOL_group <- factor(no_typos$JOL_group,
+                             levels = c("delayed", "immediate"),
+                             labels = c("Delayed", "Immediate"))
+
+no_typos$type_cue <- factor(no_typos$type_cue, 
+                            levels = c("cue only", "stimulus pairs"),
+                            labels = c("Cue Only", "Stimulus Pairs"))
+```
+
+## Accuracy Continuous
+
+- Confidence and recall should only be between 0 and 100.
+- Looks like we have some data to clean up.
+
+```{r}
+summary(no_typos)
+```
+
+## Accuracy Continuous
+
+```{r}
+# how did I get 3:22?
+# how did I get the rule?
+# what should I do? 
+no_typos[ , 3:22][ no_typos[ , 3:22] > 100 ]
+
+no_typos[ , 3:22][ no_typos[ , 3:22] > 100 ] <- NA
+
+no_typos[ , 3:22][ no_typos[ , 3:22] < 0 ] <- NA
+```
+
+## Missing
+
+- There are two main types of missing data: 
+
+  - Missing not at random: when data is missing because of a common cause (i.e., everyone skipped question five)
+  - Missing completely at random: data is randomly missing, potentially due to computer or human error 
+
+- We also have to distinguish between missing data and incomplete data 
+
+```{r}
+no_missing <- no_typos
+summary(no_missing)
+```
+
+## Missing Rows
+
+```{r}
+percent_missing <- function(x){sum(is.na(x))/length(x) * 100}
+missing <- apply(no_missing, 1, percent_missing)
+table(missing)
+```
+
+## Missing Replacement
+
+- How much data can I safely replace? 
+  
+  - Replace only things that make sense.
+  - Replace as minimal as possible, often less than 5%
+  - Replace based on completion/missingness type
+
+```{r}
+replace_rows <- subset(no_missing, missing <= 5)
+no_rows <- subset(no_missing, missing > 5)
+```
+
+## Missing Columns
+
+- Separate out columns that you should not replace 
+- Make sure columns have less than 5% missing for replacement
+
+```{r}
+missing <- apply(replace_rows, 2, percent_missing)
+table(missing)
+
+replace_columns <- replace_rows[ , 3:22]
+no_columns <- replace_rows[ , 1:2]
+```
+
+## Missing Replacement
+
+```{r}
+library(mice)
+tempnomiss <- mice(replace_columns)
+```
+
+## Missing Put Together
+
+```{r}
+fixed_columns <- complete(tempnomiss)
+all_columns <- cbind(no_columns, fixed_columns)
+all_rows <- rbind(all_columns, no_rows)
+nrow(no_missing)
+nrow(all_rows)
+```
+
+## Outliers
+
+- We will mostly be concerned with multivariate outliers in SEM. 
+- These are rows of data (participants) who have extremely weird patterns of scores when compared to everyone else.
+- We will use Mahalanobis Distance to examine each row to determine if they are an outlier
+  
+  - This score *D* is the distance from the centriod or mean of means
+  - We will use a cutoff score based on our strict screening criterion, *p* < .001 to determine if they are an outlier
+  - This cutoff criterion is based on *the number of variables* rather than the *number of observations*
+
+## Outliers Mahalanobis 
+
+```{r}
+mahal <- mahalanobis(all_columns[ , -c(1,2)], #take note here 
+  colMeans(all_columns[ , -c(1,2)], na.rm=TRUE),
+  cov(all_columns[ , -c(1,2)], use ="pairwise.complete.obs"))
+
+cutoff <- qchisq(p = 1 - .001, #1 minus alpha
+                 df = ncol(all_columns[ , -c(1,2)])) # number of columns
+```
+
+## Outliers Mahalanobis 
+
+- Do outliers really matter in a SEM analysis though? 
+
+```{r}
+cutoff
+
+summary(mahal < cutoff) #notice the direction 
+
+no_outliers <- subset(all_columns, mahal < cutoff)
+```
+
+## Assumptions Additivity
+
+- Additivity is the assumption that each variable adds something to the model
+- You basically do not want to use the same variable twice, as that lowers power
+- Often this is described as multicollinearity
+- Mainly, SEM analysis has a lot of correlated variables, you just want to make sure they aren't perfectly correlated
+
+## Assumptions Additivity
+
+```{r}
+library(corrplot)
+corrplot(cor(no_outliers[ , -c(1,2)]))
+```
+
+## Assumptions Set Up
+
+```{r}
+random_variable <- rchisq(nrow(no_outliers), 7)
+fake_model <- lm(random_variable ~ ., 
+                 data = no_outliers[ , -c(1,2)])
+standardized <- rstudent(fake_model)
+fitvalues <- scale(fake_model$fitted.values)
+```
+
+## Assumptions Linearity
+
+- We assume the the multivariate relationship between continuous variables is linear (i.e., no curved)
+- There are many ways to test this, but we can use a QQ/PP Plot to examine for linearity
+
+```{r}
+plot(fake_model, 2)
+```
+
+## Assumptions Normality
+
+- We expect that the residuals are normally distributed
+- Not that the *sample* is normally distributed 
+- Generally, SEM requires a large sample size, thus, buffering against normality deviations
+
+```{r}
+hist(standardized)
+```
+
+## Assumptions Homogeneity + Homoscedasticity
+
+- These assumptions are about equality of the variances
+- We assume equal variances between groups for things like t-tests, ANOVA
+- Here the assumption is equality in the spread of variance across predicted values 
+
+```{r}
+{plot(standardized, fitvalues)
+  abline(v = 0)
+  abline(h = 0)
+}
+```
+
+## Recap
+
+- We have completed a datascreening check up for our dataset
+- Any problems should be noted, and we will discuss how to handle some of the issues as relevant to SEM analysis
+- Let's check out the assignment!

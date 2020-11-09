@@ -1,0 +1,71 @@
+---
+title: "1 Intro R"
+author: "YOUR NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Answer the following questions in provided *R* chunks. 
+
+#	Make a vector of numbers. 
+
+    -	Use the rep or seq function.
+    -	Include a concatenate c().
+
+```{r}
+
+```
+
+#	Length
+  
+     - Use the length() function to figure out how long your vector is.
+
+```{r}
+
+```
+
+#	Matrices
+  
+     - Make a matrix at least 5 by 5. 
+     - Pull out the value for row 2 column 3.
+    
+```{r}
+
+```
+
+#	Embedded Data
+    
+    - Use the head() function to look at the dataset USArrests. 
+    - Calculate a summary of USArrests.
+
+```{r}
+
+```
+
+#	Data Wrangling
+
+    - Import a data set (attached). 
+    - Recode all the values to LEFT and RIGHT in the whichhand column.
+    - Create a summary of the dataset.
+    - Exclude all NA values in the dataset.
+    - Create a dataset with only LEFT handed participants.
+    - Calculate the correlation table of just the following variables: LR_switch, finger_switch, rha, word_length, letter_freq
+
+```{r}
+
+```
+
+#	Regression Wrangling:
+
+    - Run a regression using the following: lm(rating~finger_switch, data=data) or whatever you called the data
+    - Save the output of the regression.
+    - Pull out only the slope from the coefficients.
+
+```{r}
+
+```
+

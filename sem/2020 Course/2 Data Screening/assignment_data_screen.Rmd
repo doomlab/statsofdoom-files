@@ -1,0 +1,142 @@
+---
+title: "2 Data Screening"
+author: "YOUR NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Screening Class Assignment
+
+Download the data screening file to analyze. You want to screen the whole dataset at once to look for issues, since all the variables will be used in several different hypotheses. Import the data below. 
+
+```{r}
+
+```
+
+Study: This dataset includes a male body dissatisfaction scale with the following questions: 
+
+1.	I think my body should be leaner
+2.	I am concerned that my stomach is too flabby
+3.	I feel dissatisfied with my overall body build
+4.	I think I have too much fat on my body
+5.	I think my abs are not thin enough
+6.	I feel satisfied with the size and shape of my body
+7.	Has eating sweets, cakes, or other high calorie food made you feel fat or weak?
+8.	Have you felt excessively large and rounded (i.e., fat)?
+9.	Have you felt ashamed of your body size or shape?
+10.	Has seeing your reflection (e.g., in a mirror or window) made you feel badly about your size or shape?
+11.	Have you been so worried about your body size or shape that you have been feeling that you ought to diet?
+
+## Check the data for the following:
+
+### Accuracy:
+
+Check the data for out of range scores.  The scale ranges from 1 (*never*) to 6 (*always*). Use the `summary()` function to inspect the scores. 
+
+```{r}
+
+```
+
+QUESTION: What are the problems you see in the dataset?  
+ANSWER: 
+
+Make all out of range values `NA`. Include a `summary()` of the dataset to show that you have fixed the inaccurate values. 
+
+```{r}
+
+```
+
+### Missing data:
+
+QUESTION: Using the summary function from above, what type of missing data do you appear to have? 
+ANSWER:
+
+Calculate the missing scores by participant (rows), showing the final missing percentages using the `table()` function. 
+
+```{r}
+
+```
+
+Exclude all participants with more than 5% missing data.
+
+```{r}
+
+```
+
+Calculate missing scores by variable (columns) on the dataset with participants who have less than 5% missing.  
+
+```{r}
+
+```
+
+### Outliers:
+
+Calculate Mahalanobis distance scores for your data.
+
+```{r}
+
+```
+
+QUESTION: What is the *df* for your cut off score?
+ANSWER:
+
+QUESTION: What is the cut off score? 
+ANSWER:
+
+QUESTION: How many outliers did you have? 
+ANSWER:
+
+Exclude the outliers, if you have any. 
+
+```{r}
+
+```
+
+### Additivity:
+
+Include a depiction of the correlation between scale items with `corplot`. 
+
+```{r}
+
+```
+
+QUESTION: Do you meet the assumption of additivity?
+ANSWER:
+
+### Normality:
+
+Include the multivariate normality histogram.
+
+```{r}
+
+```
+
+QUESTION: Interpret the graph.  Does it indicate multivariate normality?
+ANSWER:
+
+### Linearity: 
+
+Include the multivariate QQ plot.
+
+```{r}
+
+```
+
+QUESTION: Interpret the graph. Does it indicate multivariate linearity?
+ANSWER: 
+
+### Homogeneity/Homoscedasticity:
+
+Include the multivariate residuals plot.
+
+```{r}
+
+```
+
+QUESTION: Interpret the graph. Does it indicate homoscedasticity and homogeneity?
+ANSWER: 
+

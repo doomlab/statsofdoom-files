@@ -1,0 +1,104 @@
+---
+title: "3 EFA"
+author: "YOUR NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## EFA Example Class Assignment
+
+What is in the dataset? Here's the scale we are going to explore:
+
+Below are some phrases describing people's behaviors. Please use the rating scale below to describe how accurately each statement describes you. Describe yourself as you generally are now, not as you wish to be in the future. Describe yourself as you honestly see yourself in relation to other people of your gender and of roughly your same age.  Please read each statement carefully, and then check the box that corresponds to your response.
+
+Scale: very inaccurate, moderately inaccurate, neither inaccurate nor accurate, moderately accurate, very accurate
+
+1.	Believe in the importance of art.
+2.	Have a vivid imagination.
+3.	Tend to vote for liberal political candidates.
+4.	Carry the conversation to a higher level.
+5.	Enjoy hearing new ideas.
+6.	Enjoy thinking about things.
+7.	Can say things beautifully.
+8.	Enjoy wild flights of fantasy.
+9.	Get excited by new ideas.
+10.	Have a rich vocabulary.
+11.	Am not interested in abstract ideas.
+12.	Do not like art.
+13.	Avoid philosophical discussions.
+14.	Do not enjoy going to art museums.
+15.	Tend to vote for conservative political candidates.
+16.	Do not like poetry.
+17.	Rarely look for a deeper meaning in things.
+18.	Believe that too much tax money goes to support artists.
+19.	Am not interested in theoretical discussions.
+20.	Have difficulty understanding abstract ideas.
+
+Import the dataset below.
+
+```{r}
+
+```
+
+## Short Data Screening
+
+Exclude missing cases from the dataset. Exclude the group variable from the analysis (you can drop the column).
+
+## Number of Factors
+
+Include a parallel analysis and scree plot.
+
+```{r}
+
+```
+
+Include a summary of the eigenvalues and the Kaiser criterion.
+
+```{r}
+
+```
+
+QUESTION: How many factors should you use given the results of the parallel analysis, scree plot, and eigenvalues?
+ANSWER:
+
+## Simple Structure
+
+Using oblimin rotation and maximum likelihood as your math, run the EFA analysis. Examine the loadings. If you find items that do not load or cross load on multiple factors, you should exclude them. 
+
+```{r}
+
+```
+
+## Fit Indices
+
+Show the RMSR, RMSEA, TLI, and CFI fit indices.
+
+```{r}
+
+```
+
+QUESTION: Interpret these fit indices. What do they tell you about your model?
+ANSWER: 
+
+## Reliablity
+
+Calculate Cronbach's alpha for each factor. 
+
+```{r}
+
+```
+
+## Interpretation
+
+Create a plot of the factors.
+
+```{r}
+
+```
+
+QUESTION: What do you think the factors are measuring? Try describing your factors.
+ANSWER: 

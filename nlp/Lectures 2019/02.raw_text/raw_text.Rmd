@@ -1,7 +1,7 @@
 ---
 title: "Processing Raw Text"
 author: "Erin M. Buchanan"
-date: "01/30/2020"
+date: "`r Sys.Date()`"
 output: 
   slidy_presentation:
     increment: TRUE
@@ -88,8 +88,6 @@ setofstrings[:1]
 setofstrings[:2]
 setofstrings[2:]
 ```
-
-Add <= versus < 
 
 ## Methods
 
@@ -210,6 +208,12 @@ library(rvest)
 blog_url = "https://www.aggieerin.com/post/getting-translations-with-rvest-and-selenium/"
 blog_post = read_html(blog_url)
 clean_text = html_text(blog_post)
+
+#forgot that you need to find all the instances, since the meta
+#data has the introduction as information
+str_locate_all(clean_text, "In this guide")
+str_locate_all(clean_text, "Enjoy!")
+clean_text <- substr(clean_text, 3873, 8202) 
 clean_text
 ```
 
@@ -233,7 +237,10 @@ print(content[1000:2000])
 from bs4 import BeautifulSoup
 clean_content = BeautifulSoup(content)
 clean_text = clean_content.get_text()
-print(clean_text[1000:2000])
+#print(clean_text[:1000])
+re.search("In this guide", clean_text)
+clean_text = clean_text[495:]
+print(clean_text)
 ```
 
 ## Tokenization 
@@ -251,7 +258,8 @@ print(clean_text[1000:2000])
 ```{r}
 ##r chunk
 library(tokenizers)
-tokenize_sentences(clean_text)[[1]][3:8]
+list_sentences <- unlist(tokenize_sentences(clean_text))
+tokenize_sentences(clean_text)[[1]][3:8] ##give me just a few parts
 
 count_sentences(clean_text) # hmmm
 temp = unlist(tokenize_sentences(clean_text))

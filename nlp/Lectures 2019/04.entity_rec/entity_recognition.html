@@ -6,13 +6,83 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Erin M. Buchanan" />
-  <meta name="date" content="2019-12-12" />
+  <meta name="date" content="2020-12-15" />
   <title>WordNet and Entity Recognition</title>
-  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode { white-space: pre; position: relative; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    code.sourceCode { white-space: pre-wrap; }
+    code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+          </style>
+  <style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -22,14 +92,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -38,9 +110,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -441,7 +513,7 @@ list-style-type: none;
   <p class="author">
 Erin M. Buchanan
   </p>
-  <p class="date">12/12/2019</p>
+  <p class="date">2020-12-15</p>
 </div>
 <div id="semantic-analysis" class="slide section level2">
 <h1>Semantic Analysis</h1>
@@ -480,10 +552,18 @@ Erin M. Buchanan
 <li>Contains over 150,000 words grouped into 120,000(ish) synsets and many more word-sense pairs</li>
 <li>WordNet can be accessed through <code>nltk</code> in Python and the <code>wordnet</code> package in R</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">##r chunk</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#install.packages(&quot;wordnet&quot;)</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(reticulate)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#py_install(&quot;nltk&quot;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">##r chunk</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co">#install.packages(&quot;wordnet&quot;)</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(reticulate)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">py_config</span>()</span></code></pre></div>
+<pre><code>## python:         C:/Users/EBuchanan.HU/AppData/Local/r-miniconda/envs/r-reticulate/python.exe
+## libpython:      C:/Users/EBuchanan.HU/AppData/Local/r-miniconda/envs/r-reticulate/python36.dll
+## pythonhome:     C:/Users/EBuchanan.HU/AppData/Local/r-miniconda/envs/r-reticulate
+## version:        3.6.11 (default, Aug  5 2020, 19:41:03) [MSC v.1916 64 bit (AMD64)]
+## Architecture:   64bit
+## numpy:          C:/Users/EBuchanan.HU/AppData/Local/r-miniconda/envs/r-reticulate/Lib/site-packages/numpy
+## numpy_version:  1.18.1</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">#py_install(&quot;nltk&quot;)</span></span></code></pre></div>
 </div>
 <div id="synsets" class="slide section level2">
 <h1>Synsets</h1>
@@ -503,11 +583,14 @@ Erin M. Buchanan
 <li>Filters can be “ContainsFilter”, “EndsWithFilter”, “ExactMatchFilter”, “RegexFilter”, “SoundFilter”, “StartsWithFilter”, and “WildcardFilter”.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">##r chunk</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(wordnet)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">filter &lt;-<span class="st"> </span><span class="kw">getTermFilter</span>(<span class="st">&quot;ExactMatchFilter&quot;</span>, <span class="co">#find this exact word</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">                        <span class="dt">word =</span> <span class="st">&quot;fruit&quot;</span>, <span class="co">#what the word is</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">                        <span class="dt">ignoreCase =</span> <span class="ot">TRUE</span>) <span class="co">#should I ignore case</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">##r chunk</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">library</span>(wordnet)</span></code></pre></div>
+<pre><code>## Warning in initDict(): cannot find WordNet &#39;dict&#39; directory: please set the
+## environment variable WNHOME to its parent</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">setDict</span>(<span class="st">&quot;C:/Program Files (x86)/WordNet/2.1/dict&quot;</span>) <span class="co">#if wordnet error</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>filter &lt;-<span class="st"> </span><span class="kw">getTermFilter</span>(<span class="st">&quot;ExactMatchFilter&quot;</span>, <span class="co">#find this exact word</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>                        <span class="dt">word =</span> <span class="st">&quot;fruit&quot;</span>, <span class="co">#what the word is</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>                        <span class="dt">ignoreCase =</span> <span class="ot">TRUE</span>) <span class="co">#should I ignore case</span></span></code></pre></div>
 </div>
 <div id="fruit-in-r-1" class="slide section level2">
 <h1>Fruit in R</h1>
@@ -518,68 +601,81 @@ Erin M. Buchanan
 </ul></li>
 <li>Last, you put in the filter.</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">##r chunk</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">terms &lt;-<span class="st"> </span><span class="kw">getIndexTerms</span>(<span class="st">&quot;NOUN&quot;</span>, <span class="co">#what type of word you want it to be</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">                       <span class="dv">5</span>, <span class="co">#maximum number of results to return</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">                       filter) <span class="co">#the filter you previously defined</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">terms</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">##r chunk</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>terms &lt;-<span class="st"> </span><span class="kw">getIndexTerms</span>(<span class="st">&quot;NOUN&quot;</span>, <span class="co">#what type of word you want it to be</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>                       <span class="dv">5</span>, <span class="co">#maximum number of results to return</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>                       filter) <span class="co">#the filter you previously defined</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>terms</span></code></pre></div>
 <pre><code>## [[1]]
-## [1] &quot;Java-Object{Lemma: fruit  POS: noun  Tag-Sense-Count: 3\nList of Synsets (3)\n  #1: 13134947\n  #2: 4612722\n  #3: 7294550\nList of Pointers (3)\n  #1: @ (Hypernym)\n  #2: ~ (Hyponym)\n  #3: + (Derivationally related form)}&quot;</code></pre>
+## [1] &quot;Java-Object{Lemma: fruit  POS: noun  Tag-Sense-Count: 3\nList of Synsets (3)\n  #1: 12965125\n  #2: 7194635\n  #3: 4557797\nList of Pointers (3)\n  #1: @ (Hypernym)\n  #2: ~ (Hyponym)\n  #3: + (Derivationally related form)}&quot;</code></pre>
 </div>
 <div id="fruit-in-r-2" class="slide section level2">
 <h1>Fruit in R</h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">##r chunk</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#we could use lapply here to pull more than one</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">fruit_sets &lt;-<span class="st"> </span><span class="kw">lapply</span>(terms, getSynsets)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">fruit_sets</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">##r chunk</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#we could use lapply here to pull more than one</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>fruit_sets &lt;-<span class="st"> </span><span class="kw">lapply</span>(terms, getSynsets)</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a>fruit_sets</span></code></pre></div>
 <pre><code>## [[1]]
 ## [[1]][[1]]
-## [1] &quot;Java-Object{Synset-Offset: 13134947  Lex-FileNum: 20  POS: noun  Num-Words: 1\nNum-Ptrs: 37  Num-Frames: 0\nGloss: the ripened reproductive body of a seed plant  \nList of Words (1)\n  #1: Word: fruit  Lexicon-ID: 0  Syntactic-Marker: null\nPOS: noun  Offset: 13134947  Sense: &lt;Not loaded&gt;\nList of Pointers (37)\n  #1: Symbol: @  Synset-Offset: 11675842  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #2: Symbol: +  Synset-Offset: 2397119  POS: adj  Source-Word-Number: 1  Target-Word-Number: 1\n  #3: Symbol: +  Synset-Offset: 10113997  POS: noun  Source-Word-Number: 1  Target-Word-Number: 1\n  #4: Symbol: +  Synset-Offset: 13135692  POS: noun  Source-Word-Number: 1  Target-Word-Number: 1\n  #5: Symbol: +  Synset-Offset: 1652731  POS: verb  Source-Word-Number: 1  Target-Word-Number: 1\n  #6: Symbol: +  Synset-Offset: 1652895  POS: verb  Source-Word-Number: 1  Target-Word-Number: 1\n  #7: Symbol: +  Synset-Offset: 506672  POS: verb  Source-Word-Number: 1  Target-Word-Number: 1\n  #8: Symbol: +  Synset-Offset: 56188  POS: verb  Source-Word-Number: 1  Target-Word-Number: 1\n  #9: Symbol: ~  Synset-Offset: 7705931  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #10: Symbol: ~  Synset-Offset: 11636835  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #11: Symbol: ~  Synset-Offset: 11700279  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #12: Symbol: ~  Synset-Offset: 12036067  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #13: Symbol: ~  Synset-Offset: 12158031  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #14: Symbol: ~  Synset-Offset: 12162758  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #15: Symbol: ~  Synset-Offset: 12193334  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #16: Symbol: ~  Synset-Offset: 12267677  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #17: Symbol: ~  Synset-Offset: 12301445  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #18: Symbol: ~  Synset-Offset: 12620546  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #19: Symbol: ~  Synset-Offset: 12642090  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #20: Symbol: ~  Synset-Offset: 12644283  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #21: Symbol: ~  Synset-Offset: 12647787  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #22: Symbol: ~  Synset-Offset: 12650805  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #23: Symbol: ~  Synset-Offset: 12658481  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #24: Symbol: ~  Synset-Offset: 12737251  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #25: Symbol: ~  Synset-Offset: 13133613  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #26: Symbol: ~  Synset-Offset: 13135692  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #27: Symbol: ~  Synset-Offset: 13135832  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #28: Symbol: ~  Synset-Offset: 13137409  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #29: Symbol: ~  Synset-Offset: 13137672  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #30: Symbol: ~  Synset-Offset: 13138308  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #31: Symbol: ~  Synset-Offset: 13138842  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #32: Symbol: ~  Synset-Offset: 13139055  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #33: Symbol: ~  Synset-Offset: 13139482  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #34: Symbol: ~  Synset-Offset: 13140367  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #35: Symbol: ~  Synset-Offset: 13141415  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #36: Symbol: ~  Synset-Offset: 13150378  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #37: Symbol: ~  Synset-Offset: 13150592  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\nList-Frames: (no frames)}&quot;
+## [1] &quot;Java-Object{Synset-Offset: 12965125  Lex-FileNum: 20  POS: noun  Num-Words: 1\nNum-Ptrs: 37  Num-Frames: 0\nGloss: the ripened reproductive body of a seed plant  \nList of Words (1)\n  #1: Word: fruit  Lexicon-ID: 0  Syntactic-Marker: null\nPOS: noun  Offset: 12965125  Sense: &lt;Not loaded&gt;\nList of Pointers (37)\n  #1: Symbol: @  Synset-Offset: 11508871  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #2: Symbol: +  Synset-Offset: 2478432  POS: adj  Source-Word-Number: 1  Target-Word-Number: 1\n  #3: Symbol: +  Synset-Offset: 9963578  POS: noun  Source-Word-Number: 1  Target-Word-Number: 1\n  #4: Symbol: +  Synset-Offset: 12965870  POS: noun  Source-Word-Number: 1  Target-Word-Number: 1\n  #5: Symbol: +  Synset-Offset: 1637948  POS: verb  Source-Word-Number: 1  Target-Word-Number: 1\n  #6: Symbol: +  Synset-Offset: 1638112  POS: verb  Source-Word-Number: 1  Target-Word-Number: 1\n  #7: Symbol: +  Synset-Offset: 501518  POS: verb  Source-Word-Number: 1  Target-Word-Number: 1\n  #8: Symbol: +  Synset-Offset: 55463  POS: verb  Source-Word-Number: 1  Target-Word-Number: 1\n  #9: Symbol: ~  Synset-Offset: 7600448  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #10: Symbol: ~  Synset-Offset: 11469909  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #11: Symbol: ~  Synset-Offset: 11533155  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #12: Symbol: ~  Synset-Offset: 11868534  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #13: Symbol: ~  Synset-Offset: 11990089  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #14: Symbol: ~  Synset-Offset: 11994816  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #15: Symbol: ~  Synset-Offset: 12025188  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #16: Symbol: ~  Synset-Offset: 12099498  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #17: Symbol: ~  Synset-Offset: 12133301  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #18: Symbol: ~  Synset-Offset: 12452326  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #19: Symbol: ~  Synset-Offset: 12473853  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #20: Symbol: ~  Synset-Offset: 12476079  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #21: Symbol: ~  Synset-Offset: 12479583  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #22: Symbol: ~  Synset-Offset: 12482601  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #23: Symbol: ~  Synset-Offset: 12490277  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #24: Symbol: ~  Synset-Offset: 12569046  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #25: Symbol: ~  Synset-Offset: 12963790  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #26: Symbol: ~  Synset-Offset: 12965870  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #27: Symbol: ~  Synset-Offset: 12966010  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #28: Symbol: ~  Synset-Offset: 12967587  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #29: Symbol: ~  Synset-Offset: 12967850  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #30: Symbol: ~  Synset-Offset: 12968486  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #31: Symbol: ~  Synset-Offset: 12969020  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #32: Symbol: ~  Synset-Offset: 12969233  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #33: Symbol: ~  Synset-Offset: 12969634  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #34: Symbol: ~  Synset-Offset: 12970519  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #35: Symbol: ~  Synset-Offset: 12971567  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #36: Symbol: ~  Synset-Offset: 12980517  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #37: Symbol: ~  Synset-Offset: 12980731  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\nList-Frames: (no frames)}&quot;
 ## 
 ## [[1]][[2]]
-## [1] &quot;Java-Object{Synset-Offset: 4612722  Lex-FileNum: 6  POS: noun  Num-Words: 2\nNum-Ptrs: 3  Num-Frames: 0\nGloss: an amount of a product  \nList of Words (2)\n  #1: Word: yield  Lexicon-ID: 0  Syntactic-Marker: null\nPOS: noun  Offset: 4612722  Sense: &lt;Not loaded&gt;\n  #2: Word: fruit  Lexicon-ID: 0  Syntactic-Marker: null\nPOS: noun  Offset: 4612722  Sense: &lt;Not loaded&gt;\nList of Pointers (3)\n  #1: Symbol: @  Synset-Offset: 4007894  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #2: Symbol: +  Synset-Offset: 2291708  POS: verb  Source-Word-Number: 1  Target-Word-Number: 1\n  #3: Symbol: +  Synset-Offset: 1629000  POS: verb  Source-Word-Number: 1  Target-Word-Number: 2\nList-Frames: (no frames)}&quot;
+## [1] &quot;Java-Object{Synset-Offset: 7194635  Lex-FileNum: 11  POS: noun  Num-Words: 1\nNum-Ptrs: 1  Num-Frames: 0\nGloss: the consequence of some effort or action; \&quot;he lived long enough to see the fruit of his policies\&quot;  \nList of Words (1)\n  #1: Word: fruit  Lexicon-ID: 0  Syntactic-Marker: null\nPOS: noun  Offset: 7194635  Sense: &lt;Not loaded&gt;\nList of Pointers (1)\n  #1: Symbol: @  Synset-Offset: 7194068  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\nList-Frames: (no frames)}&quot;
 ## 
 ## [[1]][[3]]
-## [1] &quot;Java-Object{Synset-Offset: 7294550  Lex-FileNum: 11  POS: noun  Num-Words: 1\nNum-Ptrs: 1  Num-Frames: 0\nGloss: the consequence of some effort or action; \&quot;he lived long enough to see the fruit of his policies\&quot;  \nList of Words (1)\n  #1: Word: fruit  Lexicon-ID: 0  Syntactic-Marker: null\nPOS: noun  Offset: 7294550  Sense: &lt;Not loaded&gt;\nList of Pointers (1)\n  #1: Symbol: @  Synset-Offset: 7294019  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\nList-Frames: (no frames)}&quot;</code></pre>
+## [1] &quot;Java-Object{Synset-Offset: 4557797  Lex-FileNum: 6  POS: noun  Num-Words: 2\nNum-Ptrs: 3  Num-Frames: 0\nGloss: an amount of a product  \nList of Words (2)\n  #1: Word: yield  Lexicon-ID: 0  Syntactic-Marker: null\nPOS: noun  Offset: 4557797  Sense: &lt;Not loaded&gt;\n  #2: Word: fruit  Lexicon-ID: 0  Syntactic-Marker: null\nPOS: noun  Offset: 4557797  Sense: &lt;Not loaded&gt;\nList of Pointers (3)\n  #1: Symbol: @  Synset-Offset: 3962771  POS: noun  Source-Word-Number: 0  Target-Word-Number: 0\n  #2: Symbol: +  Synset-Offset: 2270163  POS: verb  Source-Word-Number: 1  Target-Word-Number: 1\n  #3: Symbol: +  Synset-Offset: 1614519  POS: verb  Source-Word-Number: 1  Target-Word-Number: 2\nList-Frames: (no frames)}&quot;</code></pre>
 </div>
 <div id="fruit-in-python" class="slide section level2">
 <h1>Fruit in Python</h1>
 <ul class="incremental">
 <li>The Python version is easier - you can grab all the types at once!</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="im">from</span> nltk.corpus <span class="im">import</span> wordnet <span class="im">as</span> wn</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="im">import</span> pandas <span class="im">as</span> pd</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">fruit_sets_py <span class="op">=</span> wn.synsets(<span class="st">&quot;fruit&quot;</span>)</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="bu">print</span>(fruit_sets_py)</a></code></pre></div>
-<pre><code>## [Synset('fruit.n.01'), Synset('yield.n.03'), Synset('fruit.n.03'), Synset('fruit.v.01'), Synset('fruit.v.02')]</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">##python chunk</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> wordnet <span class="im">as</span> wn</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a>fruit_sets_py <span class="op">=</span> wn.synsets(<span class="st">&quot;fruit&quot;</span>)</span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="bu">print</span>(fruit_sets_py)</span></code></pre></div>
+<pre><code>## [Synset(&#39;fruit.n.01&#39;), Synset(&#39;yield.n.03&#39;), Synset(&#39;fruit.n.03&#39;), Synset(&#39;fruit.v.01&#39;), Synset(&#39;fruit.v.02&#39;)]</code></pre>
 </div>
 <div id="fruit-in-python-1" class="slide section level2">
 <h1>Fruit in Python</h1>
 <ul class="incremental">
 <li>You can also convert to a dataframe a lot easier!</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">fruit_df <span class="op">=</span> pd.DataFrame([</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">  {<span class="st">&quot;Synset&quot;</span>: each_synset, </a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">  <span class="st">&quot;Part of Speech&quot;</span>: each_synset.pos(), </a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">  <span class="st">&quot;Definition&quot;</span>: each_synset.definition(), </a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">  <span class="st">&quot;Lemmas&quot;</span>: each_synset.lemma_names(), </a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">  <span class="st">&quot;Examples&quot;</span>: each_synset.examples()} </a>
-<a class="sourceLine" id="cb9-8" data-line-number="8">  <span class="cf">for</span> each_synset <span class="kw">in</span> fruit_sets_py])</a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10">fruit_df</a></code></pre></div>
-<pre><code>##                  Synset  ...                                           Examples
-## 0  Synset('fruit.n.01')  ...                                                 []
-## 1  Synset('yield.n.03')  ...                                                 []
-## 2  Synset('fruit.n.03')  ...  [he lived long enough to see the fruit of his ...
-## 3  Synset('fruit.v.01')  ...                                                 []
-## 4  Synset('fruit.v.02')  ...                [the trees fruited early this year]
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">##python chunk</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>pd.set_option(<span class="st">&#39;display.max_columns&#39;</span>, <span class="va">None</span>)</span>
+<span id="cb13-3"><a href="#cb13-3"></a>fruit_df <span class="op">=</span> pd.DataFrame([</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  {<span class="st">&quot;Synset&quot;</span>: each_synset, </span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="st">&quot;Part of Speech&quot;</span>: each_synset.pos(), </span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="st">&quot;Definition&quot;</span>: each_synset.definition(), </span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="st">&quot;Lemmas&quot;</span>: each_synset.lemma_names(), </span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="st">&quot;Examples&quot;</span>: each_synset.examples()} </span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="cf">for</span> each_synset <span class="kw">in</span> fruit_sets_py])</span>
+<span id="cb13-10"><a href="#cb13-10"></a></span>
+<span id="cb13-11"><a href="#cb13-11"></a>fruit_df</span></code></pre></div>
+<pre><code>##                  Synset Part of Speech  \
+## 0  Synset(&#39;fruit.n.01&#39;)              n   
+## 1  Synset(&#39;yield.n.03&#39;)              n   
+## 2  Synset(&#39;fruit.n.03&#39;)              n   
+## 3  Synset(&#39;fruit.v.01&#39;)              v   
+## 4  Synset(&#39;fruit.v.02&#39;)              v   
 ## 
-## [5 rows x 5 columns]</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" data-line-number="1">fruit_df[<span class="st">&quot;Definition&quot;</span>]</a></code></pre></div>
+##                                       Definition          Lemmas  \
+## 0  the ripened reproductive body of a seed plant         [fruit]   
+## 1                         an amount of a product  [yield, fruit]   
+## 2       the consequence of some effort or action         [fruit]   
+## 3                            cause to bear fruit         [fruit]   
+## 4                                     bear fruit         [fruit]   
+## 
+##                                             Examples  
+## 0                                                 []  
+## 1                                                 []  
+## 2  [he lived long enough to see the fruit of his ...  
+## 3                                                 []  
+## 4                [the trees fruited early this year]</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>fruit_df[<span class="st">&quot;Definition&quot;</span>]</span></code></pre></div>
 <pre><code>## 0    the ripened reproductive body of a seed plant
 ## 1                           an amount of a product
 ## 2         the consequence of some effort or action
@@ -602,12 +698,12 @@ Erin M. Buchanan
 <li>Entailments are coded into Wordnet, which we can pull from the <code>synset</code> using the <code>.entailments()</code> function.</li>
 <li>There may be more than one synset, but here we are just pulling the first one by using <code>[0]</code>.</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="cf">for</span> action <span class="kw">in</span> [<span class="st">&quot;walk&quot;</span>, <span class="st">&quot;eat&quot;</span>, <span class="st">&quot;digest&quot;</span>]:</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">  action_synset <span class="op">=</span> wn.synsets(action, pos <span class="op">=</span> <span class="st">&quot;v&quot;</span>)[<span class="dv">0</span>] <span class="co">#take just the first one</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">  <span class="bu">print</span>(action_synset, <span class="st">&quot;-- entails --&gt;&quot;</span>, action_synset.entailments())</a></code></pre></div>
-<pre><code>## Synset('walk.v.01') -- entails --&gt; [Synset('step.v.01')]
-## Synset('eat.v.01') -- entails --&gt; [Synset('chew.v.01'), Synset('swallow.v.01')]
-## Synset('digest.v.01') -- entails --&gt; [Synset('consume.v.02')]</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="cf">for</span> action <span class="kw">in</span> [<span class="st">&quot;walk&quot;</span>, <span class="st">&quot;eat&quot;</span>, <span class="st">&quot;digest&quot;</span>]:</span>
+<span id="cb17-2"><a href="#cb17-2"></a>  action_synset <span class="op">=</span> wn.synsets(action, pos <span class="op">=</span> <span class="st">&quot;v&quot;</span>)[<span class="dv">0</span>] <span class="co">#take just the first one</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="bu">print</span>(action_synset, <span class="st">&quot;-- entails --&gt;&quot;</span>, action_synset.entailments())</span></code></pre></div>
+<pre><code>## Synset(&#39;walk.v.01&#39;) -- entails --&gt; [Synset(&#39;step.v.01&#39;)]
+## Synset(&#39;eat.v.01&#39;) -- entails --&gt; [Synset(&#39;chew.v.01&#39;), Synset(&#39;swallow.v.01&#39;)]
+## Synset(&#39;digest.v.01&#39;) -- entails --&gt; [Synset(&#39;consume.v.02&#39;)]</code></pre>
 </div>
 <div id="other-types-of-relations" class="slide section level2">
 <h1>Other types of relations</h1>
@@ -615,9 +711,9 @@ Erin M. Buchanan
 <li>Homonyms: same written form/pronunciation but different meanings</li>
 <li>Homographs: same written form, different pronunciation or meaning</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="cf">for</span> synset <span class="kw">in</span> wn.synsets(<span class="st">&quot;bank&quot;</span>):</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">  <span class="bu">print</span>(synset.name(), <span class="st">&quot; - &quot;</span>, synset.definition())</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a><span class="co">##python chunk</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="cf">for</span> synset <span class="kw">in</span> wn.synsets(<span class="st">&quot;bank&quot;</span>):</span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="bu">print</span>(synset.name(), <span class="st">&quot; - &quot;</span>, synset.definition())</span></code></pre></div>
 <pre><code>## bank.n.01  -  sloping land (especially the slope beside a body of water)
 ## depository_financial_institution.n.01  -  a financial institution that accepts deposits and channels the money into lending activities
 ## bank.n.03  -  a long ridge or pile
@@ -643,31 +739,31 @@ Erin M. Buchanan
 <li>Synsets are for synonyms, words with similar meanings</li>
 <li>Antonyms are words with opposite meanings</li>
 </ul>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">large_synset <span class="op">=</span> wn.synsets(<span class="st">&quot;large&quot;</span>)</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">large_synset[<span class="dv">1</span>] <span class="co">#grab large as an adjective</span></a></code></pre></div>
-<pre><code>## Synset('large.a.01')</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb19-1" data-line-number="1">large_synset[<span class="dv">1</span>].lemmas()</a></code></pre></div>
-<pre><code>## [Lemma('large.a.01.large'), Lemma('large.a.01.big')]</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb21-1" data-line-number="1">large_synset[<span class="dv">1</span>].lemmas()[<span class="dv">0</span>].antonyms()</a></code></pre></div>
-<pre><code>## [Lemma('small.a.01.small')]</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a><span class="co">##python chunk</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>large_synset <span class="op">=</span> wn.synsets(<span class="st">&quot;large&quot;</span>)</span>
+<span id="cb21-3"><a href="#cb21-3"></a>large_synset[<span class="dv">1</span>] <span class="co">#grab large as an adjective</span></span></code></pre></div>
+<pre><code>## Synset(&#39;large.a.01&#39;)</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>large_synset[<span class="dv">1</span>].lemmas()</span></code></pre></div>
+<pre><code>## [Lemma(&#39;large.a.01.large&#39;), Lemma(&#39;large.a.01.big&#39;)]</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>large_synset[<span class="dv">1</span>].lemmas()[<span class="dv">0</span>].antonyms()</span></code></pre></div>
+<pre><code>## [Lemma(&#39;small.a.01.small&#39;)]</code></pre>
 </div>
 <div id="another-example" class="slide section level2">
 <h1>Another example</h1>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">term <span class="op">=</span> <span class="st">&quot;rich&quot;</span></a>
-<a class="sourceLine" id="cb23-3" data-line-number="3">term_synset <span class="op">=</span> wn.synsets(term)[:<span class="dv">3</span>] <span class="co">#only the first three have connections</span></a>
-<a class="sourceLine" id="cb23-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="cf">for</span> each_synset <span class="kw">in</span> term_synset:</a>
-<a class="sourceLine" id="cb23-6" data-line-number="6">  term_l <span class="op">=</span> each_synset.lemmas()[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb23-7" data-line-number="7">  term_s <span class="op">=</span> term_l.synset()</a>
-<a class="sourceLine" id="cb23-8" data-line-number="8">  term_a <span class="op">=</span> term_l.antonyms()[<span class="dv">0</span>].synset()</a>
-<a class="sourceLine" id="cb23-9" data-line-number="9">  </a>
-<a class="sourceLine" id="cb23-10" data-line-number="10">  <span class="bu">print</span>(<span class="st">&quot;Synonym: &quot;</span>, term_s.name())</a>
-<a class="sourceLine" id="cb23-11" data-line-number="11">  <span class="bu">print</span>(<span class="st">&quot;Definition: &quot;</span>, term_s.definition())</a>
-<a class="sourceLine" id="cb23-12" data-line-number="12">  <span class="bu">print</span>(<span class="st">&quot;Antonym: &quot;</span>, term_a.name())</a>
-<a class="sourceLine" id="cb23-13" data-line-number="13">  <span class="bu">print</span>(<span class="st">&quot;Definition: &quot;</span>, term_a.definition())</a>
-<a class="sourceLine" id="cb23-14" data-line-number="14">  </a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="co">##python chunk</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>term <span class="op">=</span> <span class="st">&quot;rich&quot;</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>term_synset <span class="op">=</span> wn.synsets(term)[:<span class="dv">3</span>] <span class="co">#only the first three have connections</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a></span>
+<span id="cb27-5"><a href="#cb27-5"></a><span class="cf">for</span> each_synset <span class="kw">in</span> term_synset:</span>
+<span id="cb27-6"><a href="#cb27-6"></a>  term_l <span class="op">=</span> each_synset.lemmas()[<span class="dv">0</span>]</span>
+<span id="cb27-7"><a href="#cb27-7"></a>  term_s <span class="op">=</span> term_l.synset()</span>
+<span id="cb27-8"><a href="#cb27-8"></a>  term_a <span class="op">=</span> term_l.antonyms()[<span class="dv">0</span>].synset()</span>
+<span id="cb27-9"><a href="#cb27-9"></a>  </span>
+<span id="cb27-10"><a href="#cb27-10"></a>  <span class="bu">print</span>(<span class="st">&quot;Synonym: &quot;</span>, term_s.name())</span>
+<span id="cb27-11"><a href="#cb27-11"></a>  <span class="bu">print</span>(<span class="st">&quot;Definition: &quot;</span>, term_s.definition())</span>
+<span id="cb27-12"><a href="#cb27-12"></a>  <span class="bu">print</span>(<span class="st">&quot;Antonym: &quot;</span>, term_a.name())</span>
+<span id="cb27-13"><a href="#cb27-13"></a>  <span class="bu">print</span>(<span class="st">&quot;Definition: &quot;</span>, term_a.definition())</span>
+<span id="cb27-14"><a href="#cb27-14"></a>  </span></code></pre></div>
 <pre><code>## Synonym:  rich_people.n.01
 ## Definition:  people who have possessions and wealth (considered as a group)
 ## Antonym:  poor_people.n.01
@@ -688,52 +784,52 @@ Erin M. Buchanan
 <li>Comparison word (dog)</li>
 <li>Hyponyms: a subordinate name, more specific (beagle)</li>
 </ul>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb25-2" data-line-number="2">dog_synset <span class="op">=</span> wn.synsets(<span class="st">&quot;dog&quot;</span>)</a>
-<a class="sourceLine" id="cb25-3" data-line-number="3">dog_synset</a></code></pre></div>
-<pre><code>## [Synset('dog.n.01'), Synset('frump.n.01'), Synset('dog.n.03'), Synset('cad.n.01'), Synset('frank.n.02'), Synset('pawl.n.01'), Synset('andiron.n.01'), Synset('chase.v.01')]</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb27-1" data-line-number="1">dog <span class="op">=</span> dog_synset[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb27-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb27-3" data-line-number="3">dog.hypernyms()</a></code></pre></div>
-<pre><code>## [Synset('canine.n.02'), Synset('domestic_animal.n.01')]</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb29-1" data-line-number="1">dog.hyponyms()</a></code></pre></div>
-<pre><code>## [Synset('basenji.n.01'), Synset('corgi.n.01'), Synset('cur.n.01'), Synset('dalmatian.n.02'), Synset('great_pyrenees.n.01'), Synset('griffon.n.02'), Synset('hunting_dog.n.01'), Synset('lapdog.n.01'), Synset('leonberg.n.01'), Synset('mexican_hairless.n.01'), Synset('newfoundland.n.01'), Synset('pooch.n.01'), Synset('poodle.n.01'), Synset('pug.n.01'), Synset('puppy.n.01'), Synset('spitz.n.01'), Synset('toy_dog.n.01'), Synset('working_dog.n.01')]</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">##python chunk</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>dog_synset <span class="op">=</span> wn.synsets(<span class="st">&quot;dog&quot;</span>)</span>
+<span id="cb29-3"><a href="#cb29-3"></a>dog_synset</span></code></pre></div>
+<pre><code>## [Synset(&#39;dog.n.01&#39;), Synset(&#39;frump.n.01&#39;), Synset(&#39;dog.n.03&#39;), Synset(&#39;cad.n.01&#39;), Synset(&#39;frank.n.02&#39;), Synset(&#39;pawl.n.01&#39;), Synset(&#39;andiron.n.01&#39;), Synset(&#39;chase.v.01&#39;)]</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a>dog <span class="op">=</span> dog_synset[<span class="dv">0</span>]</span>
+<span id="cb31-2"><a href="#cb31-2"></a></span>
+<span id="cb31-3"><a href="#cb31-3"></a>dog.hypernyms()</span></code></pre></div>
+<pre><code>## [Synset(&#39;canine.n.02&#39;), Synset(&#39;domestic_animal.n.01&#39;)]</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a>dog.hyponyms()</span></code></pre></div>
+<pre><code>## [Synset(&#39;basenji.n.01&#39;), Synset(&#39;corgi.n.01&#39;), Synset(&#39;cur.n.01&#39;), Synset(&#39;dalmatian.n.02&#39;), Synset(&#39;great_pyrenees.n.01&#39;), Synset(&#39;griffon.n.02&#39;), Synset(&#39;hunting_dog.n.01&#39;), Synset(&#39;lapdog.n.01&#39;), Synset(&#39;leonberg.n.01&#39;), Synset(&#39;mexican_hairless.n.01&#39;), Synset(&#39;newfoundland.n.01&#39;), Synset(&#39;pooch.n.01&#39;), Synset(&#39;poodle.n.01&#39;), Synset(&#39;pug.n.01&#39;), Synset(&#39;puppy.n.01&#39;), Synset(&#39;spitz.n.01&#39;), Synset(&#39;toy_dog.n.01&#39;), Synset(&#39;working_dog.n.01&#39;)]</code></pre>
 </div>
 <div id="why-is-this-structure-awesome" class="slide section level2">
 <h1>Why is this structure awesome?</h1>
 <ul class="incremental">
 <li>We can begin to track the hierarchical path of how words are connected to each other in meaning by tracking the paths of hyper/hyponyms.</li>
 </ul>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co">##python</span></a>
-<a class="sourceLine" id="cb31-2" data-line-number="2">dog_paths <span class="op">=</span> dog.hypernym_paths()</a>
-<a class="sourceLine" id="cb31-3" data-line-number="3">dog_paths</a></code></pre></div>
-<pre><code>## [[Synset('entity.n.01'), Synset('physical_entity.n.01'), Synset('object.n.01'), Synset('whole.n.02'), Synset('living_thing.n.01'), Synset('organism.n.01'), Synset('animal.n.01'), Synset('chordate.n.01'), Synset('vertebrate.n.01'), Synset('mammal.n.01'), Synset('placental.n.01'), Synset('carnivore.n.01'), Synset('canine.n.02'), Synset('dog.n.01')], [Synset('entity.n.01'), Synset('physical_entity.n.01'), Synset('object.n.01'), Synset('whole.n.02'), Synset('living_thing.n.01'), Synset('organism.n.01'), Synset('animal.n.01'), Synset('domestic_animal.n.01'), Synset('dog.n.01')]]</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a><span class="co">##python</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>dog_paths <span class="op">=</span> dog.hypernym_paths()</span>
+<span id="cb35-3"><a href="#cb35-3"></a>dog_paths</span></code></pre></div>
+<pre><code>## [[Synset(&#39;entity.n.01&#39;), Synset(&#39;physical_entity.n.01&#39;), Synset(&#39;object.n.01&#39;), Synset(&#39;whole.n.02&#39;), Synset(&#39;living_thing.n.01&#39;), Synset(&#39;organism.n.01&#39;), Synset(&#39;animal.n.01&#39;), Synset(&#39;chordate.n.01&#39;), Synset(&#39;vertebrate.n.01&#39;), Synset(&#39;mammal.n.01&#39;), Synset(&#39;placental.n.01&#39;), Synset(&#39;carnivore.n.01&#39;), Synset(&#39;canine.n.02&#39;), Synset(&#39;dog.n.01&#39;)], [Synset(&#39;entity.n.01&#39;), Synset(&#39;physical_entity.n.01&#39;), Synset(&#39;object.n.01&#39;), Synset(&#39;whole.n.02&#39;), Synset(&#39;living_thing.n.01&#39;), Synset(&#39;organism.n.01&#39;), Synset(&#39;animal.n.01&#39;), Synset(&#39;domestic_animal.n.01&#39;), Synset(&#39;dog.n.01&#39;)]]</code></pre>
 </div>
 <div id="holonyms-and-meronyms" class="slide section level2">
 <h1>Holonyms and Meronyms</h1>
 <ul class="incremental">
 <li>Holonyms are the name for a collection of objects</li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb33-2" data-line-number="2">tree_synset <span class="op">=</span> wn.synsets(<span class="st">&quot;tree&quot;</span>)</a>
-<a class="sourceLine" id="cb33-3" data-line-number="3">tree_synset</a></code></pre></div>
-<pre><code>## [Synset('tree.n.01'), Synset('tree.n.02'), Synset('tree.n.03'), Synset('corner.v.02'), Synset('tree.v.02'), Synset('tree.v.03'), Synset('tree.v.04')]</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb35-1" data-line-number="1">tree_synset[<span class="dv">0</span>].definition()</a></code></pre></div>
-<pre><code>## 'a tall perennial woody plant having a main trunk and branches forming a distinct elevated crown; includes both gymnosperms and angiosperms'</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb37-1" data-line-number="1">tree <span class="op">=</span> tree_synset[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">tree.member_holonyms()</a></code></pre></div>
-<pre><code>## [Synset('forest.n.01')]</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="co">##python chunk</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>tree_synset <span class="op">=</span> wn.synsets(<span class="st">&quot;tree&quot;</span>)</span>
+<span id="cb37-3"><a href="#cb37-3"></a>tree_synset</span></code></pre></div>
+<pre><code>## [Synset(&#39;tree.n.01&#39;), Synset(&#39;tree.n.02&#39;), Synset(&#39;tree.n.03&#39;), Synset(&#39;corner.v.02&#39;), Synset(&#39;tree.v.02&#39;), Synset(&#39;tree.v.03&#39;), Synset(&#39;tree.v.04&#39;)]</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a>tree_synset[<span class="dv">0</span>].definition()</span></code></pre></div>
+<pre><code>## &#39;a tall perennial woody plant having a main trunk and branches forming a distinct elevated crown; includes both gymnosperms and angiosperms&#39;</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a>tree <span class="op">=</span> tree_synset[<span class="dv">0</span>]</span>
+<span id="cb41-2"><a href="#cb41-2"></a>tree.member_holonyms()</span></code></pre></div>
+<pre><code>## [Synset(&#39;forest.n.01&#39;)]</code></pre>
 </div>
 <div id="holonyms-and-meronyms-1" class="slide section level2">
 <h1>Holonyms and Meronyms</h1>
 <ul class="incremental">
 <li>Meronyms are the component parts of an object</li>
 </ul>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb39-2" data-line-number="2">tree.part_meronyms()</a></code></pre></div>
-<pre><code>## [Synset('burl.n.02'), Synset('crown.n.07'), Synset('limb.n.02'), Synset('stump.n.01'), Synset('trunk.n.01')]</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb41-1" data-line-number="1">tree.substance_meronyms()</a></code></pre></div>
-<pre><code>## [Synset('heartwood.n.01'), Synset('sapwood.n.01')]</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a><span class="co">##python chunk</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>tree.part_meronyms()</span></code></pre></div>
+<pre><code>## [Synset(&#39;burl.n.02&#39;), Synset(&#39;crown.n.07&#39;), Synset(&#39;limb.n.02&#39;), Synset(&#39;stump.n.01&#39;), Synset(&#39;trunk.n.01&#39;)]</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a>tree.substance_meronyms()</span></code></pre></div>
+<pre><code>## [Synset(&#39;heartwood.n.01&#39;), Synset(&#39;sapwood.n.01&#39;)]</code></pre>
 </div>
 <div id="similarity" class="slide section level2">
 <h1>Similarity</h1>
@@ -741,50 +837,50 @@ Erin M. Buchanan
 <li>With the structure of the network, we can calculate similarity by finding the paths between words or the most common hypernym, etc.</li>
 <li>Let’s look at an example:</li>
 </ul>
-<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb43-2" data-line-number="2">tree <span class="op">=</span> wn.synsets(<span class="st">&quot;tree&quot;</span>)</a>
-<a class="sourceLine" id="cb43-3" data-line-number="3">tree[<span class="dv">0</span>].definition()</a></code></pre></div>
-<pre><code>## 'a tall perennial woody plant having a main trunk and branches forming a distinct elevated crown; includes both gymnosperms and angiosperms'</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb45-1" data-line-number="1">tree <span class="op">=</span> tree[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb45-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb45-3" data-line-number="3">lion <span class="op">=</span> wn.synsets(<span class="st">&quot;lion&quot;</span>)</a>
-<a class="sourceLine" id="cb45-4" data-line-number="4">lion[<span class="dv">0</span>].definition()</a></code></pre></div>
-<pre><code>## 'large gregarious predatory feline of Africa and India having a tawny coat with a shaggy mane in the male'</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb47-1" data-line-number="1">lion <span class="op">=</span> lion[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb47-3" data-line-number="3">cat <span class="op">=</span> wn.synsets(<span class="st">&quot;cat&quot;</span>)</a>
-<a class="sourceLine" id="cb47-4" data-line-number="4">cat[<span class="dv">0</span>].definition()</a></code></pre></div>
-<pre><code>## 'feline mammal usually having thick soft fur and no ability to roar: domestic cats; wildcats'</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb49-1" data-line-number="1">cat <span class="op">=</span> cat[<span class="dv">0</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a><span class="co">##python chunk</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a>tree <span class="op">=</span> wn.synsets(<span class="st">&quot;tree&quot;</span>)</span>
+<span id="cb47-3"><a href="#cb47-3"></a>tree[<span class="dv">0</span>].definition()</span></code></pre></div>
+<pre><code>## &#39;a tall perennial woody plant having a main trunk and branches forming a distinct elevated crown; includes both gymnosperms and angiosperms&#39;</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a>tree <span class="op">=</span> tree[<span class="dv">0</span>]</span>
+<span id="cb49-2"><a href="#cb49-2"></a></span>
+<span id="cb49-3"><a href="#cb49-3"></a>lion <span class="op">=</span> wn.synsets(<span class="st">&quot;lion&quot;</span>)</span>
+<span id="cb49-4"><a href="#cb49-4"></a>lion[<span class="dv">0</span>].definition()</span></code></pre></div>
+<pre><code>## &#39;large gregarious predatory feline of Africa and India having a tawny coat with a shaggy mane in the male&#39;</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a>lion <span class="op">=</span> lion[<span class="dv">0</span>]</span>
+<span id="cb51-2"><a href="#cb51-2"></a></span>
+<span id="cb51-3"><a href="#cb51-3"></a>cat <span class="op">=</span> wn.synsets(<span class="st">&quot;cat&quot;</span>)</span>
+<span id="cb51-4"><a href="#cb51-4"></a>cat[<span class="dv">0</span>].definition()</span></code></pre></div>
+<pre><code>## &#39;feline mammal usually having thick soft fur and no ability to roar: domestic cats; wildcats&#39;</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a>cat <span class="op">=</span> cat[<span class="dv">0</span>]</span></code></pre></div>
 </div>
 <div id="lowest-common-hypernyms" class="slide section level2">
 <h1>Lowest common hypernyms</h1>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb50-2" data-line-number="2">tree.lowest_common_hypernyms(lion)</a></code></pre></div>
-<pre><code>## [Synset('organism.n.01')]</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb52-1" data-line-number="1">tree.lowest_common_hypernyms(cat)</a></code></pre></div>
-<pre><code>## [Synset('organism.n.01')]</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb54-1" data-line-number="1">lion.lowest_common_hypernyms(cat)</a></code></pre></div>
-<pre><code>## [Synset('feline.n.01')]</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb56-1" data-line-number="1">tree.path_similarity(lion)</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a><span class="co">##python chunk</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a>tree.lowest_common_hypernyms(lion)</span></code></pre></div>
+<pre><code>## [Synset(&#39;organism.n.01&#39;)]</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a>tree.lowest_common_hypernyms(cat)</span></code></pre></div>
+<pre><code>## [Synset(&#39;organism.n.01&#39;)]</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a>lion.lowest_common_hypernyms(cat)</span></code></pre></div>
+<pre><code>## [Synset(&#39;feline.n.01&#39;)]</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1"></a>tree.path_similarity(lion)</span></code></pre></div>
 <pre><code>## 0.07142857142857142</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb58-1" data-line-number="1">tree.path_similarity(cat)</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1"></a>tree.path_similarity(cat)</span></code></pre></div>
 <pre><code>## 0.07692307692307693</code></pre>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb60-1" data-line-number="1">lion.path_similarity(cat)</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1"></a>lion.path_similarity(cat)</span></code></pre></div>
 <pre><code>## 0.25</code></pre>
 </div>
 <div id="other-similarity-measures" class="slide section level2">
 <h1>Other similarity measures</h1>
-<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="im">from</span> nltk.corpus <span class="im">import</span> wordnet_ic</a>
-<a class="sourceLine" id="cb62-3" data-line-number="3">semcor_ic <span class="op">=</span> wordnet_ic.ic(<span class="st">'ic-semcor.dat'</span>)</a>
-<a class="sourceLine" id="cb62-4" data-line-number="4">tree.jcn_similarity(lion, semcor_ic)</a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1"></a><span class="co">##python chunk</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> wordnet_ic</span>
+<span id="cb66-3"><a href="#cb66-3"></a>semcor_ic <span class="op">=</span> wordnet_ic.ic(<span class="st">&#39;ic-semcor.dat&#39;</span>)</span>
+<span id="cb66-4"><a href="#cb66-4"></a>tree.jcn_similarity(lion, semcor_ic)</span></code></pre></div>
 <pre><code>## 0.07054678940058942</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb64-1" data-line-number="1">lion.jcn_similarity(cat, semcor_ic)</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1"></a>lion.jcn_similarity(cat, semcor_ic)</span></code></pre></div>
 <pre><code>## 0.35263820335121604</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb66-1" data-line-number="1">tree.lin_similarity(lion, semcor_ic)</a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1"></a>tree.lin_similarity(lion, semcor_ic)</span></code></pre></div>
 <pre><code>## 0.20459481533473894</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb68-1" data-line-number="1">lion.lin_similarity(cat, semcor_ic)</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1"></a>lion.lin_similarity(cat, semcor_ic)</span></code></pre></div>
 <pre><code>## 0.8560734335071154</code></pre>
 </div>
 <div id="word-sense-disambiguation" class="slide section level2">
@@ -794,48 +890,48 @@ Erin M. Buchanan
 <li>This task is useful for search enginges, keywords, etc. in a business context</li>
 <li>We can use the Lesk algorithm - examine the dictionary definition and the words around the target word in the sentence to see if they overlap.</li>
 </ul>
-<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="co">##python chunk </span></a>
-<a class="sourceLine" id="cb70-2" data-line-number="2"><span class="im">from</span> nltk.wsd <span class="im">import</span> lesk</a>
-<a class="sourceLine" id="cb70-3" data-line-number="3"><span class="im">from</span> nltk <span class="im">import</span> word_tokenize</a>
-<a class="sourceLine" id="cb70-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb70-5" data-line-number="5">sample_text <span class="op">=</span> [(<span class="st">&quot;The fruits on that plant have ripened&quot;</span>, <span class="st">&quot;n&quot;</span>),</a>
-<a class="sourceLine" id="cb70-6" data-line-number="6">          (<span class="st">&quot;He finally reaped the fruit of his hard work as he won the race&quot;</span>, <span class="st">&quot;n&quot;</span>)]</a>
-<a class="sourceLine" id="cb70-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb70-8" data-line-number="8">word <span class="op">=</span> <span class="st">&quot;fruit&quot;</span></a>
-<a class="sourceLine" id="cb70-9" data-line-number="9"><span class="cf">for</span> sentence, pos_tag <span class="kw">in</span> sample_text:</a>
-<a class="sourceLine" id="cb70-10" data-line-number="10">  word_syn <span class="op">=</span> lesk(word_tokenize(sentence.lower()), word, pos_tag)</a>
-<a class="sourceLine" id="cb70-11" data-line-number="11">  <span class="bu">print</span>(<span class="st">&quot;Sentence: &quot;</span>, sentence)</a>
-<a class="sourceLine" id="cb70-12" data-line-number="12">  <span class="bu">print</span>(<span class="st">&quot;Word Synset: &quot;</span>, word_syn)</a>
-<a class="sourceLine" id="cb70-13" data-line-number="13">  <span class="bu">print</span>(<span class="st">&quot;Corresponding Definition: &quot;</span>, word_syn.definition())</a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1"></a><span class="co">##python chunk </span></span>
+<span id="cb74-2"><a href="#cb74-2"></a><span class="im">from</span> nltk.wsd <span class="im">import</span> lesk</span>
+<span id="cb74-3"><a href="#cb74-3"></a><span class="im">from</span> nltk <span class="im">import</span> word_tokenize</span>
+<span id="cb74-4"><a href="#cb74-4"></a></span>
+<span id="cb74-5"><a href="#cb74-5"></a>sample_text <span class="op">=</span> [(<span class="st">&quot;The fruits on that plant have ripened&quot;</span>, <span class="st">&quot;n&quot;</span>),</span>
+<span id="cb74-6"><a href="#cb74-6"></a>          (<span class="st">&quot;He finally reaped the fruit of his hard work as he won the race&quot;</span>, <span class="st">&quot;n&quot;</span>)]</span>
+<span id="cb74-7"><a href="#cb74-7"></a></span>
+<span id="cb74-8"><a href="#cb74-8"></a>word <span class="op">=</span> <span class="st">&quot;fruit&quot;</span></span>
+<span id="cb74-9"><a href="#cb74-9"></a><span class="cf">for</span> sentence, pos_tag <span class="kw">in</span> sample_text:</span>
+<span id="cb74-10"><a href="#cb74-10"></a>  word_syn <span class="op">=</span> lesk(word_tokenize(sentence.lower()), word, pos_tag)</span>
+<span id="cb74-11"><a href="#cb74-11"></a>  <span class="bu">print</span>(<span class="st">&quot;Sentence: &quot;</span>, sentence)</span>
+<span id="cb74-12"><a href="#cb74-12"></a>  <span class="bu">print</span>(<span class="st">&quot;Word Synset: &quot;</span>, word_syn)</span>
+<span id="cb74-13"><a href="#cb74-13"></a>  <span class="bu">print</span>(<span class="st">&quot;Corresponding Definition: &quot;</span>, word_syn.definition())</span></code></pre></div>
 <pre><code>## Sentence:  The fruits on that plant have ripened
-## Word Synset:  Synset('fruit.n.01')
+## Word Synset:  Synset(&#39;fruit.n.01&#39;)
 ## Corresponding Definition:  the ripened reproductive body of a seed plant
 ## Sentence:  He finally reaped the fruit of his hard work as he won the race
-## Word Synset:  Synset('fruit.n.03')
+## Word Synset:  Synset(&#39;fruit.n.03&#39;)
 ## Corresponding Definition:  the consequence of some effort or action</code></pre>
 </div>
 <div id="one-more-example" class="slide section level2">
 <h1>One more example</h1>
-<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="co">##python chunk </span></a>
-<a class="sourceLine" id="cb72-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb72-3" data-line-number="3">sample_text <span class="op">=</span> [(<span class="st">&quot;Lead is a very soft, malleable metal&quot;</span>, <span class="st">&quot;n&quot;</span>),</a>
-<a class="sourceLine" id="cb72-4" data-line-number="4">          (<span class="st">&quot;John is the actor who plays the lead in that movie&quot;</span>, <span class="st">&quot;n&quot;</span>),</a>
-<a class="sourceLine" id="cb72-5" data-line-number="5">          (<span class="st">&quot;This road leads to nowhere&quot;</span>, <span class="st">&quot;v&quot;</span>)]</a>
-<a class="sourceLine" id="cb72-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb72-7" data-line-number="7">word <span class="op">=</span> <span class="st">&quot;lead&quot;</span></a>
-<a class="sourceLine" id="cb72-8" data-line-number="8"><span class="cf">for</span> sentence, pos_tag <span class="kw">in</span> sample_text:</a>
-<a class="sourceLine" id="cb72-9" data-line-number="9">  word_syn <span class="op">=</span> lesk(word_tokenize(sentence.lower()), word, pos_tag)</a>
-<a class="sourceLine" id="cb72-10" data-line-number="10">  <span class="bu">print</span>(<span class="st">&quot;Sentence: &quot;</span>, sentence)</a>
-<a class="sourceLine" id="cb72-11" data-line-number="11">  <span class="bu">print</span>(<span class="st">&quot;Word Synset: &quot;</span>, word_syn)</a>
-<a class="sourceLine" id="cb72-12" data-line-number="12">  <span class="bu">print</span>(<span class="st">&quot;Corresponding Definition: &quot;</span>, word_syn.definition())</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1"></a><span class="co">##python chunk </span></span>
+<span id="cb76-2"><a href="#cb76-2"></a></span>
+<span id="cb76-3"><a href="#cb76-3"></a>sample_text <span class="op">=</span> [(<span class="st">&quot;Lead is a very soft, malleable metal&quot;</span>, <span class="st">&quot;n&quot;</span>),</span>
+<span id="cb76-4"><a href="#cb76-4"></a>          (<span class="st">&quot;John is the actor who plays the lead in that movie&quot;</span>, <span class="st">&quot;n&quot;</span>),</span>
+<span id="cb76-5"><a href="#cb76-5"></a>          (<span class="st">&quot;This road leads to nowhere&quot;</span>, <span class="st">&quot;v&quot;</span>)]</span>
+<span id="cb76-6"><a href="#cb76-6"></a></span>
+<span id="cb76-7"><a href="#cb76-7"></a>word <span class="op">=</span> <span class="st">&quot;lead&quot;</span></span>
+<span id="cb76-8"><a href="#cb76-8"></a><span class="cf">for</span> sentence, pos_tag <span class="kw">in</span> sample_text:</span>
+<span id="cb76-9"><a href="#cb76-9"></a>  word_syn <span class="op">=</span> lesk(word_tokenize(sentence.lower()), word, pos_tag)</span>
+<span id="cb76-10"><a href="#cb76-10"></a>  <span class="bu">print</span>(<span class="st">&quot;Sentence: &quot;</span>, sentence)</span>
+<span id="cb76-11"><a href="#cb76-11"></a>  <span class="bu">print</span>(<span class="st">&quot;Word Synset: &quot;</span>, word_syn)</span>
+<span id="cb76-12"><a href="#cb76-12"></a>  <span class="bu">print</span>(<span class="st">&quot;Corresponding Definition: &quot;</span>, word_syn.definition())</span></code></pre></div>
 <pre><code>## Sentence:  Lead is a very soft, malleable metal
-## Word Synset:  Synset('lead.n.02')
+## Word Synset:  Synset(&#39;lead.n.02&#39;)
 ## Corresponding Definition:  a soft heavy toxic malleable metallic element; bluish white when freshly cut but tarnishes readily to dull grey
 ## Sentence:  John is the actor who plays the lead in that movie
-## Word Synset:  Synset('star.n.04')
+## Word Synset:  Synset(&#39;star.n.04&#39;)
 ## Corresponding Definition:  an actor who plays a principal role
 ## Sentence:  This road leads to nowhere
-## Word Synset:  Synset('run.v.23')
+## Word Synset:  Synset(&#39;run.v.23&#39;)
 ## Corresponding Definition:  cause something to pass or lead somewhere</code></pre>
 </div>
 <div id="named-entity-recognition" class="slide section level2">
@@ -986,13 +1082,13 @@ Erin M. Buchanan
 </div>
 <div id="ner-with-spacy" class="slide section level2">
 <h1>NER with spacy</h1>
-<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb74-2" data-line-number="2"><span class="im">import</span> spacy</a>
-<a class="sourceLine" id="cb74-3" data-line-number="3">nlp <span class="op">=</span> spacy.load(<span class="st">&quot;en_core_web_sm&quot;</span>)</a>
-<a class="sourceLine" id="cb74-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb74-5" data-line-number="5"><span class="co">##process with nlp</span></a>
-<a class="sourceLine" id="cb74-6" data-line-number="6">example1 <span class="op">=</span> nlp(<span class="st">&quot;Donald Trump visited the government headquarters in France today.&quot;</span>)</a>
-<a class="sourceLine" id="cb74-7" data-line-number="7">example2 <span class="op">=</span> nlp(<span class="st">&quot;He studies philosophy at Paris Nanterre University, completed a Master's of Public Affairs at Sciences Po, and graduate from the Ecole nationale d'administration (ENA) in 2004.&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1"></a><span class="co">##python chunk</span></span>
+<span id="cb78-2"><a href="#cb78-2"></a><span class="im">import</span> spacy</span>
+<span id="cb78-3"><a href="#cb78-3"></a>nlp <span class="op">=</span> spacy.load(<span class="st">&quot;en_core_web_sm&quot;</span>)</span>
+<span id="cb78-4"><a href="#cb78-4"></a></span>
+<span id="cb78-5"><a href="#cb78-5"></a><span class="co">##process with nlp</span></span>
+<span id="cb78-6"><a href="#cb78-6"></a>example1 <span class="op">=</span> nlp(<span class="st">&quot;Donald Trump visited the government headquarters in France today.&quot;</span>)</span>
+<span id="cb78-7"><a href="#cb78-7"></a>example2 <span class="op">=</span> nlp(<span class="st">&quot;He studies philosophy at Paris Nanterre University, completed a Master&#39;s of Public Affairs at Sciences Po, and graduate from the Ecole nationale d&#39;administration (ENA) in 2004.&quot;</span>)</span></code></pre></div>
 </div>
 <div id="how-to-automatically-detect-entities" class="slide section level2">
 <h1>How to Automatically Detect Entities</h1>
@@ -1000,9 +1096,9 @@ Erin M. Buchanan
 <li>Notice how it tags the names and places.</li>
 <li>Also notice how there are empty spaces</li>
 </ul>
-<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb75-2" data-line-number="2"><span class="cf">for</span> token <span class="kw">in</span> example1:</a>
-<a class="sourceLine" id="cb75-3" data-line-number="3">  <span class="bu">print</span>(token.text, token.ent_type_)</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1"></a><span class="co">##python chunk</span></span>
+<span id="cb79-2"><a href="#cb79-2"></a><span class="cf">for</span> token <span class="kw">in</span> example1:</span>
+<span id="cb79-3"><a href="#cb79-3"></a>  <span class="bu">print</span>(token.text, token.ent_type_)</span></code></pre></div>
 <pre><code>## Donald PERSON
 ## Trump PERSON
 ## visited 
@@ -1016,9 +1112,9 @@ Erin M. Buchanan
 </div>
 <div id="how-to-automatically-detect-entities-1" class="slide section level2">
 <h1>How to Automatically Detect Entities</h1>
-<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb77-2" data-line-number="2"><span class="cf">for</span> token <span class="kw">in</span> example2:</a>
-<a class="sourceLine" id="cb77-3" data-line-number="3">  <span class="bu">print</span>(token.text, token.ent_type_)</a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1"></a><span class="co">##python chunk</span></span>
+<span id="cb81-2"><a href="#cb81-2"></a><span class="cf">for</span> token <span class="kw">in</span> example2:</span>
+<span id="cb81-3"><a href="#cb81-3"></a>  <span class="bu">print</span>(token.text, token.ent_type_)</span></code></pre></div>
 <pre><code>## He 
 ## studies 
 ## philosophy 
@@ -1028,25 +1124,25 @@ Erin M. Buchanan
 ## University ORG
 ## , 
 ## completed 
-## a ORG
-## Master ORG
-## 's ORG
-## of ORG
-## Public ORG
-## Affairs ORG
-## at ORG
-## Sciences ORG
-## Po ORG
+## a 
+## Master 
+## &#39;s 
+## of 
+## Public 
+## Affairs 
+## at 
+## Sciences FAC
+## Po FAC
 ## , 
 ## and 
 ## graduate 
 ## from 
 ## the 
-## Ecole PRODUCT
+## Ecole 
 ## nationale 
-## d'administration 
+## d&#39;administration 
 ## ( 
-## ENA ORG
+## ENA 
 ## ) 
 ## in 
 ## 2004 DATE
@@ -1059,24 +1155,24 @@ Erin M. Buchanan
 <li>Next add some information about the type of model you want to build</li>
 <li>Tutorial taken from: <a href="https://sematext.com/blog/entity-extraction-with-spacy/" class="uri">https://sematext.com/blog/entity-extraction-with-spacy/</a> and <a href="https://spacy.io/usage/training" class="uri">https://spacy.io/usage/training</a></li>
 </ul>
-<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb79-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb79-3" data-line-number="3"><span class="co">#empty spacy model</span></a>
-<a class="sourceLine" id="cb79-4" data-line-number="4">nlp <span class="op">=</span> spacy.blank(<span class="st">&quot;en&quot;</span>)  </a>
-<a class="sourceLine" id="cb79-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb79-6" data-line-number="6"><span class="co">#add a name for training</span></a>
-<a class="sourceLine" id="cb79-7" data-line-number="7">nlp.vocab.vectors.name <span class="op">=</span> <span class="st">'example_model_training'</span>   </a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1"></a><span class="co">##python chunk</span></span>
+<span id="cb83-2"><a href="#cb83-2"></a></span>
+<span id="cb83-3"><a href="#cb83-3"></a><span class="co">#empty spacy model</span></span>
+<span id="cb83-4"><a href="#cb83-4"></a>nlp <span class="op">=</span> spacy.blank(<span class="st">&quot;en&quot;</span>)  </span>
+<span id="cb83-5"><a href="#cb83-5"></a></span>
+<span id="cb83-6"><a href="#cb83-6"></a><span class="co">#add a name for training</span></span>
+<span id="cb83-7"><a href="#cb83-7"></a>nlp.vocab.vectors.name <span class="op">=</span> <span class="st">&#39;example_model_training&#39;</span>   </span></code></pre></div>
 </div>
 <div id="how-to-train-your-own-ner-tagger-1" class="slide section level2">
 <h1>How to Train your own NER Tagger</h1>
 <ul class="incremental">
 <li>Spacy models are built on “pipes”, so we will add a NER pipe</li>
 </ul>
-<div class="sourceCode" id="cb80"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb80-2" data-line-number="2"><span class="co">#add NER pipeline</span></a>
-<a class="sourceLine" id="cb80-3" data-line-number="3">ner <span class="op">=</span> nlp.create_pipe(<span class="st">'ner'</span>)  </a>
-<a class="sourceLine" id="cb80-4" data-line-number="4"><span class="co">#add pipeline to our blank model we created</span></a>
-<a class="sourceLine" id="cb80-5" data-line-number="5">nlp.add_pipe(ner, last<span class="op">=</span><span class="va">True</span>)  </a></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1"></a><span class="co">##python chunk</span></span>
+<span id="cb84-2"><a href="#cb84-2"></a><span class="co">#add NER pipeline</span></span>
+<span id="cb84-3"><a href="#cb84-3"></a>ner <span class="op">=</span> nlp.create_pipe(<span class="st">&#39;ner&#39;</span>)  </span>
+<span id="cb84-4"><a href="#cb84-4"></a><span class="co">#add pipeline to our blank model we created</span></span>
+<span id="cb84-5"><a href="#cb84-5"></a>nlp.add_pipe(ner, last<span class="op">=</span><span class="va">True</span>)  </span></code></pre></div>
 </div>
 <div id="how-to-train-your-own-ner-tagger-2" class="slide section level2">
 <h1>How to Train your own NER Tagger</h1>
@@ -1085,79 +1181,81 @@ Erin M. Buchanan
 <li>Notice this is a list [] of tuples () that contain dictionaries {}.</li>
 <li>The “u” indicates unicode.</li>
 </ul>
-<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb81-2" data-line-number="2"><span class="co"># training data</span></a>
-<a class="sourceLine" id="cb81-3" data-line-number="3">training_data <span class="op">=</span> [ <span class="co">#start our list</span></a>
-<a class="sourceLine" id="cb81-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb81-5" data-line-number="5">    ( <span class="co">#start a tuple</span></a>
-<a class="sourceLine" id="cb81-6" data-line-number="6">      <span class="co">#first is the text</span></a>
-<a class="sourceLine" id="cb81-7" data-line-number="7">      <span class="st">u&quot;Search Analytics: Business Value &amp; BigData NoSQL Backend, Otis Gospodnetic&quot;</span>, </a>
-<a class="sourceLine" id="cb81-8" data-line-number="8">      { <span class="co">#start a dictionary</span></a>
-<a class="sourceLine" id="cb81-9" data-line-number="9">        <span class="co">#first key is always entities</span></a>
-<a class="sourceLine" id="cb81-10" data-line-number="10">        <span class="co">#second value which is a LIST of TUPLES</span></a>
-<a class="sourceLine" id="cb81-11" data-line-number="11">        <span class="st">'entities'</span>: [ <span class="co">#start value list</span></a>
-<a class="sourceLine" id="cb81-12" data-line-number="12">          <span class="co">#slicing to find the specific section of the text</span></a>
-<a class="sourceLine" id="cb81-13" data-line-number="13">          <span class="co">#start number, end number, entity tag</span></a>
-<a class="sourceLine" id="cb81-14" data-line-number="14">          (<span class="dv">58</span>,<span class="dv">74</span>,<span class="st">'PERSON'</span>) </a>
-<a class="sourceLine" id="cb81-15" data-line-number="15">          ] <span class="co">#end value list</span></a>
-<a class="sourceLine" id="cb81-16" data-line-number="16">        } <span class="co">#end dictionary </span></a>
-<a class="sourceLine" id="cb81-17" data-line-number="17">    ), <span class="co">#end of the tuple </span></a>
-<a class="sourceLine" id="cb81-18" data-line-number="18">    </a>
-<a class="sourceLine" id="cb81-19" data-line-number="19">  ( <span class="co">#start tuple </span></a>
-<a class="sourceLine" id="cb81-20" data-line-number="20">    <span class="co">#text </span></a>
-<a class="sourceLine" id="cb81-21" data-line-number="21">    <span class="st">u&quot;Introduction to Elasticsearch by Radu&quot;</span>, </a>
-<a class="sourceLine" id="cb81-22" data-line-number="22">    { <span class="co">#start dictionary </span></a>
-<a class="sourceLine" id="cb81-23" data-line-number="23">      <span class="st">'entities'</span>: [ <span class="co">#list for values</span></a>
-<a class="sourceLine" id="cb81-24" data-line-number="24">        (<span class="dv">16</span>,<span class="dv">29</span>,<span class="st">'TECH'</span>), (<span class="dv">33</span>, <span class="dv">37</span>, <span class="st">'PERSON'</span>) </a>
-<a class="sourceLine" id="cb81-25" data-line-number="25">      ] <span class="co">#end of list </span></a>
-<a class="sourceLine" id="cb81-26" data-line-number="26">    } <span class="co">#end dictionary</span></a>
-<a class="sourceLine" id="cb81-27" data-line-number="27">  ) <span class="co">#end tuple</span></a>
-<a class="sourceLine" id="cb81-28" data-line-number="28"></a>
-<a class="sourceLine" id="cb81-29" data-line-number="29">  ] <span class="co">#end list </span></a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1"></a><span class="co">##python chunk</span></span>
+<span id="cb85-2"><a href="#cb85-2"></a><span class="co"># training data</span></span>
+<span id="cb85-3"><a href="#cb85-3"></a>training_data <span class="op">=</span> [ <span class="co">#start our list</span></span>
+<span id="cb85-4"><a href="#cb85-4"></a></span>
+<span id="cb85-5"><a href="#cb85-5"></a>    ( <span class="co">#start a tuple</span></span>
+<span id="cb85-6"><a href="#cb85-6"></a>      <span class="co">#first is the text</span></span>
+<span id="cb85-7"><a href="#cb85-7"></a>      <span class="st">u&quot;Search Analytics: Business Value &amp; BigData NoSQL Backend, Otis Gospodnetic&quot;</span>, </span>
+<span id="cb85-8"><a href="#cb85-8"></a>      { <span class="co">#start a dictionary</span></span>
+<span id="cb85-9"><a href="#cb85-9"></a>        <span class="co">#first key is always entities</span></span>
+<span id="cb85-10"><a href="#cb85-10"></a>        <span class="co">#second value which is a LIST of TUPLES</span></span>
+<span id="cb85-11"><a href="#cb85-11"></a>        <span class="st">&#39;entities&#39;</span>: [ <span class="co">#start value list</span></span>
+<span id="cb85-12"><a href="#cb85-12"></a>          <span class="co">#slicing to find the specific section of the text</span></span>
+<span id="cb85-13"><a href="#cb85-13"></a>          <span class="co">#start number, end number, entity tag</span></span>
+<span id="cb85-14"><a href="#cb85-14"></a>          (<span class="dv">58</span>,<span class="dv">74</span>,<span class="st">&#39;PERSON&#39;</span>) </span>
+<span id="cb85-15"><a href="#cb85-15"></a>          ] <span class="co">#end value list</span></span>
+<span id="cb85-16"><a href="#cb85-16"></a>        } <span class="co">#end dictionary </span></span>
+<span id="cb85-17"><a href="#cb85-17"></a>    ), <span class="co">#end of the tuple </span></span>
+<span id="cb85-18"><a href="#cb85-18"></a>    </span>
+<span id="cb85-19"><a href="#cb85-19"></a>  ( <span class="co">#start tuple </span></span>
+<span id="cb85-20"><a href="#cb85-20"></a>    <span class="co">#text </span></span>
+<span id="cb85-21"><a href="#cb85-21"></a>    <span class="st">u&quot;Introduction to Elasticsearch by Radu&quot;</span>, </span>
+<span id="cb85-22"><a href="#cb85-22"></a>    { <span class="co">#start dictionary </span></span>
+<span id="cb85-23"><a href="#cb85-23"></a>      <span class="st">&#39;entities&#39;</span>: [ <span class="co">#list for values</span></span>
+<span id="cb85-24"><a href="#cb85-24"></a>        (<span class="dv">16</span>,<span class="dv">29</span>,<span class="st">&#39;TECH&#39;</span>), (<span class="dv">33</span>, <span class="dv">37</span>, <span class="st">&#39;PERSON&#39;</span>) </span>
+<span id="cb85-25"><a href="#cb85-25"></a>      ] <span class="co">#end of list </span></span>
+<span id="cb85-26"><a href="#cb85-26"></a>    } <span class="co">#end dictionary</span></span>
+<span id="cb85-27"><a href="#cb85-27"></a>  ) <span class="co">#end tuple</span></span>
+<span id="cb85-28"><a href="#cb85-28"></a></span>
+<span id="cb85-29"><a href="#cb85-29"></a>  ] <span class="co">#end list </span></span></code></pre></div>
 </div>
 <div id="how-to-train-your-own-ner-tagger-3" class="slide section level2">
 <h1>How to Train your own NER Tagger</h1>
 <ul class="incremental">
 <li>We need to tell our model what type of tags to expect.</li>
 </ul>
-<div class="sourceCode" id="cb82"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb82-2" data-line-number="2">nlp.entity.add_label(<span class="st">'PERSON'</span>)</a>
-<a class="sourceLine" id="cb82-3" data-line-number="3">nlp.entity.add_label(<span class="st">'TECH'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1"></a><span class="co">##python chunk</span></span>
+<span id="cb86-2"><a href="#cb86-2"></a>nlp.entity.add_label(<span class="st">&#39;PERSON&#39;</span>)</span>
+<span id="cb86-3"><a href="#cb86-3"></a>nlp.entity.add_label(<span class="st">&#39;TECH&#39;</span>)</span></code></pre></div>
 </div>
 <div id="how-to-train-your-own-ner-tagger-4" class="slide section level2">
 <h1>How to Train your own NER Tagger</h1>
 <ul class="incremental">
 <li>Let’s start training!</li>
 </ul>
-<div class="sourceCode" id="cb83"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb83-2" data-line-number="2"><span class="co">#begin training</span></a>
-<a class="sourceLine" id="cb83-3" data-line-number="3">optimizer <span class="op">=</span> nlp.begin_training()</a>
-<a class="sourceLine" id="cb83-4" data-line-number="4"><span class="im">import</span> random</a>
-<a class="sourceLine" id="cb83-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb83-6" data-line-number="6"><span class="co">#run through training</span></a>
-<a class="sourceLine" id="cb83-7" data-line-number="7"><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>):</a>
-<a class="sourceLine" id="cb83-8" data-line-number="8">    random.shuffle(training_data)</a>
-<a class="sourceLine" id="cb83-9" data-line-number="9">    <span class="cf">for</span> text, annotations <span class="kw">in</span> training_data:</a>
-<a class="sourceLine" id="cb83-10" data-line-number="10">        nlp.update([text], [annotations], sgd<span class="op">=</span>optimizer)</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1"></a><span class="co">##python chunk</span></span>
+<span id="cb87-2"><a href="#cb87-2"></a><span class="co">#begin training</span></span>
+<span id="cb87-3"><a href="#cb87-3"></a>optimizer <span class="op">=</span> nlp.begin_training()</span>
+<span id="cb87-4"><a href="#cb87-4"></a><span class="im">import</span> random</span>
+<span id="cb87-5"><a href="#cb87-5"></a></span>
+<span id="cb87-6"><a href="#cb87-6"></a><span class="co">#run through training</span></span>
+<span id="cb87-7"><a href="#cb87-7"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>):</span>
+<span id="cb87-8"><a href="#cb87-8"></a>    random.shuffle(training_data)</span>
+<span id="cb87-9"><a href="#cb87-9"></a>    <span class="cf">for</span> text, annotations <span class="kw">in</span> training_data:</span>
+<span id="cb87-10"><a href="#cb87-10"></a>        nlp.update([text], [annotations], sgd<span class="op">=</span>optimizer)</span></code></pre></div>
 </div>
 <div id="how-to-train-your-own-ner-tagger-5" class="slide section level2">
 <h1>How to Train your own NER Tagger</h1>
 <ul class="incremental">
 <li>You can save your model for later.</li>
 </ul>
-<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb84-2" data-line-number="2"><span class="co">#save your model if you want to use it later</span></a>
-<a class="sourceLine" id="cb84-3" data-line-number="3">nlp.to_disk(<span class="st">&quot;./model&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1"></a><span class="co">##python chunk</span></span>
+<span id="cb88-2"><a href="#cb88-2"></a><span class="co">#save your model if you want to use it later</span></span>
+<span id="cb88-3"><a href="#cb88-3"></a>nlp.to_disk(<span class="st">&quot;./model&quot;</span>)</span></code></pre></div>
 </div>
 <div id="using-your-ner-tagger" class="slide section level2">
 <h1>Using your NER Tagger</h1>
-<div class="sourceCode" id="cb85"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb85-2" data-line-number="2">example3 <span class="op">=</span> nlp(<span class="st">u&quot;#bbuzz 2016: Otis Gospodnetic - Running High Performance And Fault Tolerant Elasticsearch &quot;</span>)</a>
-<a class="sourceLine" id="cb85-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb85-4" data-line-number="4"><span class="cf">for</span> entity <span class="kw">in</span> example3.ents:</a>
-<a class="sourceLine" id="cb85-5" data-line-number="5">  <span class="bu">print</span>(entity.label_, <span class="st">' | '</span>, entity.text)</a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1"></a><span class="co">##python chunk</span></span>
+<span id="cb89-2"><a href="#cb89-2"></a>example3 <span class="op">=</span> nlp(<span class="st">u&quot;#bbuzz 2016: Otis Gospodnetic - Running High Performance And Fault Tolerant Elasticsearch &quot;</span>)</span>
+<span id="cb89-3"><a href="#cb89-3"></a></span>
+<span id="cb89-4"><a href="#cb89-4"></a><span class="cf">for</span> entity <span class="kw">in</span> example3.ents:</span>
+<span id="cb89-5"><a href="#cb89-5"></a>  <span class="bu">print</span>(entity.label_, <span class="st">&#39; | &#39;</span>, entity.text)</span></code></pre></div>
 <pre><code>## PERSON  |  Otis Gospodnetic
-## PERSON  |  -</code></pre>
+## PERSON  |  -
+## PERSON  |  High Performance
+## TECH  |  Elasticsearch</code></pre>
 </div>
 <div id="summary" class="slide section level2">
 <h1>Summary</h1>

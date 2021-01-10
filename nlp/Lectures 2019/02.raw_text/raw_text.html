@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Erin M. Buchanan" />
-  <meta name="date" content="2020-11-10" />
+  <meta name="date" content="2020-11-17" />
   <title>Processing Raw Text</title>
   <style type="text/css">
     code{white-space: pre-wrap;}
@@ -513,7 +513,7 @@ list-style-type: none;
   <p class="author">
 Erin M. Buchanan
   </p>
-  <p class="date">2020-11-10</p>
+  <p class="date">2020-11-17</p>
 </div>
 <div id="working-with-strings" class="slide section level2">
 <h1>Working with strings</h1>
@@ -523,9 +523,8 @@ Erin M. Buchanan
 <li>So, we will learn how to work with them in a few ways.</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">##r chunk</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(reticulate)</span></code></pre></div>
-<pre><code>## Warning: package &#39;reticulate&#39; was built under R version 4.0.3</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">py_config</span>()</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(reticulate)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">py_config</span>()</span></code></pre></div>
 <pre><code>## python:         C:/Users/EBuchanan.HU/AppData/Local/r-miniconda/envs/r-reticulate/python.exe
 ## libpython:      C:/Users/EBuchanan.HU/AppData/Local/r-miniconda/envs/r-reticulate/python36.dll
 ## pythonhome:     C:/Users/EBuchanan.HU/AppData/Local/r-miniconda/envs/r-reticulate
@@ -539,23 +538,23 @@ Erin M. Buchanan
 <ul class="incremental">
 <li>How do we combine strings?</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">##r chunk</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>string1 =<span class="st"> &quot;swiss&quot;</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>string2 =<span class="st"> &quot;cheese&quot;</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">c</span>(string1, string2) <span class="co">#notice this is a vector</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">##r chunk</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>string1 =<span class="st"> &quot;swiss&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>string2 =<span class="st"> &quot;cheese&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">c</span>(string1, string2) <span class="co">#notice this is a vector</span></span></code></pre></div>
 <pre><code>## [1] &quot;swiss&quot;  &quot;cheese&quot;</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">paste</span>(string1, string2, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">paste</span>(string1, string2, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;swiss cheese&quot;</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">##python chunk</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>string1 <span class="op">=</span> <span class="st">&quot;swiss&quot;</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>string2 <span class="op">=</span> <span class="st">&quot;cheese&quot;</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a></span>
-<span id="cb9-5"><a href="#cb9-5"></a>string1 <span class="op">+</span> string2</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">##python chunk</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>string1 <span class="op">=</span> <span class="st">&quot;swiss&quot;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>string2 <span class="op">=</span> <span class="st">&quot;cheese&quot;</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a>string1 <span class="op">+</span> string2</span></code></pre></div>
 <pre><code>## &#39;swisscheese&#39;</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>string1 <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> string2</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>string1 <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> string2</span></code></pre></div>
 <pre><code>## &#39;swiss cheese&#39;</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">&quot; &quot;</span>.join([string1, string2])</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">&quot; &quot;</span>.join([string1, string2])</span></code></pre></div>
 <pre><code>## &#39;swiss cheese&#39;</code></pre>
 </div>
 <div id="indexing" class="slide section level2">
@@ -563,25 +562,25 @@ Erin M. Buchanan
 <ul class="incremental">
 <li>Indexing is calling a particular row, column, or spot in a set of objects</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">##r chunk</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>string1[<span class="dv">1</span>] <span class="co">#pulls the first item</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">##r chunk</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>string1[<span class="dv">1</span>] <span class="co">#pulls the first item</span></span></code></pre></div>
 <pre><code>## [1] &quot;swiss&quot;</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>setofstrings =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;swiss&quot;</span>, <span class="st">&quot;cheese&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;great&quot;</span>)</span>
-<span id="cb17-2"><a href="#cb17-2"></a>setofstrings[<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>setofstrings =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;swiss&quot;</span>, <span class="st">&quot;cheese&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;great&quot;</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a>setofstrings[<span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;cheese&quot;</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>setofstrings[<span class="op">-</span><span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>setofstrings[<span class="op">-</span><span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;swiss&quot; &quot;is&quot;    &quot;great&quot;</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a><span class="co">##python chunk</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>string1[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a><span class="co">##python chunk</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>string1[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## &#39;w&#39;</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>string1[<span class="dv">0</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>string1[<span class="dv">0</span>]</span></code></pre></div>
 <pre><code>## &#39;s&#39;</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>string2[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>string2[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## &#39;e&#39;</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a>setofstrings <span class="op">=</span> [<span class="st">&quot;swiss&quot;</span>, <span class="st">&quot;cheese&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;great&quot;</span>]</span>
-<span id="cb27-2"><a href="#cb27-2"></a>setofstrings[<span class="dv">0</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>setofstrings <span class="op">=</span> [<span class="st">&quot;swiss&quot;</span>, <span class="st">&quot;cheese&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;great&quot;</span>]</span>
+<span id="cb25-2"><a href="#cb25-2"></a>setofstrings[<span class="dv">0</span>]</span></code></pre></div>
 <pre><code>## &#39;swiss&#39;</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>setofstrings[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a>setofstrings[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## &#39;great&#39;</code></pre>
 </div>
 <div id="slicing" class="slide section level2">
@@ -589,20 +588,20 @@ Erin M. Buchanan
 <ul class="incremental">
 <li>Slicing is taking only a set of indices (rather than everything)</li>
 </ul>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co">##r chunk</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>setofstrings[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">##r chunk</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>setofstrings[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;swiss&quot;  &quot;cheese&quot;</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co">#setofstrings[:2] not allowed</span></span></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a><span class="co">##python chunk</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a>setofstrings</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co">#setofstrings[:2] not allowed</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a><span class="co">##python chunk</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>setofstrings</span></code></pre></div>
 <pre><code>## [&#39;swiss&#39;, &#39;cheese&#39;, &#39;is&#39;, &#39;great&#39;]</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a>setofstrings[<span class="dv">0</span>:<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a>setofstrings[<span class="dv">0</span>:<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [&#39;swiss&#39;]</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a>setofstrings[:<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a>setofstrings[:<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [&#39;swiss&#39;]</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1"></a>setofstrings[:<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a>setofstrings[:<span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [&#39;swiss&#39;, &#39;cheese&#39;]</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1"></a>setofstrings[<span class="dv">2</span>:]</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1"></a>setofstrings[<span class="dv">2</span>:]</span></code></pre></div>
 <pre><code>## [&#39;is&#39;, &#39;great&#39;]</code></pre>
 </div>
 <div id="methods" class="slide section level2">
@@ -610,34 +609,34 @@ Erin M. Buchanan
 <ul class="incremental">
 <li>How can we manipulate text? The ultimate goal is to clean the text, but what are some functions we might use?</li>
 </ul>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co">##r chunk</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a>sentence =<span class="st"> </span><span class="kw">paste</span>(setofstrings, <span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</span>
-<span id="cb44-3"><a href="#cb44-3"></a></span>
-<span id="cb44-4"><a href="#cb44-4"></a><span class="kw">toupper</span>(sentence)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co">##r chunk</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>sentence =<span class="st"> </span><span class="kw">paste</span>(setofstrings, <span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</span>
+<span id="cb42-3"><a href="#cb42-3"></a></span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="kw">toupper</span>(sentence)</span></code></pre></div>
 <pre><code>## [1] &quot;SWISS CHEESE IS GREAT&quot;</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="kw">tolower</span>(sentence)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">tolower</span>(sentence)</span></code></pre></div>
 <pre><code>## [1] &quot;swiss cheese is great&quot;</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">library</span>(stringr)</span>
-<span id="cb48-2"><a href="#cb48-2"></a><span class="kw">str_to_upper</span>(sentence)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb46-2"><a href="#cb46-2"></a><span class="kw">str_to_upper</span>(sentence)</span></code></pre></div>
 <pre><code>## [1] &quot;SWISS CHEESE IS GREAT&quot;</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">str_to_lower</span>(sentence)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">str_to_lower</span>(sentence)</span></code></pre></div>
 <pre><code>## [1] &quot;swiss cheese is great&quot;</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="kw">str_to_title</span>(sentence)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">str_to_title</span>(sentence)</span></code></pre></div>
 <pre><code>## [1] &quot;Swiss Cheese Is Great&quot;</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="kw">str_to_sentence</span>(sentence)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="kw">str_to_sentence</span>(sentence)</span></code></pre></div>
 <pre><code>## [1] &quot;Swiss cheese is great&quot;</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a><span class="co">##python chunk</span></span>
-<span id="cb56-2"><a href="#cb56-2"></a>sep <span class="op">=</span> <span class="st">&quot; &quot;</span></span>
-<span id="cb56-3"><a href="#cb56-3"></a>sentence <span class="op">=</span> sep.join(setofstrings)</span>
-<span id="cb56-4"><a href="#cb56-4"></a>sentence</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a><span class="co">##python chunk</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a>sep <span class="op">=</span> <span class="st">&quot; &quot;</span></span>
+<span id="cb54-3"><a href="#cb54-3"></a>sentence <span class="op">=</span> sep.join(setofstrings)</span>
+<span id="cb54-4"><a href="#cb54-4"></a>sentence</span></code></pre></div>
 <pre><code>## &#39;swiss cheese is great&#39;</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a>sentence.upper()</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a>sentence.upper()</span></code></pre></div>
 <pre><code>## &#39;SWISS CHEESE IS GREAT&#39;</code></pre>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1"></a>sentence.lower()</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a>sentence.lower()</span></code></pre></div>
 <pre><code>## &#39;swiss cheese is great&#39;</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1"></a>sentence.capitalize()</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1"></a>sentence.capitalize()</span></code></pre></div>
 <pre><code>## &#39;Swiss cheese is great&#39;</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1"></a>sentence.title()</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1"></a>sentence.title()</span></code></pre></div>
 <pre><code>## &#39;Swiss Cheese Is Great&#39;</code></pre>
 </div>
 <div id="regular-expressions" class="slide section level2">
@@ -680,35 +679,35 @@ Erin M. Buchanan
 </div>
 <div id="regular-expressions-3" class="slide section level2">
 <h1>Regular expressions</h1>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="co">##r chunk</span></span>
-<span id="cb66-2"><a href="#cb66-2"></a>sentence =<span class="st"> &quot;We can talk about numbers like how great is 5 or what is a ? doing here?&quot;</span></span>
-<span id="cb66-3"><a href="#cb66-3"></a><span class="kw">str_extract</span>(sentence, <span class="dt">pattern =</span> <span class="st">&quot;5&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="co">##r chunk</span></span>
+<span id="cb64-2"><a href="#cb64-2"></a>sentence =<span class="st"> &quot;We can talk about numbers like how great is 5 or what is a ? doing here?&quot;</span></span>
+<span id="cb64-3"><a href="#cb64-3"></a><span class="kw">str_extract</span>(sentence, <span class="dt">pattern =</span> <span class="st">&quot;5&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;5&quot;</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="kw">str_extract</span>(sentence, <span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">d&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="kw">str_extract</span>(sentence, <span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">d&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;5&quot;</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">str_extract_all</span>(sentence, <span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">?&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="kw">str_extract_all</span>(sentence, <span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">?&quot;</span>)</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;?&quot; &quot;?&quot;</code></pre>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="kw">str_detect</span>(sentence, <span class="dt">pattern =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">str_detect</span>(sentence, <span class="dt">pattern =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="kw">str_replace_all</span>(sentence, <span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">?&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;!&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="kw">str_replace_all</span>(sentence, <span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">?&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;!&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;We can talk about numbers like how great is 5 or what is a ! doing here!&quot;</code></pre>
-<div class="sourceCode" id="cb76"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1"></a><span class="co">##python chunk</span></span>
-<span id="cb76-2"><a href="#cb76-2"></a><span class="im">import</span> re</span>
-<span id="cb76-3"><a href="#cb76-3"></a>sentence <span class="op">=</span> <span class="st">&quot;We can talk about numbers like how great is 5 or what is a ? doing here?&quot;</span></span>
-<span id="cb76-4"><a href="#cb76-4"></a></span>
-<span id="cb76-5"><a href="#cb76-5"></a><span class="co">#re.match - only finds the match at the beginning of the string</span></span>
-<span id="cb76-6"><a href="#cb76-6"></a><span class="bu">print</span>(re.search(<span class="st">&quot;4&quot;</span>, sentence))</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1"></a><span class="co">##python chunk</span></span>
+<span id="cb74-2"><a href="#cb74-2"></a><span class="im">import</span> re</span>
+<span id="cb74-3"><a href="#cb74-3"></a>sentence <span class="op">=</span> <span class="st">&quot;We can talk about numbers like how great is 5 or what is a ? doing here?&quot;</span></span>
+<span id="cb74-4"><a href="#cb74-4"></a></span>
+<span id="cb74-5"><a href="#cb74-5"></a><span class="co">#re.match - only finds the match at the beginning of the string</span></span>
+<span id="cb74-6"><a href="#cb74-6"></a><span class="bu">print</span>(re.search(<span class="st">&quot;4&quot;</span>, sentence))</span></code></pre></div>
 <pre><code>## None</code></pre>
-<div class="sourceCode" id="cb78"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1"></a><span class="bu">print</span>(re.search(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">d&quot;</span>, sentence))</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1"></a><span class="bu">print</span>(re.search(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">d&quot;</span>, sentence))</span></code></pre></div>
 <pre><code>## &lt;_sre.SRE_Match object; span=(44, 45), match=&#39;5&#39;&gt;</code></pre>
-<div class="sourceCode" id="cb80"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1"></a><span class="bu">print</span>(re.search(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">?&quot;</span>, sentence)) <span class="co">#note only first one</span></span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1"></a><span class="bu">print</span>(re.search(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">?&quot;</span>, sentence)) <span class="co">#note only first one</span></span></code></pre></div>
 <pre><code>## &lt;_sre.SRE_Match object; span=(59, 60), match=&#39;?&#39;&gt;</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1"></a><span class="bu">print</span>(re.findall(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">?&quot;</span>, sentence))</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1"></a><span class="bu">print</span>(re.findall(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">?&quot;</span>, sentence))</span></code></pre></div>
 <pre><code>## [&#39;?&#39;, &#39;?&#39;]</code></pre>
-<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1"></a><span class="bu">print</span>(re.finditer(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">?&quot;</span>, sentence))</span></code></pre></div>
-<pre><code>## &lt;callable_iterator object at 0x000000002A544940&gt;</code></pre>
-<div class="sourceCode" id="cb86"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1"></a>re.sub(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">?&quot;</span>, <span class="st">&quot;!&quot;</span>, sentence)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1"></a><span class="bu">print</span>(re.finditer(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">?&quot;</span>, sentence))</span></code></pre></div>
+<pre><code>## &lt;callable_iterator object at 0x000000002C407EB8&gt;</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1"></a>re.sub(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">?&quot;</span>, <span class="st">&quot;!&quot;</span>, sentence)</span></code></pre></div>
 <pre><code>## &#39;We can talk about numbers like how great is 5 or what is a ! doing here!&#39;</code></pre>
 </div>
 <div id="what-do-i-need-to-do-to-clean-up-data" class="slide section level2">
@@ -738,27 +737,26 @@ Erin M. Buchanan
 <li>Specially, let’s do some simple web scraping and clean up that code.</li>
 <li>We can use <code>rvest</code> to get html data and clean it up.</li>
 </ul>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a><span class="co">##r chunk</span></span>
-<span id="cb88-2"><a href="#cb88-2"></a><span class="kw">library</span>(rvest)</span></code></pre></div>
-<pre><code>## Warning: package &#39;rvest&#39; was built under R version 4.0.3</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a><span class="co">##r chunk</span></span>
+<span id="cb86-2"><a href="#cb86-2"></a><span class="kw">library</span>(rvest)</span></code></pre></div>
 <pre><code>## Loading required package: xml2</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1"></a>blog_url =<span class="st"> &quot;https://www.aggieerin.com/post/getting-translations-with-rvest-and-selenium/&quot;</span></span>
-<span id="cb91-2"><a href="#cb91-2"></a>blog_post =<span class="st"> </span><span class="kw">read_html</span>(blog_url)</span>
-<span id="cb91-3"><a href="#cb91-3"></a>clean_text =<span class="st"> </span><span class="kw">html_text</span>(blog_post)</span>
-<span id="cb91-4"><a href="#cb91-4"></a></span>
-<span id="cb91-5"><a href="#cb91-5"></a><span class="co">#forgot that you need to find all the instances, since the meta</span></span>
-<span id="cb91-6"><a href="#cb91-6"></a><span class="co">#data has the introduction as information</span></span>
-<span id="cb91-7"><a href="#cb91-7"></a><span class="kw">str_locate_all</span>(clean_text, <span class="st">&quot;In this guide&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a>blog_url =<span class="st"> &quot;https://www.aggieerin.com/post/getting-translations-with-rvest-and-selenium/&quot;</span></span>
+<span id="cb88-2"><a href="#cb88-2"></a>blog_post =<span class="st"> </span><span class="kw">read_html</span>(blog_url)</span>
+<span id="cb88-3"><a href="#cb88-3"></a>clean_text =<span class="st"> </span><span class="kw">html_text</span>(blog_post)</span>
+<span id="cb88-4"><a href="#cb88-4"></a></span>
+<span id="cb88-5"><a href="#cb88-5"></a><span class="co">#forgot that you need to find all the instances, since the meta</span></span>
+<span id="cb88-6"><a href="#cb88-6"></a><span class="co">#data has the introduction as information</span></span>
+<span id="cb88-7"><a href="#cb88-7"></a><span class="kw">str_locate_all</span>(clean_text, <span class="st">&quot;In this guide&quot;</span>)</span></code></pre></div>
 <pre><code>## [[1]]
 ##      start  end
 ## [1,]   937  949
 ## [2,]  3873 3885</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1"></a><span class="kw">str_locate_all</span>(clean_text, <span class="st">&quot;Enjoy!&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a><span class="kw">str_locate_all</span>(clean_text, <span class="st">&quot;Enjoy!&quot;</span>)</span></code></pre></div>
 <pre><code>## [[1]]
 ##      start  end
 ## [1,]  8197 8202</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1"></a>clean_text &lt;-<span class="st"> </span><span class="kw">substr</span>(clean_text, <span class="dv">3873</span>, <span class="dv">8202</span>) </span>
-<span id="cb95-2"><a href="#cb95-2"></a>clean_text</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a>clean_text &lt;-<span class="st"> </span><span class="kw">substr</span>(clean_text, <span class="dv">3873</span>, <span class="dv">8202</span>) </span>
+<span id="cb92-2"><a href="#cb92-2"></a>clean_text</span></code></pre></div>
 <pre><code>## [1] &quot;In this guide, I’ll go over how you can use web scraping rvest and Selenium to get translations from Google Translate. Note: I encourage responsible scraping - I always try to do it with some space between requests. You can only do 5000 characters at a time with the free Google translate. I will say that I tried to do this with just rvest and the predictability of the links for Google translate - but I could not get rvest to pull the right data off the page, so here’s a slightly more difficult approach that appears to work. Happy to hear comments!\nFirst, load the rvest and RSelenium libraries. I wish I could remember precisely what I did to set up RSelenium but I don’t :| there are good tutorials out there if you need help with setting it up.\nlibrary(rvest)\n## Loading required package: xml2\nlibrary(RSelenium)\nNext, put in the text you would like to translate:\n##words\nwords_translate &lt;- c(\&quot;hebben deze van door heet woord maar wat sommige\&quot;)\nThis next part controls the browser:\nrsDriver tells you what browser to control/open and gets the session started. If you get an error that there’s already something open on that port, run rD[[\&quot;server\&quot;]]$stop() to stop the session and try again.\nThe second line sets up you at the client for controlling the session.\n$navigate is exactly how it sounds, go to this page.\nWhen you run these, you will see a browser open, then go to the Google page.\n##an example to show you what&#39;s happening\nrD &lt;- rsDriver(browser = \&quot;firefox\&quot;)\nremDr &lt;- rD[[\&quot;client\&quot;]]\nremDr$navigate(\&quot;https://translate.Google.com/\&quot;)\nOnce you get the page open, this part is a bit harder. You have to figure out the area of the page you want to control. I have used the SelectorGadget plugin for this, as well as right clicking -&gt; inspect element to find the right class ids and also just View Page Source because I understand html. You should start with SelectorGadget if you aren’t familiar with html and css.\n$findElement finds a specific area of the page.\n$sendKeysToElement sends text to the area of the page you found. You can also do things like clickElement to click on a certain area of the page. Note that the \\uE007 is the Enter key. So, we are filling in our words we want and hitting enter.\n$getPageSource gets the page source - rvest has read_html but I could not get that to find all the right information to get the translated text back.\nwebElem &lt;- remDr$findElement(using = \&quot;class name\&quot;,\&quot;goog-textarea\&quot;)\nwebElem$sendKeysToElement(list(words_translate, \&quot;\\uE007\&quot;))\n\nwebpage &lt;-remDr$getPageSource()\nNext, you need to translate the page source into something usable. I will say that in theory, html_nodes allows you to specify a specific class id you are looking for (that’s the result-shield stuff), but I could not get that to work. So, I grabbed the text, the class codes, slapped them together, and then sorted it out.\n#load dplyr\nlibrary(dplyr, quietly = T)\n\n#get all the text\nanswers &lt;- webpage %&gt;% #your webpage\n  unlist() %&gt;% #unlist, as it saves as a list\n  read_html() %&gt;% #read the html \n  html_nodes(\&quot;div\&quot;) %&gt;% #grab all the divs\n  html_text() #get the text from those divs\n\n#get the class names\nclass_names &lt;- webpage %&gt;% \n  unlist() %&gt;% \n  read_html() %&gt;% \n  html_nodes(\&quot;div\&quot;) %&gt;% \n  html_attrs() %&gt;% #get the attributes, that&#39;s the class codes \n  sapply(function(x) x[1]) #just the first one is good\n\n#get the answer that has this class code\nanswers[class_names == \&quot;result-shield-container tlid-copy-target\&quot;][1]\n## [1] \&quot;have this van by hot word but some\&quot;\nNow we have the translation of some top Dutch words. You could loop over a set of translations you want to do, storing them in a data frame, tibble, list, etc. I would recommend a Sys.sleep() between loops to just not make the website angry. I usually use something like Sys.sleep(runif(1,0,5)) to get a random sleep time between 0 and 5 seconds.\nWhen you are done be sure to close the remote session/connection:\n#close the browser \nremDr$close()\n# stop the selenium server\nrD[[\&quot;server\&quot;]]$stop()\nThe nice thing about this set up is that you could pull the automatic translation here, and then “click” on a different translation using Selenium - you just would have to figure out where to click on the page. I find myself doing a lot of trial and error for clicks, so just play around it with until it clicks where you want.\nEnjoy!&quot;</code></pre>
 </div>
 <div id="removing-noise-1" class="slide section level2">
@@ -767,24 +765,24 @@ Erin M. Buchanan
 <li>Use the <code>requests</code> package to pull html pages.</li>
 <li>Use <code>BeautifulSoup</code> to clean it up (most of the time).</li>
 </ul>
-<div class="sourceCode" id="cb97"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1"></a><span class="co">##python chunk</span></span>
-<span id="cb97-2"><a href="#cb97-2"></a><span class="im">import</span> requests</span>
-<span id="cb97-3"><a href="#cb97-3"></a>blog_post <span class="op">=</span> requests.get(<span class="st">&quot;https://www.aggieerin.com/post/getting-translations-with-rvest-and-selenium/&quot;</span>)</span>
-<span id="cb97-4"><a href="#cb97-4"></a>content <span class="op">=</span> blog_post.content</span>
-<span id="cb97-5"><a href="#cb97-5"></a><span class="bu">print</span>(content[<span class="dv">1000</span>:<span class="dv">2000</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1"></a><span class="co">##python chunk</span></span>
+<span id="cb94-2"><a href="#cb94-2"></a><span class="im">import</span> requests</span>
+<span id="cb94-3"><a href="#cb94-3"></a>blog_post <span class="op">=</span> requests.get(<span class="st">&quot;https://www.aggieerin.com/post/getting-translations-with-rvest-and-selenium/&quot;</span>)</span>
+<span id="cb94-4"><a href="#cb94-4"></a>content <span class="op">=</span> blog_post.content</span>
+<span id="cb94-5"><a href="#cb94-5"></a><span class="bu">print</span>(content[<span class="dv">1000</span>:<span class="dv">2000</span>])</span></code></pre></div>
 <pre><code>## b&#39;+json&quot;&gt;\n{\n    &quot;@context&quot;: &quot;http://schema.org&quot;,\n    &quot;@type&quot;: &quot;WebSite&quot;,\n    &quot;name&quot;: &quot;Dr. Erin Buchanan&quot;,\n    \n    &quot;url&quot;: &quot;\\/&quot;\n}\n&lt;/script&gt;&lt;script type=&quot;application/ld+json&quot;&gt;\n{\n  &quot;@context&quot;: &quot;http://schema.org&quot;,\n  &quot;@type&quot;: &quot;Organization&quot;,\n  &quot;name&quot;: &quot;&quot;,\n  &quot;url&quot;: &quot;\\/&quot;\n  \n  \n  \n  \n}\n&lt;/script&gt;\n&lt;script type=&quot;application/ld+json&quot;&gt;\n{\n  &quot;@context&quot;: &quot;http://schema.org&quot;,\n  &quot;@type&quot;: &quot;BreadcrumbList&quot;,\n  &quot;itemListElement&quot;: [{\n        &quot;@type&quot;: &quot;ListItem&quot;,\n        &quot;position&quot;: 1,\n        &quot;item&quot;: {\n          &quot;@id&quot;: &quot;\\/&quot;,\n          &quot;name&quot;: &quot;home&quot;\n        }\n    },{\n        &quot;@type&quot;: &quot;ListItem&quot;,\n        &quot;position&quot;: 3,\n        &quot;item&quot;: {\n          &quot;@id&quot;: &quot;\\/post\\/getting-translations-with-rvest-and-selenium\\/&quot;,\n          &quot;name&quot;: &quot;Getting translations with rvest and selenium&quot;\n        }\n    }]\n}\n&lt;/script&gt;&lt;script type=&quot;application/ld+json&quot;&gt;\n{\n  &quot;@context&quot;: &quot;http://schema.org&quot;,\n  &quot;@type&quot;: &quot;Article&quot;,\n  &quot;author&quot;: {\n    &quot;name&quot; : &quot;Erin Buchanan&quot;\n  },\n  &quot;headline&quot;: &quot;Getting Translations with rvest and Selenium&quot;,\n  &quot;desc&#39;</code></pre>
 </div>
 <div id="removing-noise-2" class="slide section level2">
 <h1>Removing noise</h1>
-<div class="sourceCode" id="cb99"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1"></a><span class="co">##python chunk</span></span>
-<span id="cb99-2"><a href="#cb99-2"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
-<span id="cb99-3"><a href="#cb99-3"></a>clean_content <span class="op">=</span> BeautifulSoup(content)</span>
-<span id="cb99-4"><a href="#cb99-4"></a>clean_text <span class="op">=</span> clean_content.get_text()</span>
-<span id="cb99-5"><a href="#cb99-5"></a><span class="co">#print(clean_text[:1000])</span></span>
-<span id="cb99-6"><a href="#cb99-6"></a>re.search(<span class="st">&quot;In this guide&quot;</span>, clean_text)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1"></a><span class="co">##python chunk</span></span>
+<span id="cb96-2"><a href="#cb96-2"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
+<span id="cb96-3"><a href="#cb96-3"></a>clean_content <span class="op">=</span> BeautifulSoup(content)</span>
+<span id="cb96-4"><a href="#cb96-4"></a>clean_text <span class="op">=</span> clean_content.get_text()</span>
+<span id="cb96-5"><a href="#cb96-5"></a><span class="co">#print(clean_text[:1000])</span></span>
+<span id="cb96-6"><a href="#cb96-6"></a>re.search(<span class="st">&quot;In this guide&quot;</span>, clean_text)</span></code></pre></div>
 <pre><code>## &lt;_sre.SRE_Match object; span=(495, 508), match=&#39;In this guide&#39;&gt;</code></pre>
-<div class="sourceCode" id="cb101"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1"></a>clean_text <span class="op">=</span> clean_text[<span class="dv">495</span>:]</span>
-<span id="cb101-2"><a href="#cb101-2"></a><span class="bu">print</span>(clean_text)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1"></a>clean_text <span class="op">=</span> clean_text[<span class="dv">495</span>:]</span>
+<span id="cb98-2"><a href="#cb98-2"></a><span class="bu">print</span>(clean_text)</span></code></pre></div>
 <pre><code>## In this guide, I’ll go over how you can use web scraping rvest and Selenium to get translations from Google Translate. Note: I encourage responsible scraping - I always try to do it with some space between requests. You can only do 5000 characters at a time with the free Google translate. I will say that I tried to do this with just rvest and the predictability of the links for Google translate - but I could not get rvest to pull the right data off the page, so here’s a slightly more difficult approach that appears to work. Happy to hear comments!
 ## First, load the rvest and RSelenium libraries. I wish I could remember precisely what I did to set up RSelenium but I don’t :| there are good tutorials out there if you need help with setting it up.
 ## library(rvest)
@@ -952,21 +950,20 @@ Erin M. Buchanan
 <li>The basic technique is to simply break things down based on a <code>.</code> or <code>!</code> or <code>\n</code> characters.</li>
 <li>We can use the <code>tokenizers</code> library in <code>R</code> to get us started.</li>
 </ul>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1"></a><span class="co">##r chunk</span></span>
-<span id="cb103-2"><a href="#cb103-2"></a><span class="kw">library</span>(tokenizers)</span></code></pre></div>
-<pre><code>## Warning: package &#39;tokenizers&#39; was built under R version 4.0.3</code></pre>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1"></a>list_sentences &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">tokenize_sentences</span>(clean_text))</span>
-<span id="cb105-2"><a href="#cb105-2"></a><span class="kw">tokenize_sentences</span>(clean_text)[[<span class="dv">1</span>]][<span class="dv">3</span><span class="op">:</span><span class="dv">8</span>] <span class="co">##give me just a few parts</span></span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a><span class="co">##r chunk</span></span>
+<span id="cb100-2"><a href="#cb100-2"></a><span class="kw">library</span>(tokenizers)</span>
+<span id="cb100-3"><a href="#cb100-3"></a>list_sentences &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">tokenize_sentences</span>(clean_text))</span>
+<span id="cb100-4"><a href="#cb100-4"></a><span class="kw">tokenize_sentences</span>(clean_text)[[<span class="dv">1</span>]][<span class="dv">3</span><span class="op">:</span><span class="dv">8</span>] <span class="co">##give me just a few parts</span></span></code></pre></div>
 <pre><code>## [1] &quot;You can only do 5000 characters at a time with the free Google translate.&quot;                                                                                                                                                                                                                                                                                                                                                                                                           
 ## [2] &quot;I will say that I tried to do this with just rvest and the predictability of the links for Google translate - but I could not get rvest to pull the right data off the page, so here’s a slightly more difficult approach that appears to work.&quot;                                                                                                                                                                                                                                     
 ## [3] &quot;Happy to hear comments!&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 ## [4] &quot;First, load the rvest and RSelenium libraries.&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                      
 ## [5] &quot;I wish I could remember precisely what I did to set up RSelenium but I don’t :| there are good tutorials out there if you need help with setting it up. library(rvest) ## Loading required package: xml2 library(RSelenium) Next, put in the text you would like to translate: ##words words_translate &lt;- c(\&quot;hebben deze van door heet woord maar wat sommige\&quot;) This next part controls the browser: rsDriver tells you what browser to control/open and gets the session started.&quot;
 ## [6] &quot;If you get an error that there’s already something open on that port, run rD[[\&quot;server\&quot;]]$stop() to stop the session and try again.&quot;</code></pre>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1"></a><span class="kw">count_sentences</span>(clean_text) <span class="co"># hmmm</span></span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1"></a><span class="kw">count_sentences</span>(clean_text) <span class="co"># hmmm</span></span></code></pre></div>
 <pre><code>## [1] 73</code></pre>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1"></a>temp =<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">tokenize_sentences</span>(clean_text))</span>
-<span id="cb109-2"><a href="#cb109-2"></a><span class="kw">length</span>(temp)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1"></a>temp =<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">tokenize_sentences</span>(clean_text))</span>
+<span id="cb104-2"><a href="#cb104-2"></a><span class="kw">length</span>(temp)</span></code></pre></div>
 <pre><code>## [1] 24</code></pre>
 </div>
 <div id="sentence-tokenization-1" class="slide section level2">
@@ -976,12 +973,12 @@ Erin M. Buchanan
 <li>The default is the <code>PunktSentenceTokenizer</code> - which is a pretrained model to find abbreviations, collocations, and sentence boundaries.</li>
 <li>Said to work well for European languages.</li>
 </ul>
-<div class="sourceCode" id="cb111"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb111-1"><a href="#cb111-1"></a><span class="co">##python chunk</span></span>
-<span id="cb111-2"><a href="#cb111-2"></a><span class="im">import</span> nltk</span>
-<span id="cb111-3"><a href="#cb111-3"></a>sentences <span class="op">=</span> nltk.sent_tokenize(clean_text)</span>
-<span id="cb111-4"><a href="#cb111-4"></a><span class="bu">print</span>(sentences[<span class="dv">1</span>:<span class="dv">3</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1"></a><span class="co">##python chunk</span></span>
+<span id="cb106-2"><a href="#cb106-2"></a><span class="im">import</span> nltk</span>
+<span id="cb106-3"><a href="#cb106-3"></a>sentences <span class="op">=</span> nltk.sent_tokenize(clean_text)</span>
+<span id="cb106-4"><a href="#cb106-4"></a><span class="bu">print</span>(sentences[<span class="dv">1</span>:<span class="dv">3</span>])</span></code></pre></div>
 <pre><code>## [&#39;Note: I encourage responsible scraping - I always try to do it with some space between requests.&#39;, &#39;You can only do 5000 characters at a time with the free Google translate.&#39;]</code></pre>
-<div class="sourceCode" id="cb113"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1"></a><span class="bu">len</span>(sentences)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1"></a><span class="bu">len</span>(sentences)</span></code></pre></div>
 <pre><code>## 34</code></pre>
 </div>
 <div id="sentence-tokenization-2" class="slide section level2">
@@ -1002,13 +999,13 @@ Erin M. Buchanan
 </div>
 <div id="word-tokenization-1" class="slide section level2">
 <h1>Word tokenization</h1>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1"></a><span class="co">##r chunk</span></span>
-<span id="cb115-2"><a href="#cb115-2"></a><span class="kw">tokenize_words</span>(clean_text,</span>
-<span id="cb115-3"><a href="#cb115-3"></a>               <span class="dt">lowercase =</span> T,</span>
-<span id="cb115-4"><a href="#cb115-4"></a>               <span class="dt">stopwords =</span> <span class="ot">NULL</span>, <span class="co">#more on this later</span></span>
-<span id="cb115-5"><a href="#cb115-5"></a>               <span class="dt">strip_punct =</span> T,</span>
-<span id="cb115-6"><a href="#cb115-6"></a>               <span class="dt">strip_numeric =</span> F,</span>
-<span id="cb115-7"><a href="#cb115-7"></a>               <span class="dt">simplify =</span> F) <span class="co">#list format</span></span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1"></a><span class="co">##r chunk</span></span>
+<span id="cb110-2"><a href="#cb110-2"></a><span class="kw">tokenize_words</span>(clean_text,</span>
+<span id="cb110-3"><a href="#cb110-3"></a>               <span class="dt">lowercase =</span> T,</span>
+<span id="cb110-4"><a href="#cb110-4"></a>               <span class="dt">stopwords =</span> <span class="ot">NULL</span>, <span class="co">#more on this later</span></span>
+<span id="cb110-5"><a href="#cb110-5"></a>               <span class="dt">strip_punct =</span> T,</span>
+<span id="cb110-6"><a href="#cb110-6"></a>               <span class="dt">strip_numeric =</span> F,</span>
+<span id="cb110-7"><a href="#cb110-7"></a>               <span class="dt">simplify =</span> F) <span class="co">#list format</span></span></code></pre></div>
 <pre><code>## [[1]]
 ##   [1] &quot;in&quot;                   &quot;this&quot;                 &quot;guide&quot;               
 ##   [4] &quot;i’ll&quot;                 &quot;go&quot;                   &quot;over&quot;                
@@ -1257,7 +1254,7 @@ Erin M. Buchanan
 ## [733] &quot;until&quot;                &quot;it&quot;                   &quot;clicks&quot;              
 ## [736] &quot;where&quot;                &quot;you&quot;                  &quot;want&quot;                
 ## [739] &quot;enjoy&quot;</code></pre>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1"></a><span class="co">#tokenize_ptb(clean_text) Penn TreeBank option (see below)</span></span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1"></a><span class="co">#tokenize_ptb(clean_text) Penn TreeBank option (see below)</span></span></code></pre></div>
 </div>
 <div id="word-tokenization-2" class="slide section level2">
 <h1>Word tokenization</h1>
@@ -1284,9 +1281,9 @@ Erin M. Buchanan
 <li>Deals with contractions (sort of)</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb118"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1"></a><span class="co">##python chunk</span></span>
-<span id="cb118-2"><a href="#cb118-2"></a>words <span class="op">=</span> nltk.word_tokenize(clean_text)</span>
-<span id="cb118-3"><a href="#cb118-3"></a><span class="bu">print</span>(words[<span class="dv">50</span>:<span class="dv">60</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1"></a><span class="co">##python chunk</span></span>
+<span id="cb113-2"><a href="#cb113-2"></a>words <span class="op">=</span> nltk.word_tokenize(clean_text)</span>
+<span id="cb113-3"><a href="#cb113-3"></a><span class="bu">print</span>(words[<span class="dv">50</span>:<span class="dv">60</span>])</span></code></pre></div>
 <pre><code>## [&#39;at&#39;, &#39;a&#39;, &#39;time&#39;, &#39;with&#39;, &#39;the&#39;, &#39;free&#39;, &#39;Google&#39;, &#39;translate&#39;, &#39;.&#39;, &#39;I&#39;]</code></pre>
 </div>
 <div id="spacy" class="slide section level2">
@@ -1294,15 +1291,15 @@ Erin M. Buchanan
 <ul class="incremental">
 <li><a href="https://spacy.io/usage/models" class="uri">https://spacy.io/usage/models</a></li>
 </ul>
-<div class="sourceCode" id="cb120"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1"></a><span class="co">##python chunk</span></span>
-<span id="cb120-2"><a href="#cb120-2"></a><span class="im">import</span> spacy</span>
-<span id="cb120-3"><a href="#cb120-3"></a></span>
-<span id="cb120-4"><a href="#cb120-4"></a><span class="co">#this is very common naming to get spacy langauge models started</span></span>
-<span id="cb120-5"><a href="#cb120-5"></a>nlp <span class="op">=</span> spacy.load(<span class="st">&#39;en_core_web_sm&#39;</span>)</span>
-<span id="cb120-6"><a href="#cb120-6"></a></span>
-<span id="cb120-7"><a href="#cb120-7"></a>spacy_processed <span class="op">=</span> nlp(clean_text)</span>
-<span id="cb120-8"><a href="#cb120-8"></a></span>
-<span id="cb120-9"><a href="#cb120-9"></a><span class="bu">list</span>(spacy_processed.sents)[<span class="dv">20</span>:<span class="dv">30</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1"></a><span class="co">##python chunk</span></span>
+<span id="cb115-2"><a href="#cb115-2"></a><span class="im">import</span> spacy</span>
+<span id="cb115-3"><a href="#cb115-3"></a></span>
+<span id="cb115-4"><a href="#cb115-4"></a><span class="co">#this is very common naming to get spacy langauge models started</span></span>
+<span id="cb115-5"><a href="#cb115-5"></a>nlp <span class="op">=</span> spacy.load(<span class="st">&#39;en_core_web_sm&#39;</span>)</span>
+<span id="cb115-6"><a href="#cb115-6"></a></span>
+<span id="cb115-7"><a href="#cb115-7"></a>spacy_processed <span class="op">=</span> nlp(clean_text)</span>
+<span id="cb115-8"><a href="#cb115-8"></a></span>
+<span id="cb115-9"><a href="#cb115-9"></a><span class="bu">list</span>(spacy_processed.sents)[<span class="dv">20</span>:<span class="dv">30</span>]</span></code></pre></div>
 <pre><code>## [When you run these, you will see a browser open, then go to the Google page.
 ## 
 ## , ##an example to show you what&#39;s happening
@@ -1310,13 +1307,13 @@ Erin M. Buchanan
 ## , remDr &lt;- rD[[&quot;client&quot;]]
 ## , remDr$navigate(&quot;https://translate., Google.com/&quot;)
 ## , Once you get the page open, this part is a bit harder., You have to figure out the area of the page you want to control., I have used the SelectorGadget plugin for this, as well as right clicking -]</code></pre>
-<div class="sourceCode" id="cb122"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb122-1"><a href="#cb122-1"></a><span class="bu">len</span>(<span class="bu">list</span>(spacy_processed.sents))</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1"></a><span class="bu">len</span>(<span class="bu">list</span>(spacy_processed.sents))</span></code></pre></div>
 <pre><code>## 91</code></pre>
 </div>
 <div id="word-tokenization-4" class="slide section level2">
 <h1>Word tokenization</h1>
-<div class="sourceCode" id="cb124"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb124-1"><a href="#cb124-1"></a><span class="co">##python chunk</span></span>
-<span id="cb124-2"><a href="#cb124-2"></a><span class="bu">print</span>([word.text <span class="cf">for</span> word <span class="kw">in</span> spacy_processed][:<span class="dv">500</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1"></a><span class="co">##python chunk</span></span>
+<span id="cb119-2"><a href="#cb119-2"></a><span class="bu">print</span>([word.text <span class="cf">for</span> word <span class="kw">in</span> spacy_processed][:<span class="dv">500</span>])</span></code></pre></div>
 <pre><code>## [&#39;In&#39;, &#39;this&#39;, &#39;guide&#39;, &#39;,&#39;, &#39;I&#39;, &#39;’ll&#39;, &#39;go&#39;, &#39;over&#39;, &#39;how&#39;, &#39;you&#39;, &#39;can&#39;, &#39;use&#39;, &#39;web&#39;, &#39;scraping&#39;, &#39;rvest&#39;, &#39;and&#39;, &#39;Selenium&#39;, &#39;to&#39;, &#39;get&#39;, &#39;translations&#39;, &#39;from&#39;, &#39;Google&#39;, &#39;Translate&#39;, &#39;.&#39;, &#39;Note&#39;, &#39;:&#39;, &#39;I&#39;, &#39;encourage&#39;, &#39;responsible&#39;, &#39;scraping&#39;, &#39;-&#39;, &#39;I&#39;, &#39;always&#39;, &#39;try&#39;, &#39;to&#39;, &#39;do&#39;, &#39;it&#39;, &#39;with&#39;, &#39;some&#39;, &#39;space&#39;, &#39;between&#39;, &#39;requests&#39;, &#39;.&#39;, &#39;You&#39;, &#39;can&#39;, &#39;only&#39;, &#39;do&#39;, &#39;5000&#39;, &#39;characters&#39;, &#39;at&#39;, &#39;a&#39;, &#39;time&#39;, &#39;with&#39;, &#39;the&#39;, &#39;free&#39;, &#39;Google&#39;, &#39;translate&#39;, &#39;.&#39;, &#39;I&#39;, &#39;will&#39;, &#39;say&#39;, &#39;that&#39;, &#39;I&#39;, &#39;tried&#39;, &#39;to&#39;, &#39;do&#39;, &#39;this&#39;, &#39;with&#39;, &#39;just&#39;, &#39;rvest&#39;, &#39;and&#39;, &#39;the&#39;, &#39;predictability&#39;, &#39;of&#39;, &#39;the&#39;, &#39;links&#39;, &#39;for&#39;, &#39;Google&#39;, &#39;translate&#39;, &#39;-&#39;, &#39;but&#39;, &#39;I&#39;, &#39;could&#39;, &#39;not&#39;, &#39;get&#39;, &#39;rvest&#39;, &#39;to&#39;, &#39;pull&#39;, &#39;the&#39;, &#39;right&#39;, &#39;data&#39;, &#39;off&#39;, &#39;the&#39;, &#39;page&#39;, &#39;,&#39;, &#39;so&#39;, &#39;here&#39;, &#39;’s&#39;, &#39;a&#39;, &#39;slightly&#39;, &#39;more&#39;, &#39;difficult&#39;, &#39;approach&#39;, &#39;that&#39;, &#39;appears&#39;, &#39;to&#39;, &#39;work&#39;, &#39;.&#39;, &#39;Happy&#39;, &#39;to&#39;, &#39;hear&#39;, &#39;comments&#39;, &#39;!&#39;, &#39;\n&#39;, &#39;First&#39;, &#39;,&#39;, &#39;load&#39;, &#39;the&#39;, &#39;rvest&#39;, &#39;and&#39;, &#39;RSelenium&#39;, &#39;libraries&#39;, &#39;.&#39;, &#39;I&#39;, &#39;wish&#39;, &#39;I&#39;, &#39;could&#39;, &#39;remember&#39;, &#39;precisely&#39;, &#39;what&#39;, &#39;I&#39;, &#39;did&#39;, &#39;to&#39;, &#39;set&#39;, &#39;up&#39;, &#39;RSelenium&#39;, &#39;but&#39;, &#39;I&#39;, &#39;do&#39;, &#39;n’t&#39;, &#39;:|&#39;, &#39;there&#39;, &#39;are&#39;, &#39;good&#39;, &#39;tutorials&#39;, &#39;out&#39;, &#39;there&#39;, &#39;if&#39;, &#39;you&#39;, &#39;need&#39;, &#39;help&#39;, &#39;with&#39;, &#39;setting&#39;, &#39;it&#39;, &#39;up&#39;, &#39;.&#39;, &#39;\n&#39;, &#39;library(rvest&#39;, &#39;)&#39;, &#39;\n&#39;, &#39;#&#39;, &#39;#&#39;, &#39;Loading&#39;, &#39;required&#39;, &#39;package&#39;, &#39;:&#39;, &#39;xml2&#39;, &#39;\n&#39;, &#39;library(RSelenium&#39;, &#39;)&#39;, &#39;\n&#39;, &#39;Next&#39;, &#39;,&#39;, &#39;put&#39;, &#39;in&#39;, &#39;the&#39;, &#39;text&#39;, &#39;you&#39;, &#39;would&#39;, &#39;like&#39;, &#39;to&#39;, &#39;translate&#39;, &#39;:&#39;, &#39;\n&#39;, &#39;#&#39;, &#39;#&#39;, &#39;words&#39;, &#39;\n&#39;, &#39;words_translate&#39;, &#39;&lt;&#39;, &#39;-&#39;, &#39;c(&quot;hebben&#39;, &#39;deze&#39;, &#39;van&#39;, &#39;door&#39;, &#39;heet&#39;, &#39;woord&#39;, &#39;maar&#39;, &#39;wat&#39;, &#39;sommige&#39;, &#39;&quot;&#39;, &#39;)&#39;, &#39;\n&#39;, &#39;This&#39;, &#39;next&#39;, &#39;part&#39;, &#39;controls&#39;, &#39;the&#39;, &#39;browser&#39;, &#39;:&#39;, &#39;\n\n&#39;, &#39;rsDriver&#39;, &#39;tells&#39;, &#39;you&#39;, &#39;what&#39;, &#39;browser&#39;, &#39;to&#39;, &#39;control&#39;, &#39;/&#39;, &#39;open&#39;, &#39;and&#39;, &#39;gets&#39;, &#39;the&#39;, &#39;session&#39;, &#39;started&#39;, &#39;.&#39;, &#39;If&#39;, &#39;you&#39;, &#39;get&#39;, &#39;an&#39;, &#39;error&#39;, &#39;that&#39;, &#39;there&#39;, &#39;’s&#39;, &#39;already&#39;, &#39;something&#39;, &#39;open&#39;, &#39;on&#39;, &#39;that&#39;, &#39;port&#39;, &#39;,&#39;, &#39;run&#39;, &#39;rD[[&quot;server&quot;]]$stop&#39;, &#39;(&#39;, &#39;)&#39;, &#39;to&#39;, &#39;stop&#39;, &#39;the&#39;, &#39;session&#39;, &#39;and&#39;, &#39;try&#39;, &#39;again&#39;, &#39;.&#39;, &#39;\n&#39;, &#39;The&#39;, &#39;second&#39;, &#39;line&#39;, &#39;sets&#39;, &#39;up&#39;, &#39;you&#39;, &#39;at&#39;, &#39;the&#39;, &#39;client&#39;, &#39;for&#39;, &#39;controlling&#39;, &#39;the&#39;, &#39;session&#39;, &#39;.&#39;, &#39;\n&#39;, &#39;$&#39;, &#39;navigate&#39;, &#39;is&#39;, &#39;exactly&#39;, &#39;how&#39;, &#39;it&#39;, &#39;sounds&#39;, &#39;,&#39;, &#39;go&#39;, &#39;to&#39;, &#39;this&#39;, &#39;page&#39;, &#39;.&#39;, &#39;\n&#39;, &#39;When&#39;, &#39;you&#39;, &#39;run&#39;, &#39;these&#39;, &#39;,&#39;, &#39;you&#39;, &#39;will&#39;, &#39;see&#39;, &#39;a&#39;, &#39;browser&#39;, &#39;open&#39;, &#39;,&#39;, &#39;then&#39;, &#39;go&#39;, &#39;to&#39;, &#39;the&#39;, &#39;Google&#39;, &#39;page&#39;, &#39;.&#39;, &#39;\n\n&#39;, &#39;#&#39;, &#39;#&#39;, &#39;an&#39;, &#39;example&#39;, &#39;to&#39;, &#39;show&#39;, &#39;you&#39;, &#39;what&#39;, &quot;&#39;s&quot;, &#39;happening&#39;, &#39;\n&#39;, &#39;rD&#39;, &#39;&lt;&#39;, &#39;-&#39;, &#39;rsDriver(browser&#39;, &#39;=&#39;, &#39;&quot;&#39;, &#39;firefox&#39;, &#39;&quot;&#39;, &#39;)&#39;, &#39;\n&#39;, &#39;remDr&#39;, &#39;&lt;&#39;, &#39;-&#39;, &#39;rD[[&quot;client&#39;, &#39;&quot;&#39;, &#39;]&#39;, &#39;]&#39;, &#39;\n&#39;, &#39;remDr$navigate(&quot;https://translate&#39;, &#39;.&#39;, &#39;Google.com/&#39;, &#39;&quot;&#39;, &#39;)&#39;, &#39;\n&#39;, &#39;Once&#39;, &#39;you&#39;, &#39;get&#39;, &#39;the&#39;, &#39;page&#39;, &#39;open&#39;, &#39;,&#39;, &#39;this&#39;, &#39;part&#39;, &#39;is&#39;, &#39;a&#39;, &#39;bit&#39;, &#39;harder&#39;, &#39;.&#39;, &#39;You&#39;, &#39;have&#39;, &#39;to&#39;, &#39;figure&#39;, &#39;out&#39;, &#39;the&#39;, &#39;area&#39;, &#39;of&#39;, &#39;the&#39;, &#39;page&#39;, &#39;you&#39;, &#39;want&#39;, &#39;to&#39;, &#39;control&#39;, &#39;.&#39;, &#39;I&#39;, &#39;have&#39;, &#39;used&#39;, &#39;the&#39;, &#39;SelectorGadget&#39;, &#39;plugin&#39;, &#39;for&#39;, &#39;this&#39;, &#39;,&#39;, &#39;as&#39;, &#39;well&#39;, &#39;as&#39;, &#39;right&#39;, &#39;clicking&#39;, &#39;-&#39;, &#39;&gt;&#39;, &#39;inspect&#39;, &#39;element&#39;, &#39;to&#39;, &#39;find&#39;, &#39;the&#39;, &#39;right&#39;, &#39;class&#39;, &#39;ids&#39;, &#39;and&#39;, &#39;also&#39;, &#39;just&#39;, &#39;View&#39;, &#39;Page&#39;, &#39;Source&#39;, &#39;because&#39;, &#39;I&#39;, &#39;understand&#39;, &#39;html&#39;, &#39;.&#39;, &#39;You&#39;, &#39;should&#39;, &#39;start&#39;, &#39;with&#39;, &#39;SelectorGadget&#39;, &#39;if&#39;, &#39;you&#39;, &#39;are&#39;, &#39;n’t&#39;, &#39;familiar&#39;, &#39;with&#39;, &#39;html&#39;, &#39;and&#39;, &#39;css&#39;, &#39;.&#39;, &#39;\n\n&#39;, &#39;$&#39;, &#39;findElement&#39;, &#39;finds&#39;, &#39;a&#39;, &#39;specific&#39;, &#39;area&#39;, &#39;of&#39;, &#39;the&#39;, &#39;page&#39;, &#39;.&#39;, &#39;\n&#39;, &#39;$&#39;, &#39;sendKeysToElement&#39;, &#39;sends&#39;, &#39;text&#39;, &#39;to&#39;, &#39;the&#39;, &#39;area&#39;, &#39;of&#39;, &#39;the&#39;, &#39;page&#39;, &#39;you&#39;, &#39;found&#39;, &#39;.&#39;, &#39;You&#39;, &#39;can&#39;, &#39;also&#39;, &#39;do&#39;, &#39;things&#39;, &#39;like&#39;, &#39;clickElement&#39;, &#39;to&#39;, &#39;click&#39;, &#39;on&#39;, &#39;a&#39;, &#39;certain&#39;, &#39;area&#39;, &#39;of&#39;, &#39;the&#39;, &#39;page&#39;, &#39;.&#39;, &#39;Note&#39;, &#39;that&#39;, &#39;the&#39;, &#39;\\uE007&#39;, &#39;is&#39;, &#39;the&#39;, &#39;Enter&#39;, &#39;key&#39;, &#39;.&#39;, &#39;So&#39;, &#39;,&#39;, &#39;we&#39;, &#39;are&#39;, &#39;filling&#39;, &#39;in&#39;, &#39;our&#39;, &#39;words&#39;, &#39;we&#39;, &#39;want&#39;, &#39;and&#39;, &#39;hitting&#39;, &#39;enter&#39;, &#39;.&#39;, &#39;\n&#39;, &#39;$&#39;, &#39;getPageSource&#39;, &#39;gets&#39;, &#39;the&#39;, &#39;page&#39;, &#39;source&#39;, &#39;-&#39;, &#39;rvest&#39;, &#39;has&#39;, &#39;read_html&#39;, &#39;but&#39;, &#39;I&#39;, &#39;could&#39;, &#39;not&#39;, &#39;get&#39;, &#39;that&#39;, &#39;to&#39;]</code></pre>
 </div>
 <div id="removing-symbols" class="slide section level2">
@@ -1327,25 +1324,25 @@ Erin M. Buchanan
 <li>The <code>iconv</code> base R function is also recommend, if you just want to strip them out.</li>
 <li><code>stringi</code> appears to have a good replacement function.</li>
 </ul>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1"></a><span class="co">##r chunk</span></span>
-<span id="cb126-2"><a href="#cb126-2"></a>characters =<span class="st"> &quot;éáö&quot;</span></span>
-<span id="cb126-3"><a href="#cb126-3"></a></span>
-<span id="cb126-4"><a href="#cb126-4"></a><span class="kw">library</span>(stringi)</span>
-<span id="cb126-5"><a href="#cb126-5"></a></span>
-<span id="cb126-6"><a href="#cb126-6"></a><span class="kw">stri_trans_general</span>(<span class="dt">str =</span> characters,</span>
-<span id="cb126-7"><a href="#cb126-7"></a>                   <span class="dt">id =</span> <span class="st">&quot;Latin-ASCII&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1"></a><span class="co">##r chunk</span></span>
+<span id="cb121-2"><a href="#cb121-2"></a>characters =<span class="st"> &quot;éáö&quot;</span></span>
+<span id="cb121-3"><a href="#cb121-3"></a></span>
+<span id="cb121-4"><a href="#cb121-4"></a><span class="kw">library</span>(stringi)</span>
+<span id="cb121-5"><a href="#cb121-5"></a></span>
+<span id="cb121-6"><a href="#cb121-6"></a><span class="kw">stri_trans_general</span>(<span class="dt">str =</span> characters,</span>
+<span id="cb121-7"><a href="#cb121-7"></a>                   <span class="dt">id =</span> <span class="st">&quot;Latin-ASCII&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;eao&quot;</code></pre>
 </div>
 <div id="removing-symbols-1" class="slide section level2">
 <h1>Removing symbols</h1>
-<div class="sourceCode" id="cb128"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1"></a><span class="co">##python chunk</span></span>
-<span id="cb128-2"><a href="#cb128-2"></a><span class="im">import</span> unicodedata</span>
-<span id="cb128-3"><a href="#cb128-3"></a></span>
-<span id="cb128-4"><a href="#cb128-4"></a><span class="kw">def</span> remove_accented_chars(text):</span>
-<span id="cb128-5"><a href="#cb128-5"></a>  text <span class="op">=</span> unicodedata.normalize(<span class="st">&#39;NFKD&#39;</span>, text).encode(<span class="st">&#39;ascii&#39;</span>, <span class="st">&#39;ignore&#39;</span>).decode(<span class="st">&#39;utf-8&#39;</span>, <span class="st">&#39;ignore&#39;</span>)</span>
-<span id="cb128-6"><a href="#cb128-6"></a>  <span class="cf">return</span> text</span>
-<span id="cb128-7"><a href="#cb128-7"></a></span>
-<span id="cb128-8"><a href="#cb128-8"></a>remove_accented_chars(r.characters)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb123-1"><a href="#cb123-1"></a><span class="co">##python chunk</span></span>
+<span id="cb123-2"><a href="#cb123-2"></a><span class="im">import</span> unicodedata</span>
+<span id="cb123-3"><a href="#cb123-3"></a></span>
+<span id="cb123-4"><a href="#cb123-4"></a><span class="kw">def</span> remove_accented_chars(text):</span>
+<span id="cb123-5"><a href="#cb123-5"></a>  text <span class="op">=</span> unicodedata.normalize(<span class="st">&#39;NFKD&#39;</span>, text).encode(<span class="st">&#39;ascii&#39;</span>, <span class="st">&#39;ignore&#39;</span>).decode(<span class="st">&#39;utf-8&#39;</span>, <span class="st">&#39;ignore&#39;</span>)</span>
+<span id="cb123-6"><a href="#cb123-6"></a>  <span class="cf">return</span> text</span>
+<span id="cb123-7"><a href="#cb123-7"></a></span>
+<span id="cb123-8"><a href="#cb123-8"></a>remove_accented_chars(r.characters)</span></code></pre></div>
 <pre><code>## &#39;eao&#39;</code></pre>
 </div>
 <div id="contractions" class="slide section level2">
@@ -1361,30 +1358,30 @@ Erin M. Buchanan
 </div>
 <div id="contractions-1" class="slide section level2">
 <h1>Contractions</h1>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1"></a><span class="co">##r chunk</span></span>
-<span id="cb130-2"><a href="#cb130-2"></a><span class="kw">library</span>(textclean)</span></code></pre></div>
-<pre><code>## Warning: package &#39;textclean&#39; was built under R version 4.0.3</code></pre>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1"></a>clean_text =<span class="st"> </span><span class="kw">str_replace_all</span>(clean_text, </span>
-<span id="cb132-2"><a href="#cb132-2"></a>                        <span class="dt">pattern =</span> <span class="st">&quot;’&quot;</span>, </span>
-<span id="cb132-3"><a href="#cb132-3"></a>                        <span class="dt">replacement =</span> <span class="st">&quot;&#39;&quot;</span>)</span>
-<span id="cb132-4"><a href="#cb132-4"></a></span>
-<span id="cb132-5"><a href="#cb132-5"></a><span class="kw">replace_contraction</span>(clean_text, </span>
-<span id="cb132-6"><a href="#cb132-6"></a>                    <span class="dt">contraction.key =</span> lexicon<span class="op">::</span>key_contractions, <span class="co">#default</span></span>
-<span id="cb132-7"><a href="#cb132-7"></a>                    <span class="dt">ignore.case =</span> T) <span class="co">#default</span></span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1"></a><span class="co">##r chunk</span></span>
+<span id="cb125-2"><a href="#cb125-2"></a><span class="kw">library</span>(textclean)</span>
+<span id="cb125-3"><a href="#cb125-3"></a></span>
+<span id="cb125-4"><a href="#cb125-4"></a>clean_text =<span class="st"> </span><span class="kw">str_replace_all</span>(clean_text, </span>
+<span id="cb125-5"><a href="#cb125-5"></a>                        <span class="dt">pattern =</span> <span class="st">&quot;’&quot;</span>, </span>
+<span id="cb125-6"><a href="#cb125-6"></a>                        <span class="dt">replacement =</span> <span class="st">&quot;&#39;&quot;</span>)</span>
+<span id="cb125-7"><a href="#cb125-7"></a></span>
+<span id="cb125-8"><a href="#cb125-8"></a><span class="kw">replace_contraction</span>(clean_text, </span>
+<span id="cb125-9"><a href="#cb125-9"></a>                    <span class="dt">contraction.key =</span> lexicon<span class="op">::</span>key_contractions, <span class="co">#default</span></span>
+<span id="cb125-10"><a href="#cb125-10"></a>                    <span class="dt">ignore.case =</span> T) <span class="co">#default</span></span></code></pre></div>
 <pre><code>## [1] &quot;In this guide, I will go over how you can use web scraping rvest and Selenium to get translations from Google Translate. Note: I encourage responsible scraping - I always try to do it with some space between requests. You can only do 5000 characters at a time with the free Google translate. I will say that I tried to do this with just rvest and the predictability of the links for Google translate - but I could not get rvest to pull the right data off the page, so here&#39;s a slightly more difficult approach that appears to work. Happy to hear comments!\nFirst, load the rvest and RSelenium libraries. I wish I could remember precisely what I did to set up RSelenium but I do not :| there are good tutorials out there if you need help with setting it up.\nlibrary(rvest)\n## Loading required package: xml2\nlibrary(RSelenium)\nNext, put in the text you would like to translate:\n##words\nwords_translate &lt;- c(\&quot;hebben deze van door heet woord maar wat sommige\&quot;)\nThis next part controls the browser:\nrsDriver tells you what browser to control/open and gets the session started. If you get an error that there is already something open on that port, run rD[[\&quot;server\&quot;]]$stop() to stop the session and try again.\nThe second line sets up you at the client for controlling the session.\n$navigate is exactly how it sounds, go to this page.\nWhen you run these, you will see a browser open, then go to the Google page.\n##an example to show you what is happening\nrD &lt;- rsDriver(browser = \&quot;firefox\&quot;)\nremDr &lt;- rD[[\&quot;client\&quot;]]\nremDr$navigate(\&quot;https://translate.Google.com/\&quot;)\nOnce you get the page open, this part is a bit harder. You have to figure out the area of the page you want to control. I have used the SelectorGadget plugin for this, as well as right clicking -&gt; inspect element to find the right class ids and also just View Page Source because I understand html. You should start with SelectorGadget if you are not familiar with html and css.\n$findElement finds a specific area of the page.\n$sendKeysToElement sends text to the area of the page you found. You can also do things like clickElement to click on a certain area of the page. Note that the \\uE007 is the Enter key. So, we are filling in our words we want and hitting enter.\n$getPageSource gets the page source - rvest has read_html but I could not get that to find all the right information to get the translated text back.\nwebElem &lt;- remDr$findElement(using = \&quot;class name\&quot;,\&quot;goog-textarea\&quot;)\nwebElem$sendKeysToElement(list(words_translate, \&quot;\\uE007\&quot;))\n\nwebpage &lt;-remDr$getPageSource()\nNext, you need to translate the page source into something usable. I will say that in theory, html_nodes allows you to specify a specific class id you are looking for (that is the result-shield stuff), but I could not get that to work. So, I grabbed the text, the class codes, slapped them together, and then sorted it out.\n#load dplyr\nlibrary(dplyr, quietly = T)\n\n#get all the text\nanswers &lt;- webpage %&gt;% #your webpage\n  unlist() %&gt;% #unlist, as it saves as a list\n  read_html() %&gt;% #read the html \n  html_nodes(\&quot;div\&quot;) %&gt;% #grab all the divs\n  html_text() #get the text from those divs\n\n#get the class names\nclass_names &lt;- webpage %&gt;% \n  unlist() %&gt;% \n  read_html() %&gt;% \n  html_nodes(\&quot;div\&quot;) %&gt;% \n  html_attrs() %&gt;% #get the attributes, that is the class codes \n  sapply(function(x) x[1]) #just the first one is good\n\n#get the answer that has this class code\nanswers[class_names == \&quot;result-shield-container tlid-copy-target\&quot;][1]\n## [1] \&quot;have this van by hot word but some\&quot;\nNow we have the translation of some top Dutch words. You could loop over a set of translations you want to do, storing them in a data frame, tibble, list, etc. I would recommend a Sys.sleep() between loops to just not make the website angry. I usually use something like Sys.sleep(runif(1,0,5)) to get a random sleep time between 0 and 5 seconds.\nWhen you are done be sure to close the remote session/connection:\n#close the browser \nremDr$close()\n# stop the selenium server\nrD[[\&quot;server\&quot;]]$stop()\nThe nice thing about this set up is that you could pull the automatic translation here, and then “click” on a different translation using Selenium - you just would have to figure out where to click on the page. I find myself doing a lot of trial and error for clicks, so just play around it with until it clicks where you want.\nEnjoy!&quot;</code></pre>
 </div>
 <div id="contractions-2" class="slide section level2">
 <h1>Contractions</h1>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1"></a><span class="co">##r chunk</span></span>
-<span id="cb134-2"><a href="#cb134-2"></a><span class="co">#py_install(&quot;contractions&quot;, pip = T)</span></span></code></pre></div>
-<div class="sourceCode" id="cb135"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb135-1"><a href="#cb135-1"></a><span class="co">##python chunk</span></span>
-<span id="cb135-2"><a href="#cb135-2"></a><span class="im">import</span> contractions</span>
-<span id="cb135-3"><a href="#cb135-3"></a></span>
-<span id="cb135-4"><a href="#cb135-4"></a>contractions.fix(clean_text)</span>
-<span id="cb135-5"><a href="#cb135-5"></a></span>
-<span id="cb135-6"><a href="#cb135-6"></a><span class="co">#from contractions import contractions_dict</span></span>
-<span id="cb135-7"><a href="#cb135-7"></a><span class="co">#for contraction, expansion in contractions_dict.items():</span></span>
-<span id="cb135-8"><a href="#cb135-8"></a><span class="co">#  clean_text = clean_text.replace(contraction, expansion)</span></span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1"></a><span class="co">##r chunk</span></span>
+<span id="cb127-2"><a href="#cb127-2"></a><span class="co">#py_install(&quot;contractions&quot;, pip = T)</span></span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1"></a><span class="co">##python chunk</span></span>
+<span id="cb128-2"><a href="#cb128-2"></a><span class="im">import</span> contractions</span>
+<span id="cb128-3"><a href="#cb128-3"></a></span>
+<span id="cb128-4"><a href="#cb128-4"></a>contractions.fix(clean_text)</span>
+<span id="cb128-5"><a href="#cb128-5"></a></span>
+<span id="cb128-6"><a href="#cb128-6"></a><span class="co">#from contractions import contractions_dict</span></span>
+<span id="cb128-7"><a href="#cb128-7"></a><span class="co">#for contraction, expansion in contractions_dict.items():</span></span>
+<span id="cb128-8"><a href="#cb128-8"></a><span class="co">#  clean_text = clean_text.replace(contraction, expansion)</span></span></code></pre></div>
 <pre><code>## &#39;In this guide, I will go over how you can use web scraping rvest and Selenium to get translations from Google Translate. Note: I encourage responsible scraping - I always try to do it with some space between requests. You can only do 5000 characters at a time with the free Google translate. I will say that I tried to do this with just rvest and the predictability of the links for Google translate - but I could not get rvest to pull the right data off the page, so here’s a slightly more difficult approach that appears to work. Happy to hear comments!\nFirst, load the rvest and RSelenium libraries. I wish I could remember precisely what I did to set up RSelenium but I do not :| there are good tutorials out there if you need help with setting it up.\nlibrary(rvest)\n## Loading required package: xml2\nlibrary(RSelenium)\nNext, put in the text you would like to translate:\n##words\nwords_translate &lt;- c(&quot;hebben deze van door heet woord maar wat sommige&quot;)\nThis next part controls the browser:\n\nrsDriver tells you what browser to control/open and gets the session started. If you get an error that there is already something open on that port, run rD[[&quot;server&quot;]]$stop() to stop the session and try again.\nThe second line sets up you at the client for controlling the session.\n$navigate is exactly how it sounds, go to this page.\nWhen you run these, you will see a browser open, then go to the Google page.\n\n##an example to show you what is happening\nrD &lt;- rsDriver(browser = &quot;firefox&quot;)\nremDr &lt;- rD[[&quot;client&quot;]]\nremDr$navigate(&quot;https://translate.Google.com/&quot;)\nOnce you get the page open, this part is a bit harder. You have to figure out the area of the page you want to control. I have used the SelectorGadget plugin for this, as well as right clicking -&gt; inspect element to find the right class ids and also just View Page Source because I understand html. You should start with SelectorGadget if you are not familiar with html and css.\n\n$findElement finds a specific area of the page.\n$sendKeysToElement sends text to the area of the page you found. You can also do things like clickElement to click on a certain area of the page. Note that the \\uE007 is the Enter key. So, we are filling in our words we want and hitting enter.\n$getPageSource gets the page source - rvest has read_html but I could not get that to find all the right information to get the translated text back.\n\nwebElem &lt;- remDr$findElement(using = &quot;class name&quot;,&quot;goog-textarea&quot;)\nwebElem$sendKeysToElement(list(words_translate, &quot;\\uE007&quot;))\n\nwebpage &lt;-remDr$getPageSource()\nNext, you need to translate the page source into something usable. I will say that in theory, html_nodes allows you to specify a specific class id you are looking for (that is the result-shield stuff), but I could not get that to work. So, I grabbed the text, the class codes, slapped them together, and then sorted it out.\n#load dplyr\nlibrary(dplyr, quietly = T)\n\n#get all the text\nanswers &lt;- webpage %&gt;% #your webpage\n  unlist() %&gt;% #unlist, as it saves as a list\n  read_html() %&gt;% #read the html \n  html_nodes(&quot;div&quot;) %&gt;% #grab all the divs\n  html_text() #get the text from those divs\n\n#get the class names\nclass_names &lt;- webpage %&gt;% \n  unlist() %&gt;% \n  read_html() %&gt;% \n  html_nodes(&quot;div&quot;) %&gt;% \n  html_attrs() %&gt;% #get the attributes, that is the class codes \n  sapply(function(x) x[1]) #just the first one is good\n\n#get the answer that has this class code\nanswers[class_names == &quot;result-shield-container tlid-copy-target&quot;][1]\n## [1] &quot;have this van by hot word but some&quot;\nNow we have the translation of some top Dutch words. You could loop over a set of translations you want to do, storing them in a data frame, tibble, list, etc. I would recommend a Sys.sleep() between loops to just not make the website angry. I usually use something like Sys.sleep(runif(1,0,5)) to get a random sleep time between 0 and 5 seconds.\nWhen you are done be sure to close the remote session/connection:\n#close the browser \nremDr$close()\n# stop the selenium server\nrD[[&quot;server&quot;]]$stop()\nThe nice thing about this set up is that you could pull the automatic translation here, and then “click” on a different translation using Selenium - you just would have to figure out where to click on the page. I find myself doing a lot of trial and error for clicks, so just play around it with until it clicks where you want.\nEnjoy!\n\ntext processing\xa0\n            \n              rstudio\xa0\n            \n              how-to\xa0\n            \n              github\xa0\n            \n              guides\xa0\n            \n          \n\n\n\n← Previous Post\n\n\nNext Post →\n\n\n\n\n\nPlease enable JavaScript to view the comments powered by Disqus.\ncomments powered by Disqus\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\naggieerin.com\n            \n          \n\n          \xa0•\xa0©\n          \n            2020\n          \n\n          \n            \xa0•\xa0\n            Dr. Erin Buchanan\n\n\nHugo v0.74.1 powered \xa0•\xa0 Theme Beautiful Hugo adapted from Beautiful Jekyll\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&#39;</code></pre>
 </div>
 <div id="correcting-text" class="slide section level2">
@@ -1401,13 +1398,13 @@ Erin M. Buchanan
 <div id="repeated-characters" class="slide section level2">
 <h1>Repeated characters</h1>
 <p>Regex to the rescue!</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1"></a><span class="co">##r chunk</span></span>
-<span id="cb137-2"><a href="#cb137-2"></a>long_text =<span class="st"> &quot;finallllyyyyyy&quot;</span></span>
-<span id="cb137-3"><a href="#cb137-3"></a><span class="kw">str_replace_all</span>(long_text, <span class="dt">pattern =</span> <span class="st">&quot;([[:alpha:]])</span><span class="ch">\\</span><span class="st">1+&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1"></a><span class="co">##r chunk</span></span>
+<span id="cb130-2"><a href="#cb130-2"></a>long_text =<span class="st"> &quot;finallllyyyyyy&quot;</span></span>
+<span id="cb130-3"><a href="#cb130-3"></a><span class="kw">str_replace_all</span>(long_text, <span class="dt">pattern =</span> <span class="st">&quot;([[:alpha:]])</span><span class="ch">\\</span><span class="st">1+&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;finaly&quot;</code></pre>
-<div class="sourceCode" id="cb139"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb139-1"><a href="#cb139-1"></a><span class="co">##python chunk</span></span>
-<span id="cb139-2"><a href="#cb139-2"></a>long_text <span class="op">=</span> <span class="st">&quot;finallllyyyyyy&quot;</span></span>
-<span id="cb139-3"><a href="#cb139-3"></a>re.sub(<span class="vs">r&quot;(\w)\1+&quot;</span>,<span class="vs">r&quot;\1&quot;</span>, long_text)</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb132-1"><a href="#cb132-1"></a><span class="co">##python chunk</span></span>
+<span id="cb132-2"><a href="#cb132-2"></a>long_text <span class="op">=</span> <span class="st">&quot;finallllyyyyyy&quot;</span></span>
+<span id="cb132-3"><a href="#cb132-3"></a>re.sub(<span class="vs">r&quot;(\w)\1+&quot;</span>,<span class="vs">r&quot;\1&quot;</span>, long_text)</span></code></pre></div>
 <pre><code>## &#39;finaly&#39;</code></pre>
 </div>
 <div id="spelling" class="slide section level2">
@@ -1416,36 +1413,36 @@ Erin M. Buchanan
 <li>Spelling options vary based on packages and options</li>
 <li>Definitely check what spelling options are being suggested!</li>
 </ul>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1"></a><span class="co">##r chunk</span></span>
-<span id="cb141-2"><a href="#cb141-2"></a><span class="kw">library</span>(hunspell)</span></code></pre></div>
-<pre><code>## Warning: package &#39;hunspell&#39; was built under R version 4.0.3</code></pre>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1"></a>wordlist =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;thse&quot;</span>, <span class="st">&quot;wods&quot;</span>, <span class="st">&quot;mispelled&quot;</span>)</span>
-<span id="cb143-2"><a href="#cb143-2"></a></span>
-<span id="cb143-3"><a href="#cb143-3"></a><span class="co"># Spell check the words</span></span>
-<span id="cb143-4"><a href="#cb143-4"></a>spelling.errors &lt;-<span class="st"> </span><span class="kw">hunspell</span>(wordlist)</span>
-<span id="cb143-5"><a href="#cb143-5"></a>spelling.sugg &lt;-<span class="st"> </span><span class="kw">hunspell_suggest</span>(<span class="kw">unique</span>(<span class="kw">unlist</span>(spelling.errors)), <span class="dt">dict =</span> <span class="kw">dictionary</span>(<span class="st">&quot;en_US&quot;</span>))</span>
-<span id="cb143-6"><a href="#cb143-6"></a></span>
-<span id="cb143-7"><a href="#cb143-7"></a><span class="co"># Pick the first suggestion</span></span>
-<span id="cb143-8"><a href="#cb143-8"></a>spelling.sugg &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(spelling.sugg, <span class="cf">function</span>(x) x[<span class="dv">1</span>]))</span>
-<span id="cb143-9"><a href="#cb143-9"></a>spelling.dict &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">cbind</span>(<span class="dt">spelling.errors =</span> <span class="kw">unique</span>(<span class="kw">unlist</span>(spelling.errors)),spelling.sugg))</span>
-<span id="cb143-10"><a href="#cb143-10"></a>spelling.dict<span class="op">$</span>spelling.pattern &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">b&quot;</span>, spelling.dict<span class="op">$</span>spelling.errors, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b&quot;</span>)</span>
-<span id="cb143-11"><a href="#cb143-11"></a></span>
-<span id="cb143-12"><a href="#cb143-12"></a><span class="co">#Replace the words </span></span>
-<span id="cb143-13"><a href="#cb143-13"></a><span class="kw">stri_replace_all_regex</span>(<span class="dt">str =</span> wordlist,</span>
-<span id="cb143-14"><a href="#cb143-14"></a>                       <span class="dt">pattern =</span> spelling.dict<span class="op">$</span>spelling.pattern,</span>
-<span id="cb143-15"><a href="#cb143-15"></a>                       <span class="dt">replacement =</span> spelling.dict<span class="op">$</span>spelling.sugg,</span>
-<span id="cb143-16"><a href="#cb143-16"></a>                       <span class="dt">vectorize_all =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1"></a><span class="co">##r chunk</span></span>
+<span id="cb134-2"><a href="#cb134-2"></a><span class="kw">library</span>(hunspell)</span>
+<span id="cb134-3"><a href="#cb134-3"></a></span>
+<span id="cb134-4"><a href="#cb134-4"></a>wordlist =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;thse&quot;</span>, <span class="st">&quot;wods&quot;</span>, <span class="st">&quot;mispelled&quot;</span>)</span>
+<span id="cb134-5"><a href="#cb134-5"></a></span>
+<span id="cb134-6"><a href="#cb134-6"></a><span class="co"># Spell check the words</span></span>
+<span id="cb134-7"><a href="#cb134-7"></a>spelling.errors &lt;-<span class="st"> </span><span class="kw">hunspell</span>(wordlist)</span>
+<span id="cb134-8"><a href="#cb134-8"></a>spelling.sugg &lt;-<span class="st"> </span><span class="kw">hunspell_suggest</span>(<span class="kw">unique</span>(<span class="kw">unlist</span>(spelling.errors)), <span class="dt">dict =</span> <span class="kw">dictionary</span>(<span class="st">&quot;en_US&quot;</span>))</span>
+<span id="cb134-9"><a href="#cb134-9"></a></span>
+<span id="cb134-10"><a href="#cb134-10"></a><span class="co"># Pick the first suggestion</span></span>
+<span id="cb134-11"><a href="#cb134-11"></a>spelling.sugg &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(spelling.sugg, <span class="cf">function</span>(x) x[<span class="dv">1</span>]))</span>
+<span id="cb134-12"><a href="#cb134-12"></a>spelling.dict &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">cbind</span>(<span class="dt">spelling.errors =</span> <span class="kw">unique</span>(<span class="kw">unlist</span>(spelling.errors)),spelling.sugg))</span>
+<span id="cb134-13"><a href="#cb134-13"></a>spelling.dict<span class="op">$</span>spelling.pattern &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">b&quot;</span>, spelling.dict<span class="op">$</span>spelling.errors, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b&quot;</span>)</span>
+<span id="cb134-14"><a href="#cb134-14"></a></span>
+<span id="cb134-15"><a href="#cb134-15"></a><span class="co">#Replace the words </span></span>
+<span id="cb134-16"><a href="#cb134-16"></a><span class="kw">stri_replace_all_regex</span>(<span class="dt">str =</span> wordlist,</span>
+<span id="cb134-17"><a href="#cb134-17"></a>                       <span class="dt">pattern =</span> spelling.dict<span class="op">$</span>spelling.pattern,</span>
+<span id="cb134-18"><a href="#cb134-18"></a>                       <span class="dt">replacement =</span> spelling.dict<span class="op">$</span>spelling.sugg,</span>
+<span id="cb134-19"><a href="#cb134-19"></a>                       <span class="dt">vectorize_all =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;the&quot;        &quot;words&quot;      &quot;misspelled&quot;</code></pre>
 </div>
 <div id="spelling-1" class="slide section level2">
 <h1>Spelling</h1>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1"></a><span class="co">##r chunk</span></span>
-<span id="cb145-2"><a href="#cb145-2"></a><span class="co">#py_install(&quot;textblob&quot;)</span></span></code></pre></div>
-<div class="sourceCode" id="cb146"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb146-1"><a href="#cb146-1"></a><span class="co">##python chunk</span></span>
-<span id="cb146-2"><a href="#cb146-2"></a><span class="im">from</span> textblob <span class="im">import</span> Word</span>
-<span id="cb146-3"><a href="#cb146-3"></a>wordlist <span class="op">=</span> [<span class="st">&quot;thse&quot;</span>, <span class="st">&quot;wods&quot;</span>, <span class="st">&quot;mispelled&quot;</span>]</span>
-<span id="cb146-4"><a href="#cb146-4"></a></span>
-<span id="cb146-5"><a href="#cb146-5"></a>[Word(word).correct() <span class="cf">for</span> word <span class="kw">in</span> wordlist]</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1"></a><span class="co">##r chunk</span></span>
+<span id="cb136-2"><a href="#cb136-2"></a><span class="co">#py_install(&quot;textblob&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb137-1"><a href="#cb137-1"></a><span class="co">##python chunk</span></span>
+<span id="cb137-2"><a href="#cb137-2"></a><span class="im">from</span> textblob <span class="im">import</span> Word</span>
+<span id="cb137-3"><a href="#cb137-3"></a>wordlist <span class="op">=</span> [<span class="st">&quot;thse&quot;</span>, <span class="st">&quot;wods&quot;</span>, <span class="st">&quot;mispelled&quot;</span>]</span>
+<span id="cb137-4"><a href="#cb137-4"></a></span>
+<span id="cb137-5"><a href="#cb137-5"></a>[Word(word).correct() <span class="cf">for</span> word <span class="kw">in</span> wordlist]</span></code></pre></div>
 <pre><code>## [&#39;the&#39;, &#39;words&#39;, &#39;dispelled&#39;]</code></pre>
 </div>
 <div id="stemming" class="slide section level2">
@@ -1463,25 +1460,24 @@ Erin M. Buchanan
 </div>
 <div id="stemming-1" class="slide section level2">
 <h1>Stemming</h1>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1"></a><span class="co">##r chunk</span></span>
-<span id="cb148-2"><a href="#cb148-2"></a>wordlist =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;wings&quot;</span>, <span class="st">&quot;jumped&quot;</span>, <span class="st">&quot;morning&quot;</span>, <span class="st">&quot;reading&quot;</span>)</span>
-<span id="cb148-3"><a href="#cb148-3"></a><span class="kw">library</span>(tm)</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1"></a><span class="co">##r chunk</span></span>
+<span id="cb139-2"><a href="#cb139-2"></a>wordlist =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;wings&quot;</span>, <span class="st">&quot;jumped&quot;</span>, <span class="st">&quot;morning&quot;</span>, <span class="st">&quot;reading&quot;</span>)</span>
+<span id="cb139-3"><a href="#cb139-3"></a><span class="kw">library</span>(tm)</span></code></pre></div>
 <pre><code>## Loading required package: NLP</code></pre>
-<pre><code>## Warning: package &#39;NLP&#39; was built under R version 4.0.3</code></pre>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1"></a><span class="kw">stemDocument</span>(wordlist, <span class="dt">language =</span> <span class="st">&quot;english&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1"></a><span class="kw">stemDocument</span>(wordlist, <span class="dt">language =</span> <span class="st">&quot;english&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;wing&quot; &quot;jump&quot; &quot;morn&quot; &quot;read&quot;</code></pre>
-<div class="sourceCode" id="cb153"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb153-1"><a href="#cb153-1"></a><span class="co">##python chunk</span></span>
-<span id="cb153-2"><a href="#cb153-2"></a>wordlist <span class="op">=</span> [<span class="st">&quot;wings&quot;</span>, <span class="st">&quot;jumped&quot;</span>, <span class="st">&quot;morning&quot;</span>, <span class="st">&quot;reading&quot;</span>]</span>
-<span id="cb153-3"><a href="#cb153-3"></a></span>
-<span id="cb153-4"><a href="#cb153-4"></a><span class="im">from</span> nltk.stem <span class="im">import</span> PorterStemmer </span>
-<span id="cb153-5"><a href="#cb153-5"></a><span class="im">from</span> nltk.stem <span class="im">import</span> LancasterStemmer</span>
-<span id="cb153-6"><a href="#cb153-6"></a></span>
-<span id="cb153-7"><a href="#cb153-7"></a>ps <span class="op">=</span> PorterStemmer()</span>
-<span id="cb153-8"><a href="#cb153-8"></a>ls <span class="op">=</span> LancasterStemmer()</span>
-<span id="cb153-9"><a href="#cb153-9"></a></span>
-<span id="cb153-10"><a href="#cb153-10"></a>[ps.stem(word) <span class="cf">for</span> word <span class="kw">in</span> wordlist]</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb143-1"><a href="#cb143-1"></a><span class="co">##python chunk</span></span>
+<span id="cb143-2"><a href="#cb143-2"></a>wordlist <span class="op">=</span> [<span class="st">&quot;wings&quot;</span>, <span class="st">&quot;jumped&quot;</span>, <span class="st">&quot;morning&quot;</span>, <span class="st">&quot;reading&quot;</span>]</span>
+<span id="cb143-3"><a href="#cb143-3"></a></span>
+<span id="cb143-4"><a href="#cb143-4"></a><span class="im">from</span> nltk.stem <span class="im">import</span> PorterStemmer </span>
+<span id="cb143-5"><a href="#cb143-5"></a><span class="im">from</span> nltk.stem <span class="im">import</span> LancasterStemmer</span>
+<span id="cb143-6"><a href="#cb143-6"></a></span>
+<span id="cb143-7"><a href="#cb143-7"></a>ps <span class="op">=</span> PorterStemmer()</span>
+<span id="cb143-8"><a href="#cb143-8"></a>ls <span class="op">=</span> LancasterStemmer()</span>
+<span id="cb143-9"><a href="#cb143-9"></a></span>
+<span id="cb143-10"><a href="#cb143-10"></a>[ps.stem(word) <span class="cf">for</span> word <span class="kw">in</span> wordlist]</span></code></pre></div>
 <pre><code>## [&#39;wing&#39;, &#39;jump&#39;, &#39;morn&#39;, &#39;read&#39;]</code></pre>
-<div class="sourceCode" id="cb155"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb155-1"><a href="#cb155-1"></a>[ls.stem(word) <span class="cf">for</span> word <span class="kw">in</span> wordlist]</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb145-1"><a href="#cb145-1"></a>[ls.stem(word) <span class="cf">for</span> word <span class="kw">in</span> wordlist]</span></code></pre></div>
 <pre><code>## [&#39;wing&#39;, &#39;jump&#39;, &#39;morn&#39;, &#39;read&#39;]</code></pre>
 </div>
 <div id="lemmatization" class="slide section level2">
@@ -1490,15 +1486,11 @@ Erin M. Buchanan
 <li>The best way to lemmatize in R is certainly not the easiest - as it uses a part of speech mapper and dictionary look up with TreeTagger</li>
 <li>We can probably get by with the simpler functions and check out: <a href="https://cran.r-project.org/web/packages/textstem/README.html" class="uri">https://cran.r-project.org/web/packages/textstem/README.html</a> for more information on using different dictionaries</li>
 </ul>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1"></a><span class="co">##r chunk</span></span>
-<span id="cb157-2"><a href="#cb157-2"></a><span class="kw">library</span>(textstem)</span></code></pre></div>
-<pre><code>## Warning: package &#39;textstem&#39; was built under R version 4.0.3</code></pre>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1"></a><span class="co">##r chunk</span></span>
+<span id="cb147-2"><a href="#cb147-2"></a><span class="kw">library</span>(textstem)</span></code></pre></div>
 <pre><code>## Loading required package: koRpus.lang.en</code></pre>
-<pre><code>## Warning: package &#39;koRpus.lang.en&#39; was built under R version 4.0.3</code></pre>
 <pre><code>## Loading required package: koRpus</code></pre>
-<pre><code>## Warning: package &#39;koRpus&#39; was built under R version 4.0.3</code></pre>
 <pre><code>## Loading required package: sylly</code></pre>
-<pre><code>## Warning: package &#39;sylly&#39; was built under R version 4.0.3</code></pre>
 <pre><code>## For information on available language packages for &#39;koRpus&#39;, run
 ## 
 ##   available.koRpus.lang()
@@ -1509,24 +1501,24 @@ Erin M. Buchanan
 <pre><code>## The following object is masked from &#39;package:tm&#39;:
 ## 
 ##     readTagged</code></pre>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="#cb168-1"></a><span class="kw">lemmatize_words</span>(wordlist)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1"></a><span class="kw">lemmatize_words</span>(wordlist)</span></code></pre></div>
 <pre><code>## [1] &quot;wing&quot;    &quot;jump&quot;    &quot;morning&quot; &quot;read&quot;</code></pre>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1"></a>sentence =<span class="st"> &quot;My system keeps crashing his crashed yesterday, ours crashes daily&quot;</span></span>
-<span id="cb170-2"><a href="#cb170-2"></a><span class="kw">lemmatize_strings</span>(sentence)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1"></a>sentence =<span class="st"> &quot;My system keeps crashing his crashed yesterday, ours crashes daily&quot;</span></span>
+<span id="cb156-2"><a href="#cb156-2"></a><span class="kw">lemmatize_strings</span>(sentence)</span></code></pre></div>
 <pre><code>## [1] &quot;My system keep crash his crash yesterday, ours crash daily&quot;</code></pre>
 </div>
 <div id="lemmatization-1" class="slide section level2">
 <h1>Lemmatization</h1>
-<div class="sourceCode" id="cb172"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb172-1"><a href="#cb172-1"></a><span class="co">##python chunk</span></span>
-<span id="cb172-2"><a href="#cb172-2"></a><span class="co">##remember we imported spacy above</span></span>
-<span id="cb172-3"><a href="#cb172-3"></a>sentence <span class="op">=</span> <span class="st">&quot;My system keeps crashing his crashed yesterday, ours crashes daily&quot;</span></span>
-<span id="cb172-4"><a href="#cb172-4"></a></span>
-<span id="cb172-5"><a href="#cb172-5"></a><span class="kw">def</span> lemmatize_text(text):</span>
-<span id="cb172-6"><a href="#cb172-6"></a>  text <span class="op">=</span> nlp(text)</span>
-<span id="cb172-7"><a href="#cb172-7"></a>  text <span class="op">=</span> <span class="st">&quot; &quot;</span>.join([word.lemma_ <span class="cf">if</span> word.lemma_ <span class="op">!=</span> <span class="st">&quot;-PRON-&quot;</span> <span class="cf">else</span> word.text <span class="cf">for</span> word <span class="kw">in</span> text])</span>
-<span id="cb172-8"><a href="#cb172-8"></a>  <span class="cf">return</span> text</span>
-<span id="cb172-9"><a href="#cb172-9"></a></span>
-<span id="cb172-10"><a href="#cb172-10"></a>lemmatize_text(sentence)</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb158-1"><a href="#cb158-1"></a><span class="co">##python chunk</span></span>
+<span id="cb158-2"><a href="#cb158-2"></a><span class="co">##remember we imported spacy above</span></span>
+<span id="cb158-3"><a href="#cb158-3"></a>sentence <span class="op">=</span> <span class="st">&quot;My system keeps crashing his crashed yesterday, ours crashes daily&quot;</span></span>
+<span id="cb158-4"><a href="#cb158-4"></a></span>
+<span id="cb158-5"><a href="#cb158-5"></a><span class="kw">def</span> lemmatize_text(text):</span>
+<span id="cb158-6"><a href="#cb158-6"></a>  text <span class="op">=</span> nlp(text)</span>
+<span id="cb158-7"><a href="#cb158-7"></a>  text <span class="op">=</span> <span class="st">&quot; &quot;</span>.join([word.lemma_ <span class="cf">if</span> word.lemma_ <span class="op">!=</span> <span class="st">&quot;-PRON-&quot;</span> <span class="cf">else</span> word.text <span class="cf">for</span> word <span class="kw">in</span> text])</span>
+<span id="cb158-8"><a href="#cb158-8"></a>  <span class="cf">return</span> text</span>
+<span id="cb158-9"><a href="#cb158-9"></a></span>
+<span id="cb158-10"><a href="#cb158-10"></a>lemmatize_text(sentence)</span></code></pre></div>
 <pre><code>## &#39;My system keep crash his crash yesterday , ours crash daily&#39;</code></pre>
 </div>
 <div id="stopwords" class="slide section level2">
@@ -1539,10 +1531,10 @@ Erin M. Buchanan
 <li>We usually want to remove them as unnecessary for our analysis</li>
 <li>There are so many ways to do this in R it’s mind boggling, favorite is probably <code>tm</code></li>
 </ul>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1"></a><span class="co">##r chunk</span></span>
-<span id="cb174-2"><a href="#cb174-2"></a><span class="kw">head</span>(tm<span class="op">::</span><span class="kw">stopwords</span>(<span class="dt">kind =</span> <span class="st">&quot;SMART&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1"></a><span class="co">##r chunk</span></span>
+<span id="cb160-2"><a href="#cb160-2"></a><span class="kw">head</span>(tm<span class="op">::</span><span class="kw">stopwords</span>(<span class="dt">kind =</span> <span class="st">&quot;SMART&quot;</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot;         &quot;a&#39;s&quot;       &quot;able&quot;      &quot;about&quot;     &quot;above&quot;     &quot;according&quot;</code></pre>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1"></a><span class="kw">removeWords</span>(sentence, <span class="kw">stopwords</span>(<span class="dt">kind =</span> <span class="st">&quot;SMART&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1"></a><span class="kw">removeWords</span>(sentence, <span class="kw">stopwords</span>(<span class="dt">kind =</span> <span class="st">&quot;SMART&quot;</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;My system  crashing  crashed yesterday,  crashes daily&quot;</code></pre>
 </div>
 <div id="stopwords-1" class="slide section level2">
@@ -1553,12 +1545,12 @@ Erin M. Buchanan
 <li>Give me words in the tokenized sentence, if those words are not in the stopword list</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb178"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb178-1"><a href="#cb178-1"></a><span class="co">##python chunk</span></span>
-<span id="cb178-2"><a href="#cb178-2"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> stopwords</span>
-<span id="cb178-3"><a href="#cb178-3"></a></span>
-<span id="cb178-4"><a href="#cb178-4"></a><span class="bu">set</span>(stopwords.words(<span class="st">&#39;english&#39;</span>))</span></code></pre></div>
-<pre><code>## {&#39;once&#39;, &quot;haven&#39;t&quot;, &quot;that&#39;ll&quot;, &#39;having&#39;, &quot;you&#39;re&quot;, &#39;an&#39;, &#39;by&#39;, &#39;in&#39;, &#39;if&#39;, &#39;m&#39;, &#39;has&#39;, &#39;they&#39;, &quot;hadn&#39;t&quot;, &quot;weren&#39;t&quot;, &#39;not&#39;, &#39;before&#39;, &#39;being&#39;, &#39;she&#39;, &quot;should&#39;ve&quot;, &#39;my&#39;, &#39;couldn&#39;, &#39;didn&#39;, &#39;had&#39;, &quot;she&#39;s&quot;, &quot;you&#39;ve&quot;, &#39;some&#39;, &#39;out&#39;, &#39;wasn&#39;, &#39;most&#39;, &#39;down&#39;, &#39;now&#39;, &#39;mustn&#39;, &#39;from&#39;, &#39;y&#39;, &#39;o&#39;, &#39;of&#39;, &quot;you&#39;ll&quot;, &#39;should&#39;, &#39;his&#39;, &quot;doesn&#39;t&quot;, &#39;were&#39;, &#39;was&#39;, &#39;into&#39;, &#39;who&#39;, &quot;shouldn&#39;t&quot;, &#39;further&#39;, &#39;hers&#39;, &#39;ourselves&#39;, &#39;needn&#39;, &#39;does&#39;, &#39;been&#39;, &#39;wouldn&#39;, &#39;weren&#39;, &#39;him&#39;, &#39;ve&#39;, &#39;very&#39;, &#39;their&#39;, &#39;re&#39;, &#39;can&#39;, &#39;here&#39;, &#39;that&#39;, &#39;themselves&#39;, &#39;don&#39;, &#39;for&#39;, &#39;yourself&#39;, &quot;mustn&#39;t&quot;, &#39;hadn&#39;, &quot;needn&#39;t&quot;, &#39;up&#39;, &#39;under&#39;, &#39;be&#39;, &#39;the&#39;, &#39;aren&#39;, &#39;because&#39;, &#39;do&#39;, &#39;won&#39;, &#39;on&#39;, &#39;only&#39;, &#39;hasn&#39;, &quot;you&#39;d&quot;, &#39;those&#39;, &#39;when&#39;, &#39;over&#39;, &#39;itself&#39;, &#39;doesn&#39;, &#39;myself&#39;, &#39;these&#39;, &#39;he&#39;, &#39;such&#39;, &#39;during&#39;, &#39;what&#39;, &#39;which&#39;, &#39;its&#39;, &#39;your&#39;, &#39;how&#39;, &#39;own&#39;, &#39;between&#39;, &#39;few&#39;, &#39;d&#39;, &#39;just&#39;, &#39;with&#39;, &quot;couldn&#39;t&quot;, &#39;t&#39;, &#39;me&#39;, &#39;ain&#39;, &quot;isn&#39;t&quot;, &#39;as&#39;, &#39;there&#39;, &#39;isn&#39;, &#39;shan&#39;, &#39;have&#39;, &#39;then&#39;, &#39;other&#39;, &#39;above&#39;, &#39;her&#39;, &quot;wouldn&#39;t&quot;, &#39;same&#39;, &#39;doing&#39;, &#39;below&#39;, &#39;haven&#39;, &quot;shan&#39;t&quot;, &#39;ours&#39;, &quot;don&#39;t&quot;, &#39;himself&#39;, &#39;i&#39;, &#39;ma&#39;, &#39;s&#39;, &#39;am&#39;, &#39;against&#39;, &#39;theirs&#39;, &#39;it&#39;, &#39;herself&#39;, &#39;until&#39;, &quot;it&#39;s&quot;, &#39;both&#39;, &#39;whom&#39;, &#39;more&#39;, &#39;yourselves&#39;, &#39;to&#39;, &quot;didn&#39;t&quot;, &#39;each&#39;, &quot;mightn&#39;t&quot;, &#39;you&#39;, &#39;or&#39;, &#39;our&#39;, &#39;while&#39;, &#39;why&#39;, &#39;will&#39;, &#39;through&#39;, &#39;mightn&#39;, &#39;nor&#39;, &#39;but&#39;, &#39;shouldn&#39;, &#39;no&#39;, &#39;yours&#39;, &#39;ll&#39;, &#39;again&#39;, &#39;too&#39;, &#39;are&#39;, &#39;is&#39;, &#39;any&#39;, &#39;off&#39;, &#39;all&#39;, &#39;so&#39;, &#39;we&#39;, &#39;them&#39;, &quot;aren&#39;t&quot;, &#39;a&#39;, &#39;did&#39;, &#39;and&#39;, &#39;at&#39;, &quot;hasn&#39;t&quot;, &#39;about&#39;, &#39;this&#39;, &#39;after&#39;, &quot;won&#39;t&quot;, &quot;wasn&#39;t&quot;, &#39;where&#39;, &#39;than&#39;}</code></pre>
-<div class="sourceCode" id="cb180"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb180-1"><a href="#cb180-1"></a>[word <span class="cf">for</span> word <span class="kw">in</span> nltk.word_tokenize(sentence) <span class="cf">if</span> word <span class="kw">not</span> <span class="kw">in</span> stopwords.words(<span class="st">&#39;english&#39;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb164-1"><a href="#cb164-1"></a><span class="co">##python chunk</span></span>
+<span id="cb164-2"><a href="#cb164-2"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> stopwords</span>
+<span id="cb164-3"><a href="#cb164-3"></a></span>
+<span id="cb164-4"><a href="#cb164-4"></a><span class="bu">set</span>(stopwords.words(<span class="st">&#39;english&#39;</span>))</span></code></pre></div>
+<pre><code>## {&#39;don&#39;, &quot;shouldn&#39;t&quot;, &#39;by&#39;, &#39;will&#39;, &#39;been&#39;, &#39;m&#39;, &#39;ve&#39;, &#39;should&#39;, &#39;down&#39;, &#39;himself&#39;, &#39;again&#39;, &#39;wouldn&#39;, &#39;few&#39;, &#39;once&#39;, &#39;these&#39;, &#39;their&#39;, &#39;myself&#39;, &#39;from&#39;, &#39;our&#39;, &#39;your&#39;, &#39;after&#39;, &#39;she&#39;, &#39;so&#39;, &quot;you&#39;ve&quot;, &#39;my&#39;, &#39;needn&#39;, &#39;for&#39;, &#39;no&#39;, &#39;hers&#39;, &#39;we&#39;, &quot;don&#39;t&quot;, &#39;and&#39;, &#39;only&#39;, &quot;you&#39;re&quot;, &quot;didn&#39;t&quot;, &#39;hasn&#39;, &#39;be&#39;, &#39;under&#39;, &#39;why&#39;, &#39;y&#39;, &#39;me&#39;, &#39;not&#39;, &#39;have&#39;, &#39;shouldn&#39;, &#39;wasn&#39;, &#39;it&#39;, &#39;t&#39;, &#39;between&#39;, &#39;aren&#39;, &#39;here&#39;, &#39;over&#39;, &#39;above&#39;, &#39;what&#39;, &#39;during&#39;, &#39;this&#39;, &quot;isn&#39;t&quot;, &#39;is&#39;, &quot;mustn&#39;t&quot;, &#39;any&#39;, &#39;itself&#39;, &#39;having&#39;, &#39;some&#39;, &#39;has&#39;, &#39;doing&#39;, &#39;into&#39;, &#39;yours&#39;, &#39;re&#39;, &#39;did&#39;, &#39;or&#39;, &#39;there&#39;, &#39;with&#39;, &#39;hadn&#39;, &#39;am&#39;, &#39;yourself&#39;, &#39;haven&#39;, &#39;mightn&#39;, &#39;they&#39;, &#39;on&#39;, &#39;d&#39;, &quot;it&#39;s&quot;, &#39;both&#39;, &#39;i&#39;, &#39;such&#39;, &#39;s&#39;, &#39;the&#39;, &#39;herself&#39;, &#39;before&#39;, &#39;those&#39;, &#39;where&#39;, &#39;in&#39;, &#39;o&#39;, &#39;until&#39;, &#39;about&#39;, &quot;aren&#39;t&quot;, &#39;yourselves&#39;, &#39;him&#39;, &#39;a&#39;, &#39;won&#39;, &#39;isn&#39;, &#39;shan&#39;, &#39;themselves&#39;, &#39;was&#39;, &#39;had&#39;, &#39;up&#39;, &quot;wasn&#39;t&quot;, &#39;you&#39;, &#39;below&#39;, &#39;do&#39;, &#39;them&#39;, &#39;most&#39;, &#39;just&#39;, &#39;nor&#39;, &#39;being&#39;, &quot;won&#39;t&quot;, &#39;very&#39;, &#39;ll&#39;, &#39;which&#39;, &quot;wouldn&#39;t&quot;, &#39;his&#39;, &#39;if&#39;, &#39;through&#39;, &#39;how&#39;, &#39;against&#39;, &#39;own&#39;, &#39;more&#39;, &quot;couldn&#39;t&quot;, &#39;can&#39;, &#39;than&#39;, &#39;her&#39;, &#39;ourselves&#39;, &#39;are&#39;, &#39;further&#39;, &#39;all&#39;, &quot;hadn&#39;t&quot;, &#39;out&#39;, &#39;now&#39;, &quot;doesn&#39;t&quot;, &quot;that&#39;ll&quot;, &#39;who&#39;, &#39;ain&#39;, &#39;its&#39;, &#39;at&#39;, &#39;that&#39;, &#39;ours&#39;, &#39;were&#39;, &#39;does&#39;, &#39;an&#39;, &#39;of&#39;, &#39;too&#39;, &#39;same&#39;, &quot;mightn&#39;t&quot;, &#39;to&#39;, &#39;while&#39;, &#39;ma&#39;, &quot;shan&#39;t&quot;, &#39;weren&#39;, &quot;you&#39;ll&quot;, &#39;he&#39;, &#39;then&#39;, &quot;should&#39;ve&quot;, &#39;couldn&#39;, &#39;whom&#39;, &#39;off&#39;, &#39;when&#39;, &#39;didn&#39;, &quot;you&#39;d&quot;, &quot;needn&#39;t&quot;, &#39;mustn&#39;, &#39;each&#39;, &quot;hasn&#39;t&quot;, &#39;other&#39;, &#39;as&#39;, &#39;doesn&#39;, &#39;but&#39;, &quot;weren&#39;t&quot;, &quot;haven&#39;t&quot;, &quot;she&#39;s&quot;, &#39;because&#39;, &#39;theirs&#39;}</code></pre>
+<div class="sourceCode" id="cb166"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb166-1"><a href="#cb166-1"></a>[word <span class="cf">for</span> word <span class="kw">in</span> nltk.word_tokenize(sentence) <span class="cf">if</span> word <span class="kw">not</span> <span class="kw">in</span> stopwords.words(<span class="st">&#39;english&#39;</span>)]</span></code></pre></div>
 <pre><code>## [&#39;My&#39;, &#39;system&#39;, &#39;keeps&#39;, &#39;crashing&#39;, &#39;crashed&#39;, &#39;yesterday&#39;, &#39;,&#39;, &#39;crashes&#39;, &#39;daily&#39;]</code></pre>
 </div>
 <div id="bring-it-all-together" class="slide section level2">

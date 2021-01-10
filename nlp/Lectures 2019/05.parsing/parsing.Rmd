@@ -1,7 +1,7 @@
 ---
 title: "Parsing: Sentence Structure"
 author: "Erin M. Buchanan"
-date: "01/09/2020"
+date: "`r Sys.Date()`"
 output: 
   slidy_presentation:
     increment: TRUE
@@ -164,6 +164,15 @@ knitr::include_graphics('recursive.png')
 ```{r}
 ##r chunk
 library(reticulate)
+py_config()
+```
+
+```{python echo = F}
+import platform
+if platform.system() == "Windows":
+    import os
+    os.environ[ 'MPLCONFIGDIR' ] = '/tmp/'
+    os.environ['SCIKIT_LEARN_DATA'] = "C:/Users/EBuchanan.HU/py_stuff"
 ```
 
 ```{python}

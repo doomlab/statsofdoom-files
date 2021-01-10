@@ -1,7 +1,7 @@
 ---
 title: "WordNet and Entity Recognition"
 author: "Erin M. Buchanan"
-date: "12/12/2019"
+date: "`r Sys.Date()`"
 output: 
   slidy_presentation:
     increment: TRUE
@@ -43,7 +43,16 @@ knitr::opts_chunk$set(echo = TRUE)
 ##r chunk
 #install.packages("wordnet")
 library(reticulate)
+py_config()
 #py_install("nltk")
+```
+
+```{python echo = F}
+import platform
+if platform.system() == "Windows":
+    import os
+    os.environ[ 'MPLCONFIGDIR' ] = '/tmp/'
+    os.environ['SCIKIT_LEARN_DATA'] = "C:/Users/EBuchanan.HU/py_stuff"
 ```
 
 ## Synsets
@@ -62,6 +71,7 @@ library(reticulate)
 ```{r}
 ##r chunk
 library(wordnet)
+setDict("C:/Program Files (x86)/WordNet/2.1/dict") #if wordnet error
 filter <- getTermFilter("ExactMatchFilter", #find this exact word
                         word = "fruit", #what the word is
                         ignoreCase = TRUE) #should I ignore case
@@ -110,6 +120,7 @@ print(fruit_sets_py)
 
 ```{python}
 ##python chunk
+pd.set_option('display.max_columns', None)
 fruit_df = pd.DataFrame([
   {"Synset": each_synset, 
   "Part of Speech": each_synset.pos(), 

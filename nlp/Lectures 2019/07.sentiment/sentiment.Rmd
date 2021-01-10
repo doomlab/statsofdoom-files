@@ -44,7 +44,15 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 ##r chunk
 library(reticulate)
-source_python("model_evaluation_utils.py")
+py_config()
+```
+
+```{python echo = F}
+import platform
+if platform.system() == "Windows":
+    import os
+    os.environ[ 'MPLCONFIGDIR' ] = '/tmp/'
+    os.environ['SCIKIT_LEARN_DATA'] = "C:/Users/EBuchanan.HU/py_stuff"
 ```
 
 ## Loading and clean up libraries
@@ -184,8 +192,10 @@ predicted_sentiments = ['positive' if score >= 0.1 else 'negative' for score in 
 
 ```{python}
 ##python chunk
-display_model_performance_metrics(true_labels=example_test_sentiments, predicted_labels=predicted_sentiments, 
-                                  classes=['positive', 'negative'])
+from sklearn.metrics import classification_report
+classification_report(y_true=example_test_sentiments,
+                      y_pred=predicted_sentiments, 
+                      labels=['positive', 'negative'])
 ```
 
 ## Popular lexicons
@@ -234,8 +244,9 @@ predicted_sentiments = ['positive' if score >= 1.0 else 'negative' for score in 
 
 ```{python}
 ##python chunk
-display_model_performance_metrics(true_labels=example_test_sentiments, predicted_labels=predicted_sentiments, 
-                                  classes=['positive', 'negative'])
+classification_report(y_true=example_test_sentiments,
+                      y_pred=predicted_sentiments, 
+                      labels=['positive', 'negative'])
 ```
 
 ## Popular lexicons
@@ -307,7 +318,7 @@ def analyze_sentiment_sentiwordnet_lexicon(review,
                                        columns=pd.MultiIndex(levels=[['SENTIMENT STATS:'], 
                                                              ['Predicted Sentiment', 'Objectivity',
                                                               'Positive', 'Negative', 'Overall']], 
-                                                             labels=[[0,0,0,0,0],[0,1,2,3,4]]))
+                                                             codes=[[0,0,0,0,0],[0,1,2,3,4]]))
         print(sentiment_frame)
         
     return final_sentiment
@@ -330,8 +341,9 @@ for review, sentiment in zip(test_reviews[sample_review_ids], test_sentiments[sa
 ##python chunk
 predicted_sentiments = [analyze_sentiment_sentiwordnet_lexicon(review, verbose=False) for review in example_test_reviews]
 
-display_model_performance_metrics(true_labels=example_test_sentiments, predicted_labels=predicted_sentiments, 
-                                  classes=['positive', 'negative'])
+classification_report(y_true=example_test_sentiments,
+                      y_pred=predicted_sentiments, 
+                      labels=['positive', 'negative'])
 ```
 
 ## Popular lexicons
@@ -373,7 +385,7 @@ def analyze_sentiment_vader_lexicon(review,
                                         columns=pd.MultiIndex(levels=[['SENTIMENT STATS:'], 
                                                                       ['Predicted Sentiment', 'Polarity Score',
                                                                        'Positive', 'Negative', 'Neutral']], 
-                                                              labels=[[0,0,0,0,0],[0,1,2,3,4]]))
+                                                              codes=[[0,0,0,0,0],[0,1,2,3,4]]))
         print(sentiment_frame)
     
     return final_sentiment
@@ -396,8 +408,9 @@ for review, sentiment in zip(test_reviews[sample_review_ids], test_sentiments[sa
 ##python chunk
 predicted_sentiments = [analyze_sentiment_vader_lexicon(review, threshold=0.4, verbose=False) for review in example_test_reviews]
 
-display_model_performance_metrics(true_labels=example_test_sentiments, predicted_labels=predicted_sentiments, 
-                                  classes=['positive', 'negative'])
+classification_report(y_true=example_test_sentiments,
+                      y_pred=predicted_sentiments, 
+                      labels=['positive', 'negative'])
 ```
 
 ## Supervised Learning Approach
@@ -458,9 +471,9 @@ lr_bow_model = lr.fit(cv_train_features, train_sentiments)
 lr_bow_predictions = lr_bow_model.predict(cv_test_features)
 
 #model performance
-display_model_performance_metrics(true_labels=test_sentiments, 
-  predicted_labels=lr_bow_predictions,
-  classes=['positive', 'negative'])
+classification_report(y_true=test_sentiments, 
+                      y_pred=lr_bow_predictions,
+                      labels=['positive', 'negative'])
 ```
 
 ## Logistic Regression TF-IDF
@@ -474,9 +487,9 @@ lr_tfidf_model = lr.fit(tv_train_features, train_sentiments)
 lr_tfidf_predictions = lr_tfidf_model.predict(tv_test_features)
 
 #model performance
-display_model_performance_metrics(true_labels=test_sentiments,
-  predicted_labels=lr_tfidf_predictions,
-  classes=['positive', 'negative'])
+classification_report(y_true=test_sentiments,
+                      y_pred=lr_tfidf_predictions,
+                      labels=['positive', 'negative'])
 ```
 
 ## Learn More

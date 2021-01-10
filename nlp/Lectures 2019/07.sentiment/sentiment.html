@@ -8,11 +8,81 @@
   <meta name="author" content="Erin M. Buchanan" />
   <meta name="date" content="2020-02-06" />
   <title>Sentiment Analysis</title>
-  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode { white-space: pre; position: relative; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    code.sourceCode { white-space: pre-wrap; }
+    code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+          </style>
+  <style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -22,14 +92,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -38,9 +110,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -484,37 +556,44 @@ Erin M. Buchanan
 <li>50,000 reviews that have been coded for positive or negative sentiment as the class labels</li>
 <li>Consider the important aspects of this type of data - depending on the technique used, you might consider cleaning the text differently</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">##r chunk</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(reticulate)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">source_python</span>(<span class="st">&quot;model_evaluation_utils.py&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">##r chunk</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(reticulate)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">py_config</span>()</span></code></pre></div>
+<pre><code>## python:         C:/Users/EBuchanan.HU/AppData/Local/r-miniconda/envs/r-reticulate/python.exe
+## libpython:      C:/Users/EBuchanan.HU/AppData/Local/r-miniconda/envs/r-reticulate/python36.dll
+## pythonhome:     C:/Users/EBuchanan.HU/AppData/Local/r-miniconda/envs/r-reticulate
+## version:        3.6.11 (default, Aug  5 2020, 19:41:03) [MSC v.1916 64 bit (AMD64)]
+## Architecture:   64bit
+## numpy:          C:/Users/EBuchanan.HU/AppData/Local/r-miniconda/envs/r-reticulate/Lib/site-packages/numpy
+## numpy_version:  1.18.1</code></pre>
 </div>
 <div id="loading-and-clean-up-libraries" class="slide section level2">
 <h1>Loading and clean up libraries</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="im">import</span> pandas <span class="im">as</span> pd</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="im">import</span> numpy <span class="im">as</span> np</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="im">import</span> nltk</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="im">import</span> textblob</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="im">import</span> unicodedata</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="im">import</span> contractions</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#if you want to stem</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="im">from</span> nltk <span class="im">import</span> PorterStemmer</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">ps <span class="op">=</span> PorterStemmer()</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">##python chunk</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="im">import</span> nltk</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="im">import</span> textblob</span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="im">import</span> unicodedata</span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="im">import</span> contractions</span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#if you want to stem</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="im">from</span> nltk <span class="im">import</span> PorterStemmer</span>
+<span id="cb3-11"><a href="#cb3-11"></a>ps <span class="op">=</span> PorterStemmer()</span></code></pre></div>
 </div>
 <div id="load-the-data" class="slide section level2">
 <h1>Load the data</h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">dataset <span class="op">=</span> pd.read_csv(<span class="st">'movie_reviews.csv.bz2'</span>, compression<span class="op">=</span><span class="st">'bz2'</span>)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">dataset.shape</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">##python chunk</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>dataset <span class="op">=</span> pd.read_csv(<span class="st">&#39;movie_reviews.csv.bz2&#39;</span>, compression<span class="op">=</span><span class="st">&#39;bz2&#39;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>dataset.shape</span></code></pre></div>
 <pre><code>## (50000, 2)</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1">dataset.head()</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>dataset.head()</span></code></pre></div>
 <pre><code>##                                               review sentiment
 ## 0  One of the other reviewers has mentioned that ...  positive
 ## 1  A wonderful little production. &lt;br /&gt;&lt;br /&gt;The...  positive
 ## 2  I thought this was a wonderful way to spend ti...  positive
-## 3  Basically there's a family where a little boy ...  negative
-## 4  Petter Mattei's &quot;Love in the Time of Money&quot; is...  positive</code></pre>
+## 3  Basically there&#39;s a family where a little boy ...  negative
+## 4  Petter Mattei&#39;s &quot;Love in the Time of Money&quot; is...  positive</code></pre>
 </div>
 <div id="a-function-for-data-cleaning" class="slide section level2">
 <h1>A function for data cleaning</h1>
@@ -523,35 +602,35 @@ Erin M. Buchanan
 <li>You would also expect opinions to have lots of slang</li>
 <li>A good halfway solution would likely be to find the most common mistakes and fix those only</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">STOPWORDS <span class="op">=</span> <span class="bu">set</span>(nltk.corpus.stopwords.words(<span class="st">'english'</span>)) <span class="co">#stopwords</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">STOPWORDS.remove(<span class="st">'no'</span>)</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">STOPWORDS.remove(<span class="st">'but'</span>)</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">STOPWORDS.remove(<span class="st">'not'</span>)</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="kw">def</span> clean_text(text):</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">    text <span class="op">=</span> BeautifulSoup(text).get_text() <span class="co">#html</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9">    text <span class="op">=</span> text.lower() <span class="co">#lower case</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">    text <span class="op">=</span> contractions.fix(text) <span class="co">#contractions</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11">    text <span class="op">=</span> unicodedata.normalize(<span class="st">'NFKD'</span>, text).encode(<span class="st">'ascii'</span>, <span class="st">'ignore'</span>).decode(<span class="st">'utf-8'</span>, <span class="st">'ignore'</span>) <span class="co">#symbols</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12">    <span class="co">#text = ' '.join([ps.stem(word) for word in text.split()]) #stem</span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13">    text <span class="op">=</span> <span class="st">' '</span>.join(word <span class="cf">for</span> word <span class="kw">in</span> text.split() <span class="cf">if</span> word <span class="kw">not</span> <span class="kw">in</span> STOPWORDS) <span class="co"># stopwords</span></a>
-<a class="sourceLine" id="cb7-14" data-line-number="14">    <span class="cf">return</span> text</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">##python chunk</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>STOPWORDS <span class="op">=</span> <span class="bu">set</span>(nltk.corpus.stopwords.words(<span class="st">&#39;english&#39;</span>)) <span class="co">#stopwords</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>STOPWORDS.remove(<span class="st">&#39;no&#39;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a>STOPWORDS.remove(<span class="st">&#39;but&#39;</span>)</span>
+<span id="cb8-5"><a href="#cb8-5"></a>STOPWORDS.remove(<span class="st">&#39;not&#39;</span>)</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="kw">def</span> clean_text(text):</span>
+<span id="cb8-8"><a href="#cb8-8"></a>    text <span class="op">=</span> BeautifulSoup(text).get_text() <span class="co">#html</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    text <span class="op">=</span> text.lower() <span class="co">#lower case</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>    text <span class="op">=</span> contractions.fix(text) <span class="co">#contractions</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>    text <span class="op">=</span> unicodedata.normalize(<span class="st">&#39;NFKD&#39;</span>, text).encode(<span class="st">&#39;ascii&#39;</span>, <span class="st">&#39;ignore&#39;</span>).decode(<span class="st">&#39;utf-8&#39;</span>, <span class="st">&#39;ignore&#39;</span>) <span class="co">#symbols</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>    <span class="co">#text = &#39; &#39;.join([ps.stem(word) for word in text.split()]) #stem</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>    text <span class="op">=</span> <span class="st">&#39; &#39;</span>.join(word <span class="cf">for</span> word <span class="kw">in</span> text.split() <span class="cf">if</span> word <span class="kw">not</span> <span class="kw">in</span> STOPWORDS) <span class="co"># stopwords</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>    <span class="cf">return</span> text</span></code></pre></div>
 </div>
 <div id="apply-our-function" class="slide section level2">
 <h1>Apply our function</h1>
 <ul class="incremental">
 <li>Now we apply our <code>clean_text</code> function to clean up the data</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co">##python chunk </span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">dataset[<span class="st">'review'</span>] <span class="op">=</span> dataset[<span class="st">'review'</span>].<span class="bu">apply</span>(clean_text)</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">dataset.head()</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">##python chunk </span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>dataset[<span class="st">&#39;review&#39;</span>] <span class="op">=</span> dataset[<span class="st">&#39;review&#39;</span>].<span class="bu">apply</span>(clean_text)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>dataset.head()</span></code></pre></div>
 <pre><code>##                                               review sentiment
 ## 0  one reviewers mentioned watching 1 oz episode ...  positive
 ## 1  wonderful little production. filming technique...  positive
 ## 2  thought wonderful way spend time hot summer we...  positive
 ## 3  basically family little boy (jake) thinks zomb...  negative
-## 4  petter mattei's &quot;love time money&quot; visually stu...  positive</code></pre>
+## 4  petter mattei&#39;s &quot;love time money&quot; visually stu...  positive</code></pre>
 </div>
 <div id="unsupervised-lexicon-models" class="slide section level2">
 <h1>Unsupervised lexicon models</h1>
@@ -597,16 +676,16 @@ Erin M. Buchanan
 </ul></li>
 <li>However, we use can this example throughout to show how each approach varies in their accuracy</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">reviews <span class="op">=</span> np.array(dataset[<span class="st">'review'</span>])</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">sentiments <span class="op">=</span> np.array(dataset[<span class="st">'sentiment'</span>])</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7">train_reviews, test_reviews, train_sentiments, test_sentiments <span class="op">=</span> train_test_split(reviews, sentiments, test_size<span class="op">=</span><span class="fl">0.20</span>, random_state <span class="op">=</span> <span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb10-8" data-line-number="8">train_reviews.shape</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">##python chunk</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>reviews <span class="op">=</span> np.array(dataset[<span class="st">&#39;review&#39;</span>])</span>
+<span id="cb11-3"><a href="#cb11-3"></a>sentiments <span class="op">=</span> np.array(dataset[<span class="st">&#39;sentiment&#39;</span>])</span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a>train_reviews, test_reviews, train_sentiments, test_sentiments <span class="op">=</span> train_test_split(reviews, sentiments, test_size<span class="op">=</span><span class="fl">0.20</span>, random_state <span class="op">=</span> <span class="dv">42</span>)</span>
+<span id="cb11-8"><a href="#cb11-8"></a>train_reviews.shape</span></code></pre></div>
 <pre><code>## (40000,)</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" data-line-number="1">test_reviews.shape</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>test_reviews.shape</span></code></pre></div>
 <pre><code>## (10000,)</code></pre>
 </div>
 <div id="example-using-textblob-1" class="slide section level2">
@@ -614,15 +693,15 @@ Erin M. Buchanan
 <ul class="incremental">
 <li>Let’s print out a few reviews and their predicted polarity score to help understand what is going on</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">sample_review_ids <span class="op">=</span> [<span class="dv">7626</span>, <span class="dv">3533</span>, <span class="dv">1010</span>]</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="cf">for</span> review, sentiment <span class="kw">in</span> <span class="bu">zip</span>(test_reviews[sample_review_ids], test_sentiments[sample_review_ids]):</a>
-<a class="sourceLine" id="cb14-5" data-line-number="5">    <span class="bu">print</span>(<span class="st">'REVIEW:'</span>, review)</a>
-<a class="sourceLine" id="cb14-6" data-line-number="6">    <span class="bu">print</span>(<span class="st">'Actual Sentiment:'</span>, sentiment)</a>
-<a class="sourceLine" id="cb14-7" data-line-number="7">    <span class="bu">print</span>(<span class="st">'Predicted Sentiment polarity:'</span>, textblob.TextBlob(review).sentiment.polarity)</a>
-<a class="sourceLine" id="cb14-8" data-line-number="8">    <span class="bu">print</span>(<span class="st">'-'</span><span class="op">*</span><span class="dv">60</span>)</a></code></pre></div>
-<pre><code>## REVIEW: hitchcock great director. ironically mostly find films total waste time watch. admire hitchcok purely visual technical level.first positives. hitchcock invented notion probing camera. curious eye able withhold search information. not exactly new visual grammar but revolutionary then.secondly, hitchcock pretty much perfected thriller chase movie. economical style always thinking audience. gives regular thrills, regular jolts humour regular shocks. short, anticipates audience's base needs plays like fiddle.unfortunately, base needs human mostly stupid. food, sex, thrill danger little comedy. hithcock caters needs screen, exception food, which, judging size, catered screen.it pandering audience sabotages films. second downside hitchcock's camera work visual grammar common place. keeps films watchable simple economy tales, intelligence camera work, skill crafting tense action set pieces.so &quot;saboteur&quot;. light-hearted romp vein &quot;the 39 steps&quot;. jumps sequence sequence, concludes typical hitchcock final act set piece.on emotional level, relationship leads not par robert donat madeleine caroll &quot;the 39 steps&quot;. hence whole story lacks certain energy. plot simply rumbles like machine, desperately depending addition new scenes. new scenes bring us nearer end, since not clear hook hero's escape police, villains action stop plotted sabotages.there usual hitchcock logic flaws. example, guy handcuffs frees using car fan belt etc. (why not drive away car? surely handcuffs not restrictive? able swim them, all!)if want better hitchcock wartime propaganda flick 40's, would advise watch &quot;foreign correspondant&quot;. silly chase movies catchy finale, but &quot;foreign correspondant&quot; makes great use umbrellas tulips, something spielberg rips nicely &quot;minority report&quot;.7.5/10 - good set pieces. beyond that, however, nothing much sink teeth into.
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">##python chunk</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>sample_review_ids <span class="op">=</span> [<span class="dv">7626</span>, <span class="dv">3533</span>, <span class="dv">1010</span>]</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="cf">for</span> review, sentiment <span class="kw">in</span> <span class="bu">zip</span>(test_reviews[sample_review_ids], test_sentiments[sample_review_ids]):</span>
+<span id="cb15-5"><a href="#cb15-5"></a>    <span class="bu">print</span>(<span class="st">&#39;REVIEW:&#39;</span>, review)</span>
+<span id="cb15-6"><a href="#cb15-6"></a>    <span class="bu">print</span>(<span class="st">&#39;Actual Sentiment:&#39;</span>, sentiment)</span>
+<span id="cb15-7"><a href="#cb15-7"></a>    <span class="bu">print</span>(<span class="st">&#39;Predicted Sentiment polarity:&#39;</span>, textblob.TextBlob(review).sentiment.polarity)</span>
+<span id="cb15-8"><a href="#cb15-8"></a>    <span class="bu">print</span>(<span class="st">&#39;-&#39;</span><span class="op">*</span><span class="dv">60</span>)</span></code></pre></div>
+<pre><code>## REVIEW: hitchcock great director. ironically mostly find films total waste time watch. admire hitchcok purely visual technical level.first positives. hitchcock invented notion probing camera. curious eye able withhold search information. not exactly new visual grammar but revolutionary then.secondly, hitchcock pretty much perfected thriller chase movie. economical style always thinking audience. gives regular thrills, regular jolts humour regular shocks. short, anticipates audience&#39;s base needs plays like fiddle.unfortunately, base needs human mostly stupid. food, sex, thrill danger little comedy. hithcock caters needs screen, exception food, which, judging size, catered screen.it pandering audience sabotages films. second downside hitchcock&#39;s camera work visual grammar common place. keeps films watchable simple economy tales, intelligence camera work, skill crafting tense action set pieces.so &quot;saboteur&quot;. light-hearted romp vein &quot;the 39 steps&quot;. jumps sequence sequence, concludes typical hitchcock final act set piece.on emotional level, relationship leads not par robert donat madeleine caroll &quot;the 39 steps&quot;. hence whole story lacks certain energy. plot simply rumbles like machine, desperately depending addition new scenes. new scenes bring us nearer end, since not clear hook hero&#39;s escape police, villains action stop plotted sabotages.there usual hitchcock logic flaws. example, guy handcuffs frees using car fan belt etc. (why not drive away car? surely handcuffs not restrictive? able swim them, all!)if want better hitchcock wartime propaganda flick 40&#39;s, would advise watch &quot;foreign correspondant&quot;. silly chase movies catchy finale, but &quot;foreign correspondant&quot; makes great use umbrellas tulips, something spielberg rips nicely &quot;minority report&quot;.7.5/10 - good set pieces. beyond that, however, nothing much sink teeth into.
 ## Actual Sentiment: negative
 ## Predicted Sentiment polarity: 0.04291021478521478
 ## ------------------------------------------------------------
@@ -630,7 +709,7 @@ Erin M. Buchanan
 ## Actual Sentiment: positive
 ## Predicted Sentiment polarity: 0.38627450980392153
 ## ------------------------------------------------------------
-## REVIEW: think consensus pretty unanimous recent tv miniseries: okay but far cry &quot;lonesome dove.&quot; gets compared latter simply prequel famous story. &quot;commanche moon&quot; definitely worth watch fan westerns. not expect intense &quot;lonesome dove.&quot; steve zahn karl urban not robert duvall tommy lee jones, characters play not strong duvall jones portrayed two guys. say unfair criticize movie comparison but compare - story two leading texas ranger characters: &quot;woodrow call&quot; &quot;gus mccrae.&quot;the main difference, found, prequel lot slower relational (the two rangers women) times. yet, not mind two main women pretty ladies generally likable agreeable people. played nicely linda cardelini (&quot;clara forsythe&quot;) elizabeth banks (&quot;maggie.&quot;).. helped make long movie palatable. seen pictures women old west, none looked half pretty cardelini banks, though. joy male eyes ogle. maggie's son &quot;newt&quot; wonderful kid, - kind boy every parent would want..the interesting character, thought, turned &quot;inish scull,&quot; played val kilmer. western film, &quot;tombstone,&quot; kilmer almost steals show leads. &quot;scull&quot; really original, ever saw one: strange dude, indeed. actually, supporting actors fine job, keith robinson's &quot;deets&quot; wes studi &quot;buffalo hump.&quot; always find studi fascinating, no matter role plays. wish bigger role miniseries.one thing film common &quot;lonesome dove&quot; good westerns: scenery photography. beautiful times joy watch. also excellent director film: simon wincer, directed &quot;lonesome dove&quot; another outstanding tv western, &quot;crossfire trail.&quot; also two favorite feature films, based home country australia: &quot;phar lap&quot; &quot;quigley under.&quot;unfortunately, although enjoyed this, &quot;commanche moon&quot; nothing good above-mentioned films.yet, still watched sorry ended, makes sense. made want watch woodrow gus again, time tommy lee robert.note: title page says 360 minutes. must included tv commercials. two-disc dvd version saw 4 hours 40 minutes.
+## REVIEW: think consensus pretty unanimous recent tv miniseries: okay but far cry &quot;lonesome dove.&quot; gets compared latter simply prequel famous story. &quot;commanche moon&quot; definitely worth watch fan westerns. not expect intense &quot;lonesome dove.&quot; steve zahn karl urban not robert duvall tommy lee jones, characters play not strong duvall jones portrayed two guys. say unfair criticize movie comparison but compare - story two leading texas ranger characters: &quot;woodrow call&quot; &quot;gus mccrae.&quot;the main difference, found, prequel lot slower relational (the two rangers women) times. yet, not mind two main women pretty ladies generally likable agreeable people. played nicely linda cardelini (&quot;clara forsythe&quot;) elizabeth banks (&quot;maggie.&quot;).. helped make long movie palatable. seen pictures women old west, none looked half pretty cardelini banks, though. joy male eyes ogle. maggie&#39;s son &quot;newt&quot; wonderful kid, - kind boy every parent would want..the interesting character, thought, turned &quot;inish scull,&quot; played val kilmer. western film, &quot;tombstone,&quot; kilmer almost steals show leads. &quot;scull&quot; really original, ever saw one: strange dude, indeed. actually, supporting actors fine job, keith robinson&#39;s &quot;deets&quot; wes studi &quot;buffalo hump.&quot; always find studi fascinating, no matter role plays. wish bigger role miniseries.one thing film common &quot;lonesome dove&quot; good westerns: scenery photography. beautiful times joy watch. also excellent director film: simon wincer, directed &quot;lonesome dove&quot; another outstanding tv western, &quot;crossfire trail.&quot; also two favorite feature films, based home country australia: &quot;phar lap&quot; &quot;quigley under.&quot;unfortunately, although enjoyed this, &quot;commanche moon&quot; nothing good above-mentioned films.yet, still watched sorry ended, makes sense. made want watch woodrow gus again, time tommy lee robert.note: title page says 360 minutes. must included tv commercials. two-disc dvd version saw 4 hours 40 minutes.
 ## Actual Sentiment: positive
 ## Predicted Sentiment polarity: 0.26203703703703707
 ## ------------------------------------------------------------</code></pre>
@@ -642,53 +721,28 @@ Erin M. Buchanan
 <li>Then we convert those to categorical labels to see our accuracy</li>
 <li>In general, continuous data is more informative, but we need the class labels to see the accuracy of this approach</li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co">##python chunk </span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">example_test_reviews <span class="op">=</span> test_reviews[<span class="dv">0</span>:<span class="dv">1001</span>]</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">example_test_sentiments <span class="op">=</span> test_sentiments[<span class="dv">0</span>:<span class="dv">1001</span>]</a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#calculate sentiment for smaller example set</span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7">sentiment_polarity <span class="op">=</span> [textblob.TextBlob(review).sentiment.polarity <span class="cf">for</span> review <span class="kw">in</span> example_test_reviews]</a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="co">#convert to categorical labels</span></a>
-<a class="sourceLine" id="cb16-10" data-line-number="10">predicted_sentiments <span class="op">=</span> [<span class="st">'positive'</span> <span class="cf">if</span> score <span class="op">&gt;=</span> <span class="fl">0.1</span> <span class="cf">else</span> <span class="st">'negative'</span> <span class="cf">for</span> score <span class="kw">in</span> sentiment_polarity]</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">##python chunk </span></span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a>example_test_reviews <span class="op">=</span> test_reviews[<span class="dv">0</span>:<span class="dv">1001</span>]</span>
+<span id="cb17-4"><a href="#cb17-4"></a>example_test_sentiments <span class="op">=</span> test_sentiments[<span class="dv">0</span>:<span class="dv">1001</span>]</span>
+<span id="cb17-5"><a href="#cb17-5"></a></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="co">#calculate sentiment for smaller example set</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>sentiment_polarity <span class="op">=</span> [textblob.TextBlob(review).sentiment.polarity <span class="cf">for</span> review <span class="kw">in</span> example_test_reviews]</span>
+<span id="cb17-8"><a href="#cb17-8"></a></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="co">#convert to categorical labels</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a>predicted_sentiments <span class="op">=</span> [<span class="st">&#39;positive&#39;</span> <span class="cf">if</span> score <span class="op">&gt;=</span> <span class="fl">0.1</span> <span class="cf">else</span> <span class="st">&#39;negative&#39;</span> <span class="cf">for</span> score <span class="kw">in</span> sentiment_polarity]</span></code></pre></div>
 </div>
 <div id="example-using-textblob-3" class="slide section level2">
 <h1>Example using TextBlob</h1>
 <ul class="incremental">
 <li>How well did we do? Don’t forget this function is in the separate provided <code>.py</code> file.</li>
 </ul>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">display_model_performance_metrics(true_labels<span class="op">=</span>example_test_sentiments, predicted_labels<span class="op">=</span>predicted_sentiments, </a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">                                  classes<span class="op">=</span>[<span class="st">'positive'</span>, <span class="st">'negative'</span>])</a></code></pre></div>
-<pre><code>## Model Performance metrics:
-## ------------------------------
-## Accuracy: 0.7572
-## Precision: 0.7571
-## Recall: 0.7572
-## F1 Score: 0.7571
-## 
-## Model Classification report:
-## ------------------------------
-##               precision    recall  f1-score   support
-## 
-##     positive       0.75      0.74      0.74       477
-##     negative       0.76      0.78      0.77       524
-## 
-##     accuracy                           0.76      1001
-##    macro avg       0.76      0.76      0.76      1001
-## weighted avg       0.76      0.76      0.76      1001
-## 
-## 
-## Prediction Confusion Matrix:
-## ------------------------------
-##                  Predicted:         
-##                    positive negative
-## Actual: positive        351      126
-##         negative        117      407
-## 
-## /Users/buchanan/.virtualenvs/r-reticulate/bin/python:61: FutureWarning: the 'labels' keyword is deprecated, use 'codes' instead
-## /Users/buchanan/.virtualenvs/r-reticulate/bin/python:63: FutureWarning: the 'labels' keyword is deprecated, use 'codes' instead</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">##python chunk</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
+<span id="cb18-3"><a href="#cb18-3"></a>classification_report(y_true<span class="op">=</span>example_test_sentiments,</span>
+<span id="cb18-4"><a href="#cb18-4"></a>                      y_pred<span class="op">=</span>predicted_sentiments, </span>
+<span id="cb18-5"><a href="#cb18-5"></a>                      labels<span class="op">=</span>[<span class="st">&#39;positive&#39;</span>, <span class="st">&#39;negative&#39;</span>])</span></code></pre></div>
+<pre><code>## &#39;              precision    recall  f1-score   support\n\n    positive       0.75      0.74      0.74       477\n    negative       0.76      0.78      0.77       524\n\n    accuracy                           0.76      1001\n   macro avg       0.76      0.76      0.76      1001\nweighted avg       0.76      0.76      0.76      1001\n&#39;</code></pre>
 </div>
 <div id="popular-lexicons-1" class="slide section level2">
 <h1>Popular lexicons</h1>
@@ -701,23 +755,23 @@ Erin M. Buchanan
 <li>You need to install it first!</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co">##r chunk</span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw">py_install</span>(<span class="st">&quot;afinn&quot;</span>, <span class="dt">pip =</span> T)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">##r chunk</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">py_install</span>(<span class="st">&quot;afinn&quot;</span>, <span class="dt">pip =</span> T)</span></code></pre></div>
 </div>
 <div id="example-using-afinn" class="slide section level2">
 <h1>Example using AFINN</h1>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co">##python chunk </span></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="im">from</span> afinn <span class="im">import</span> Afinn</a>
-<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co">#load the model </span></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4">afn <span class="op">=</span> Afinn(emoticons<span class="op">=</span><span class="va">True</span>)</a>
-<a class="sourceLine" id="cb20-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co">#look at some examples</span></a>
-<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="cf">for</span> review, sentiment <span class="kw">in</span> <span class="bu">zip</span>(test_reviews[sample_review_ids], test_sentiments[sample_review_ids]):</a>
-<a class="sourceLine" id="cb20-8" data-line-number="8">    <span class="bu">print</span>(<span class="st">'REVIEW:'</span>, review)</a>
-<a class="sourceLine" id="cb20-9" data-line-number="9">    <span class="bu">print</span>(<span class="st">'Actual Sentiment:'</span>, sentiment)</a>
-<a class="sourceLine" id="cb20-10" data-line-number="10">    <span class="bu">print</span>(<span class="st">'Predicted Sentiment polarity:'</span>, afn.score(review))</a>
-<a class="sourceLine" id="cb20-11" data-line-number="11">    <span class="bu">print</span>(<span class="st">'-'</span><span class="op">*</span><span class="dv">60</span>)</a></code></pre></div>
-<pre><code>## REVIEW: hitchcock great director. ironically mostly find films total waste time watch. admire hitchcok purely visual technical level.first positives. hitchcock invented notion probing camera. curious eye able withhold search information. not exactly new visual grammar but revolutionary then.secondly, hitchcock pretty much perfected thriller chase movie. economical style always thinking audience. gives regular thrills, regular jolts humour regular shocks. short, anticipates audience's base needs plays like fiddle.unfortunately, base needs human mostly stupid. food, sex, thrill danger little comedy. hithcock caters needs screen, exception food, which, judging size, catered screen.it pandering audience sabotages films. second downside hitchcock's camera work visual grammar common place. keeps films watchable simple economy tales, intelligence camera work, skill crafting tense action set pieces.so &quot;saboteur&quot;. light-hearted romp vein &quot;the 39 steps&quot;. jumps sequence sequence, concludes typical hitchcock final act set piece.on emotional level, relationship leads not par robert donat madeleine caroll &quot;the 39 steps&quot;. hence whole story lacks certain energy. plot simply rumbles like machine, desperately depending addition new scenes. new scenes bring us nearer end, since not clear hook hero's escape police, villains action stop plotted sabotages.there usual hitchcock logic flaws. example, guy handcuffs frees using car fan belt etc. (why not drive away car? surely handcuffs not restrictive? able swim them, all!)if want better hitchcock wartime propaganda flick 40's, would advise watch &quot;foreign correspondant&quot;. silly chase movies catchy finale, but &quot;foreign correspondant&quot; makes great use umbrellas tulips, something spielberg rips nicely &quot;minority report&quot;.7.5/10 - good set pieces. beyond that, however, nothing much sink teeth into.
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a><span class="co">##python chunk </span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="im">from</span> afinn <span class="im">import</span> Afinn</span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="co">#load the model </span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>afn <span class="op">=</span> Afinn(emoticons<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb21-5"><a href="#cb21-5"></a></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="co">#look at some examples</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="cf">for</span> review, sentiment <span class="kw">in</span> <span class="bu">zip</span>(test_reviews[sample_review_ids], test_sentiments[sample_review_ids]):</span>
+<span id="cb21-8"><a href="#cb21-8"></a>    <span class="bu">print</span>(<span class="st">&#39;REVIEW:&#39;</span>, review)</span>
+<span id="cb21-9"><a href="#cb21-9"></a>    <span class="bu">print</span>(<span class="st">&#39;Actual Sentiment:&#39;</span>, sentiment)</span>
+<span id="cb21-10"><a href="#cb21-10"></a>    <span class="bu">print</span>(<span class="st">&#39;Predicted Sentiment polarity:&#39;</span>, afn.score(review))</span>
+<span id="cb21-11"><a href="#cb21-11"></a>    <span class="bu">print</span>(<span class="st">&#39;-&#39;</span><span class="op">*</span><span class="dv">60</span>)</span></code></pre></div>
+<pre><code>## REVIEW: hitchcock great director. ironically mostly find films total waste time watch. admire hitchcok purely visual technical level.first positives. hitchcock invented notion probing camera. curious eye able withhold search information. not exactly new visual grammar but revolutionary then.secondly, hitchcock pretty much perfected thriller chase movie. economical style always thinking audience. gives regular thrills, regular jolts humour regular shocks. short, anticipates audience&#39;s base needs plays like fiddle.unfortunately, base needs human mostly stupid. food, sex, thrill danger little comedy. hithcock caters needs screen, exception food, which, judging size, catered screen.it pandering audience sabotages films. second downside hitchcock&#39;s camera work visual grammar common place. keeps films watchable simple economy tales, intelligence camera work, skill crafting tense action set pieces.so &quot;saboteur&quot;. light-hearted romp vein &quot;the 39 steps&quot;. jumps sequence sequence, concludes typical hitchcock final act set piece.on emotional level, relationship leads not par robert donat madeleine caroll &quot;the 39 steps&quot;. hence whole story lacks certain energy. plot simply rumbles like machine, desperately depending addition new scenes. new scenes bring us nearer end, since not clear hook hero&#39;s escape police, villains action stop plotted sabotages.there usual hitchcock logic flaws. example, guy handcuffs frees using car fan belt etc. (why not drive away car? surely handcuffs not restrictive? able swim them, all!)if want better hitchcock wartime propaganda flick 40&#39;s, would advise watch &quot;foreign correspondant&quot;. silly chase movies catchy finale, but &quot;foreign correspondant&quot; makes great use umbrellas tulips, something spielberg rips nicely &quot;minority report&quot;.7.5/10 - good set pieces. beyond that, however, nothing much sink teeth into.
 ## Actual Sentiment: negative
 ## Predicted Sentiment polarity: 11.0
 ## ------------------------------------------------------------
@@ -725,7 +779,7 @@ Erin M. Buchanan
 ## Actual Sentiment: positive
 ## Predicted Sentiment polarity: 20.0
 ## ------------------------------------------------------------
-## REVIEW: think consensus pretty unanimous recent tv miniseries: okay but far cry &quot;lonesome dove.&quot; gets compared latter simply prequel famous story. &quot;commanche moon&quot; definitely worth watch fan westerns. not expect intense &quot;lonesome dove.&quot; steve zahn karl urban not robert duvall tommy lee jones, characters play not strong duvall jones portrayed two guys. say unfair criticize movie comparison but compare - story two leading texas ranger characters: &quot;woodrow call&quot; &quot;gus mccrae.&quot;the main difference, found, prequel lot slower relational (the two rangers women) times. yet, not mind two main women pretty ladies generally likable agreeable people. played nicely linda cardelini (&quot;clara forsythe&quot;) elizabeth banks (&quot;maggie.&quot;).. helped make long movie palatable. seen pictures women old west, none looked half pretty cardelini banks, though. joy male eyes ogle. maggie's son &quot;newt&quot; wonderful kid, - kind boy every parent would want..the interesting character, thought, turned &quot;inish scull,&quot; played val kilmer. western film, &quot;tombstone,&quot; kilmer almost steals show leads. &quot;scull&quot; really original, ever saw one: strange dude, indeed. actually, supporting actors fine job, keith robinson's &quot;deets&quot; wes studi &quot;buffalo hump.&quot; always find studi fascinating, no matter role plays. wish bigger role miniseries.one thing film common &quot;lonesome dove&quot; good westerns: scenery photography. beautiful times joy watch. also excellent director film: simon wincer, directed &quot;lonesome dove&quot; another outstanding tv western, &quot;crossfire trail.&quot; also two favorite feature films, based home country australia: &quot;phar lap&quot; &quot;quigley under.&quot;unfortunately, although enjoyed this, &quot;commanche moon&quot; nothing good above-mentioned films.yet, still watched sorry ended, makes sense. made want watch woodrow gus again, time tommy lee robert.note: title page says 360 minutes. must included tv commercials. two-disc dvd version saw 4 hours 40 minutes.
+## REVIEW: think consensus pretty unanimous recent tv miniseries: okay but far cry &quot;lonesome dove.&quot; gets compared latter simply prequel famous story. &quot;commanche moon&quot; definitely worth watch fan westerns. not expect intense &quot;lonesome dove.&quot; steve zahn karl urban not robert duvall tommy lee jones, characters play not strong duvall jones portrayed two guys. say unfair criticize movie comparison but compare - story two leading texas ranger characters: &quot;woodrow call&quot; &quot;gus mccrae.&quot;the main difference, found, prequel lot slower relational (the two rangers women) times. yet, not mind two main women pretty ladies generally likable agreeable people. played nicely linda cardelini (&quot;clara forsythe&quot;) elizabeth banks (&quot;maggie.&quot;).. helped make long movie palatable. seen pictures women old west, none looked half pretty cardelini banks, though. joy male eyes ogle. maggie&#39;s son &quot;newt&quot; wonderful kid, - kind boy every parent would want..the interesting character, thought, turned &quot;inish scull,&quot; played val kilmer. western film, &quot;tombstone,&quot; kilmer almost steals show leads. &quot;scull&quot; really original, ever saw one: strange dude, indeed. actually, supporting actors fine job, keith robinson&#39;s &quot;deets&quot; wes studi &quot;buffalo hump.&quot; always find studi fascinating, no matter role plays. wish bigger role miniseries.one thing film common &quot;lonesome dove&quot; good westerns: scenery photography. beautiful times joy watch. also excellent director film: simon wincer, directed &quot;lonesome dove&quot; another outstanding tv western, &quot;crossfire trail.&quot; also two favorite feature films, based home country australia: &quot;phar lap&quot; &quot;quigley under.&quot;unfortunately, although enjoyed this, &quot;commanche moon&quot; nothing good above-mentioned films.yet, still watched sorry ended, makes sense. made want watch woodrow gus again, time tommy lee robert.note: title page says 360 minutes. must included tv commercials. two-disc dvd version saw 4 hours 40 minutes.
 ## Actual Sentiment: positive
 ## Predicted Sentiment polarity: 46.0
 ## ------------------------------------------------------------</code></pre>
@@ -735,43 +789,20 @@ Erin M. Buchanan
 <ul class="incremental">
 <li>Since we have a potentially very large range of scores (i.e. they are not bounded -1 to 1), we can decide for ourselves what the criterion should be</li>
 </ul>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="co">#predict the polarity</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">sentiment_polarity <span class="op">=</span> [afn.score(review) <span class="cf">for</span> review <span class="kw">in</span> example_test_reviews]</a>
-<a class="sourceLine" id="cb22-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="co">#decide how to categorize</span></a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">predicted_sentiments <span class="op">=</span> [<span class="st">'positive'</span> <span class="cf">if</span> score <span class="op">&gt;=</span> <span class="fl">1.0</span> <span class="cf">else</span> <span class="st">'negative'</span> <span class="cf">for</span> score <span class="kw">in</span> sentiment_polarity]</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">##python chunk</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="co">#predict the polarity</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>sentiment_polarity <span class="op">=</span> [afn.score(review) <span class="cf">for</span> review <span class="kw">in</span> example_test_reviews]</span>
+<span id="cb23-4"><a href="#cb23-4"></a></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="co">#decide how to categorize</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a>predicted_sentiments <span class="op">=</span> [<span class="st">&#39;positive&#39;</span> <span class="cf">if</span> score <span class="op">&gt;=</span> <span class="fl">1.0</span> <span class="cf">else</span> <span class="st">&#39;negative&#39;</span> <span class="cf">for</span> score <span class="kw">in</span> sentiment_polarity]</span></code></pre></div>
 </div>
 <div id="example-using-afinn-2" class="slide section level2">
 <h1>Example using AFINN</h1>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">display_model_performance_metrics(true_labels<span class="op">=</span>example_test_sentiments, predicted_labels<span class="op">=</span>predicted_sentiments, </a>
-<a class="sourceLine" id="cb23-3" data-line-number="3">                                  classes<span class="op">=</span>[<span class="st">'positive'</span>, <span class="st">'negative'</span>])</a></code></pre></div>
-<pre><code>## Model Performance metrics:
-## ------------------------------
-## Accuracy: 0.7113
-## Precision: 0.7302
-## Recall: 0.7113
-## F1 Score: 0.7081
-## 
-## Model Classification report:
-## ------------------------------
-##               precision    recall  f1-score   support
-## 
-##     positive       0.65      0.83      0.73       477
-##     negative       0.80      0.60      0.68       524
-## 
-##     accuracy                           0.71      1001
-##    macro avg       0.73      0.72      0.71      1001
-## weighted avg       0.73      0.71      0.71      1001
-## 
-## 
-## Prediction Confusion Matrix:
-## ------------------------------
-##                  Predicted:         
-##                    positive negative
-## Actual: positive        398       79
-##         negative        210      314</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a><span class="co">##python chunk</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>classification_report(y_true<span class="op">=</span>example_test_sentiments,</span>
+<span id="cb24-3"><a href="#cb24-3"></a>                      y_pred<span class="op">=</span>predicted_sentiments, </span>
+<span id="cb24-4"><a href="#cb24-4"></a>                      labels<span class="op">=</span>[<span class="st">&#39;positive&#39;</span>, <span class="st">&#39;negative&#39;</span>])</span></code></pre></div>
+<pre><code>## &#39;              precision    recall  f1-score   support\n\n    positive       0.66      0.83      0.73       477\n    negative       0.80      0.60      0.69       524\n\n    accuracy                           0.71      1001\n   macro avg       0.73      0.72      0.71      1001\nweighted avg       0.73      0.71      0.71      1001\n&#39;</code></pre>
 </div>
 <div id="popular-lexicons-2" class="slide section level2">
 <h1>Popular lexicons</h1>
@@ -782,15 +813,15 @@ Erin M. Buchanan
 <li>Each synset is coded with positive word score, negative word score, and an objectivity score</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="im">from</span> nltk.corpus <span class="im">import</span> sentiwordnet <span class="im">as</span> swn</a>
-<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="co">#nltk.download('sentiwordnet')</span></a>
-<a class="sourceLine" id="cb25-4" data-line-number="4">awesome <span class="op">=</span> <span class="bu">list</span>(swn.senti_synsets(<span class="st">'awesome'</span>, <span class="st">'a'</span>))[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="bu">print</span>(<span class="st">'Positive Polarity Score:'</span>, awesome.pos_score())</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="co">##python chunk</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> sentiwordnet <span class="im">as</span> swn</span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="co">#nltk.download(&#39;sentiwordnet&#39;)</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a>awesome <span class="op">=</span> <span class="bu">list</span>(swn.senti_synsets(<span class="st">&#39;awesome&#39;</span>, <span class="st">&#39;a&#39;</span>))[<span class="dv">0</span>]</span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="bu">print</span>(<span class="st">&#39;Positive Polarity Score:&#39;</span>, awesome.pos_score())</span></code></pre></div>
 <pre><code>## Positive Polarity Score: 0.875</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="bu">print</span>(<span class="st">'Negative Polarity Score:'</span>, awesome.neg_score())</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="bu">print</span>(<span class="st">&#39;Negative Polarity Score:&#39;</span>, awesome.neg_score())</span></code></pre></div>
 <pre><code>## Negative Polarity Score: 0.125</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="bu">print</span>(<span class="st">'Objective Score:'</span>, awesome.obj_score())</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a><span class="bu">print</span>(<span class="st">&#39;Objective Score:&#39;</span>, awesome.obj_score())</span></code></pre></div>
 <pre><code>## Objective Score: 0.0</code></pre>
 </div>
 <div id="example-using-sentiwordnet" class="slide section level2">
@@ -802,119 +833,91 @@ Erin M. Buchanan
 <li>Then subtract positive minus negative scores to final polarity</li>
 <li>And print out those final scores</li>
 </ul>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="im">import</span> spacy</a>
-<a class="sourceLine" id="cb31-3" data-line-number="3">nlp <span class="op">=</span> spacy.load(<span class="st">&quot;en_core_web_sm&quot;</span>)</a>
-<a class="sourceLine" id="cb31-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb31-5" data-line-number="5"><span class="kw">def</span> analyze_sentiment_sentiwordnet_lexicon(review,</a>
-<a class="sourceLine" id="cb31-6" data-line-number="6">                                           verbose<span class="op">=</span><span class="va">False</span>):</a>
-<a class="sourceLine" id="cb31-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb31-8" data-line-number="8">    <span class="co"># tokenize and POS tag text tokens</span></a>
-<a class="sourceLine" id="cb31-9" data-line-number="9">    tagged_text <span class="op">=</span> [(token.text, token.tag_) <span class="cf">for</span> token <span class="kw">in</span> nlp(review)]</a>
-<a class="sourceLine" id="cb31-10" data-line-number="10">    pos_score <span class="op">=</span> neg_score <span class="op">=</span> token_count <span class="op">=</span> obj_score <span class="op">=</span> <span class="dv">0</span></a>
-<a class="sourceLine" id="cb31-11" data-line-number="11">    <span class="co"># get wordnet synsets based on POS tags</span></a>
-<a class="sourceLine" id="cb31-12" data-line-number="12">    <span class="co"># get sentiment scores if synsets are found</span></a>
-<a class="sourceLine" id="cb31-13" data-line-number="13">    <span class="cf">for</span> word, tag <span class="kw">in</span> tagged_text:</a>
-<a class="sourceLine" id="cb31-14" data-line-number="14">        ss_set <span class="op">=</span> <span class="va">None</span></a>
-<a class="sourceLine" id="cb31-15" data-line-number="15">        <span class="cf">if</span> <span class="st">'NN'</span> <span class="kw">in</span> tag <span class="kw">and</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">'n'</span>)):</a>
-<a class="sourceLine" id="cb31-16" data-line-number="16">            ss_set <span class="op">=</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">'n'</span>))[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb31-17" data-line-number="17">        <span class="cf">elif</span> <span class="st">'VB'</span> <span class="kw">in</span> tag <span class="kw">and</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">'v'</span>)):</a>
-<a class="sourceLine" id="cb31-18" data-line-number="18">            ss_set <span class="op">=</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">'v'</span>))[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb31-19" data-line-number="19">        <span class="cf">elif</span> <span class="st">'JJ'</span> <span class="kw">in</span> tag <span class="kw">and</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">'a'</span>)):</a>
-<a class="sourceLine" id="cb31-20" data-line-number="20">            ss_set <span class="op">=</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">'a'</span>))[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb31-21" data-line-number="21">        <span class="cf">elif</span> <span class="st">'RB'</span> <span class="kw">in</span> tag <span class="kw">and</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">'r'</span>)):</a>
-<a class="sourceLine" id="cb31-22" data-line-number="22">            ss_set <span class="op">=</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">'r'</span>))[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb31-23" data-line-number="23">        <span class="co"># if senti-synset is found        </span></a>
-<a class="sourceLine" id="cb31-24" data-line-number="24">        <span class="cf">if</span> ss_set:</a>
-<a class="sourceLine" id="cb31-25" data-line-number="25">            <span class="co"># add scores for all found synsets</span></a>
-<a class="sourceLine" id="cb31-26" data-line-number="26">            pos_score <span class="op">+=</span> ss_set.pos_score()</a>
-<a class="sourceLine" id="cb31-27" data-line-number="27">            neg_score <span class="op">+=</span> ss_set.neg_score()</a>
-<a class="sourceLine" id="cb31-28" data-line-number="28">            obj_score <span class="op">+=</span> ss_set.obj_score()</a>
-<a class="sourceLine" id="cb31-29" data-line-number="29">            token_count <span class="op">+=</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb31-30" data-line-number="30">    </a>
-<a class="sourceLine" id="cb31-31" data-line-number="31">    <span class="co"># aggregate final scores</span></a>
-<a class="sourceLine" id="cb31-32" data-line-number="32">    final_score <span class="op">=</span> pos_score <span class="op">-</span> neg_score</a>
-<a class="sourceLine" id="cb31-33" data-line-number="33">    norm_final_score <span class="op">=</span> <span class="bu">round</span>(<span class="bu">float</span>(final_score) <span class="op">/</span> token_count, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb31-34" data-line-number="34">    final_sentiment <span class="op">=</span> <span class="st">'positive'</span> <span class="cf">if</span> norm_final_score <span class="op">&gt;=</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">'negative'</span></a>
-<a class="sourceLine" id="cb31-35" data-line-number="35">    <span class="cf">if</span> verbose:</a>
-<a class="sourceLine" id="cb31-36" data-line-number="36">        norm_obj_score <span class="op">=</span> <span class="bu">round</span>(<span class="bu">float</span>(obj_score) <span class="op">/</span> token_count, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb31-37" data-line-number="37">        norm_pos_score <span class="op">=</span> <span class="bu">round</span>(<span class="bu">float</span>(pos_score) <span class="op">/</span> token_count, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb31-38" data-line-number="38">        norm_neg_score <span class="op">=</span> <span class="bu">round</span>(<span class="bu">float</span>(neg_score) <span class="op">/</span> token_count, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb31-39" data-line-number="39">        <span class="co"># to display results in a nice table</span></a>
-<a class="sourceLine" id="cb31-40" data-line-number="40">        sentiment_frame <span class="op">=</span> pd.DataFrame([[final_sentiment, norm_obj_score, norm_pos_score, </a>
-<a class="sourceLine" id="cb31-41" data-line-number="41">                                         norm_neg_score, norm_final_score]],</a>
-<a class="sourceLine" id="cb31-42" data-line-number="42">                                       columns<span class="op">=</span>pd.MultiIndex(levels<span class="op">=</span>[[<span class="st">'SENTIMENT STATS:'</span>], </a>
-<a class="sourceLine" id="cb31-43" data-line-number="43">                                                             [<span class="st">'Predicted Sentiment'</span>, <span class="st">'Objectivity'</span>,</a>
-<a class="sourceLine" id="cb31-44" data-line-number="44">                                                              <span class="st">'Positive'</span>, <span class="st">'Negative'</span>, <span class="st">'Overall'</span>]], </a>
-<a class="sourceLine" id="cb31-45" data-line-number="45">                                                             labels<span class="op">=</span>[[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],[<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]]))</a>
-<a class="sourceLine" id="cb31-46" data-line-number="46">        <span class="bu">print</span>(sentiment_frame)</a>
-<a class="sourceLine" id="cb31-47" data-line-number="47">        </a>
-<a class="sourceLine" id="cb31-48" data-line-number="48">    <span class="cf">return</span> final_sentiment</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a><span class="co">##python chunk</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="im">import</span> spacy</span>
+<span id="cb32-3"><a href="#cb32-3"></a>nlp <span class="op">=</span> spacy.load(<span class="st">&quot;en_core_web_sm&quot;</span>)</span>
+<span id="cb32-4"><a href="#cb32-4"></a></span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="kw">def</span> analyze_sentiment_sentiwordnet_lexicon(review,</span>
+<span id="cb32-6"><a href="#cb32-6"></a>                                           verbose<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb32-7"><a href="#cb32-7"></a></span>
+<span id="cb32-8"><a href="#cb32-8"></a>    <span class="co"># tokenize and POS tag text tokens</span></span>
+<span id="cb32-9"><a href="#cb32-9"></a>    tagged_text <span class="op">=</span> [(token.text, token.tag_) <span class="cf">for</span> token <span class="kw">in</span> nlp(review)]</span>
+<span id="cb32-10"><a href="#cb32-10"></a>    pos_score <span class="op">=</span> neg_score <span class="op">=</span> token_count <span class="op">=</span> obj_score <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb32-11"><a href="#cb32-11"></a>    <span class="co"># get wordnet synsets based on POS tags</span></span>
+<span id="cb32-12"><a href="#cb32-12"></a>    <span class="co"># get sentiment scores if synsets are found</span></span>
+<span id="cb32-13"><a href="#cb32-13"></a>    <span class="cf">for</span> word, tag <span class="kw">in</span> tagged_text:</span>
+<span id="cb32-14"><a href="#cb32-14"></a>        ss_set <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb32-15"><a href="#cb32-15"></a>        <span class="cf">if</span> <span class="st">&#39;NN&#39;</span> <span class="kw">in</span> tag <span class="kw">and</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">&#39;n&#39;</span>)):</span>
+<span id="cb32-16"><a href="#cb32-16"></a>            ss_set <span class="op">=</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">&#39;n&#39;</span>))[<span class="dv">0</span>]</span>
+<span id="cb32-17"><a href="#cb32-17"></a>        <span class="cf">elif</span> <span class="st">&#39;VB&#39;</span> <span class="kw">in</span> tag <span class="kw">and</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">&#39;v&#39;</span>)):</span>
+<span id="cb32-18"><a href="#cb32-18"></a>            ss_set <span class="op">=</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">&#39;v&#39;</span>))[<span class="dv">0</span>]</span>
+<span id="cb32-19"><a href="#cb32-19"></a>        <span class="cf">elif</span> <span class="st">&#39;JJ&#39;</span> <span class="kw">in</span> tag <span class="kw">and</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">&#39;a&#39;</span>)):</span>
+<span id="cb32-20"><a href="#cb32-20"></a>            ss_set <span class="op">=</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">&#39;a&#39;</span>))[<span class="dv">0</span>]</span>
+<span id="cb32-21"><a href="#cb32-21"></a>        <span class="cf">elif</span> <span class="st">&#39;RB&#39;</span> <span class="kw">in</span> tag <span class="kw">and</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">&#39;r&#39;</span>)):</span>
+<span id="cb32-22"><a href="#cb32-22"></a>            ss_set <span class="op">=</span> <span class="bu">list</span>(swn.senti_synsets(word, <span class="st">&#39;r&#39;</span>))[<span class="dv">0</span>]</span>
+<span id="cb32-23"><a href="#cb32-23"></a>        <span class="co"># if senti-synset is found        </span></span>
+<span id="cb32-24"><a href="#cb32-24"></a>        <span class="cf">if</span> ss_set:</span>
+<span id="cb32-25"><a href="#cb32-25"></a>            <span class="co"># add scores for all found synsets</span></span>
+<span id="cb32-26"><a href="#cb32-26"></a>            pos_score <span class="op">+=</span> ss_set.pos_score()</span>
+<span id="cb32-27"><a href="#cb32-27"></a>            neg_score <span class="op">+=</span> ss_set.neg_score()</span>
+<span id="cb32-28"><a href="#cb32-28"></a>            obj_score <span class="op">+=</span> ss_set.obj_score()</span>
+<span id="cb32-29"><a href="#cb32-29"></a>            token_count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb32-30"><a href="#cb32-30"></a>    </span>
+<span id="cb32-31"><a href="#cb32-31"></a>    <span class="co"># aggregate final scores</span></span>
+<span id="cb32-32"><a href="#cb32-32"></a>    final_score <span class="op">=</span> pos_score <span class="op">-</span> neg_score</span>
+<span id="cb32-33"><a href="#cb32-33"></a>    norm_final_score <span class="op">=</span> <span class="bu">round</span>(<span class="bu">float</span>(final_score) <span class="op">/</span> token_count, <span class="dv">2</span>)</span>
+<span id="cb32-34"><a href="#cb32-34"></a>    final_sentiment <span class="op">=</span> <span class="st">&#39;positive&#39;</span> <span class="cf">if</span> norm_final_score <span class="op">&gt;=</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">&#39;negative&#39;</span></span>
+<span id="cb32-35"><a href="#cb32-35"></a>    <span class="cf">if</span> verbose:</span>
+<span id="cb32-36"><a href="#cb32-36"></a>        norm_obj_score <span class="op">=</span> <span class="bu">round</span>(<span class="bu">float</span>(obj_score) <span class="op">/</span> token_count, <span class="dv">2</span>)</span>
+<span id="cb32-37"><a href="#cb32-37"></a>        norm_pos_score <span class="op">=</span> <span class="bu">round</span>(<span class="bu">float</span>(pos_score) <span class="op">/</span> token_count, <span class="dv">2</span>)</span>
+<span id="cb32-38"><a href="#cb32-38"></a>        norm_neg_score <span class="op">=</span> <span class="bu">round</span>(<span class="bu">float</span>(neg_score) <span class="op">/</span> token_count, <span class="dv">2</span>)</span>
+<span id="cb32-39"><a href="#cb32-39"></a>        <span class="co"># to display results in a nice table</span></span>
+<span id="cb32-40"><a href="#cb32-40"></a>        sentiment_frame <span class="op">=</span> pd.DataFrame([[final_sentiment, norm_obj_score, norm_pos_score, </span>
+<span id="cb32-41"><a href="#cb32-41"></a>                                         norm_neg_score, norm_final_score]],</span>
+<span id="cb32-42"><a href="#cb32-42"></a>                                       columns<span class="op">=</span>pd.MultiIndex(levels<span class="op">=</span>[[<span class="st">&#39;SENTIMENT STATS:&#39;</span>], </span>
+<span id="cb32-43"><a href="#cb32-43"></a>                                                             [<span class="st">&#39;Predicted Sentiment&#39;</span>, <span class="st">&#39;Objectivity&#39;</span>,</span>
+<span id="cb32-44"><a href="#cb32-44"></a>                                                              <span class="st">&#39;Positive&#39;</span>, <span class="st">&#39;Negative&#39;</span>, <span class="st">&#39;Overall&#39;</span>]], </span>
+<span id="cb32-45"><a href="#cb32-45"></a>                                                             codes<span class="op">=</span>[[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],[<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]]))</span>
+<span id="cb32-46"><a href="#cb32-46"></a>        <span class="bu">print</span>(sentiment_frame)</span>
+<span id="cb32-47"><a href="#cb32-47"></a>        </span>
+<span id="cb32-48"><a href="#cb32-48"></a>    <span class="cf">return</span> final_sentiment</span></code></pre></div>
 </div>
 <div id="example-using-sentiwordnet-1" class="slide section level2">
 <h1>Example using SentiWordNet</h1>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="cf">for</span> review, sentiment <span class="kw">in</span> <span class="bu">zip</span>(test_reviews[sample_review_ids], test_sentiments[sample_review_ids]):</a>
-<a class="sourceLine" id="cb32-3" data-line-number="3">    <span class="bu">print</span>(<span class="st">'REVIEW:'</span>, review)</a>
-<a class="sourceLine" id="cb32-4" data-line-number="4">    <span class="bu">print</span>(<span class="st">'Actual Sentiment:'</span>, sentiment)</a>
-<a class="sourceLine" id="cb32-5" data-line-number="5">    pred <span class="op">=</span> analyze_sentiment_sentiwordnet_lexicon(review, verbose<span class="op">=</span><span class="va">True</span>)    </a>
-<a class="sourceLine" id="cb32-6" data-line-number="6">    <span class="bu">print</span>(<span class="st">'-'</span><span class="op">*</span><span class="dv">60</span>)</a></code></pre></div>
-<pre><code>## REVIEW: hitchcock great director. ironically mostly find films total waste time watch. admire hitchcok purely visual technical level.first positives. hitchcock invented notion probing camera. curious eye able withhold search information. not exactly new visual grammar but revolutionary then.secondly, hitchcock pretty much perfected thriller chase movie. economical style always thinking audience. gives regular thrills, regular jolts humour regular shocks. short, anticipates audience's base needs plays like fiddle.unfortunately, base needs human mostly stupid. food, sex, thrill danger little comedy. hithcock caters needs screen, exception food, which, judging size, catered screen.it pandering audience sabotages films. second downside hitchcock's camera work visual grammar common place. keeps films watchable simple economy tales, intelligence camera work, skill crafting tense action set pieces.so &quot;saboteur&quot;. light-hearted romp vein &quot;the 39 steps&quot;. jumps sequence sequence, concludes typical hitchcock final act set piece.on emotional level, relationship leads not par robert donat madeleine caroll &quot;the 39 steps&quot;. hence whole story lacks certain energy. plot simply rumbles like machine, desperately depending addition new scenes. new scenes bring us nearer end, since not clear hook hero's escape police, villains action stop plotted sabotages.there usual hitchcock logic flaws. example, guy handcuffs frees using car fan belt etc. (why not drive away car? surely handcuffs not restrictive? able swim them, all!)if want better hitchcock wartime propaganda flick 40's, would advise watch &quot;foreign correspondant&quot;. silly chase movies catchy finale, but &quot;foreign correspondant&quot; makes great use umbrellas tulips, something spielberg rips nicely &quot;minority report&quot;.7.5/10 - good set pieces. beyond that, however, nothing much sink teeth into.
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a><span class="co">##python chunk</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="cf">for</span> review, sentiment <span class="kw">in</span> <span class="bu">zip</span>(test_reviews[sample_review_ids], test_sentiments[sample_review_ids]):</span>
+<span id="cb33-3"><a href="#cb33-3"></a>    <span class="bu">print</span>(<span class="st">&#39;REVIEW:&#39;</span>, review)</span>
+<span id="cb33-4"><a href="#cb33-4"></a>    <span class="bu">print</span>(<span class="st">&#39;Actual Sentiment:&#39;</span>, sentiment)</span>
+<span id="cb33-5"><a href="#cb33-5"></a>    pred <span class="op">=</span> analyze_sentiment_sentiwordnet_lexicon(review, verbose<span class="op">=</span><span class="va">True</span>)    </span>
+<span id="cb33-6"><a href="#cb33-6"></a>    <span class="bu">print</span>(<span class="st">&#39;-&#39;</span><span class="op">*</span><span class="dv">60</span>)</span></code></pre></div>
+<pre><code>## REVIEW: hitchcock great director. ironically mostly find films total waste time watch. admire hitchcok purely visual technical level.first positives. hitchcock invented notion probing camera. curious eye able withhold search information. not exactly new visual grammar but revolutionary then.secondly, hitchcock pretty much perfected thriller chase movie. economical style always thinking audience. gives regular thrills, regular jolts humour regular shocks. short, anticipates audience&#39;s base needs plays like fiddle.unfortunately, base needs human mostly stupid. food, sex, thrill danger little comedy. hithcock caters needs screen, exception food, which, judging size, catered screen.it pandering audience sabotages films. second downside hitchcock&#39;s camera work visual grammar common place. keeps films watchable simple economy tales, intelligence camera work, skill crafting tense action set pieces.so &quot;saboteur&quot;. light-hearted romp vein &quot;the 39 steps&quot;. jumps sequence sequence, concludes typical hitchcock final act set piece.on emotional level, relationship leads not par robert donat madeleine caroll &quot;the 39 steps&quot;. hence whole story lacks certain energy. plot simply rumbles like machine, desperately depending addition new scenes. new scenes bring us nearer end, since not clear hook hero&#39;s escape police, villains action stop plotted sabotages.there usual hitchcock logic flaws. example, guy handcuffs frees using car fan belt etc. (why not drive away car? surely handcuffs not restrictive? able swim them, all!)if want better hitchcock wartime propaganda flick 40&#39;s, would advise watch &quot;foreign correspondant&quot;. silly chase movies catchy finale, but &quot;foreign correspondant&quot; makes great use umbrellas tulips, something spielberg rips nicely &quot;minority report&quot;.7.5/10 - good set pieces. beyond that, however, nothing much sink teeth into.
 ## Actual Sentiment: negative
 ##      SENTIMENT STATS:                                      
 ##   Predicted Sentiment Objectivity Positive Negative Overall
-## 0            negative        0.87     0.06     0.07   -0.01
+## 0            positive        0.87     0.06     0.07    -0.0
 ## ------------------------------------------------------------
 ## REVIEW: funny film. usual disney components (music, great range characters, story, appeal), entwined superb animation excellent voice talents less well known actors say &quot;antz&quot; &quot;price egypt&quot;.the characters work really well, strong appeal, humour aimed wide level overcomes generational barriers. movie also presented superb cinemascope format, adds cinema experience.call crazy, but seen film three times, intend taking friends see weekend. many skeptics seen film recommendation not disappointed. work multiplex, honestly say no-one ever walked movie without sense satisfaction.see it, not put animated. sure enjoy movie, make sure stay end credits! bloopers out-takes end funniest part film, packed laughs throughout.
 ## Actual Sentiment: positive
 ##      SENTIMENT STATS:                                      
 ##   Predicted Sentiment Objectivity Positive Negative Overall
-## 0            positive        0.86      0.1     0.04    0.06
+## 0            positive        0.87     0.08     0.05    0.03
 ## ------------------------------------------------------------
-## REVIEW: think consensus pretty unanimous recent tv miniseries: okay but far cry &quot;lonesome dove.&quot; gets compared latter simply prequel famous story. &quot;commanche moon&quot; definitely worth watch fan westerns. not expect intense &quot;lonesome dove.&quot; steve zahn karl urban not robert duvall tommy lee jones, characters play not strong duvall jones portrayed two guys. say unfair criticize movie comparison but compare - story two leading texas ranger characters: &quot;woodrow call&quot; &quot;gus mccrae.&quot;the main difference, found, prequel lot slower relational (the two rangers women) times. yet, not mind two main women pretty ladies generally likable agreeable people. played nicely linda cardelini (&quot;clara forsythe&quot;) elizabeth banks (&quot;maggie.&quot;).. helped make long movie palatable. seen pictures women old west, none looked half pretty cardelini banks, though. joy male eyes ogle. maggie's son &quot;newt&quot; wonderful kid, - kind boy every parent would want..the interesting character, thought, turned &quot;inish scull,&quot; played val kilmer. western film, &quot;tombstone,&quot; kilmer almost steals show leads. &quot;scull&quot; really original, ever saw one: strange dude, indeed. actually, supporting actors fine job, keith robinson's &quot;deets&quot; wes studi &quot;buffalo hump.&quot; always find studi fascinating, no matter role plays. wish bigger role miniseries.one thing film common &quot;lonesome dove&quot; good westerns: scenery photography. beautiful times joy watch. also excellent director film: simon wincer, directed &quot;lonesome dove&quot; another outstanding tv western, &quot;crossfire trail.&quot; also two favorite feature films, based home country australia: &quot;phar lap&quot; &quot;quigley under.&quot;unfortunately, although enjoyed this, &quot;commanche moon&quot; nothing good above-mentioned films.yet, still watched sorry ended, makes sense. made want watch woodrow gus again, time tommy lee robert.note: title page says 360 minutes. must included tv commercials. two-disc dvd version saw 4 hours 40 minutes.
+## REVIEW: think consensus pretty unanimous recent tv miniseries: okay but far cry &quot;lonesome dove.&quot; gets compared latter simply prequel famous story. &quot;commanche moon&quot; definitely worth watch fan westerns. not expect intense &quot;lonesome dove.&quot; steve zahn karl urban not robert duvall tommy lee jones, characters play not strong duvall jones portrayed two guys. say unfair criticize movie comparison but compare - story two leading texas ranger characters: &quot;woodrow call&quot; &quot;gus mccrae.&quot;the main difference, found, prequel lot slower relational (the two rangers women) times. yet, not mind two main women pretty ladies generally likable agreeable people. played nicely linda cardelini (&quot;clara forsythe&quot;) elizabeth banks (&quot;maggie.&quot;).. helped make long movie palatable. seen pictures women old west, none looked half pretty cardelini banks, though. joy male eyes ogle. maggie&#39;s son &quot;newt&quot; wonderful kid, - kind boy every parent would want..the interesting character, thought, turned &quot;inish scull,&quot; played val kilmer. western film, &quot;tombstone,&quot; kilmer almost steals show leads. &quot;scull&quot; really original, ever saw one: strange dude, indeed. actually, supporting actors fine job, keith robinson&#39;s &quot;deets&quot; wes studi &quot;buffalo hump.&quot; always find studi fascinating, no matter role plays. wish bigger role miniseries.one thing film common &quot;lonesome dove&quot; good westerns: scenery photography. beautiful times joy watch. also excellent director film: simon wincer, directed &quot;lonesome dove&quot; another outstanding tv western, &quot;crossfire trail.&quot; also two favorite feature films, based home country australia: &quot;phar lap&quot; &quot;quigley under.&quot;unfortunately, although enjoyed this, &quot;commanche moon&quot; nothing good above-mentioned films.yet, still watched sorry ended, makes sense. made want watch woodrow gus again, time tommy lee robert.note: title page says 360 minutes. must included tv commercials. two-disc dvd version saw 4 hours 40 minutes.
 ## Actual Sentiment: positive
 ##      SENTIMENT STATS:                                      
 ##   Predicted Sentiment Objectivity Positive Negative Overall
-## 0            positive        0.85      0.1     0.05    0.05
-## ------------------------------------------------------------
-## 
-## /Users/buchanan/.virtualenvs/r-reticulate/bin/python:41: FutureWarning: the 'labels' keyword is deprecated, use 'codes' instead</code></pre>
+## 0            positive        0.86     0.09     0.05    0.05
+## ------------------------------------------------------------</code></pre>
 </div>
 <div id="example-using-sentiwordnet-2" class="slide section level2">
 <h1>Example using SentiWordNet</h1>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2">predicted_sentiments <span class="op">=</span> [analyze_sentiment_sentiwordnet_lexicon(review, verbose<span class="op">=</span><span class="va">False</span>) <span class="cf">for</span> review <span class="kw">in</span> example_test_reviews]</a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb34-4" data-line-number="4">display_model_performance_metrics(true_labels<span class="op">=</span>example_test_sentiments, predicted_labels<span class="op">=</span>predicted_sentiments, </a>
-<a class="sourceLine" id="cb34-5" data-line-number="5">                                  classes<span class="op">=</span>[<span class="st">'positive'</span>, <span class="st">'negative'</span>])</a></code></pre></div>
-<pre><code>## Model Performance metrics:
-## ------------------------------
-## Accuracy: 0.6863
-## Precision: 0.6951
-## Recall: 0.6863
-## F1 Score: 0.6851
-## 
-## Model Classification report:
-## ------------------------------
-##               precision    recall  f1-score   support
-## 
-##     positive       0.64      0.77      0.70       477
-##     negative       0.74      0.61      0.67       524
-## 
-##     accuracy                           0.69      1001
-##    macro avg       0.69      0.69      0.69      1001
-## weighted avg       0.70      0.69      0.69      1001
-## 
-## 
-## Prediction Confusion Matrix:
-## ------------------------------
-##                  Predicted:         
-##                    positive negative
-## Actual: positive        365      112
-##         negative        202      322
-## 
-## /Users/buchanan/.virtualenvs/r-reticulate/bin/python:61: FutureWarning: the 'labels' keyword is deprecated, use 'codes' instead
-## /Users/buchanan/.virtualenvs/r-reticulate/bin/python:63: FutureWarning: the 'labels' keyword is deprecated, use 'codes' instead</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a><span class="co">##python chunk</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>predicted_sentiments <span class="op">=</span> [analyze_sentiment_sentiwordnet_lexicon(review, verbose<span class="op">=</span><span class="va">False</span>) <span class="cf">for</span> review <span class="kw">in</span> example_test_reviews]</span>
+<span id="cb35-3"><a href="#cb35-3"></a></span>
+<span id="cb35-4"><a href="#cb35-4"></a>classification_report(y_true<span class="op">=</span>example_test_sentiments,</span>
+<span id="cb35-5"><a href="#cb35-5"></a>                      y_pred<span class="op">=</span>predicted_sentiments, </span>
+<span id="cb35-6"><a href="#cb35-6"></a>                      labels<span class="op">=</span>[<span class="st">&#39;positive&#39;</span>, <span class="st">&#39;negative&#39;</span>])</span></code></pre></div>
+<pre><code>## &#39;              precision    recall  f1-score   support\n\n    positive       0.64      0.75      0.69       477\n    negative       0.73      0.61      0.67       524\n\n    accuracy                           0.68      1001\n   macro avg       0.68      0.68      0.68      1001\nweighted avg       0.69      0.68      0.68      1001\n&#39;</code></pre>
 </div>
 <div id="popular-lexicons-3" class="slide section level2">
 <h1>Popular lexicons</h1>
@@ -933,46 +936,46 @@ Erin M. Buchanan
 <ul class="incremental">
 <li>Again, we take a similar approach and create a function to run the analysis</li>
 </ul>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="im">from</span> nltk.sentiment.vader <span class="im">import</span> SentimentIntensityAnalyzer</a>
-<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="co">#nltk.download('vader_lexicon')</span></a>
-<a class="sourceLine" id="cb36-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb36-5" data-line-number="5"><span class="kw">def</span> analyze_sentiment_vader_lexicon(review, </a>
-<a class="sourceLine" id="cb36-6" data-line-number="6">                                    threshold<span class="op">=</span><span class="fl">0.1</span>,</a>
-<a class="sourceLine" id="cb36-7" data-line-number="7">                                    verbose<span class="op">=</span><span class="va">False</span>):</a>
-<a class="sourceLine" id="cb36-8" data-line-number="8">    </a>
-<a class="sourceLine" id="cb36-9" data-line-number="9">    <span class="co"># analyze the sentiment for review</span></a>
-<a class="sourceLine" id="cb36-10" data-line-number="10">    analyzer <span class="op">=</span> SentimentIntensityAnalyzer()</a>
-<a class="sourceLine" id="cb36-11" data-line-number="11">    scores <span class="op">=</span> analyzer.polarity_scores(review)</a>
-<a class="sourceLine" id="cb36-12" data-line-number="12">    <span class="co"># get aggregate scores and final sentiment</span></a>
-<a class="sourceLine" id="cb36-13" data-line-number="13">    agg_score <span class="op">=</span> scores[<span class="st">'compound'</span>]</a>
-<a class="sourceLine" id="cb36-14" data-line-number="14">    final_sentiment <span class="op">=</span> <span class="st">'positive'</span> <span class="cf">if</span> agg_score <span class="op">&gt;=</span> threshold<span class="op">\</span></a>
-<a class="sourceLine" id="cb36-15" data-line-number="15">                                   <span class="cf">else</span> <span class="st">'negative'</span></a>
-<a class="sourceLine" id="cb36-16" data-line-number="16">    <span class="cf">if</span> verbose:</a>
-<a class="sourceLine" id="cb36-17" data-line-number="17">        <span class="co"># display detailed sentiment statistics</span></a>
-<a class="sourceLine" id="cb36-18" data-line-number="18">        positive <span class="op">=</span> <span class="bu">str</span>(<span class="bu">round</span>(scores[<span class="st">'pos'</span>], <span class="dv">2</span>)<span class="op">*</span><span class="dv">100</span>)<span class="op">+</span><span class="st">'%'</span></a>
-<a class="sourceLine" id="cb36-19" data-line-number="19">        final <span class="op">=</span> <span class="bu">round</span>(agg_score, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb36-20" data-line-number="20">        negative <span class="op">=</span> <span class="bu">str</span>(<span class="bu">round</span>(scores[<span class="st">'neg'</span>], <span class="dv">2</span>)<span class="op">*</span><span class="dv">100</span>)<span class="op">+</span><span class="st">'%'</span></a>
-<a class="sourceLine" id="cb36-21" data-line-number="21">        neutral <span class="op">=</span> <span class="bu">str</span>(<span class="bu">round</span>(scores[<span class="st">'neu'</span>], <span class="dv">2</span>)<span class="op">*</span><span class="dv">100</span>)<span class="op">+</span><span class="st">'%'</span></a>
-<a class="sourceLine" id="cb36-22" data-line-number="22">        sentiment_frame <span class="op">=</span> pd.DataFrame([[final_sentiment, final, positive,</a>
-<a class="sourceLine" id="cb36-23" data-line-number="23">                                        negative, neutral]],</a>
-<a class="sourceLine" id="cb36-24" data-line-number="24">                                        columns<span class="op">=</span>pd.MultiIndex(levels<span class="op">=</span>[[<span class="st">'SENTIMENT STATS:'</span>], </a>
-<a class="sourceLine" id="cb36-25" data-line-number="25">                                                                      [<span class="st">'Predicted Sentiment'</span>, <span class="st">'Polarity Score'</span>,</a>
-<a class="sourceLine" id="cb36-26" data-line-number="26">                                                                       <span class="st">'Positive'</span>, <span class="st">'Negative'</span>, <span class="st">'Neutral'</span>]], </a>
-<a class="sourceLine" id="cb36-27" data-line-number="27">                                                              labels<span class="op">=</span>[[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],[<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]]))</a>
-<a class="sourceLine" id="cb36-28" data-line-number="28">        <span class="bu">print</span>(sentiment_frame)</a>
-<a class="sourceLine" id="cb36-29" data-line-number="29">    </a>
-<a class="sourceLine" id="cb36-30" data-line-number="30">    <span class="cf">return</span> final_sentiment</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="co">##python chunk</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="im">from</span> nltk.sentiment.vader <span class="im">import</span> SentimentIntensityAnalyzer</span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="co">#nltk.download(&#39;vader_lexicon&#39;)</span></span>
+<span id="cb37-4"><a href="#cb37-4"></a></span>
+<span id="cb37-5"><a href="#cb37-5"></a><span class="kw">def</span> analyze_sentiment_vader_lexicon(review, </span>
+<span id="cb37-6"><a href="#cb37-6"></a>                                    threshold<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="cb37-7"><a href="#cb37-7"></a>                                    verbose<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb37-8"><a href="#cb37-8"></a>    </span>
+<span id="cb37-9"><a href="#cb37-9"></a>    <span class="co"># analyze the sentiment for review</span></span>
+<span id="cb37-10"><a href="#cb37-10"></a>    analyzer <span class="op">=</span> SentimentIntensityAnalyzer()</span>
+<span id="cb37-11"><a href="#cb37-11"></a>    scores <span class="op">=</span> analyzer.polarity_scores(review)</span>
+<span id="cb37-12"><a href="#cb37-12"></a>    <span class="co"># get aggregate scores and final sentiment</span></span>
+<span id="cb37-13"><a href="#cb37-13"></a>    agg_score <span class="op">=</span> scores[<span class="st">&#39;compound&#39;</span>]</span>
+<span id="cb37-14"><a href="#cb37-14"></a>    final_sentiment <span class="op">=</span> <span class="st">&#39;positive&#39;</span> <span class="cf">if</span> agg_score <span class="op">&gt;=</span> threshold<span class="op">\</span></span>
+<span id="cb37-15"><a href="#cb37-15"></a>                                   <span class="cf">else</span> <span class="st">&#39;negative&#39;</span></span>
+<span id="cb37-16"><a href="#cb37-16"></a>    <span class="cf">if</span> verbose:</span>
+<span id="cb37-17"><a href="#cb37-17"></a>        <span class="co"># display detailed sentiment statistics</span></span>
+<span id="cb37-18"><a href="#cb37-18"></a>        positive <span class="op">=</span> <span class="bu">str</span>(<span class="bu">round</span>(scores[<span class="st">&#39;pos&#39;</span>], <span class="dv">2</span>)<span class="op">*</span><span class="dv">100</span>)<span class="op">+</span><span class="st">&#39;%&#39;</span></span>
+<span id="cb37-19"><a href="#cb37-19"></a>        final <span class="op">=</span> <span class="bu">round</span>(agg_score, <span class="dv">2</span>)</span>
+<span id="cb37-20"><a href="#cb37-20"></a>        negative <span class="op">=</span> <span class="bu">str</span>(<span class="bu">round</span>(scores[<span class="st">&#39;neg&#39;</span>], <span class="dv">2</span>)<span class="op">*</span><span class="dv">100</span>)<span class="op">+</span><span class="st">&#39;%&#39;</span></span>
+<span id="cb37-21"><a href="#cb37-21"></a>        neutral <span class="op">=</span> <span class="bu">str</span>(<span class="bu">round</span>(scores[<span class="st">&#39;neu&#39;</span>], <span class="dv">2</span>)<span class="op">*</span><span class="dv">100</span>)<span class="op">+</span><span class="st">&#39;%&#39;</span></span>
+<span id="cb37-22"><a href="#cb37-22"></a>        sentiment_frame <span class="op">=</span> pd.DataFrame([[final_sentiment, final, positive,</span>
+<span id="cb37-23"><a href="#cb37-23"></a>                                        negative, neutral]],</span>
+<span id="cb37-24"><a href="#cb37-24"></a>                                        columns<span class="op">=</span>pd.MultiIndex(levels<span class="op">=</span>[[<span class="st">&#39;SENTIMENT STATS:&#39;</span>], </span>
+<span id="cb37-25"><a href="#cb37-25"></a>                                                                      [<span class="st">&#39;Predicted Sentiment&#39;</span>, <span class="st">&#39;Polarity Score&#39;</span>,</span>
+<span id="cb37-26"><a href="#cb37-26"></a>                                                                       <span class="st">&#39;Positive&#39;</span>, <span class="st">&#39;Negative&#39;</span>, <span class="st">&#39;Neutral&#39;</span>]], </span>
+<span id="cb37-27"><a href="#cb37-27"></a>                                                              codes<span class="op">=</span>[[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],[<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]]))</span>
+<span id="cb37-28"><a href="#cb37-28"></a>        <span class="bu">print</span>(sentiment_frame)</span>
+<span id="cb37-29"><a href="#cb37-29"></a>    </span>
+<span id="cb37-30"><a href="#cb37-30"></a>    <span class="cf">return</span> final_sentiment</span></code></pre></div>
 </div>
 <div id="example-using-vader-1" class="slide section level2">
 <h1>Example using VADER</h1>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="cf">for</span> review, sentiment <span class="kw">in</span> <span class="bu">zip</span>(test_reviews[sample_review_ids], test_sentiments[sample_review_ids]):</a>
-<a class="sourceLine" id="cb37-3" data-line-number="3">    <span class="bu">print</span>(<span class="st">'REVIEW:'</span>, review)</a>
-<a class="sourceLine" id="cb37-4" data-line-number="4">    <span class="bu">print</span>(<span class="st">'Actual Sentiment:'</span>, sentiment)</a>
-<a class="sourceLine" id="cb37-5" data-line-number="5">    pred <span class="op">=</span> analyze_sentiment_vader_lexicon(review, threshold<span class="op">=</span><span class="fl">0.4</span>, verbose<span class="op">=</span><span class="va">True</span>)    </a>
-<a class="sourceLine" id="cb37-6" data-line-number="6">    <span class="bu">print</span>(<span class="st">'-'</span><span class="op">*</span><span class="dv">60</span>)</a></code></pre></div>
-<pre><code>## REVIEW: hitchcock great director. ironically mostly find films total waste time watch. admire hitchcok purely visual technical level.first positives. hitchcock invented notion probing camera. curious eye able withhold search information. not exactly new visual grammar but revolutionary then.secondly, hitchcock pretty much perfected thriller chase movie. economical style always thinking audience. gives regular thrills, regular jolts humour regular shocks. short, anticipates audience's base needs plays like fiddle.unfortunately, base needs human mostly stupid. food, sex, thrill danger little comedy. hithcock caters needs screen, exception food, which, judging size, catered screen.it pandering audience sabotages films. second downside hitchcock's camera work visual grammar common place. keeps films watchable simple economy tales, intelligence camera work, skill crafting tense action set pieces.so &quot;saboteur&quot;. light-hearted romp vein &quot;the 39 steps&quot;. jumps sequence sequence, concludes typical hitchcock final act set piece.on emotional level, relationship leads not par robert donat madeleine caroll &quot;the 39 steps&quot;. hence whole story lacks certain energy. plot simply rumbles like machine, desperately depending addition new scenes. new scenes bring us nearer end, since not clear hook hero's escape police, villains action stop plotted sabotages.there usual hitchcock logic flaws. example, guy handcuffs frees using car fan belt etc. (why not drive away car? surely handcuffs not restrictive? able swim them, all!)if want better hitchcock wartime propaganda flick 40's, would advise watch &quot;foreign correspondant&quot;. silly chase movies catchy finale, but &quot;foreign correspondant&quot; makes great use umbrellas tulips, something spielberg rips nicely &quot;minority report&quot;.7.5/10 - good set pieces. beyond that, however, nothing much sink teeth into.
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a><span class="co">##python chunk</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="cf">for</span> review, sentiment <span class="kw">in</span> <span class="bu">zip</span>(test_reviews[sample_review_ids], test_sentiments[sample_review_ids]):</span>
+<span id="cb38-3"><a href="#cb38-3"></a>    <span class="bu">print</span>(<span class="st">&#39;REVIEW:&#39;</span>, review)</span>
+<span id="cb38-4"><a href="#cb38-4"></a>    <span class="bu">print</span>(<span class="st">&#39;Actual Sentiment:&#39;</span>, sentiment)</span>
+<span id="cb38-5"><a href="#cb38-5"></a>    pred <span class="op">=</span> analyze_sentiment_vader_lexicon(review, threshold<span class="op">=</span><span class="fl">0.4</span>, verbose<span class="op">=</span><span class="va">True</span>)    </span>
+<span id="cb38-6"><a href="#cb38-6"></a>    <span class="bu">print</span>(<span class="st">&#39;-&#39;</span><span class="op">*</span><span class="dv">60</span>)</span></code></pre></div>
+<pre><code>## REVIEW: hitchcock great director. ironically mostly find films total waste time watch. admire hitchcok purely visual technical level.first positives. hitchcock invented notion probing camera. curious eye able withhold search information. not exactly new visual grammar but revolutionary then.secondly, hitchcock pretty much perfected thriller chase movie. economical style always thinking audience. gives regular thrills, regular jolts humour regular shocks. short, anticipates audience&#39;s base needs plays like fiddle.unfortunately, base needs human mostly stupid. food, sex, thrill danger little comedy. hithcock caters needs screen, exception food, which, judging size, catered screen.it pandering audience sabotages films. second downside hitchcock&#39;s camera work visual grammar common place. keeps films watchable simple economy tales, intelligence camera work, skill crafting tense action set pieces.so &quot;saboteur&quot;. light-hearted romp vein &quot;the 39 steps&quot;. jumps sequence sequence, concludes typical hitchcock final act set piece.on emotional level, relationship leads not par robert donat madeleine caroll &quot;the 39 steps&quot;. hence whole story lacks certain energy. plot simply rumbles like machine, desperately depending addition new scenes. new scenes bring us nearer end, since not clear hook hero&#39;s escape police, villains action stop plotted sabotages.there usual hitchcock logic flaws. example, guy handcuffs frees using car fan belt etc. (why not drive away car? surely handcuffs not restrictive? able swim them, all!)if want better hitchcock wartime propaganda flick 40&#39;s, would advise watch &quot;foreign correspondant&quot;. silly chase movies catchy finale, but &quot;foreign correspondant&quot; makes great use umbrellas tulips, something spielberg rips nicely &quot;minority report&quot;.7.5/10 - good set pieces. beyond that, however, nothing much sink teeth into.
 ## Actual Sentiment: negative
 ##      SENTIMENT STATS:                                         
 ##   Predicted Sentiment Polarity Score Positive Negative Neutral
@@ -984,47 +987,22 @@ Erin M. Buchanan
 ##   Predicted Sentiment Polarity Score Positive Negative             Neutral
 ## 0            positive           0.99    37.0%     6.0%  56.99999999999999%
 ## ------------------------------------------------------------
-## REVIEW: think consensus pretty unanimous recent tv miniseries: okay but far cry &quot;lonesome dove.&quot; gets compared latter simply prequel famous story. &quot;commanche moon&quot; definitely worth watch fan westerns. not expect intense &quot;lonesome dove.&quot; steve zahn karl urban not robert duvall tommy lee jones, characters play not strong duvall jones portrayed two guys. say unfair criticize movie comparison but compare - story two leading texas ranger characters: &quot;woodrow call&quot; &quot;gus mccrae.&quot;the main difference, found, prequel lot slower relational (the two rangers women) times. yet, not mind two main women pretty ladies generally likable agreeable people. played nicely linda cardelini (&quot;clara forsythe&quot;) elizabeth banks (&quot;maggie.&quot;).. helped make long movie palatable. seen pictures women old west, none looked half pretty cardelini banks, though. joy male eyes ogle. maggie's son &quot;newt&quot; wonderful kid, - kind boy every parent would want..the interesting character, thought, turned &quot;inish scull,&quot; played val kilmer. western film, &quot;tombstone,&quot; kilmer almost steals show leads. &quot;scull&quot; really original, ever saw one: strange dude, indeed. actually, supporting actors fine job, keith robinson's &quot;deets&quot; wes studi &quot;buffalo hump.&quot; always find studi fascinating, no matter role plays. wish bigger role miniseries.one thing film common &quot;lonesome dove&quot; good westerns: scenery photography. beautiful times joy watch. also excellent director film: simon wincer, directed &quot;lonesome dove&quot; another outstanding tv western, &quot;crossfire trail.&quot; also two favorite feature films, based home country australia: &quot;phar lap&quot; &quot;quigley under.&quot;unfortunately, although enjoyed this, &quot;commanche moon&quot; nothing good above-mentioned films.yet, still watched sorry ended, makes sense. made want watch woodrow gus again, time tommy lee robert.note: title page says 360 minutes. must included tv commercials. two-disc dvd version saw 4 hours 40 minutes.
+## REVIEW: think consensus pretty unanimous recent tv miniseries: okay but far cry &quot;lonesome dove.&quot; gets compared latter simply prequel famous story. &quot;commanche moon&quot; definitely worth watch fan westerns. not expect intense &quot;lonesome dove.&quot; steve zahn karl urban not robert duvall tommy lee jones, characters play not strong duvall jones portrayed two guys. say unfair criticize movie comparison but compare - story two leading texas ranger characters: &quot;woodrow call&quot; &quot;gus mccrae.&quot;the main difference, found, prequel lot slower relational (the two rangers women) times. yet, not mind two main women pretty ladies generally likable agreeable people. played nicely linda cardelini (&quot;clara forsythe&quot;) elizabeth banks (&quot;maggie.&quot;).. helped make long movie palatable. seen pictures women old west, none looked half pretty cardelini banks, though. joy male eyes ogle. maggie&#39;s son &quot;newt&quot; wonderful kid, - kind boy every parent would want..the interesting character, thought, turned &quot;inish scull,&quot; played val kilmer. western film, &quot;tombstone,&quot; kilmer almost steals show leads. &quot;scull&quot; really original, ever saw one: strange dude, indeed. actually, supporting actors fine job, keith robinson&#39;s &quot;deets&quot; wes studi &quot;buffalo hump.&quot; always find studi fascinating, no matter role plays. wish bigger role miniseries.one thing film common &quot;lonesome dove&quot; good westerns: scenery photography. beautiful times joy watch. also excellent director film: simon wincer, directed &quot;lonesome dove&quot; another outstanding tv western, &quot;crossfire trail.&quot; also two favorite feature films, based home country australia: &quot;phar lap&quot; &quot;quigley under.&quot;unfortunately, although enjoyed this, &quot;commanche moon&quot; nothing good above-mentioned films.yet, still watched sorry ended, makes sense. made want watch woodrow gus again, time tommy lee robert.note: title page says 360 minutes. must included tv commercials. two-disc dvd version saw 4 hours 40 minutes.
 ## Actual Sentiment: positive
 ##      SENTIMENT STATS:                                                     
 ##   Predicted Sentiment Polarity Score Positive Negative             Neutral
 ## 0            positive            1.0    32.0%    11.0%  57.99999999999999%
-## ------------------------------------------------------------
-## 
-## /Users/buchanan/.virtualenvs/r-reticulate/bin/python:23: FutureWarning: the 'labels' keyword is deprecated, use 'codes' instead</code></pre>
+## ------------------------------------------------------------</code></pre>
 </div>
 <div id="example-using-vader-2" class="slide section level2">
 <h1>Example using VADER</h1>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb39-2" data-line-number="2">predicted_sentiments <span class="op">=</span> [analyze_sentiment_vader_lexicon(review, threshold<span class="op">=</span><span class="fl">0.4</span>, verbose<span class="op">=</span><span class="va">False</span>) <span class="cf">for</span> review <span class="kw">in</span> example_test_reviews]</a>
-<a class="sourceLine" id="cb39-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb39-4" data-line-number="4">display_model_performance_metrics(true_labels<span class="op">=</span>example_test_sentiments, predicted_labels<span class="op">=</span>predicted_sentiments, </a>
-<a class="sourceLine" id="cb39-5" data-line-number="5">                                  classes<span class="op">=</span>[<span class="st">'positive'</span>, <span class="st">'negative'</span>])</a></code></pre></div>
-<pre><code>## Model Performance metrics:
-## ------------------------------
-## Accuracy: 0.6983
-## Precision: 0.7137
-## Recall: 0.6983
-## F1 Score: 0.6956
-## 
-## Model Classification report:
-## ------------------------------
-##               precision    recall  f1-score   support
-## 
-##     positive       0.65      0.81      0.72       477
-##     negative       0.77      0.60      0.67       524
-## 
-##     accuracy                           0.70      1001
-##    macro avg       0.71      0.70      0.70      1001
-## weighted avg       0.71      0.70      0.70      1001
-## 
-## 
-## Prediction Confusion Matrix:
-## ------------------------------
-##                  Predicted:         
-##                    positive negative
-## Actual: positive        386       91
-##         negative        211      313</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1"></a><span class="co">##python chunk</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>predicted_sentiments <span class="op">=</span> [analyze_sentiment_vader_lexicon(review, threshold<span class="op">=</span><span class="fl">0.4</span>, verbose<span class="op">=</span><span class="va">False</span>) <span class="cf">for</span> review <span class="kw">in</span> example_test_reviews]</span>
+<span id="cb40-3"><a href="#cb40-3"></a></span>
+<span id="cb40-4"><a href="#cb40-4"></a>classification_report(y_true<span class="op">=</span>example_test_sentiments,</span>
+<span id="cb40-5"><a href="#cb40-5"></a>                      y_pred<span class="op">=</span>predicted_sentiments, </span>
+<span id="cb40-6"><a href="#cb40-6"></a>                      labels<span class="op">=</span>[<span class="st">&#39;positive&#39;</span>, <span class="st">&#39;negative&#39;</span>])</span></code></pre></div>
+<pre><code>## &#39;              precision    recall  f1-score   support\n\n    positive       0.65      0.81      0.72       477\n    negative       0.77      0.60      0.67       524\n\n    accuracy                           0.70      1001\n   macro avg       0.71      0.70      0.70      1001\nweighted avg       0.71      0.70      0.70      1001\n&#39;</code></pre>
 </div>
 <div id="supervised-learning-approach" class="slide section level2">
 <h1>Supervised Learning Approach</h1>
@@ -1040,23 +1018,23 @@ Erin M. Buchanan
 <li>We are going to use many of the techniques covered in the classification section to train and classify sentiment ourselves</li>
 <li>Let’s use the Bag of Words and the TF-IDF approaches to start</li>
 </ul>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co">##python chunk </span></a>
-<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> CountVectorizer, TfidfVectorizer</a>
-<a class="sourceLine" id="cb41-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb41-4" data-line-number="4"><span class="co"># build BOW features on train reviews</span></a>
-<a class="sourceLine" id="cb41-5" data-line-number="5">cv <span class="op">=</span> CountVectorizer(binary<span class="op">=</span><span class="va">False</span>, min_df<span class="op">=</span><span class="fl">0.0</span>, max_df<span class="op">=</span><span class="fl">1.0</span>, ngram_range<span class="op">=</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb41-6" data-line-number="6">cv_train_features <span class="op">=</span> cv.fit_transform(train_reviews)</a>
-<a class="sourceLine" id="cb41-7" data-line-number="7">cv_test_features <span class="op">=</span> cv.transform(test_reviews)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1"></a><span class="co">##python chunk </span></span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> CountVectorizer, TfidfVectorizer</span>
+<span id="cb42-3"><a href="#cb42-3"></a></span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="co"># build BOW features on train reviews</span></span>
+<span id="cb42-5"><a href="#cb42-5"></a>cv <span class="op">=</span> CountVectorizer(binary<span class="op">=</span><span class="va">False</span>, min_df<span class="op">=</span><span class="fl">0.0</span>, max_df<span class="op">=</span><span class="fl">1.0</span>, ngram_range<span class="op">=</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb42-6"><a href="#cb42-6"></a>cv_train_features <span class="op">=</span> cv.fit_transform(train_reviews)</span>
+<span id="cb42-7"><a href="#cb42-7"></a>cv_test_features <span class="op">=</span> cv.transform(test_reviews)</span></code></pre></div>
 </div>
 <div id="feature-extraction-1" class="slide section level2">
 <h1>Feature Extraction</h1>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb42-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb42-3" data-line-number="3"><span class="co"># build TFIDF features on train reviews</span></a>
-<a class="sourceLine" id="cb42-4" data-line-number="4">tv <span class="op">=</span> TfidfVectorizer(use_idf<span class="op">=</span><span class="va">True</span>, min_df<span class="op">=</span><span class="fl">0.0</span>, max_df<span class="op">=</span><span class="fl">1.0</span>, ngram_range<span class="op">=</span>(<span class="dv">1</span>,<span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb42-5" data-line-number="5">                     sublinear_tf<span class="op">=</span><span class="va">True</span>)</a>
-<a class="sourceLine" id="cb42-6" data-line-number="6">tv_train_features <span class="op">=</span> tv.fit_transform(train_reviews)</a>
-<a class="sourceLine" id="cb42-7" data-line-number="7">tv_test_features <span class="op">=</span> tv.transform(test_reviews)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a><span class="co">##python chunk</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a></span>
+<span id="cb43-3"><a href="#cb43-3"></a><span class="co"># build TFIDF features on train reviews</span></span>
+<span id="cb43-4"><a href="#cb43-4"></a>tv <span class="op">=</span> TfidfVectorizer(use_idf<span class="op">=</span><span class="va">True</span>, min_df<span class="op">=</span><span class="fl">0.0</span>, max_df<span class="op">=</span><span class="fl">1.0</span>, ngram_range<span class="op">=</span>(<span class="dv">1</span>,<span class="dv">2</span>),</span>
+<span id="cb43-5"><a href="#cb43-5"></a>                     sublinear_tf<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb43-6"><a href="#cb43-6"></a>tv_train_features <span class="op">=</span> tv.fit_transform(train_reviews)</span>
+<span id="cb43-7"><a href="#cb43-7"></a>tv_test_features <span class="op">=</span> tv.transform(test_reviews)</span></code></pre></div>
 </div>
 <div id="model-training" class="slide section level2">
 <h1>Model Training</h1>
@@ -1064,95 +1042,41 @@ Erin M. Buchanan
 <li>In the classification section, we consider logistic regression, naive Bayes, and support vector machines</li>
 <li>You can apply any of those here to the extracted bag of words and TF-IDF features</li>
 </ul>
-<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</a>
-<a class="sourceLine" id="cb43-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb43-4" data-line-number="4"><span class="co">#blank model</span></a>
-<a class="sourceLine" id="cb43-5" data-line-number="5">lr <span class="op">=</span> LogisticRegression(penalty<span class="op">=</span><span class="st">'l2'</span>, max_iter<span class="op">=</span><span class="dv">1000</span>, C<span class="op">=</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1"></a><span class="co">##python chunk</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb44-3"><a href="#cb44-3"></a></span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="co">#blank model</span></span>
+<span id="cb44-5"><a href="#cb44-5"></a>lr <span class="op">=</span> LogisticRegression(penalty<span class="op">=</span><span class="st">&#39;l2&#39;</span>, max_iter<span class="op">=</span><span class="dv">1000</span>, C<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div>
 </div>
 <div id="logistic-regression-bag-of-words" class="slide section level2">
 <h1>Logistic Regression Bag of Words</h1>
-<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb44-2" data-line-number="2"><span class="co"># fit the model</span></a>
-<a class="sourceLine" id="cb44-3" data-line-number="3">lr_bow_model <span class="op">=</span> lr.fit(cv_train_features, train_sentiments)</a>
-<a class="sourceLine" id="cb44-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb44-5" data-line-number="5"><span class="co"># grab the predictions</span></a>
-<a class="sourceLine" id="cb44-6" data-line-number="6">lr_bow_predictions <span class="op">=</span> lr_bow_model.predict(cv_test_features)</a>
-<a class="sourceLine" id="cb44-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb44-8" data-line-number="8"><span class="co">#model performance</span></a>
-<a class="sourceLine" id="cb44-9" data-line-number="9">display_model_performance_metrics(true_labels<span class="op">=</span>test_sentiments, </a>
-<a class="sourceLine" id="cb44-10" data-line-number="10">  predicted_labels<span class="op">=</span>lr_bow_predictions,</a>
-<a class="sourceLine" id="cb44-11" data-line-number="11">  classes<span class="op">=</span>[<span class="st">'positive'</span>, <span class="st">'negative'</span>])</a></code></pre></div>
-<pre><code>## Model Performance metrics:
-## ------------------------------
-## Accuracy: 0.9078
-## Precision: 0.9079
-## Recall: 0.9078
-## F1 Score: 0.9078
-## 
-## Model Classification report:
-## ------------------------------
-##               precision    recall  f1-score   support
-## 
-##     positive       0.90      0.92      0.91      5039
-##     negative       0.91      0.90      0.91      4961
-## 
-##     accuracy                           0.91     10000
-##    macro avg       0.91      0.91      0.91     10000
-## weighted avg       0.91      0.91      0.91     10000
-## 
-## 
-## Prediction Confusion Matrix:
-## ------------------------------
-##                  Predicted:         
-##                    positive negative
-## Actual: positive       4613      426
-##         negative        496     4465
-## 
-## /Users/buchanan/.virtualenvs/r-reticulate/bin/python:61: FutureWarning: the 'labels' keyword is deprecated, use 'codes' instead
-## /Users/buchanan/.virtualenvs/r-reticulate/bin/python:63: FutureWarning: the 'labels' keyword is deprecated, use 'codes' instead</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a><span class="co">##python chunk</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="co"># fit the model</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a>lr_bow_model <span class="op">=</span> lr.fit(cv_train_features, train_sentiments)</span>
+<span id="cb45-4"><a href="#cb45-4"></a></span>
+<span id="cb45-5"><a href="#cb45-5"></a><span class="co"># grab the predictions</span></span>
+<span id="cb45-6"><a href="#cb45-6"></a>lr_bow_predictions <span class="op">=</span> lr_bow_model.predict(cv_test_features)</span>
+<span id="cb45-7"><a href="#cb45-7"></a></span>
+<span id="cb45-8"><a href="#cb45-8"></a><span class="co">#model performance</span></span>
+<span id="cb45-9"><a href="#cb45-9"></a>classification_report(y_true<span class="op">=</span>test_sentiments, </span>
+<span id="cb45-10"><a href="#cb45-10"></a>                      y_pred<span class="op">=</span>lr_bow_predictions,</span>
+<span id="cb45-11"><a href="#cb45-11"></a>                      labels<span class="op">=</span>[<span class="st">&#39;positive&#39;</span>, <span class="st">&#39;negative&#39;</span>])</span></code></pre></div>
+<pre><code>## &#39;              precision    recall  f1-score   support\n\n    positive       0.90      0.92      0.91      5039\n    negative       0.91      0.90      0.91      4961\n\n    accuracy                           0.91     10000\n   macro avg       0.91      0.91      0.91     10000\nweighted avg       0.91      0.91      0.91     10000\n&#39;</code></pre>
 </div>
 <div id="logistic-regression-tf-idf" class="slide section level2">
 <h1>Logistic Regression TF-IDF</h1>
-<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="co"># fit the model</span></a>
-<a class="sourceLine" id="cb46-3" data-line-number="3">lr_tfidf_model <span class="op">=</span> lr.fit(tv_train_features, train_sentiments)</a>
-<a class="sourceLine" id="cb46-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb46-5" data-line-number="5"><span class="co"># grab the predictions</span></a>
-<a class="sourceLine" id="cb46-6" data-line-number="6">lr_tfidf_predictions <span class="op">=</span> lr_tfidf_model.predict(tv_test_features)</a>
-<a class="sourceLine" id="cb46-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb46-8" data-line-number="8"><span class="co">#model performance</span></a>
-<a class="sourceLine" id="cb46-9" data-line-number="9">display_model_performance_metrics(true_labels<span class="op">=</span>test_sentiments,</a>
-<a class="sourceLine" id="cb46-10" data-line-number="10">  predicted_labels<span class="op">=</span>lr_tfidf_predictions,</a>
-<a class="sourceLine" id="cb46-11" data-line-number="11">  classes<span class="op">=</span>[<span class="st">'positive'</span>, <span class="st">'negative'</span>])</a></code></pre></div>
-<pre><code>## Model Performance metrics:
-## ------------------------------
-## Accuracy: 0.9
-## Precision: 0.9001
-## Recall: 0.9
-## F1 Score: 0.9
-## 
-## Model Classification report:
-## ------------------------------
-##               precision    recall  f1-score   support
-## 
-##     positive       0.89      0.91      0.90      5039
-##     negative       0.91      0.89      0.90      4961
-## 
-##     accuracy                           0.90     10000
-##    macro avg       0.90      0.90      0.90     10000
-## weighted avg       0.90      0.90      0.90     10000
-## 
-## 
-## Prediction Confusion Matrix:
-## ------------------------------
-##                  Predicted:         
-##                    positive negative
-## Actual: positive       4578      461
-##         negative        539     4422
-## 
-## /Users/buchanan/.virtualenvs/r-reticulate/bin/python:61: FutureWarning: the 'labels' keyword is deprecated, use 'codes' instead
-## /Users/buchanan/.virtualenvs/r-reticulate/bin/python:63: FutureWarning: the 'labels' keyword is deprecated, use 'codes' instead</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a><span class="co">##python chunk</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="co"># fit the model</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a>lr_tfidf_model <span class="op">=</span> lr.fit(tv_train_features, train_sentiments)</span>
+<span id="cb47-4"><a href="#cb47-4"></a></span>
+<span id="cb47-5"><a href="#cb47-5"></a><span class="co"># grab the predictions</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a>lr_tfidf_predictions <span class="op">=</span> lr_tfidf_model.predict(tv_test_features)</span>
+<span id="cb47-7"><a href="#cb47-7"></a></span>
+<span id="cb47-8"><a href="#cb47-8"></a><span class="co">#model performance</span></span>
+<span id="cb47-9"><a href="#cb47-9"></a>classification_report(y_true<span class="op">=</span>test_sentiments,</span>
+<span id="cb47-10"><a href="#cb47-10"></a>                      y_pred<span class="op">=</span>lr_tfidf_predictions,</span>
+<span id="cb47-11"><a href="#cb47-11"></a>                      labels<span class="op">=</span>[<span class="st">&#39;positive&#39;</span>, <span class="st">&#39;negative&#39;</span>])</span></code></pre></div>
+<pre><code>## &#39;              precision    recall  f1-score   support\n\n    positive       0.89      0.91      0.90      5039\n    negative       0.91      0.89      0.90      4961\n\n    accuracy                           0.90     10000\n   macro avg       0.90      0.90      0.90     10000\nweighted avg       0.90      0.90      0.90     10000\n&#39;</code></pre>
 </div>
 <div id="learn-more" class="slide section level2">
 <h1>Learn More</h1>
@@ -1177,25 +1101,25 @@ Erin M. Buchanan
 </div>
 <div id="simply-predict" class="slide section level2">
 <h1>Simply Predict!</h1>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="co">#new text to predict</span></a>
-<a class="sourceLine" id="cb48-3" data-line-number="3">new_corpus <span class="op">=</span> [<span class="st">'The Lord of the Rings is an Excellent movie!'</span>, </a>
-<a class="sourceLine" id="cb48-4" data-line-number="4">              <span class="st">'I didn</span><span class="ch">\'</span><span class="st">t like the recent movie on TV. It was NOT good and a waste of time!'</span>]</a>
-<a class="sourceLine" id="cb48-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb48-6" data-line-number="6"><span class="co">#clean that text up</span></a>
-<a class="sourceLine" id="cb48-7" data-line-number="7">norm_new_corpus <span class="op">=</span> [clean_text(text) <span class="cf">for</span> text <span class="kw">in</span> new_corpus]</a>
-<a class="sourceLine" id="cb48-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb48-9" data-line-number="9"><span class="co">#transform into the right format</span></a>
-<a class="sourceLine" id="cb48-10" data-line-number="10">cv_new_corpus <span class="op">=</span> cv.transform(norm_new_corpus)</a>
-<a class="sourceLine" id="cb48-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb48-12" data-line-number="12"><span class="co">#predict</span></a>
-<a class="sourceLine" id="cb48-13" data-line-number="13">lr_bow_model.predict(cv_new_corpus)</a>
-<a class="sourceLine" id="cb48-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb48-15" data-line-number="15"><span class="co">#predict probabilities</span></a></code></pre></div>
-<pre><code>## array(['positive', 'negative'], dtype=object)</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb50-1" data-line-number="1">lr_bow_model.predict_proba(cv_new_corpus)</a></code></pre></div>
-<pre><code>## array([[8.44636650e-04, 9.99155363e-01],
-##        [1.00000000e+00, 3.22141076e-10]])</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a><span class="co">##python chunk</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a><span class="co">#new text to predict</span></span>
+<span id="cb49-3"><a href="#cb49-3"></a>new_corpus <span class="op">=</span> [<span class="st">&#39;The Lord of the Rings is an Excellent movie!&#39;</span>, </span>
+<span id="cb49-4"><a href="#cb49-4"></a>              <span class="st">&#39;I didn</span><span class="ch">\&#39;</span><span class="st">t like the recent movie on TV. It was NOT good and a waste of time!&#39;</span>]</span>
+<span id="cb49-5"><a href="#cb49-5"></a></span>
+<span id="cb49-6"><a href="#cb49-6"></a><span class="co">#clean that text up</span></span>
+<span id="cb49-7"><a href="#cb49-7"></a>norm_new_corpus <span class="op">=</span> [clean_text(text) <span class="cf">for</span> text <span class="kw">in</span> new_corpus]</span>
+<span id="cb49-8"><a href="#cb49-8"></a></span>
+<span id="cb49-9"><a href="#cb49-9"></a><span class="co">#transform into the right format</span></span>
+<span id="cb49-10"><a href="#cb49-10"></a>cv_new_corpus <span class="op">=</span> cv.transform(norm_new_corpus)</span>
+<span id="cb49-11"><a href="#cb49-11"></a></span>
+<span id="cb49-12"><a href="#cb49-12"></a><span class="co">#predict</span></span>
+<span id="cb49-13"><a href="#cb49-13"></a>lr_bow_model.predict(cv_new_corpus)</span>
+<span id="cb49-14"><a href="#cb49-14"></a></span>
+<span id="cb49-15"><a href="#cb49-15"></a><span class="co">#predict probabilities</span></span></code></pre></div>
+<pre><code>## array([&#39;positive&#39;, &#39;negative&#39;], dtype=object)</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a>lr_bow_model.predict_proba(cv_new_corpus)</span></code></pre></div>
+<pre><code>## array([[8.47310982e-04, 9.99152689e-01],
+##        [1.00000000e+00, 3.20350446e-10]])</code></pre>
 </div>
 <div id="topics-background" class="slide section level2">
 <h1>Topics Background</h1>
@@ -1237,16 +1161,16 @@ Erin M. Buchanan
 </div>
 <div id="get-started" class="slide section level2">
 <h1>Get Started</h1>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">py_install</span>(<span class="st">&quot;pyLDAvis&quot;</span>, <span class="dt">pip =</span> T)</a></code></pre></div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="co">##python chunk </span></a>
-<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="im">import</span> pyLDAvis</a>
-<a class="sourceLine" id="cb53-3" data-line-number="3"><span class="im">import</span> pyLDAvis.gensim  <span class="co"># don't skip this</span></a>
-<a class="sourceLine" id="cb53-4" data-line-number="4"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a>
-<a class="sourceLine" id="cb53-5" data-line-number="5"><span class="im">import</span> gensim</a></code></pre></div>
-<pre><code>## /Users/buchanan/.virtualenvs/r-reticulate/lib/python3.7/site-packages/scipy/sparse/sparsetools.py:21: DeprecationWarning: `scipy.sparse.sparsetools` is deprecated!
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="kw">py_install</span>(<span class="st">&quot;pyLDAvis&quot;</span>, <span class="dt">pip =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a><span class="co">##python chunk </span></span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="im">import</span> pyLDAvis</span>
+<span id="cb54-3"><a href="#cb54-3"></a><span class="im">import</span> pyLDAvis.gensim  <span class="co"># don&#39;t skip this</span></span>
+<span id="cb54-4"><a href="#cb54-4"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb54-5"><a href="#cb54-5"></a><span class="im">import</span> gensim</span></code></pre></div>
+<pre><code>## C:\Users\EBUCHA~1.HU\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\scipy\sparse\sparsetools.py:21: DeprecationWarning: `scipy.sparse.sparsetools` is deprecated!
 ## scipy.sparse.sparsetools is a private module for scipy.sparse, and should not be used.
 ##   _deprecated()</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="im">import</span> gensim.corpora <span class="im">as</span> corpora</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a><span class="im">import</span> gensim.corpora <span class="im">as</span> corpora</span></code></pre></div>
 </div>
 <div id="separate-reviews" class="slide section level2">
 <h1>Separate Reviews</h1>
@@ -1257,79 +1181,79 @@ Erin M. Buchanan
 </div>
 <div id="separate-reviews-1" class="slide section level2">
 <h1>Separate Reviews</h1>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="co">##python</span></a>
-<a class="sourceLine" id="cb56-2" data-line-number="2">dataset.head()</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a><span class="co">##python</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a>dataset.head()</span></code></pre></div>
 <pre><code>##                                               review sentiment
 ## 0  one reviewers mentioned watching 1 oz episode ...  positive
 ## 1  wonderful little production. filming technique...  positive
 ## 2  thought wonderful way spend time hot summer we...  positive
 ## 3  basically family little boy (jake) thinks zomb...  negative
-## 4  petter mattei's &quot;love time money&quot; visually stu...  positive</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb58-1" data-line-number="1">positive <span class="op">=</span> dataset[dataset[<span class="st">'sentiment'</span>]<span class="op">==</span><span class="st">&quot;positive&quot;</span>][<span class="dv">0</span>:<span class="dv">1001</span>]</a>
-<a class="sourceLine" id="cb58-2" data-line-number="2">positive_reviews <span class="op">=</span> positive[<span class="st">'review'</span>].<span class="bu">apply</span>(nltk.word_tokenize)</a>
-<a class="sourceLine" id="cb58-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb58-4" data-line-number="4">negative <span class="op">=</span> dataset[dataset[<span class="st">'sentiment'</span>]<span class="op">==</span><span class="st">&quot;negative&quot;</span>][<span class="dv">0</span>:<span class="dv">1001</span>]</a>
-<a class="sourceLine" id="cb58-5" data-line-number="5">negative_reviews <span class="op">=</span> negative[<span class="st">'review'</span>].<span class="bu">apply</span>(nltk.word_tokenize)</a></code></pre></div>
+## 4  petter mattei&#39;s &quot;love time money&quot; visually stu...  positive</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a>positive <span class="op">=</span> dataset[dataset[<span class="st">&#39;sentiment&#39;</span>]<span class="op">==</span><span class="st">&quot;positive&quot;</span>][<span class="dv">0</span>:<span class="dv">1001</span>]</span>
+<span id="cb59-2"><a href="#cb59-2"></a>positive_reviews <span class="op">=</span> positive[<span class="st">&#39;review&#39;</span>].<span class="bu">apply</span>(nltk.word_tokenize)</span>
+<span id="cb59-3"><a href="#cb59-3"></a></span>
+<span id="cb59-4"><a href="#cb59-4"></a>negative <span class="op">=</span> dataset[dataset[<span class="st">&#39;sentiment&#39;</span>]<span class="op">==</span><span class="st">&quot;negative&quot;</span>][<span class="dv">0</span>:<span class="dv">1001</span>]</span>
+<span id="cb59-5"><a href="#cb59-5"></a>negative_reviews <span class="op">=</span> negative[<span class="st">&#39;review&#39;</span>].<span class="bu">apply</span>(nltk.word_tokenize)</span></code></pre></div>
 </div>
 <div id="create-a-dictionary-and-doc-term-matrix" class="slide section level2">
 <h1>Create a dictionary and Doc-Term Matrix</h1>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb59-2" data-line-number="2"><span class="co">#create a dictionary of the words</span></a>
-<a class="sourceLine" id="cb59-3" data-line-number="3">dictionary_positive <span class="op">=</span> corpora.Dictionary(positive_reviews)</a>
-<a class="sourceLine" id="cb59-4" data-line-number="4">dictionary_negative <span class="op">=</span> corpora.Dictionary(negative_reviews)</a>
-<a class="sourceLine" id="cb59-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb59-6" data-line-number="6"><span class="co">#create a doc term matrix</span></a>
-<a class="sourceLine" id="cb59-7" data-line-number="7">pos_doc_term_matrix <span class="op">=</span> [dictionary_positive.doc2bow(doc) <span class="cf">for</span> doc <span class="kw">in</span> positive_reviews]</a>
-<a class="sourceLine" id="cb59-8" data-line-number="8">neg_doc_term_matrix <span class="op">=</span> [dictionary_negative.doc2bow(doc) <span class="cf">for</span> doc <span class="kw">in</span> negative_reviews]</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1"></a><span class="co">##python chunk</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a><span class="co">#create a dictionary of the words</span></span>
+<span id="cb60-3"><a href="#cb60-3"></a>dictionary_positive <span class="op">=</span> corpora.Dictionary(positive_reviews)</span>
+<span id="cb60-4"><a href="#cb60-4"></a>dictionary_negative <span class="op">=</span> corpora.Dictionary(negative_reviews)</span>
+<span id="cb60-5"><a href="#cb60-5"></a></span>
+<span id="cb60-6"><a href="#cb60-6"></a><span class="co">#create a doc term matrix</span></span>
+<span id="cb60-7"><a href="#cb60-7"></a>pos_doc_term_matrix <span class="op">=</span> [dictionary_positive.doc2bow(doc) <span class="cf">for</span> doc <span class="kw">in</span> positive_reviews]</span>
+<span id="cb60-8"><a href="#cb60-8"></a>neg_doc_term_matrix <span class="op">=</span> [dictionary_negative.doc2bow(doc) <span class="cf">for</span> doc <span class="kw">in</span> negative_reviews]</span></code></pre></div>
 </div>
 <div id="build-the-lda-topic-model" class="slide section level2">
 <h1>Build the LDA Topic Model</h1>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb60-2" data-line-number="2">lda_model_pos <span class="op">=</span> gensim.models.ldamodel.LdaModel(</a>
-<a class="sourceLine" id="cb60-3" data-line-number="3">  corpus <span class="op">=</span> pos_doc_term_matrix, <span class="co">#TDM</span></a>
-<a class="sourceLine" id="cb60-4" data-line-number="4">  id2word <span class="op">=</span> dictionary_positive, <span class="co">#Dictionary</span></a>
-<a class="sourceLine" id="cb60-5" data-line-number="5">  num_topics <span class="op">=</span> <span class="dv">10</span>, </a>
-<a class="sourceLine" id="cb60-6" data-line-number="6">  random_state <span class="op">=</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb60-7" data-line-number="7">  update_every <span class="op">=</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb60-8" data-line-number="8">  chunksize <span class="op">=</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb60-9" data-line-number="9">  passes <span class="op">=</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb60-10" data-line-number="10">  alpha <span class="op">=</span> <span class="st">'auto'</span>,</a>
-<a class="sourceLine" id="cb60-11" data-line-number="11">  per_word_topics <span class="op">=</span> <span class="va">True</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1"></a><span class="co">##python chunk</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a>lda_model_pos <span class="op">=</span> gensim.models.ldamodel.LdaModel(</span>
+<span id="cb61-3"><a href="#cb61-3"></a>  corpus <span class="op">=</span> pos_doc_term_matrix, <span class="co">#TDM</span></span>
+<span id="cb61-4"><a href="#cb61-4"></a>  id2word <span class="op">=</span> dictionary_positive, <span class="co">#Dictionary</span></span>
+<span id="cb61-5"><a href="#cb61-5"></a>  num_topics <span class="op">=</span> <span class="dv">10</span>, </span>
+<span id="cb61-6"><a href="#cb61-6"></a>  random_state <span class="op">=</span> <span class="dv">100</span>,</span>
+<span id="cb61-7"><a href="#cb61-7"></a>  update_every <span class="op">=</span> <span class="dv">1</span>,</span>
+<span id="cb61-8"><a href="#cb61-8"></a>  chunksize <span class="op">=</span> <span class="dv">100</span>,</span>
+<span id="cb61-9"><a href="#cb61-9"></a>  passes <span class="op">=</span> <span class="dv">10</span>,</span>
+<span id="cb61-10"><a href="#cb61-10"></a>  alpha <span class="op">=</span> <span class="st">&#39;auto&#39;</span>,</span>
+<span id="cb61-11"><a href="#cb61-11"></a>  per_word_topics <span class="op">=</span> <span class="va">True</span>)</span></code></pre></div>
 </div>
 <div id="build-the-lda-topic-model-1" class="slide section level2">
 <h1>Build the LDA Topic Model</h1>
-<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb61-2" data-line-number="2">lda_model_neg <span class="op">=</span> gensim.models.ldamodel.LdaModel(</a>
-<a class="sourceLine" id="cb61-3" data-line-number="3">  corpus <span class="op">=</span> neg_doc_term_matrix, <span class="co">#TDM</span></a>
-<a class="sourceLine" id="cb61-4" data-line-number="4">  id2word <span class="op">=</span> dictionary_negative, <span class="co">#Dictionary</span></a>
-<a class="sourceLine" id="cb61-5" data-line-number="5">  num_topics <span class="op">=</span> <span class="dv">10</span>, </a>
-<a class="sourceLine" id="cb61-6" data-line-number="6">  random_state <span class="op">=</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb61-7" data-line-number="7">  update_every <span class="op">=</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb61-8" data-line-number="8">  chunksize <span class="op">=</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb61-9" data-line-number="9">  passes <span class="op">=</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb61-10" data-line-number="10">  alpha <span class="op">=</span> <span class="st">'auto'</span>,</a>
-<a class="sourceLine" id="cb61-11" data-line-number="11">  per_word_topics <span class="op">=</span> <span class="va">True</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1"></a><span class="co">##python chunk</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a>lda_model_neg <span class="op">=</span> gensim.models.ldamodel.LdaModel(</span>
+<span id="cb62-3"><a href="#cb62-3"></a>  corpus <span class="op">=</span> neg_doc_term_matrix, <span class="co">#TDM</span></span>
+<span id="cb62-4"><a href="#cb62-4"></a>  id2word <span class="op">=</span> dictionary_negative, <span class="co">#Dictionary</span></span>
+<span id="cb62-5"><a href="#cb62-5"></a>  num_topics <span class="op">=</span> <span class="dv">10</span>, </span>
+<span id="cb62-6"><a href="#cb62-6"></a>  random_state <span class="op">=</span> <span class="dv">100</span>,</span>
+<span id="cb62-7"><a href="#cb62-7"></a>  update_every <span class="op">=</span> <span class="dv">1</span>,</span>
+<span id="cb62-8"><a href="#cb62-8"></a>  chunksize <span class="op">=</span> <span class="dv">100</span>,</span>
+<span id="cb62-9"><a href="#cb62-9"></a>  passes <span class="op">=</span> <span class="dv">10</span>,</span>
+<span id="cb62-10"><a href="#cb62-10"></a>  alpha <span class="op">=</span> <span class="st">&#39;auto&#39;</span>,</span>
+<span id="cb62-11"><a href="#cb62-11"></a>  per_word_topics <span class="op">=</span> <span class="va">True</span>)</span></code></pre></div>
 </div>
 <div id="view-the-topics" class="slide section level2">
 <h1>View the Topics</h1>
-<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="bu">print</span>(lda_model_pos.print_topics())</a></code></pre></div>
-<pre><code>## [(0, '0.005*&quot;wondering&quot; + 0.003*&quot;covered&quot; + 0.003*&quot;importance&quot; + 0.002*&quot;suyin&quot; + 0.002*&quot;makers&quot; + 0.002*&quot;makeup&quot; + 0.002*&quot;iwerks&quot; + 0.002*&quot;affects&quot; + 0.002*&quot;stone&quot; + 0.001*&quot;masterful&quot;'), (1, '0.053*&quot;,&quot; + 0.030*&quot;\'s&quot; + 0.028*&quot;.&quot; + 0.021*&quot;not&quot; + 0.012*&quot;connery&quot; + 0.011*&quot;really&quot; + 0.010*&quot;funny&quot; + 0.010*&quot;character&quot; + 0.009*&quot;-&quot; + 0.009*&quot;movie&quot;'), (2, '0.000*&quot;anti-climax&quot; + 0.000*&quot;suspect.this&quot; + 0.000*&quot;heidenreich&quot; + 0.000*&quot;gonzales&quot; + 0.000*&quot;excitement.I&quot; + 0.000*&quot;entrant&quot; + 0.000*&quot;entrance.I&quot; + 0.000*&quot;combatant&quot; + 0.000*&quot;casket&quot; + 0.000*&quot;kamala&quot;'), (3, '0.000*&quot;anti-climax&quot; + 0.000*&quot;suspect.this&quot; + 0.000*&quot;heidenreich&quot; + 0.000*&quot;gonzales&quot; + 0.000*&quot;excitement.I&quot; + 0.000*&quot;entrant&quot; + 0.000*&quot;entrance.I&quot; + 0.000*&quot;combatant&quot; + 0.000*&quot;casket&quot; + 0.000*&quot;kamala&quot;'), (4, '0.014*&quot;fulci&quot; + 0.005*&quot;duckling&quot; + 0.005*&quot;giallo&quot; + 0.002*&quot;lucio&quot; + 0.002*&quot;clooney&quot; + 0.002*&quot;florinda&quot; + 0.002*&quot;bolkan&quot; + 0.002*&quot;bouchet&quot; + 0.001*&quot;johanson&quot; + 0.001*&quot;route&quot;'), (5, '0.099*&quot;,&quot; + 0.082*&quot;.&quot; + 0.017*&quot;not&quot; + 0.014*&quot;but&quot; + 0.012*&quot;film&quot; + 0.012*&quot;)&quot; + 0.012*&quot;(&quot; + 0.011*&quot;movie&quot; + 0.010*&quot;``&quot; + 0.010*&quot;\'\'&quot;'), (6, '0.018*&quot;episodes&quot; + 0.006*&quot;hospital&quot; + 0.005*&quot;mighty&quot; + 0.004*&quot;bock&quot; + 0.004*&quot;tend&quot; + 0.003*&quot;beneath&quot; + 0.002*&quot;secrets&quot; + 0.001*&quot;catching&quot; + 0.000*&quot;mind.the&quot; + 0.000*&quot;garth&quot;'), (7, '0.011*&quot;escape&quot; + 0.006*&quot;grow&quot; + 0.005*&quot;facts&quot; + 0.003*&quot;laughter&quot; + 0.003*&quot;caring&quot; + 0.003*&quot;victoria&quot; + 0.002*&quot;photographed&quot; + 0.002*&quot;observation&quot; + 0.001*&quot;gut&quot; + 0.001*&quot;stroke&quot;'), (8, '0.013*&quot;filmed&quot; + 0.009*&quot;creative&quot; + 0.009*&quot;80&quot; + 0.006*&quot;30&quot; + 0.005*&quot;usa&quot; + 0.004*&quot;karen&quot; + 0.004*&quot;recall&quot; + 0.003*&quot;bomb&quot; + 0.003*&quot;ages&quot; + 0.003*&quot;area&quot;'), (9, '0.006*&quot;navy&quot; + 0.004*&quot;perfection&quot; + 0.003*&quot;fleet&quot; + 0.003*&quot;cruise&quot; + 0.002*&quot;hare&quot; + 0.002*&quot;diesel&quot; + 0.002*&quot;drum&quot; + 0.002*&quot;lemmon&quot; + 0.002*&quot;grammar&quot; + 0.002*&quot;ought&quot;')]</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1"></a><span class="co">##python chunk</span></span>
+<span id="cb63-2"><a href="#cb63-2"></a><span class="bu">print</span>(lda_model_pos.print_topics())</span></code></pre></div>
+<pre><code>## [(0, &#39;0.007*&quot;available&quot; + 0.006*&quot;larry&quot; + 0.005*&quot;energy&quot; + 0.005*&quot;psychological&quot; + 0.004*&quot;breaking&quot; + 0.003*&quot;ages&quot; + 0.002*&quot;casablanca&quot; + 0.002*&quot;believing&quot; + 0.002*&quot;marine&quot; + 0.002*&quot;explains&quot;&#39;), (1, &#39;0.032*&quot;\&#39;s&quot; + 0.016*&quot;,&quot; + 0.013*&quot;women&quot; + 0.013*&quot;men&quot; + 0.012*&quot;funny&quot; + 0.012*&quot;hero&quot; + 0.012*&quot;dujardin&quot; + 0.012*&quot;mannerisms&quot; + 0.011*&quot;not&quot; + 0.011*&quot;character&quot;&#39;), (2, &#39;0.007*&quot;amount&quot; + 0.003*&quot;laughter&quot; + 0.002*&quot;exists&quot; + 0.002*&quot;babette&quot; + 0.002*&quot;choosing&quot; + 0.001*&quot;ignorant&quot; + 0.001*&quot;gut&quot; + 0.001*&quot;cafe&quot; + 0.001*&quot;route&quot; + 0.000*&quot;wrenching&quot;&#39;), (3, &#39;0.007*&quot;footage&quot; + 0.002*&quot;supposedly&quot; + 0.000*&quot;willie&quot; + 0.000*&quot;sampson&quot; + 0.000*&quot;crowed&quot; + 0.000*&quot;isaacs&quot; + 0.000*&quot;interviewed&quot; + 0.000*&quot;documentaries&quot; + 0.000*&quot;himmler&quot; + 0.000*&quot;definitive&quot;&#39;), (4, &#39;0.002*&quot;clooney&quot; + 0.002*&quot;allen&quot; + 0.001*&quot;johanson&quot; + 0.001*&quot;spirited&quot; + 0.001*&quot;prisoners&quot; + 0.001*&quot;jewel&quot; + 0.001*&quot;rogue&quot; + 0.001*&quot;bread&quot; + 0.000*&quot;prada&quot; + 0.000*&quot;crocs&quot;&#39;), (5, &#39;0.103*&quot;,&quot; + 0.081*&quot;.&quot; + 0.021*&quot;not&quot; + 0.014*&quot;movie&quot; + 0.013*&quot;but&quot; + 0.012*&quot;\&#39;s&quot; + 0.010*&quot;film&quot; + 0.010*&quot;)&quot; + 0.010*&quot;(&quot; + 0.010*&quot;one&quot;&#39;), (6, &#39;0.000*&quot;suspect.this&quot; + 0.000*&quot;smarts.this&quot; + 0.000*&quot;gonzales&quot; + 0.000*&quot;excitement.I&quot; + 0.000*&quot;entrant&quot; + 0.000*&quot;entrance.I&quot; + 0.000*&quot;combatant&quot; + 0.000*&quot;casket&quot; + 0.000*&quot;anti-climax&quot; + 0.000*&quot;involved.now&quot;&#39;), (7, &#39;0.004*&quot;religion&quot; + 0.004*&quot;spent&quot; + 0.004*&quot;.the&quot; + 0.003*&quot;stark&quot; + 0.002*&quot;authentic&quot; + 0.002*&quot;translation&quot; + 0.001*&quot;stirred&quot; + 0.001*&quot;hiding&quot; + 0.001*&quot;pm&quot; + 0.000*&quot;preparation&quot;&#39;), (8, &#39;0.004*&quot;tend&quot; + 0.003*&quot;godfather&quot; + 0.003*&quot;beneath&quot; + 0.002*&quot;secrets&quot; + 0.000*&quot;goriest&quot; + 0.000*&quot;mind.the&quot; + 0.000*&quot;dolemite&quot; + 0.000*&quot;expletive&quot; + 0.000*&quot;sampson&quot; + 0.000*&quot;turkey&quot;&#39;), (9, &#39;0.005*&quot;vacation&quot; + 0.005*&quot;mighty&quot; + 0.004*&quot;betty&quot; + 0.003*&quot;july&quot; + 0.002*&quot;fabulous&quot; + 0.001*&quot;surfing&quot; + 0.000*&quot;icons&quot; + 0.000*&quot;arnold&quot; + 0.000*&quot;animaniacs&quot; + 0.000*&quot;ventura&quot;&#39;)]</code></pre>
 </div>
 <div id="view-the-topics-1" class="slide section level2">
 <h1>View the Topics</h1>
-<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb64-2" data-line-number="2"><span class="bu">print</span>(lda_model_neg.print_topics())</a></code></pre></div>
-<pre><code>## [(0, '0.111*&quot;laughing&quot; + 0.006*&quot;finished&quot; + 0.004*&quot;mixed&quot; + 0.004*&quot;unfunny&quot; + 0.003*&quot;worthy&quot; + 0.003*&quot;spin&quot; + 0.003*&quot;f&quot; + 0.002*&quot;jason&quot; + 0.002*&quot;elvis&quot; + 0.002*&quot;terrific&quot;'), (1, '0.007*&quot;friday&quot; + 0.002*&quot;amused&quot; + 0.001*&quot;hood&quot; + 0.000*&quot;melissa&quot; + 0.000*&quot;druids&quot; + 0.000*&quot;intensive&quot; + 0.000*&quot;denis&quot; + 0.000*&quot;l\'intrus&quot; + 0.000*&quot;fargas&quot; + 0.000*&quot;masochist&quot;'), (2, '0.005*&quot;pulled&quot; + 0.003*&quot;kinda&quot; + 0.003*&quot;emotion&quot; + 0.002*&quot;tim&quot; + 0.002*&quot;sub&quot; + 0.002*&quot;degree&quot; + 0.002*&quot;grey&quot; + 0.001*&quot;clip&quot; + 0.001*&quot;netflix&quot; + 0.001*&quot;removed&quot;'), (3, '0.029*&quot;budget&quot; + 0.010*&quot;20&quot; + 0.010*&quot;words&quot; + 0.008*&quot;fox&quot; + 0.007*&quot;nature&quot; + 0.006*&quot;casting&quot; + 0.005*&quot;itself&quot; + 0.004*&quot;gory&quot; + 0.004*&quot;epic&quot; + 0.003*&quot;shakespeare&quot;'), (4, '0.000*&quot;hunted&quot; + 0.000*&quot;handguns&quot; + 0.000*&quot;metre&quot; + 0.000*&quot;masking&quot; + 0.000*&quot;license/getting&quot; + 0.000*&quot;journalism.-&quot; + 0.000*&quot;it.-&quot; + 0.000*&quot;intuition&quot; + 0.000*&quot;minds.-&quot; + 0.000*&quot;high-tech&quot;'), (5, '0.007*&quot;details&quot; + 0.005*&quot;ali&quot; + 0.003*&quot;salman&quot; + 0.002*&quot;renting&quot; + 0.002*&quot;sucker&quot; + 0.001*&quot;spoke&quot; + 0.001*&quot;larter&quot; + 0.001*&quot;dresses&quot; + 0.001*&quot;boyle&quot; + 0.000*&quot;borges&quot;'), (6, '0.084*&quot;,&quot; + 0.063*&quot;.&quot; + 0.018*&quot;movie&quot; + 0.017*&quot;not&quot; + 0.016*&quot;but&quot; + 0.014*&quot;``&quot; + 0.014*&quot;\'\'&quot; + 0.012*&quot;)&quot; + 0.012*&quot;(&quot; + 0.009*&quot;...&quot;'), (7, '0.009*&quot;opening&quot; + 0.008*&quot;alien&quot; + 0.006*&quot;major&quot; + 0.005*&quot;famous&quot; + 0.005*&quot;driving&quot; + 0.005*&quot;merely&quot; + 0.005*&quot;fairly&quot; + 0.005*&quot;near&quot; + 0.005*&quot;hardy&quot; + 0.004*&quot;gay&quot;'), (8, '0.007*&quot;park&quot; + 0.005*&quot;torture&quot; + 0.005*&quot;include&quot; + 0.005*&quot;described&quot; + 0.004*&quot;dreams&quot; + 0.004*&quot;overdone&quot; + 0.004*&quot;ripped&quot; + 0.004*&quot;miserable&quot; + 0.003*&quot;charm&quot; + 0.003*&quot;fu&quot;'), (9, '0.006*&quot;normal&quot; + 0.005*&quot;lacked&quot; + 0.004*&quot;clues&quot; + 0.004*&quot;sucked&quot; + 0.003*&quot;killers&quot; + 0.003*&quot;partially&quot; + 0.002*&quot;these&quot; + 0.002*&quot;illogical&quot; + 0.002*&quot;attack&quot; + 0.002*&quot;keith&quot;')]</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1"></a><span class="co">##python chunk</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a><span class="bu">print</span>(lda_model_neg.print_topics())</span></code></pre></div>
+<pre><code>## [(0, &#39;0.007*&quot;finished&quot; + 0.003*&quot;uk&quot; + 0.003*&quot;charm&quot; + 0.002*&quot;amused&quot; + 0.001*&quot;smile&quot; + 0.001*&quot;arab&quot; + 0.001*&quot;goal&quot; + 0.001*&quot;hawn&quot; + 0.001*&quot;revolves&quot; + 0.001*&quot;goldie&quot;&#39;), (1, &#39;0.008*&quot;sick&quot; + 0.005*&quot;prepared&quot; + 0.005*&quot;ripped&quot; + 0.005*&quot;jackie&quot; + 0.004*&quot;sucked&quot; + 0.004*&quot;hanging&quot; + 0.003*&quot;quaid&quot; + 0.002*&quot;these&quot; + 0.002*&quot;randy&quot; + 0.002*&quot;beat&quot;&#39;), (2, &#39;0.009*&quot;joke&quot; + 0.008*&quot;wondering&quot; + 0.002*&quot;sub&quot; + 0.002*&quot;lovers&quot; + 0.001*&quot;mallika&quot; + 0.000*&quot;himesh&quot; + 0.000*&quot;lifestyles&quot; + 0.000*&quot;brit&quot; + 0.000*&quot;finer&quot; + 0.000*&quot;goes.these&quot;&#39;), (3, &#39;0.005*&quot;lacked&quot; + 0.005*&quot;ali&quot; + 0.003*&quot;salman&quot; + 0.003*&quot;kinda&quot; + 0.003*&quot;dialogs&quot; + 0.002*&quot;unique&quot; + 0.001*&quot;sells&quot; + 0.001*&quot;larter&quot; + 0.001*&quot;destroyed&quot; + 0.000*&quot;ice-cream&quot;&#39;), (4, &#39;0.001*&quot;market&quot; + 0.000*&quot;mutilation&quot; + 0.000*&quot;lordi&quot; + 0.000*&quot;idiocy&quot; + 0.000*&quot;something.lordi&quot; + 0.000*&quot;proportion&quot; + 0.000*&quot;plastic-faced&quot; + 0.000*&quot;over.i&quot; + 0.000*&quot;*sigh*&quot; + 0.000*&quot;encountered&quot;&#39;), (5, &#39;0.004*&quot;mixed&quot; + 0.004*&quot;gruesome&quot; + 0.003*&quot;jr.&quot; + 0.001*&quot;caricatures&quot; + 0.000*&quot;requirement&quot; + 0.000*&quot;jackal&quot; + 0.000*&quot;motif&quot; + 0.000*&quot;denis&quot; + 0.000*&quot;l\&#39;intrus&quot; + 0.000*&quot;bravo&quot;&#39;), (6, &#39;0.086*&quot;.&quot; + 0.058*&quot;,&quot; + 0.025*&quot;not&quot; + 0.023*&quot;movie&quot; + 0.012*&quot;but&quot; + 0.012*&quot;film&quot; + 0.009*&quot;!&quot; + 0.008*&quot;one&quot; + 0.007*&quot;like&quot; + 0.007*&quot;?&quot;&#39;), (7, &#39;0.000*&quot;hunted&quot; + 0.000*&quot;handguns&quot; + 0.000*&quot;metre&quot; + 0.000*&quot;masking&quot; + 0.000*&quot;license/getting&quot; + 0.000*&quot;journalism.-&quot; + 0.000*&quot;it.-&quot; + 0.000*&quot;intuition&quot; + 0.000*&quot;minds.-&quot; + 0.000*&quot;high-tech&quot;&#39;), (8, &#39;0.000*&quot;hunted&quot; + 0.000*&quot;handguns&quot; + 0.000*&quot;metre&quot; + 0.000*&quot;masking&quot; + 0.000*&quot;license/getting&quot; + 0.000*&quot;journalism.-&quot; + 0.000*&quot;it.-&quot; + 0.000*&quot;intuition&quot; + 0.000*&quot;minds.-&quot; + 0.000*&quot;high-tech&quot;&#39;), (9, &#39;0.124*&quot;,&quot; + 0.031*&quot;``&quot; + 0.031*&quot;\&#39;\&#39;&quot; + 0.027*&quot;)&quot; + 0.027*&quot;(&quot; + 0.020*&quot;but&quot; + 0.018*&quot;...&quot; + 0.011*&quot;see&quot; + 0.011*&quot;no&quot; + 0.009*&quot;the&quot;&#39;)]</code></pre>
 </div>
 <div id="interactive-graphics" class="slide section level2">
 <h1>Interactive Graphics</h1>
-<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="co">##python chunk</span></a>
-<a class="sourceLine" id="cb66-2" data-line-number="2">vis <span class="op">=</span> pyLDAvis.gensim.prepare(lda_model_pos, pos_doc_term_matrix, dictionary_positive)</a>
-<a class="sourceLine" id="cb66-3" data-line-number="3">pyLDAvis.save_html(vis, <span class="st">'LDA_Visualization_Positive.html'</span>) <span class="co">##saves the file</span></a>
-<a class="sourceLine" id="cb66-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb66-5" data-line-number="5">vis <span class="op">=</span> pyLDAvis.gensim.prepare(lda_model_neg, neg_doc_term_matrix, dictionary_negative)</a>
-<a class="sourceLine" id="cb66-6" data-line-number="6">pyLDAvis.save_html(vis, <span class="st">'LDA_Visualization_Negative.html'</span>) <span class="co">##saves the file</span></a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1"></a><span class="co">##python chunk</span></span>
+<span id="cb67-2"><a href="#cb67-2"></a>vis <span class="op">=</span> pyLDAvis.gensim.prepare(lda_model_pos, pos_doc_term_matrix, dictionary_positive, n_jobs <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb67-3"><a href="#cb67-3"></a>pyLDAvis.save_html(vis, <span class="st">&#39;LDA_Visualization_Positive.html&#39;</span>) <span class="co">##saves the file</span></span>
+<span id="cb67-4"><a href="#cb67-4"></a></span>
+<span id="cb67-5"><a href="#cb67-5"></a>vis <span class="op">=</span> pyLDAvis.gensim.prepare(lda_model_neg, neg_doc_term_matrix, dictionary_negative, n_jobs <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb67-6"><a href="#cb67-6"></a>pyLDAvis.save_html(vis, <span class="st">&#39;LDA_Visualization_Negative.html&#39;</span>) <span class="co">##saves the file</span></span></code></pre></div>
 </div>
 <div id="summary" class="slide section level2">
 <h1>Summary</h1>

@@ -23,6 +23,14 @@ library(reticulate)
 py_config()
 ```
 
+```{python echo = F}
+import platform
+if platform.system() == "Windows":
+    import os
+    os.environ[ 'MPLCONFIGDIR' ] = '/tmp/'
+    os.environ['SCIKIT_LEARN_DATA'] = "C:/Users/EBuchanan.HU/py_stuff"
+```
+
 ## Basic operations
 
 - How do we combine strings? 
@@ -368,7 +376,7 @@ characters = "éáö"
 library(stringi)
 
 stri_trans_general(str = characters,
-                   id = "Latin-ASCII")
+                   id = "latin-ascii")
 ```
 
 ## Removing symbols

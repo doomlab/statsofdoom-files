@@ -1,7 +1,7 @@
 ---
 title: "Part of Speech Tagging"
 author: "Erin M. Buchanan"
-date: "11/21/2019"
+date: "`r Sys.Date()`"
 output: 
   slidy_presentation:
     increment: TRUE
@@ -11,6 +11,14 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library(reticulate)
 py_config()
+```
+
+```{python echo = F}
+import platform
+if platform.system() == "Windows":
+    import os
+    os.environ[ 'MPLCONFIGDIR' ] = '/tmp/'
+    os.environ['SCIKIT_LEARN_DATA'] = "C:/Users/EBuchanan.HU/py_stuff"
 ```
 
 ## Recap
@@ -171,7 +179,7 @@ devtools::install_github("trinker/termco")
 devtools::install_github("trinker/coreNLPsetup")
 devtools::install_github("trinker/tagger")
 install.packages("qdap")
-devtools::install_github("bnosac/RDRPOSTagger")
+devtools::install_github("bnosac/RDRPOSTagger", INSTALL_opts="--no-multiarch")
 ```
 
 ## Tagger Package
@@ -268,6 +276,14 @@ models
 ##r chunk
 create_tagger <- rdr_model(language = "English", annotation = "POS")
 rdr_pos(create_tagger, x = sentence)
+```
+
+## udpipe Tagger + More!
+
+```{r}
+library(udpipe)
+tagged <- udpipe(sentence, object = "english")
+tagged[1:10, c("token", "lemma", "upos", "feats")]
 ```
 
 ## On to Python

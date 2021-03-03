@@ -1,0 +1,108 @@
+---
+title: "5 Path Analysis 2"
+author: "YOUR NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Path Analysis Part 2 Practice Assignment
+
+In the section below, you should load the `lavaan` and `semPlot` libraries. The data correlation matrix is provided for you.
+
+```{r}
+
+mother.cor <- lav_matrix_lower2full(c(1, 
+                                    .19, 1, 
+                                    -.16, -.20, 1, 
+                                    -.37, -.06, .36, 1, 
+                                    -.06, -.05, -.03, -.25, 1, 
+                                    .13, -.06, -.09, -.28, .41, 1))
+rownames(mother.cor) <- 
+  colnames(mother.cor) <- 
+  c("agg", "with", "edu", "age", "emotion", "conduct")
+```
+
+## Build the Model
+
+Use the following picture as your guide for building the path model. You can download this image online from Canvas. Be sure to save it in the same folder as your markdown file. 
+
+This model represents the relationship between maternal variables (aggression, age, education, and withdrawal) and child outcomes (conduct and emotional ability). The model predicts that child conduct and emotional capabilities are determined by interaction with the mother based on her demographics (age, education) and behavior (aggression, withdrawal). Note that the model includes a depiction of the residuals (the circles with the *D*), which you do not have to manually add in `lavaan`. However, you should correlate `~~` the residuals between the noted variables.
+
+![Path Model Picture](assignment_path2.png)
+```{r}
+
+```
+
+## Analyze the Model
+
+Analyze your path model using the `sem()` function. There are 200 participants in this dataset. 
+
+```{r}
+
+```
+
+## Summarize Your Model
+
+Use the `summary()` function to summarize your model. 
+
+```{r}
+
+```
+
+## Create a Picture
+
+Use `semPaths()` to create a picture of your path model. 
+
+```{r}
+
+```
+
+## Model Comparison
+
+In a second model, you can either remove the environmental component (withdrawal and aggression) or the genetic component (age, education used as a proxy for IQ). Specify that model below.
+
+```{r}
+
+```
+
+## Analyze the Model
+
+Analyze your path model using the `sem()` function. 
+
+```{r}
+
+```
+
+## Summarize Your Model
+
+Use the `summary()` function to summarize your model. 
+
+```{r}
+
+```
+
+## Create a Picture
+
+Use `semPaths()` to create a picture of your path model. 
+
+```{r}
+
+```
+
+## Fit Comparison
+
+Use the `anova()` function to compare the models directly using the chi-square difference test. Include the `fitmeasures()` of `aic` and `ecvi` to show the non-nested model comparison. 
+
+```{r}
+
+```
+
+QUESTION: Which model is better? 
+ANSWER:
+
+QUESTION: Interpret one of the loadings for your best model. What does it imply? Is it significant? 
+

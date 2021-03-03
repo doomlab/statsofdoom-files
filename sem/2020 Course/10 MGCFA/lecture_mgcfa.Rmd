@@ -1,0 +1,543 @@
+---
+title: "Multi-Group Confirmatory Factor Analysis"
+author: "Erin M. Buchanan"
+date: "`r Sys.Date()`"
+editor_options:
+  chunk_output_type: console
+output: 
+  slidy_presentation:
+    incremental: true 
+---
+
+```{r echo = F, message = F, warning = F}
+knitr::opts_chunk$set(echo = TRUE)
+library(lavaan)
+library(semPlot)
+```
+
+## Multigroup Models
+
+- Let's start with some terminology specific to multigroup models: invariance = equivalence 
+- Under different conditions, do the measurements yield the same measurement of attributes?
+- Generally, we've seen that latent variable models are estimating the data based on the covariances. For these models, we will also add the mean structure. 
+- While you can test many groups in these models, you will want to generally compare two at a time. 
+
+## Mean Structure
+
+- Mean structure represents the intercept of our manifest variables 
+- In regression, remember that the Y-intercept is the mean of Y (given X = 0 or no X variables)
+  - That's your best guess for what someone is going to score on that item without any other X information
+  - Same idea in a latent variable model - it's the starting value for that manifest variable.
+
+## Latent Means
+
+- Latent means are the estimated score on the latent variable for participants.
+- It's a weighted score of each item's original value with their path coefficient, and all items are averaged together. 
+- We can use `lavPredict()` to calculate these for us.
+
+## Multigroup Questions
+
+- Do items act the same across groups?
+- Is the factor structure the same across groups?
+- Are the paths equal across groups?
+- Are the latent means equal across groups?
+
+## How to MG
+
+- First, test the model as a regular CFA with everyone in the dataset 
+  - This model will tell you if you have problems with your CFA
+  - This model is the least restrictive
+  - Do not use grouping variables
+
+## How to MG
+
+- Second, test each group separately with the same CFA structure to determine that each individual group fits ok. 
+- Fit indices often decrease slightly here, because sample size is smaller (which usually has a bit more error variance).
+- Mainly, you are looking for models that completely break down 
+  - You could have a poor fitting CFA overall and use this step to see if that's because one group just does not fit. 
+  
+## How to MG  
+
+- The next steps will be to nest the two models together.
+- Nesting is like stacking the models together (like pancakes).
+- For the nested model steps, most people use Brown’s terminology and procedure.
+
+## How to MG
+
+- All the possible paths:
+  - The whole model (the picture)
+  - Loadings (regression weights)
+  - Intercepts (y-intercept for each item)
+  - Error variances (variance)
+  - Factor variances (variances for the latents)
+  - Factor covariances (correlation)
+  - Factor means (latent means)
+
+## Equal Form / Configural Invariance
+
+- In this model, you put the two groups together into the same model.
+- You do not force any of the paths to be the same, but you are forcing the model picture to be the same.
+- You are testing if both groups show the same factor structure (configuration).
+
+## Metric Invariance
+
+- In this model, you are forcing all the factor loadings (regression weights) to be exactly the same.
+- This step will tell you if the groups have the same weights for each question – or if some questions have different signs or strengths.
+
+## Scalar Invariance
+
+- In this model, you are forcing the intercepts of the items to be the same.
+- This step will tell you if items have the same starting point – remember that the y-intercept is the mean of the item.
+- If a MG model is going to indicate non-invariance – this step is often the one that breaks.
+
+## Strict Factorial Invariance
+
+- In this model, you are forcing the error variances for each item to be the same. 
+- This step will tell you if the variance (the spread) of the item is the same for each group.  
+- If you get differences, that indicates one group has a larger range of answers than another, which indicates they are more heterogeneous. 
+
+## Other Steps
+
+- Most of the previous steps are on the manifest/measured variables only.
+- Generally, we focus on those because they indicate performance of the scale.
+- Population Heterogeneity:
+  - Equal factor variances: Testing if latents have the same set of variance – means that the overall score has the same spread
+  - Equal factor covariances: Testing if the correlations between factors is the same for each group
+  - Equal latent means: Testing if the overall latent means are equal for each group
+
+## How to Judge
+
+- How can I tell if steps are invariant?
+- You will expect fit to get worse as you go because you are being more and more restrictive.
+- While we can use change in $\chi^2$, most suggest a change in CFI > .01 to be a difference in fit. 
+
+## Model Breakdown
+
+- What do I do if steps are NOT invariant?
+- Partial invariance – when strict invariance cannot be met, you can test for partial invariance
+- Partial invariance occurs when most of the items are invariant but a couple.
+- You have to meet the invariance criteria, so you trying to bring your bad model "up" to the invariant level
+- You want to do as few of items as possible
+
+## Partial Invariance
+
+- So, how do I test partial invariance?
+- We can use modification indices to see which paths are the most problematic.
+- You will change ONE item at a time.
+- Slowly add items to bring CFI up to an acceptable change level (i.e. .01 or less change from the previous model). 
+
+## Test Latent Means
+
+- After saying the measured variables are partially to fully invariant, sometimes people also calculate latent means and use *t*-tests to determine if they are different by groups. 
+  - Instead of doing all the population heterogeneity steps. 
+- At the minimum, it is useful to know how to calculate a weighted score for each participant.
+- We normally use EFA/CFA to show that each question has a nice loading and the questions load together
+- And then we use subtotals or averages to create an overall score for each latent 
+  - This procedure totally ignores the fact that loadings are often different.
+  - Why lose that information?
+  
+## Let's get started!
+
+- Equality constraints
+- We've talked before about setting paths equal to each other by calling them the same parameter name
+  - `cheese =~ a\*feta + a\*swiss`
+  - So feta and swiss will be estimated at the same value. 
+- The entire purpose of a multigroup model is to build equality constraints
+- A few packages used to do this ... but have become more trouble than they are worth, so let's look at how to do these steps with just `lavaan`. 
+
+## An Example
+
+- Using the RS-14 scale: a one-factor measure of resiliency
+
+```{r}
+library(lavaan)
+library(rio)
+res.data <- import("assignment_mgcfa.csv")
+
+head(res.data)
+```
+
+## Clean up the data
+
+- By not including other labels, we are dropping those categories 
+
+```{r}
+table(res.data$Sex)
+res.data$Sex <- factor(res.data$Sex, 
+                       levels = c(1,2),
+                       labels = c("Men", "Women"))
+res.data <- subset(res.data, !is.na(Sex))
+nrow(res.data)
+```
+
+## Start with Overall CFA
+
+- NEW: `meanstructure = TRUE`
+- Gives you the intercepts and means in the model.
+- You want to turn that one at the beginning, and you are first examining models with means, so you can tell if you have bad parameters at the start. 
+
+## Start with Overall CFA
+
+```{r}
+overall.model <- '
+RS =~ RS1 + RS2 + RS3 + RS4 + RS5 + RS6 + RS7 + RS8 + RS9 + RS10 + RS11 + RS12 + RS13 + RS14
+'
+
+overall.fit <- cfa(model = overall.model,
+                   data = res.data, 
+                   meanstructure = TRUE) ##this is important 
+```
+
+## Examine Overall Fit
+
+```{r}
+summary(overall.fit, 
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Make a table of fit indices
+
+```{r}
+library(knitr)
+table_fit <- matrix(NA, nrow = 9, ncol = 6)
+colnames(table_fit) = c("Model", "X2", "df", "CFI", "RMSEA", "SRMR")
+table_fit[1, ] <- c("Overall Model", round(fitmeasures(overall.fit, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+kable(table_fit)
+```
+
+## Create a Picture
+
+```{r semplot, messages = F}
+library(semPlot)
+
+semPaths(overall.fit, 
+         whatLabels = "std", 
+         edge.label.cex = 1,
+         layout = "tree")
+```
+
+## Men Overall Summary
+
+```{r}
+men.fit <- cfa(model = overall.model,
+               data = res.data[res.data$Sex == "Men" , ], 
+               meanstructure = TRUE)
+summary(men.fit,
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Women Overall Summary
+
+```{r}
+women.fit <- cfa(model = overall.model,
+                 data = res.data[res.data$Sex == "Women" , ], 
+                 meanstructure = TRUE)
+summary(women.fit,
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Add the fit to table
+
+```{r}
+table_fit[2, ] <- c("Men Model", round(fitmeasures(men.fit, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+table_fit[3, ] <- c("Women Model", round(fitmeasures(women.fit, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+kable(table_fit)
+```
+
+## Configural Invariance
+
+- Both groups "pancaked" together 
+
+```{r}
+configural.fit <- cfa(model = overall.model,
+                      data = res.data,
+                      meanstructure = TRUE,
+                      group = "Sex")
+summary(configural.fit,
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Add the fit to table
+
+```{r}
+table_fit[4, ] <- c("Configural Model", round(fitmeasures(configural.fit, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+kable(table_fit)
+```
+
+## Metric Invariance
+
+- Are the factor loadings the same? 
+
+```{r}
+metric.fit <- cfa(model = overall.model,
+                  data = res.data,
+                  meanstructure = TRUE,
+                  group = "Sex",
+                  group.equal = c("loadings"))
+summary(metric.fit,
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Add the fit to table
+
+```{r}
+table_fit[5, ] <- c("Metric Model", round(fitmeasures(metric.fit, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+kable(table_fit)
+```
+
+## Scalar Invariance
+
+- Are the item intercepts the same? 
+
+```{r}
+scalar.fit <- cfa(model = overall.model,
+                  data = res.data,
+                  meanstructure = TRUE,
+                  group = "Sex",
+                  group.equal = c("loadings", "intercepts"))
+summary(scalar.fit,
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Add the fit to table
+
+```{r}
+table_fit[6, ] <- c("Scalar Model", round(fitmeasures(scalar.fit, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+kable(table_fit)
+```
+
+## Strict (Error) Invariance
+
+- Are the item residuals the same? 
+
+```{r}
+strict.fit <- cfa(model = overall.model,
+                  data = res.data,
+                  meanstructure = TRUE,
+                  group = "Sex",
+                  group.equal = c("loadings", "intercepts", "residuals"))
+summary(strict.fit,
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Add the fit to table
+
+```{r}
+table_fit[7, ] <- c("Strict Model", round(fitmeasures(strict.fit, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+kable(table_fit)
+```
+
+## Partial Invariance
+
+- We can see in this last step that we have a difference in models based on change in CFI. 
+- Now, we have to figure out where the problem is and update our model to fix that problem.
+- You would only look for problems *in the step you are in*.
+
+## Partial Invariance
+
+- Figure out which level you need:
+  - metric `=~` for loadings
+  - scalar `~1` for intercepts
+  - strict `~~` for variances
+- Change each item one at a time and note the changes
+
+## Partial Invariance
+
+```{r}
+##write out partial codes
+partial_syntax <- paste(colnames(res.data)[3:16], #all the columns
+                        "~~", #residuals
+                        colnames(res.data)[3:16]) #all columns again 
+partial_syntax
+
+CFI_list  <- 1:length(partial_syntax)
+names(CFI_list) <- partial_syntax
+
+for (i in 1:length(partial_syntax)){
+  
+  temp <- cfa(model = overall.model, 
+              data = res.data,
+              meanstructure = TRUE,
+              group = "Sex",
+              group.equal = c("loadings", "intercepts", "residuals"),
+              group.partial = partial_syntax[i])
+  
+  CFI_list[i] <- fitmeasures(temp, "cfi")
+}
+
+CFI_list
+which.max(CFI_list)
+```
+
+## Free up those paramers!
+
+```{r}
+strict.fit2 <- cfa(model = overall.model,
+                  data = res.data,
+                  meanstructure = TRUE,
+                  group = "Sex",
+                  group.equal = c("loadings", "intercepts", "residuals"), 
+                  group.partial = c("RS9 ~~ RS9"))
+summary(strict.fit2,
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Add the fit to table
+
+```{r}
+table_fit[8, ] <- c("Strict Model RS9", round(fitmeasures(strict.fit2, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+kable(table_fit)
+```
+
+## Find one more free parameter
+
+- We want to see if we can get up to .902 - .01 = .892 for our CFI. 
+
+```{r}
+for (i in 1:length(partial_syntax)){
+  
+  temp <- cfa(model = overall.model, 
+              data = res.data,
+              meanstructure = TRUE,
+              group = "Sex",
+              group.equal = c("loadings", "intercepts", "residuals"),
+              group.partial = c("RS9 ~~ RS9", partial_syntax[i]))
+  
+  CFI_list[i] <- fitmeasures(temp, "cfi")
+}
+
+CFI_list
+which.max(CFI_list)
+```
+
+## Add one more free parameter
+
+```{r}
+strict.fit3 <- cfa(model = overall.model,
+                  data = res.data,
+                  meanstructure = TRUE,
+                  group = "Sex",
+                  group.equal = c("loadings", "intercepts", "residuals"), 
+                  group.partial = c("RS9 ~~ RS9", "RS13 ~~ RS13"))
+summary(strict.fit3,
+        standardized = TRUE, 
+        rsquare = TRUE, 
+        fit.measure = TRUE)
+```
+
+## Partial Invariance Met!
+
+```{r}
+table_fit[9, ] <- c("Strict Model RS9 + 13", round(fitmeasures(strict.fit3, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+
+kable(table_fit)
+```
+
+## Interpretation
+
+- The RS is mostly invariant – the structure, loadings, intercepts, and most of the error variances are the same across men and women.
+- However, two items show larger variances:
+    - RS9
+    - RS13
+    - Where, women show much larger variances on both of those questions. 
+        - I keep interested in things.
+        - My life has meaning. 
+
+## lavPredict on the items
+
+```{r}
+predicted_scores <- lavPredict(strict.fit3, type = "ov")
+
+table(res.data$Sex)
+
+predicted_scores <- as.data.frame(do.call(rbind, predicted_scores))
+predicted_scores$Sex <- c(rep("Women", 266), rep("Men", 244))
+
+predicted_scores$sum <- apply(predicted_scores[ , 1:14], 1, sum)
+head(predicted_scores)
+
+tapply(predicted_scores$sum, predicted_scores$Sex, mean)
+```
+
+## lavPredict on the factor scores
+
+```{r}
+res.data$sum <- apply(res.data[ , 3:16], 1, sum)
+
+tapply(res.data$sum, res.data$Sex, mean)
+
+latent_means <- lavPredict(strict.fit3)
+
+latent_means <- as.data.frame(do.call(rbind, latent_means))
+latent_means$Sex <- c(rep("Women", 266), rep("Men", 244))
+
+options(scipen = 999)
+tapply(latent_means$RS, latent_means$Sex, mean) 
+
+tapply(latent_means$RS, latent_means$Sex, mean) * #latent mean
+  tapply(res.data$sum, res.data$Sex, sd, na.rm = T) + #real sum
+  tapply(res.data$sum, res.data$Sex, mean, na.rm = T) #real sd
+```
+
+## Calculate your favorite stat
+
+```{r effectsize, message = F}
+library(MOTE)
+M <- tapply(predicted_scores$sum, predicted_scores$Sex, mean)
+SD <- tapply(predicted_scores$sum, predicted_scores$Sex, sd)
+N <- tapply(predicted_scores$sum, predicted_scores$Sex, length)
+
+effect_size <- d.ind.t(M[1], M[2], SD[1], SD[2], N[1], N[2], a = .05)
+effect_size$estimate
+effect_size$statistic
+```
+
+## Summary
+
+- In this lecture you've learned:
+  
+  - The concepts and terminology for a multigroup model
+  - How to implement a multigroup model
+  - How to assess for partial invariance
+  - How to assess latent means and their potential differences 

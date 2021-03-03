@@ -1,0 +1,110 @@
+---
+title: "9 MTMM"
+author: "YOUR NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## MTMM Practice Assignment
+
+In this example, we will expand our previous example to include one more measurement method of meaning and purpose. The data includes three scales that measure meaning and purpose: The Meaning in Life Questionnaire, the Purpose in Life Questionnaire, and the Seeking of Noetic Goals test. The mapping of traits and methods are:
+
+- Traits:
+    - Meaning: 
+        - MLQ 1, 2, 5, 10
+        - SONG 1, 9
+        - PIL 4, 17
+    - Purpose:
+        - MLQ 3, 4, 6, 8, 9
+        - SONG 2, 8
+        - PIL 3, 20
+- Methods
+    - MLQ (m questions)
+    - SONG (s questions)
+    - PIL (p questions)
+
+## Data and Libraries
+
+Import the data and libraries you need below.
+
+```{r}
+
+```
+
+## Model 1
+
+In this section, build, analyze, and summarize model 1. You can include a diagram if you like, but we will mainly focus on the model building, `cfa()`, and `summary()` in this assignment. 
+
+```{r}
+
+```
+
+## Model 2
+
+In this section, build, analyze, and summarize model 2 for the methods only model. 
+
+```{r}
+
+```
+
+## Model 3
+
+In this section, build, analyze, and summarize model 3 for the perfectly correlated traits model. 
+
+```{r}
+
+```
+
+## Model 4
+
+In this section, build, analyze, and summarize model 4 for the uncorrelated methods model. 
+
+```{r}
+
+```
+
+## Comparisons
+
+We can use `kable()` from the `knitr` library to help us build a table to compare models. You will want to change the `1:5` to the appropriate model step using `fitmeasures` to grab the fit statistics mentioned. An example is provided below. There are lots of ways to make these types of tables, including `broom`. Additionally, `flextable` is a great table package as well. Here's just an example of how one might summarize their models. 
+
+```{r model_table, results = 'asis'}
+library(knitr)
+tableprint <- matrix(NA, nrow = 4, ncol = 6)
+colnames(tableprint) <- c("Model", "Chi-Square", "df", 
+                         "RMSEA", "SRMR", "CFI")
+##replace the 1:5 with the appropriate code
+##the code should be fitmeasures(step1.fit, c("chisq", "df", "rmsea", "srmr", "cfi"))
+##add that code for each section
+tableprint[1, ] = c("Model 1 - Correlated traits and methods", 1:5)
+tableprint[2, ] = c("Model 2 - No traits, correlated methods", 1:5)
+tableprint[3, ] = c("Model 3 - Perfectly correlated traits, correlated methods", 1:5)
+tableprint[4, ] = c("Model 4 - Correlated traits, uncorrelated methods", 1:5)
+
+kable(tableprint)
+```
+
+QUESTION: Using CFI change, what do the model results suggest? For each step note if the models are different, and if that supports/does not support convergent and divergent validity. 
+ANSWER MODEL 1 VERSUS MODEL 2:
+ANSWER MODEL 1 VERSUS MODEL 3:
+ANSWER MODEL 1 VERSUS MODEL 4: 
+
+## Interpreting Parmaters
+
+Print out the `parameterestimates` for Model 1. 
+
+```{r}
+
+```
+
+QUESTION: Are the parameter estimates for the traits higher than the ones for the methods? 
+ANSWER:
+
+QUESTION: Examine the correlations between traits. Do the correlations support divergent validity of the traits? 
+ANSWER:
+
+QUESTION: Examine the correlation between the methods. Do the correlations support the divergent validity of the methods?
+ANSWER: 

@@ -1,0 +1,158 @@
+---
+title: "10 MGCFA"
+author: "YOUR NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## MGCFA Class Assignment
+
+Using the same RS14 dataset from class, examine the multigroup analysis using `Ethnicity` as the grouping variable of interest. 
+
+## Data Libraries
+
+Load the included dataset and libraries for this assignment. 
+
+```{r}
+
+```
+
+## Data Cleanup
+
+In this example, code 1 as Black and 2 as White. Be sure to first change the variable to a factor with labels. 
+
+```{r}
+
+```
+
+## Overall CFA
+
+In this section, build the overall one-factor CFA for the RS14. You can use the example we did in class to get started. Include the `cfa()` and `summary()` of your model here. You should call this model `overall.model`.
+
+```{r}
+
+```
+
+## White Overall Summary
+
+Create a `white.fit` of the model for only White participants. Include the `summary()` of this model. 
+
+```{r}
+
+```
+
+## Black Overall Summary
+
+Create a `black.fit` of the model for only Black participants. Include the `summary()` of this model. 
+
+```{r}
+
+```
+
+## Add the fit to table
+
+In the code below, we've started a table for our fit indices. Fill in the section labeled `#update here` with the same `round(fitmeasures(...))` code used in the first row. 
+
+```{r}
+library(knitr)
+table_fit <- matrix(NA, nrow = 8, ncol = 6)
+colnames(table_fit) = c("Model", "X2", "df", "CFI", "RMSEA", "SRMR")
+table_fit[1, ] <- c("Overall Model", round(fitmeasures(overall.fit, 
+                                                 c("chisq", "df", "cfi",
+                                                   "rmsea", "srmr")),3))
+kable(table_fit)
+
+table_fit[2, ] <- c("White Model", #update here
+                    )
+
+table_fit[3, ] <- c("Black Model", #update here
+                    )
+
+kable(table_fit)
+```
+
+QUESTION: Does your model appear to fit ok overall and within each individual group? 
+ANSWER: 
+
+## Configural Invariance
+
+Create a `configural.fit` model using `Ethnicity` as your group variable. Include a `summary()` of this model. Add in the `configural.fit` to your table. 
+
+```{r}
+
+
+table_fit[4, ] <- c("Configural Model", #update here
+                    )
+
+kable(table_fit)
+```
+
+## Metric Invariance
+
+In this section, create `metric.fit`, summarize the model, and add the model information to your table. 
+
+```{r}
+
+
+table_fit[5, ] <- c("Metric Model", #update here
+                    )
+
+kable(table_fit)
+```
+
+## Scalar Invariance
+
+In this section, create `scalar.fit`, summarize the model, and add the model information to your table.  
+
+```{r}
+
+table_fit[6, ] <- c("Scalar Model", #update here
+                    )
+
+kable(table_fit)
+```
+
+## Strict (Error) Invariance
+
+Last, add `strict.fit` by including error variances in your multigroup model, summarize that model, and include the fit information in the table. 
+
+```{r}
+
+table_fit[7, ] <- c("Strict Model", #update here
+                    )
+
+kable(table_fit)
+```
+
+QUESTION: Looking at your results, do you see anywhere that indicates non-invariance (i.e., has a larger change than CFI = .01)? Where did it appear to break down?
+ANSWER:
+
+## Partial Invariance
+
+Use the code provided from class to calculate the potential pathway that should be freed to improve our model fit for partial invariance. 
+
+```{r}
+
+```
+
+## Update the Model
+
+Create `partial.fit` by updating your model to allow for the freed parameter. Summarize the model, and add this model's fit information to your table. 
+
+```{r}
+
+table_fit[8, ] <- c("Partial Model", #update here
+                    )
+
+kable(table_fit)
+```
+
+QUESTION: Does the freeing of this one parameter bring your model up to partial invariance for that step? 
+ANSWER:
+
+QUESTION: What does the result of the partial invariance step imply for interpreting this scale? 
+ANSWER:

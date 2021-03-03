@@ -1,0 +1,104 @@
+---
+title: "8 Full SEM"
+author: "YOUR NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Full SEM Class Assignment
+
+- We are going to create a model of the following variables:
+
+    - University composite (formative): 
+        - Class - perception of the way school work, classes, grades, and other related academic goals are going for a student.
+        - Social - perception of social networks, friendships, support systems, and connectedness on campus.
+        - Learning - perception of student's happiness with the learning environment on campus (professors, academic support, fit with major, etc.).
+    - Psychological factor (reflexive):
+        - Depression
+        - Anxiety
+        - Stress
+    - Health factor (reflexive):
+        - Chronic health issues
+        - Physical fitness and active health
+        - Sexual health
+
+- The university composite should predict both the psychological and health factors. We expect that as university perception changes, changes in mental and physical health symptoms should exist as well. Note: all variables have been scaled so that high scores are negative indicators.  
+
+## The Data
+
+- Here is the data as a covariance matrix: 
+
+```{r set up code}
+library(lavaan)
+university.cov <- lav_matrix_lower2full(
+    c(169.00, 
+      73.710, 182.2500,
+      73.229, 88.4250, 171.6100,
+      63.375, 72.5625, 127.7250, 156.2500,
+      42.120, 67.4325, 122.0265, 123.1875, 182.2500,
+      57.226, 63.2610, 117.1926, 154.4250, 138.0240, 201.6400,
+      30.875, 32.0625, 60.9805, 62.9375, 76.9500, 79.5910, 90.2500,
+      36.075, 38.9610, 61.0722, 58.2750, 65.9340, 70.9290, 81.1965, 123.2100,
+      18.096, 21.1410, 26.2131, 39.1500, 44.6310, 46.9452, 48.7635, 56.0106, 75.6900))
+
+rownames(university.cov) <-
+    colnames(university.cov) <-
+    c("class", "social", "learn", "chronic", "physical", "sex", 
+      "depression", "anxiety", "stress")
+```
+
+## Build the Model
+
+- In this section, build the full structural model with the composite indicator. 
+
+```{r}
+
+```
+
+## Analyze the Model
+
+- Analyze the model with the `sem()` function. There are 300 participants in the dataset. 
+
+```{r}
+
+```
+
+Oh no! Your model says it is not identified. What should you do? In this case, we have to remember that the entire model has to be identified. 
+
+Because University is predicting only Psychology and Health, we have two regression paths that act like a small measurement model for University. The identification for this section is not met, so we need to set them equal to each other or create a marker variable to control for these paths. The easiest solution is to set `University =~ Psychology + Health` rather than set two separate regressions. Rerun your `composite.fit` to make sure you do not get an error. 
+
+```{r}
+composite.model <- '
+University <~ class + social + learn
+Health =~ chronic + physical + sex
+Psychology =~ depression + anxiety + stress
+University =~ Psychology + Health
+'
+```
+
+```{r}
+
+```
+
+## Summarize the Model
+
+- Include a summary of the model with standardized loadings, fit measures, and r-square values.
+
+```{r}
+
+```
+
+## Diagram the Model
+
+- Include a `semPlot` of your final model. 
+
+```{r}
+
+```
+
+QUESTION: Look at the solution of the final model and describe that model. Do all of the items load with their latent variable? Does university appear to predict psychological and health factors? 
+ANSWER:

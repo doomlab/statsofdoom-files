@@ -1,0 +1,100 @@
+---
+title: "12 IRT"
+author: "YOUR NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Dichotomous IRT Class Assignment
+
+The included dataset includes data from an Educational Psychology Test scored as 0 (answered incorrectly) and 1 (answered correctly). Import the data (assignment_dirt.csv) and libraries below. 
+
+```{r}
+
+```
+
+## Two Parameter Logistic
+
+Include a 2PL calculated on just columns V2 through V5. Save the model as `edu.model`. Use the `coef()` function to examine the difficulty and discrimination parameters. 
+
+```{r}
+
+```
+
+## 2PL Plots
+
+Include the ICC and TIF plots to view all the items and overall test information at once. 
+
+```{r}
+
+```
+
+## Three Parameter Logistic
+
+Include the 3PL model as `edu2.model`. Use the `coef()` function to examine the difficulty, discrimination, and guessing parameters. 
+
+```{r}
+
+```
+
+## 3PL Plots
+
+Include the ICC and TIF plots to view all the items and overall test information at once. 
+
+```{r}
+
+```
+
+## Compare Models
+
+Use the `anova()` function to compare the two models. 
+
+```{r}
+
+```
+
+QUESTION: Which model was better? Does it appear that the guessing parameter adds something useful to the model? 
+ANSWER:
+
+QUESTION: Which items would be considered good items based on discrimination?
+ANSWER:
+
+## Polytomous IRT 
+
+Load the assignment_mirt data below. You should reverse code items 5, 8, and 13 using `8 - columns` to ensure all items are in the same direction. The scale included examines evaluations of job candidates rated on 15 different qualities. 
+
+```{r}
+
+```
+
+## Graded Partial Credit Model
+
+Create a graded partial credit model to analyze the scale, and save this model as `gpcm.model`. Include the `coef()` for the model to help you answer the questions below. 
+
+```{r}
+
+```
+
+## GPCM Plots
+
+Include the ICC and TIF plots to view all the items and overall test information at once. 
+
+```{r}
+
+```
+
+QUESTION: Examine the items. Do they appear ordered where each answer function is ordered correctly from 1 to 7?
+ANSWER:
+
+QUESTION: Examine the items. Do we need all 7 items on this scale? (i.e., do they all have the probability of being the most likely answer choice?)
+ANSWER:
+
+QUESTION: Which items indicate good discrimination? 
+ANSWER:
+        
+
+

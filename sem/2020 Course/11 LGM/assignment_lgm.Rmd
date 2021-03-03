@@ -1,0 +1,172 @@
+---
+title: "11 LCM"
+author: "YOUR NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Latent Growth Modeling Class Assignment
+
+In the following dataset, participants were given a task to read a paragraph while their heart rate was measured by a BioPac monitor. Each heart rate was subtracted from a baseline heart rate to measure change in heart rate. 
+
+```{r data}
+library(lavaan)
+heart.cov <- lav_matrix_lower2full(
+  c(
+  3.59,				
+  3.11,	3.10,			
+  2.91,	2.80,	2.82,		
+  3.22,	3.05,	2.86,	3.30,	
+  2.88,	2.63,	2.62,	2.82,	2.71)
+  )
+
+heart.mean <- c(11.97,	11.72,	12.03,	11.96,	12.10)
+
+rownames(heart.cov) <- colnames(heart.cov) <- names(heart.mean) <- c("Time1", "Time2", "Time3", "Time4", "Time5")
+```
+
+## Intercept Only Model
+
+Create the intercept only model as `heart.model1`, use `growth()` to analyze the data, and run a `summary()` to view the output from this model. You will use all five time points for this model. You can add the fit indices at the end of the document. As long as you name your models as suggested, the parameter table has been provided for you. Assume there are 200 participants in this dataset. 
+
+```{r}
+
+```
+
+## Random Intercept Only Model
+
+Create the random intercept model as `heart.model2`, analyze, and summarize the model here.
+
+```{r}
+
+```
+
+## Random Slope + Intercepts
+
+Create the random slope and intercept model as `heart.model3`, analyze, and summarize the model here. 
+
+```{r}
+
+```
+
+## Full Slopes + Intercept
+
+Create the full slope model as `heart.model4`, analyze, and summarize the model here. 
+
+```{r}
+
+```
+
+## Totally Unconstrained Model
+
+Create the final model as `heart.model5`, analyze, and summarize the model here. 
+
+```{r}
+
+```
+
+## Comparison Table Fit Indices
+
+Change the sections that say `#fill in here` to be the appropriate fit indices for your table. 
+
+```{r}
+library(knitr)
+fit.table <- matrix(NA, nrow = 5, ncol = 6)
+colnames(fit.table) <- c("Model", "X2", "df", "RMSEA", "SRMR", "CFI")
+fit.table[1, ] <- c("Intercept Only", #fill this in
+                    )
+fit.table[2, ] <- c("Random Intercept", #fill this in
+                    )
+fit.table[3, ] <- c("Random Slope", #fill this in
+                    )
+fit.table[4, ] <- c("Full Slope", #fill this in
+                    )
+fit.table[5, ] <- c("Unconstrained", #fill this in
+                    )
+kable(fit.table)
+```
+
+## Comparison Table Parameters
+
+This table has been created for you below. As long as you've named your models appropriately, this table should fill in the parameters for you. 
+
+```{r}
+par.table <- matrix(NA, nrow = 5, ncol = 7)
+colnames(par.table) <- c("Model", "Intercept Mean", "Intercept Variance", "Residual Variance", "Slope Mean", "Slope Variance", "Covariance")
+
+#model 1
+par.table[1, ] <- c("Intercept Only", 
+                    round(heart.fit1.par$est[heart.fit1.par$lhs == "i" & heart.fit1.par$op == "~1"], 3),
+                    "X", 
+                    round(heart.fit1.par$est[heart.fit1.par$lhs == "Time1" & heart.fit1.par$op == "~~"], 3),
+                    "X", 
+                    "X", 
+                    "X")
+
+#model 2
+par.table[2, ] <- c("Random Intercept", 
+                    round(heart.fit2.par$est[heart.fit2.par$lhs == "i" & heart.fit2.par$op == "~1"], 3),
+                    round(heart.fit2.par$est[heart.fit2.par$lhs == "i" & heart.fit2.par$op == "~~"], 3), 
+                    round(heart.fit2.par$est[heart.fit2.par$lhs == "Time1" & heart.fit2.par$op == "~~"], 3),
+                    "X", 
+                    "X", 
+                    "X")
+
+#model 3
+par.table[3, ] <- c("Random Slope", 
+                    round(heart.fit3.par$est[heart.fit3.par$lhs == "i" & heart.fit3.par$op == "~1"], 3),
+                    round(heart.fit3.par$est[heart.fit3.par$lhs == "i" & heart.fit3.par$op == "~~" & heart.fit3.par$rhs == "i"], 3), 
+                    round(heart.fit3.par$est[heart.fit3.par$lhs == "Time1" & heart.fit3.par$op == "~~"], 3),
+                    "X", 
+                    round(heart.fit3.par$est[heart.fit3.par$lhs == "s" & heart.fit3.par$op == "~~"], 3), 
+                    "X")
+
+#model 4
+par.table[4, ] <- c("Full Slope", 
+                    round(heart.fit4.par$est[heart.fit4.par$lhs == "i" & heart.fit4.par$op == "~1"], 3),
+                    round(heart.fit4.par$est[heart.fit4.par$lhs == "i" & heart.fit4.par$op == "~~" & heart.fit4.par$rhs == "i"], 3), 
+                    round(heart.fit4.par$est[heart.fit4.par$lhs == "Time1" & heart.fit4.par$op == "~~"], 3),
+                    round(heart.fit4.par$est[heart.fit4.par$lhs == "s" & heart.fit4.par$op == "~1"], 3), 
+                    round(heart.fit4.par$est[heart.fit4.par$lhs == "s" & heart.fit4.par$op == "~~"], 3), 
+                    round(heart.fit4.par$est[heart.fit4.par$lhs == "i" & heart.fit4.par$op == "~~" & heart.fit4.par$rhs == "s"], 3))
+
+#model 5
+heart.fit5.par <- parameterestimates(heart.fit5)
+
+residual_numbers <- paste(round(heart.fit5.par$est[heart.fit5.par$lhs == "Time1" & heart.fit5.par$op == "~~"], 3), 
+                          round(heart.fit5.par$est[heart.fit5.par$lhs == "Time2" & heart.fit5.par$op == "~~"], 3),
+                          round(heart.fit5.par$est[heart.fit5.par$lhs == "Time3" & heart.fit5.par$op == "~~"], 3),
+                          round(heart.fit5.par$est[heart.fit5.par$lhs == "Time4" & heart.fit5.par$op == "~~"], 3), 
+                          round(heart.fit5.par$est[heart.fit5.par$lhs == "Time5" & heart.fit5.par$op == "~~"], 3))
+
+#put data in table
+par.table[5, ] <- c("Random Slope", 
+                    round(heart.fit5.par$est[heart.fit5.par$lhs == "i" & heart.fit5.par$op == "~1"], 3),
+                    round(heart.fit5.par$est[heart.fit5.par$lhs == "i" & heart.fit5.par$op == "~~" & heart.fit5.par$rhs == "i"], 3), 
+                    residual_numbers,
+                    round(heart.fit5.par$est[heart.fit5.par$lhs == "s" & heart.fit5.par$op == "~1"], 3), 
+                    round(heart.fit5.par$est[heart.fit5.par$lhs == "s" & heart.fit5.par$op == "~~"], 3), 
+                    round(heart.fit5.par$est[heart.fit5.par$lhs == "i" & heart.fit5.par$op == "~~" & heart.fit5.par$rhs == "s"], 3))
+kable(par.table)
+```
+
+## Interpret your findings:
+
+QUESTION: Which model was the best?
+ANSWER:
+
+QUESTION: Given the best model, what does that imply about our growth model? (i.e., does it follow the appropriate pattern of slopes and intercepts are important, but the residuals are low?)
+ANSWER:
+
+QUESTION: Interpret the intercept. Where do people start in heart rate change? Is that variable across participants? 
+ANSWER: 
+
+QUESTION: Interpret the slope. Is there a change in heart rate across the experiment?
+ANSWER:
+
+QUESTION: Interpret the covariance. Is there a relationship between the slope and intercept? 
+ANSWER:

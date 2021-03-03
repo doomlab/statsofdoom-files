@@ -326,7 +326,7 @@ getwd()
 - You can set the working directory by doing something like this
 - I would suggest this is pretty error prone and breaks when you move files!
 
-```{r}
+```{r eval = F}
 setwd("/Users/buchanan/OneDrive - Harrisburg University/Teaching/ANLY 580/updated/1 Introduction R")
 ```
  

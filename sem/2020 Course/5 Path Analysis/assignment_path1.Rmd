@@ -1,0 +1,114 @@
+---
+title: "5 Path Analysis 1"
+author: "YOUR NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Path Analysis Part 1 Practice Assignment
+
+In the section below, you should load the `lavaan` and `semPlot` libraries. The data correlation matrix is provided for you.
+
+```{r}
+
+academic.cor <- lav_matrix_lower2full(c(1, 
+                                        .178, 1, 
+                                        .230, .327, 1, 
+                                        .106, .245, .183, 1, 
+                                        .195, .356, .721, .178, 1))
+rownames(academic.cor) <- 
+  colnames(academic.cor) <- 
+  c("race", "ses", "cog", "school", "acad")
+```
+
+## Build the Model
+
+Use the following picture as your guide for building the path model. You can download this image online from Canvas. Be sure to save it in the same folder as your markdown file. 
+
+This model represents the relationship demographic variables (race, SES, school type), individual ability (cognitive ability) predicting academic achievement. 
+
+![Path Model Picture](assignment_path1_1.png)
+Create the `lavaan` model code in the code box below. 
+
+```{r}
+
+```
+
+## Analyze the Model
+
+Analyze your path model using the `sem()` function. There are 18058 participants in the data. 
+
+```{r}
+
+```
+
+## Summarize Your Model
+
+Use the `summary()` function to summarize your model. 
+
+```{r}
+
+```
+
+## Create a Picture
+
+Use `semPaths()` to create a picture of your path model. 
+
+```{r}
+
+```
+
+## Mediation Models
+
+For this example, you will create a mediation model with two indirect effects. 
+
+```{r}
+
+mediation.cov <- lav_matrix_lower2full(c(84.85, 
+                                         71.28, 140.34, 
+                                         18.83, -6.25, 72.92, 
+                                         60.05, 84.54, 37.18, 139.48))
+rownames(mediation.cov) <-
+  colnames(mediation.cov) <- c("teacher", "social", "material", "achieve")
+```
+
+## Build the Model
+
+Use the following image to create your mediation model. Note that you will have two indirect effects: one representing the top half of the model and one representing the bottom half of the model. 
+
+This model represents the mediating effects of social climate and the material covered in class on the relationship between teacher expectations and student achievement. The model predicts that teacher expectations actually predict social climate and materials, which then lead to student achievement levels if a mediating effect is found. 
+
+![Path Model Picture](assignment_path1_2.png)
+```{r}
+
+```
+
+## Analyze the Model
+
+Analyze your path model using the `sem()` function. There are 40 participants in this data set. 
+
+```{r}
+
+```
+
+## Summarize Your Model
+
+Use the `summary()` function to summarize your model. 
+
+```{r}
+
+```
+
+## Create a Picture
+
+Use `semPaths()` to create a picture of your path model. 
+
+```{r}
+
+```
+
+

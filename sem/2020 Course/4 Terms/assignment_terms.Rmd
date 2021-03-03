@@ -1,0 +1,96 @@
+---
+title: "4 Terms"
+author: "YOUR NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Terminology Practice Assignment
+
+We are going to use an example from the `lavaan` tutorials, which you can find at https://lavaan.ugent.be/tutorial/sem.html. The model represents a complex model that will allow you to think about some of the terminology covered in the lecture.
+
+Here's a picture of the model:
+
+![SEM Example](https://lavaan.ugent.be/tutorial/figure/sem-1.png)
+
+We have not covered yet how to write the model code, but you can see it below. 
+
+```{r}
+library(lavaan)
+model <- '
+  # measurement model
+    ind60 =~ x1 + x2 + x3
+    dem60 =~ y1 + y2 + y3 + y4
+    dem65 =~ y5 + y6 + y7 + y8
+  # regressions
+    dem60 ~ ind60
+    dem65 ~ ind60 + dem60
+  # residual correlations
+    y1 ~~ y5
+    y2 ~~ y4 + y6
+    y3 ~~ y7
+    y4 ~~ y8
+    y6 ~~ y8
+'
+fit <- sem(model, data=PoliticalDemocracy)
+```
+
+## Understanding Terminology
+
+QUESTION: How many latent variables are in the model?
+ANSWER:
+
+QUESTION: How many manifest variables are in the model?
+ANSWER:
+
+QUESTION: What would you label `ind60` predicting `x1`, `x2`, and `x3`?
+ANSWER:
+
+QUESTION: What would you label `ind60` predicting `dem60` and `dem65`?
+ANSWER:
+
+QUESTION: Is `ind60` an endogenous or exogenous variable? 
+ANSWER:
+
+QUESTION: Is `dem60` an endogenous or exogenous variable? 
+ANSWER:
+
+## Understanding Identification
+
+Here's a visualization of the model using `semPlot`, which shows you all the estimated paths.
+
+```{r}
+semPaths(fit)
+```
+
+QUESTION: How many variances (error/latent variable) are estimated? 
+ANSWER:
+
+QUESTION: How many regressions are estimated?
+ANSWER:
+
+QUESTION: How many loadings are estimated? 
+ANSWER:
+
+QUESTION: How many covariances are estimated?
+ANSWER:
+
+QUESTION: How many *possible* parameters can you estimate? 
+ANSWER:
+
+QUESTION: How many *parameters* are you estimating? (add variances, regressions, loadings, covariances)
+ANSWER:
+
+QUESTION: Given the previous two answers, what is the *df* for your model?
+ANSWER:
+
+You can check your work against the model summary provided below. It's ok if you get it wrong! Learning how to read model diagrams and know what to expect is an important part of learning SEM. 
+
+```{r}
+summary(fit)
+```
+

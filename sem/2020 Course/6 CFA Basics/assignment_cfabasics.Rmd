@@ -1,0 +1,132 @@
+---
+title: "6 CFA: Basics"
+author: "YOUR NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Confirmatory Factor Analysis Practice Assignment
+
+In the section below, you should load the `lavaan` and `semPlot` libraries. The data is included in `assignment_cfabasics.csv`, and you should load that dataset. 
+
+```{r}
+
+```
+
+## The Data
+
+The data represents a 30-item questionnaire called CAAFI: Computer Aversion, Attitudes, and Familiarity Index. This questionnaire includes items on computer usage, attitudes, and familiarity. 
+
+- Computer Familiarity: Items 3, 13-14, 16, 20-23, 27, and 30. 
+- Computer Attitudes: Items 1-2, 4-5, 8, 11, 18-19, and 28-29.
+- Computer Aversion: Items 6-7, 9-10, 12, 15, 17, and 24-26.
+
+Here are the items that are present on the survey: 
+
+1. I enjoy using computers.
+2. Being able to use a computer is important to me.
+3. I keep up with the latest computer hardware.
+4. Computers are beneficial because they save people time.
+5. I like using word-processing programs.
+6. I feel like a fool when I am using a computer and others are around.
+7. I am smart enough to use a computer.
+8. I avoid using computers whenever possible.
+9. I do not understand how to use computer software (e.g., word-processing
+programs, spreadsheet programs, etc.).
+10. I feel that I understand how to use computer files, documents, and folders.
+11. I use a computer input device every day (e.g., a keyboard, a touch pad, a mouse).
+12. I can use a computer to successfully perform tasks.
+13. I can add new hardware to a computer.
+14. I enjoy reading computer magazines.
+15. When I use a computer, I am afraid that I will damage it.
+16. I enjoy connecting new computer accessories.
+17. I must have a reference manual or a help file to run computer software.
+18. E-mail is an easy way to communicate with people.
+19. I use e-mail every day.
+20. I am comfortable changing (installing/upgrading) computer software.
+21. I often read computer books.
+22. My friends often ask me computer-related questions.
+23. I often read computer magazines.
+24. Overall, I feel that I don’t know how to use a computer.
+25. Computers are too scientific for me.
+26. When using a computer, I often lose data.
+27. I enjoy learning to use new software programs.
+28. I like to use computer input devices such as a keyboard, a touch pad, a mouse,
+etc.
+29. Using a computer is entertaining.
+30. I keep up with the latest computer software.
+
+## Build a Model
+
+In this section, create a one-factor model of all of the items together. 
+
+```{r}
+
+```
+
+In this section, create a three-factor model based on the items proposed grouping listed above.
+
+```{r}
+
+```
+
+## Analyze Your Model
+
+Analyze both the one-factor and three-factor model.
+
+```{r}
+
+```
+
+## Summarize Your Model
+
+Include a summary of the one-factor and three-factor model with standardized output, rsquare values, and fit.measures. 
+
+```{r}
+
+```
+
+## Diagram Your Model
+
+Include a diagram for the three-factor model. Use the `what` and `edge.color` arguments to denote the strongest paths. 
+
+```{r}
+
+```
+
+## Compare Models 
+
+Use the `anova()` function and the `fitmeasures()` to create a model comparison. 
+
+```{r}
+
+```
+
+QUESTION: Which model is better? 
+ANSWER:
+
+## Clean Output
+
+Use either `model_parameters` or `broom`'s `tidy` function to neatly print out the model parameters for the three-factor model.
+
+QUESTION: Looking at the item loadings, are any of the items poor (i.e., they do not strongly relate to their factor)?
+ANSWER:
+
+QUESTION: Looking at the correlation table, do you think these are three separate factors? 
+ANSWER:
+
+## Modifications
+
+Include the potential modification indices for the three-factor model. Be sure to use the `sort` option to see the strongest modification indices. 
+
+```{r}
+
+```
+
+QUESTION: What potential indices do you see in these modification indices? What questions may be asking the same material twice? 
+ANSWER:
+

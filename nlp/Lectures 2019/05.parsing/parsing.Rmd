@@ -437,7 +437,7 @@ for token in sentence_nlp:
 ```{python results = 'asis'}
 ##python chunk
 ##notice in the markdown, results = 'asis'
-##this graph doesn't disply inline
+##this graph doesn't display inline
 displacy.render(sentence_nlp,
                 options={'distance': 110,
                          'arrow_stroke': 2,

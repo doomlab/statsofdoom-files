@@ -1,0 +1,257 @@
+---
+output: 
+  pdf_document
+
+title: "ANLY 500: Principles of Analytics I"
+author: Harrisburg University  
+date: "Late Spring 2021"
+
+fontfamily: mathpazo
+fontsize: 11pt
+header-includes:
+   - \linespread{1.05}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = FALSE, dev = "pdf")
+mon <- as.Date("2021-03-15")
+advdate <- function(obj, adv) {
+ tmon <- obj + 7*(adv-1)
+ tfri <- obj + 7 + 7*(adv-1)
+ tmon <- format(tmon, format="%m/%d")
+ tfri <- format(tfri, format="%m/%d")
+ zadv <- sprintf("%02d", adv)
+ tmp <- paste("Week ",zadv,sep='',", ", tmon," - ",tfri)
+ return(tmp)
+}
+```
+
+- Email: ebuchanan\@harrisburgu.edu
+- Web: https://www.aggieerin.com
+- Office Hours: Email me for Connect
+- Office: 1344A
+- Classroom: Adobe Connect
+- Class Hours: Wednesdays 8:30-10:00PM
+
+# Course Description
+
+The material in this course covers an overview of Data Analytics, provides a foundation in research methodology, and introduces students to the R programming language. The goal of this course is to provide an understanding and foundation of the role of Analytics in today organizational environment. The course introduces approaches to performing analytics. The student will be exposed to formal methods and functional programming techniques.
+
+The instructional approach will include some software demos and illustrate applications of decision support technologies to problems in finance, marketing, manufacturing, services and health care management, and information systems consulting. Students have the opportunity to work on practical exercises and projects on their own.
+
+# Learning Objectives
+
+The main goal of this course is to provide the students with an understanding of the data analytics process and to provide a foundation of skills to become a data analytics professional. 
+
+At the conclusion of this course, students will be able to:
+
+- Analyze and applied alternate methods for designing, developing and implementing Business Analytics tools.
+- Evaluate the selected alternative technology to use Business Analytics tools.
+- Be prepared for taking future courses in Data analytics program and have some insights about different branches of analytics. 
+
+# Course Policies
+
+1. Canvas: We will use Canvas for all course activities. 
+
+2. Attendance: Each week we will have a live session for course lecture. You are expected to attend these sessions. Attending live sessions, taking pre-tests, and actively participating in the discussions is included in your "Participation" grade. Live sessions are where the basic concept(s) of each unit are explained, assignments are discussed and your questions answered. Not participating will adversely affect your final grade.
+
+3. Lectures: You are responsible for all the video lectures that give background on course material. You will watch these prior to class (or live session) and be prepared to discuss and ask questions about lecture and assignments. Taking notes on the material you are viewing/reading and reflecting on the these notes will help you better understand the issues, concepts and techniques that are being presented.
+
+4. Assignments: We will work assignments together in class; however, you should budget time outside of class for the course videos and pre-test assessment. Here are a few other important comments on assignments:
+
+    - All assignments must be submitted compiled into a report. I do not grade uncompiled assignments. 
+    - I grade the assignment you submitted, and I do not regrade assignments. 
+    - Every day an assignment is late is 5% off the final score achieved. 
+    - Class activities and the final project are group projects, however, the exams should be completed individually. Answers copied from online sources will be given a zero. Students who turn in the same assignments will all be given a zero. Your work should be properly referenced and adhere to standards of both academic integrity and proper form. APA style is preferred (see http://www.apa.org/).
+    - You should make sure your code/computer is working properly during class or earlier in the week to ensure these deadlines are met. 
+
+5. Materials: You are responsible for all the readings, even if the material is not explicitly covered in class. You should read the class materials prior to class and be prepared to discuss and ask questions about the readings and assignments. You should also re-read the material after class as not every topic will be covered during class time. Many passages in the text may need to be read several times to gain clarity. Also, taking notes on the material you are reading and reflecting on the reading and these notes will help you better understand the issues, concepts and techniques that are being presented.
+
+6. Email: All class credit-related electronic mail must be done using Harrisburg's electronic mail service and the student's assigned Harrisburg University ID. All assignments should be submitted through Canvas.
+
+# HU Core Competencies
+
+At the conclusion of this course a student will have met the following core competencies that reflect HU's mission:
+
+1. Critical Thinking and Problem Solving skills are demonstrated by the student's ability to: Identify and clarify the problem, Gather information, Evaluate the evidence, Consider alternative solutions, and Choose and implement the best alternative.  
+
+2. Communication - The core communication skills are demonstrated by the student's ability to: Express ideas and facts to others effectively in a variety of formats, particularly written, oral, and visual formats, and Communicate effectively by making use of information resources and technology.
+
+3. Teamwork and Collaboration - The students will be working with others to increase involvement in learning and by sharing one's own ideas and responding to others' reactions to sharpen thinking and deepen understanding.
+
+4. Information Technology - The students will be making effective use of the .NET information resources and technology.
+
+# Statement of Academic Integrity
+
+According to the University's Student Handbook: Academic integrity is the pursuit of scholarly activity free from fraud and deception, and is the educational objective of this institution.  Academic dishonesty includes, but is not limited to cheating, plagiarism, fabrication of information or citations, facilitating acts of academic dishonesty by others, unauthorized possession of examinations, submitting work of another person, or work previously used without informing the instructor, or tampering with the academic work of other students.  Any violation of academic integrity will be thoroughly investigated, and where warranted, punitive action will be taken. Students should be aware that standards for documentation and intellectual contribution may depend on the course content and method of teaching, and should consult the instructor for guidance in this area.
+
+*Honor Code* - We as members of Harrisburg University community pledge not to cheat, plagiarize, steal, or lie in matters related to academic work.  As a Community of Learners, we honor and uphold the *HU Honor Code*.
+
+# Required Textbook
+
+- **Title:** Discovering Statistics Using R
+- **Authors:** Andy Field, Jeremy Miles, Zoe Field
+- **Publisher:** Sage
+- **ISBN:** 9781446200469
+- **Year:** 2012
+
+# Software Required 
+
+- R and RStudio available at: https://www.r-project.org/ and https://www.rstudio.com/
+- Rtools if you are a Windows user: https://cran.r-project.org/bin/windows/Rtools/ (just install, stop after that on the instructions)
+
+# Grading
+
+Your grade will be determined by the following breakdown:
+
+1. Attendance (10%): Your attendance in the live sessions will be recorded.
+
+2. Pre-tests (10%): You are required to watch the lecture before class each week. These lectures are broken down into 20-30 minute videos. You will take a pre-test before class to ensure you have watched the video. These multiple choice quizzes will cover the basics of the material covered in class. You can use your notes to help you complete them. 
+
+3. Practice Assignments (20%): These assignments will be completed together in class and will be due the day of class. You will work together on these assignments, and these will be graded as complete/incomplete.
+
+4. Mid-term Exam (20%): This exam covers sections 1-6 of the course material. The exam is open for a week online. You may use your own materials for the exam. 
+
+5. Final Exam (20%): This exam covers sections 7-12 of the course material. The exam is open for a week online. You may use your own materials for the exam. Be careful to budget time for the exam and the final project!
+
+6. Final Project (20%): You will receive a guide on how to complete this project. You will be given a choice of different research questions to answer about a dataset. You may work in groups of up to three people. The final project consists of completing a final report (see online guide). 
+
+The course breakdown is:
+
+1. A 90.00%+
+
+2. B 80.00% - 89.99%
+
+3. C 70.00% - 79.99%
+
+4. F < 70.00%
+
+# Class Schedule
+
+Here's a best guess at the course schedule - the exams and holidays will not change, but lecture material may be moved around depending on course speed. The exercises will be posted on Canvas, along with all notes and scripts created for you to use to work from. 
+
+## `r advdate(mon, 1)`
+
+- Lecture 1 - R Learning:
+
+     - Introduction to the course 
+     - Install R and RStudio (the free versions)
+     - Start coding with R
+     - Reading: Chapter 3 
+
+## `r advdate(mon, 2)`
+
+- Lecture 2 - Intro to Data Analytics
+
+    - Introduction to data analytics
+    - What is data analytics and the definition of predictive, descriptive and prescriptive analytics
+    - Theories, hypothesis, and collecting data
+    - Reading: Chapter 1
+
+## `r advdate(mon, 3)`
+
+- Lecture 3 - Statistics 
+
+    - What is the research process?
+    - What are qualitative and quantitative data?
+    - Identifying and measurement of variables
+    - Reading: Chapter 1
+
+## `r advdate(mon, 4)`
+
+- Lecture 4 - More Statistics
+
+    - Know what a statistical model is and why we use them
+    - Measures of central tendency, dispersion, frequency distributions
+    - Know what the 'fit' of a model is and why it is important
+    - Distinguish models for samples and populations
+    - Reading: Chapter 2
+
+## `r advdate(mon, 5)`
+
+- Lecture 5 - Visualization
+
+    - ggplot2
+    - Histograms
+    - Bar Charts
+    - Line Graphs
+    - Reading: Chapter 4
+
+## `r advdate(mon, 6)`
+
+- Lecture 6 - Data Screening 
+
+    - What is accuracy and error?
+    - How to handle missing values
+    - How to deal with outliers
+    - Reading Chapter 5
+
+## `r advdate(mon, 7)`
+
+- Lecture 7 - Data Screening
+
+    - Additivity 
+    - Normality
+    - Linearity
+    - Homogeneity
+    - Homoscedasticity
+    - Reading: Chapter 5
+
+## `r advdate(mon, 8)`
+
+- Midterm Review & Introduction to Final Project
+
+    - Mid-term Review
+    - Review of Final Project
+    - Take the Midterm!
+
+## `r advdate(mon, 9)`
+
+- Lecture 8 - Correlation
+
+     - What is correlation?
+     - What are the various types of correlations?
+     - How can we compare correlations?
+     - Reading: Chapter 6
+
+## `r advdate(mon, 10)`
+
+- Lecture 9 - Linear Regression 
+
+     - What is linear regression?
+     - How is it related to correlation?
+     - Interpreting linear models
+     - Reading: Chapter 7
+
+## `r advdate(mon, 11)`
+
+- Lecture 10 - Mediation and Moderation
+
+     - Mediation: Third Wheels
+     - Moderation: Interactions
+     - Reading: Chapter 7
+     
+## `r advdate(mon, 12)`
+
+- Lecture 11 - Comparing two means
+
+    - What is t-test and how can we use it in data analytics?
+    - What are independent and dependent t-tests?
+    - Reading: Chapter 9
+    
+## `r advdate(mon, 13)`
+
+- Lecture 12 - ANOVA
+
+    - Getting started with the Analysis of Variance
+    - Understanding variance versus t-tests
+    - One-Way Between Subjects
+    - Reading: Chapter 10
+
+## `r advdate(mon, 14)`
+
+- Review session for Final Exam
+  
+    - Review for the final exam
+    - Take the final exam!
+    - Final Projects 

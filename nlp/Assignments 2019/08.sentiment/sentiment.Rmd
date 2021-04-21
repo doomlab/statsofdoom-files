@@ -12,8 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Load the libraries + functions
 
 
-- Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly. 
-- Import the separate python file that includes the functions you will need for the classification reports. 
+- Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.  
 
 ```{r libaries}
 ##r chunk
@@ -98,7 +97,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Accuracy and Classification Report
 
-- Display the performance metrics of the logistic regression model on the testing data.
+- Display the performance metrics of the logistic regression model on the testing data using the `classification_report()`.
 
 ```{python}
 ##python chunk

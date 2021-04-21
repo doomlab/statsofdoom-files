@@ -1,0 +1,404 @@
+---
+title: "Data Screening Part 1"
+author: "Erin M. Buchanan"
+date: "Last Updated: `r Sys.Date()`"
+output: 
+  slidy_presentation:
+    incremental: true 
+---
+
+## Data Screening
+
+- **Garbage in, garbage out:**
+
+    - Data screening is a key facet of any analysis.
+    - Data that is incorrect will produce useless output.
+    - Data screening ensures the results are interpretable. 
+
+- **Our check should include for:**
+
+    - Accuracy,
+    - Missing data, 
+    - Outliers, and
+    - Assumptions.
+
+- Note that **assumptions checks may depend on the type** of test because there are **different tests.**
+
+## An Important Note
+
+- **Normally our $\alpha$ value is set to < 0.05, other-wise known as a Type 1 Error.**
+
+    - Therefore, we use p < .05 as a criterion for statistical significance.
+
+- **In data screening, we want to use a stricter criterion.**
+
+    - Therefore, we are going to use p < .001 to denote problematic issues.  
+
+## What Order Should be followed?
+
+- (1) Accuracy Check,
+- (2) Missing Data Check, 
+- (3) Outliers Check, and 
+- (4) Assumptions for the analysis performed. 
+
+- **Assumptions include:**
+
+    - Additivity
+    - Normality 
+    - Linearity 
+    - Homogeneity
+    - Homoscedasticity
+
+## Why is this the order?
+
+- If you correct errors - they may become missing data points.
+- If you replace missing data - they may become outliers.
+- If you exclude outliers, this may change assumption interpretations.
+- Therefore: each step can potentially affect the next steps.
+
+## Data Screening Example
+
+- While we have not covered any specific analyses yet, we can screen data overall that will cover many different types of analyses. 
+- This dataset examines the resiliency (RS columns) of teenagers after a natural disaster.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(rio)
+master <- import("data/data_screening.csv")
+str(master)
+```
+
+## Accuracy
+
+- We will want to check for several issues:
+  
+    - Any factor variables incorrectly imported as numbers.
+    - Any reverse coded variables. 
+    - Any out of range values or incorrect values.
+    - Other errors depending on data collection procedure.
+
+## Accuracy: Categorical Variables
+
+```{r}
+notypos <- master #update the dataset with each step 
+apply(notypos[ , c("Sex", "SES")], 2, table)
+#3 here for sex is probably incorrect
+```
+
+## Accuracy: Categorical Variables
+
+- We can use `factor()` but not include the bad label to drop that incorrect point.
+- You can also exclude it as shown in a few slides. 
+
+```{r}
+## fix the categorical labels and typos
+notypos$Sex <- factor(notypos$Sex, 
+                     levels = c(1,2), #no 3
+                     labels = c("Women", "Men"))
+notypos$SES <- factor(notypos$SES, 
+                     levels = c(1,2, 3),
+                     labels = c("Low", "Medium", "High"))
+apply(notypos[ , c("Sex", "SES")], 2, table)
+```
+
+## Accuracy: Continuous Variables
+
+- We can use the `summary()` function to view the summary statistics for our continuous variables.
+- Useful to check the min and max for out of range values.
+- Useful to check for reverse scoring (for data you know well, the mean may be obvious it is much lower than the rest). 
+- The RS14 scale runs from 1 to 7, so we clearly have some typos. 
+
+```{r}
+summary(notypos)
+```
+
+## How do we "fix" issues? 
+
+- Find the original data and **figure out what the point should be**.
+- **Delete that data point** but not the entire participant.
+
+## Accuracy: Continuous Variables 
+
+- When you have an inaccurate value in one or only a few columns, you can fix those values using logical operators that we discussed in our subsetting section. 
+- In this example, we know that students could not have missed more than 15 days. 
+- They cannot be more than 12 for Grade.
+
+```{r}
+summary(notypos$Grade)
+notypos$Grade[ notypos$Grade > 12 ] <- NA
+summary(notypos$Grade)
+
+summary(notypos$Absences)
+notypos$Absences[ notypos$Absences > 15 ] <- NA
+summary(notypos$Absences)
+```
+
+## Accuracy: Continuous Variables 
+
+- When you have inaccurate values for columns that all have the same possible range, you can use the subsetting rules across all columns at once. 
+
+```{r}
+names(notypos)
+head(notypos[ , 6:19]) #lots of ways to do this part!
+notypos[ , 6:19][ notypos[ , 6:19] > 7 ] <- NA
+summary(notypos)
+```
+
+## Accuracy: Continuous Variables
+
+- Using mean and standard deviation to interpret accuracy for continuous variables
+- You want to make sure it's the **data you expect, the mean can be used to make such a judgment.**
+
+- Also, **standard deviation indicates the spread of the data**
+
+    - very large spreads (lots of error) and,
+    - very small spreads (no variance) can be bad for you.
+    - Remember that depends on the scale of the data.
+
+## Accuracy: Continuous Variables
+
+```{r}
+names(notypos)
+apply(notypos[ , -c(1,3)], 2, mean, na.rm = T)
+apply(notypos[ , -c(1,3)], 2, sd, na.rm = T)
+```
+
+## Missing Data
+
+- To check for **missing data**, `summary()` can give a quick view. 
+- Additionally, we can continue to use `apply()` for a sum of the number of `NA` values.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+summary(notypos)
+apply(notypos, 2, function(x) { sum(is.na(x)) })
+```
+
+## Missing Data
+
+- Missing data is an important problem and leads us to ask ourselves one question: **Why is this data missing?**
+    
+    - Did someone skip the question?
+    - Did someone forget to enter it (from a paper survey or other transfer of data)?
+    - Is it a typo or other issue with answering the question appropriately? 
+
+## Types of Missing Data
+
+- **MCAR:** missing completely at random 
+    
+    - You want this type of missing data.
+    - Potentially, participants simply skipped a question or missing a trial. 
+    
+- **MNAR:** missing not at random.
+
+    - This type of missing data can be problematic.
+    - May be the survey instrument, computer program, or other data collection issue. 
+    - For instance, what if you surveyed a campus about alcohol abuse? What does it mean if everyone skips the same question?
+
+- There are ways to test for the type, but most times you can easily note problematic **MNAR** data by checking percent of missing data or using the `View()` function.
+
+## What do I do with missing data?
+
+- You should not replace:
+    
+    - **MNAR** data 
+    - Categorical options that are demographic of the participants
+
+- You can conservatively replace:
+
+    - **MCAR** data when 5% of the data or less is to be replaced
+    - Be careful with small datasets 
+    
+- **Note:** there is a difference between *missing data* and *incomplete data*. 
+
+```{r, echo = FALSE, out.width="50%", fig.align='center'}
+knitr::include_graphics("pictures/missing.png")
+```
+
+## What do I do with missing data?
+
+- By creating different datasets at each stage of our screening, we can run our analyses with and without missing data replaced to determine if our replacement impacted our results. 
+- We can exclude entire participants (listwise) with missing data or only when they have have missing data for that analysis (pairwise). 
+
+## What do I do with missing data?
+
+- There are multiple estimation methods to "fill-in" missing data if you did not want to remove it. 
+- Mean substitution was a popular way to estimate missing data by simply estimating the mean for that variable for the missing data points.
+    
+    - Conservative - doesn't change the mean values used to find significant differences.
+    - Does change the variance, which may cause type I error with a large number of estimated data points.
+
+- Multiple imputation is now the most popular way to estimate missing data points because computing programs have made this process easier. 
+
+    - Creates a set of potential expected values for each missing point. 
+    - Using matrix algebra, the program estimates the probability of each value and picks the highest one. 
+
+## Visualize Missing Data
+
+```{r}
+library(VIM, quietly = T)
+aggr(notypos, numbers = T)
+```
+
+## Replacing Missing Data: Rows
+
+- We will start with examining missing data by rows, as we can exclude incomplete data and rows with too much missing data to replace. 
+- This table tells us a summary of the missing data - how much is missing in the top row and the number of rows with that missing data in the second row of the table. 
+
+```{r}
+percentmiss <- function(x){ sum(is.na(x))/length(x) * 100 }
+missing <- apply(notypos, 1, percentmiss)
+table(missing)
+```
+
+## Replacing Missing Data: Rows
+
+- Create a set of rows to potentially replace.
+- If you know you want to include participants *pairwise*, you can also create a set of participants who you will not replace but keep with the dataset. 
+
+```{r}
+replace_rows <- subset(notypos, missing <= 5) #5%
+noreplace_rows <- subset(notypos, missing > 5)
+
+nrow(notypos)
+nrow(replace_rows)
+nrow(noreplace_rows)
+```
+
+## Replacing Missing Data: Columns
+
+- Next, we should examine missing data by columns to ensure we do not have **MNAR** data. 
+- **Note**: We should examine for this missing data on our `replace_rows` because excluding the incomplete data may eliminate any issues by column. 
+
+```{r}
+apply(replace_rows, 2, percentmiss)
+```
+
+## Replacing Missing Data: Columns
+
+- Now we will exclude columns that we should not replace missing data for (categorical or demographic data).
+- Sex, Age, SES, and Grade are our demographic variables, but you can include variables that do not have missing data to provide a better estimation for the other missing data as `mice` uses all available information to estimate. 
+
+```{r}
+replace_columns <- replace_rows[ , -c(1,2,4)]
+noreplace_columns <- replace_rows[ , c(1,2,4)] #notice these are both replace_rows
+```
+
+## Replacing Missing Data: Using `mice`
+
+- `mice()` will figure out the type of data based on the column structure and replace it with that type of data.
+- This function creates several imputations of the data, which we will need to combine back into our original dataset. 
+
+```{r}
+library(mice)
+temp_no_miss <- mice(replace_columns)
+```
+
+## Replacing Missing Data: Using `mice`
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+nomiss <- complete(temp_no_miss, 1) #pick a dataset 1-5 
+
+#combine back together
+dim(notypos) #original data from previous step
+dim(nomiss) #replaced data
+
+#get all columns 
+all_columns <- cbind(noreplace_columns, nomiss)
+dim(all_columns)
+
+#get all rows
+all_rows <- rbind(noreplace_rows, all_columns)
+dim(all_rows)
+```
+
+## Outliers
+
+- **Definition** - case with extreme value on one variable or multiple variables.
+
+- Why does an outlier occur? 
+
+    - Data input error.
+    - "Mindless" participant.
+    - Not a population you meant to sample.
+    - From the population but has really long tails and very extreme values.
+    
+- The logic of removing outliers: 
+
+    - Many statistics focus on the mean as a model of the data.
+    - The mean is affected by outliers. 
+    - We will use a strict criterion to only remove very extreme scores. 
+
+## Outliers: Types
+
+- There are two (2) types:
+
+    - **Univariate** - when you have one (1) DV or Y variable. 
+    
+        - We can use *Z*-scores with an $\alpha$ of .001 to eliminate very extreme values. 
+        - This corresponds to a *Z*-score of +/- 3.
+        - This analysis is useful when you only have one column to check. 
+        
+    - **Multivariate** - when you have multiple continuous variables, measurements, or dependent variables. 
+    
+        - How can we measure distance for many variables at once?
+        - **Mahalanobis distance:** It creates a distance from the centroid (the mean of the means).
+        - However, because we are creating a scores based on multiple columns, there is not one rule like *Z*-scores. 
+        
+## Outliers: Mahalanobis
+
+- Mahalanobis distance is distributed using a $\chi^2$ distribution.
+- This measure is a distance measure:
+  
+    - Distances are always positive!
+    - Many scores are close to zero, indicating they are close to the mean of means.
+    - Few scores are very large, indicating their scores are very different from everyone else.
+    - This type of pattern is not normally distributed, but rather, $\chi^2$.
+    
+- How do we know what is very far away?
+
+    - Use a $\chi^2$ distribution with *df* = to the number of variables used to create the score. 
+    - Use $\alpha$ < .001, as our very strict criterion. 
+
+- Again, because we save multiple datasets, we can test the analysis with and without outliers to help us determine their impact on our analyses. 
+
+## Outliers: Analyze and Eliminate
+
+- All variables must be numbers for this analysis, because we are calculating the mean of means.
+- You could also only analyze for outliers on the data that is provided by participants. 
+- This stage will potentially eliminate all participants who have any remaining missing data because they will not receive a distance score. 
+
+```{r message=FALSE, warning=FALSE}
+## you can use all columns or all rows here
+## however, all rows has missing data, which will not get a score 
+str(all_columns)
+mahal <- mahalanobis(all_columns[ , -c(1,4)],
+                    colMeans(all_columns[ , -c(1,4)], na.rm=TRUE),
+                    cov(all_columns[ , -c(1,4)], use ="pairwise.complete.obs"))
+```
+
+## Outliers: Analyze and Eliminate
+
+```{r}
+## remember to match the number of columns
+cutoff <- qchisq(1-.001, ncol(all_columns[ , -c(1,4)]))
+
+## df and cutoff
+ncol(all_columns[ , -c(1,4)])
+cutoff
+
+##how many outliers? Look at FALSE
+summary(mahal < cutoff)
+
+## eliminate
+noout <- subset(all_columns, mahal < cutoff)
+dim(all_columns)
+dim(noout)
+```
+
+## Summary
+
+- In this lecture, you have learned:
+
+    - The first several steps to data screening.
+    - How to deal with several different types of accuracy issues.
+    - How view, exclude, and impute missing data.
+    - How to calculate and exclude outliers. 

@@ -52,7 +52,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Terminology
 
-```{r echo = FALSE, fig.align='center'}
+```{r echo = FALSE, out.width = "75%", out.align='center'}
 knitr::include_graphics("TextClassificationExample.png")
 ```
 
@@ -93,7 +93,7 @@ knitr::include_graphics("TextClassificationExample.png")
 
 ## The Process
 
-```{r echo = FALSE, fig.align='center'}
+```{r echo = FALSE, out.align='center'}
 knitr::include_graphics("blueprint.jpg")
 ```
 
@@ -117,7 +117,6 @@ if platform.system() == "Windows":
 
 ```{python}
 ##python chunk
-from sklearn.datasets import fetch_20newsgroups
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -133,41 +132,10 @@ from contractions import contractions_dict
 ## 20 Newsgroups
 
 - Difficult classification task if you use all 20 categories 
-- We need to clean out the formatting (headers, footers, etc.), take out empty posts, and do other text processing that we discussed earlier in the semester 
-
-## 20 Newsgroups
-
+- We need to clean out the formatting, take out empty posts, and do other text processing that we discussed earlier in the semester 
 ```{python}
-##python chunk
-data = fetch_20newsgroups(subset='all', shuffle=True,
-                          remove=('headers', 'footers', 'quotes'))
-data_labels_map = dict(enumerate(data.target_names))
-```
-
-## 20 Newsgroups
-
-- Break apart the data into data, label number, label name
-- Make the data into a pandas dataframe
-- Look at what we've got 
-
-```{python}
-##python chunk
-corpus, target_labels, target_names = (data.data, data.target, 
-                                       [data_labels_map[label] for label in data.target])
-data_df = pd.DataFrame({'Article': corpus, 'Target Label': target_labels, 'Target Name': target_names})
-print(data_df.shape)
+data_df = pd.read_csv('20_newsgroups.csv')
 data_df.head(10)
-```
-
-## Text Normalization
-
-```{python}
-##python chunk
-total_nulls = data_df[data_df.Article.str.strip() == ''].shape[0]
-print("Empty documents:", total_nulls)
-
-data_df = data_df[~(data_df.Article.str.strip() == '')]
-data_df.shape
 ```
 
 ## Text Normalization
@@ -200,6 +168,7 @@ data_df['Article'] = [' '.join([ps.stem(word) for word in text.split()]) for tex
 data_df['Article'] = [' '.join([word for word in text.split() if word not in stopwords]) for text in data_df['Article'].tolist()]
 
 #drop the null values after this process
+data_df = data_df[~(data_df.Article.str.strip() == '')]
 data_df = data_df.dropna().reset_index(drop=True)
 
 #save it
@@ -224,7 +193,10 @@ data_df.head()
 ##python chunk
 from sklearn.model_selection import train_test_split
 
-train_corpus, test_corpus, train_label_nums, test_label_nums, train_label_names, test_label_names = train_test_split(np.array(data_df['Article'].apply(lambda x:np.str_(x))), np.array(data_df['Target Label']), np.array(data_df['Target Name']), test_size=0.20, random_state=42)
+train_corpus, test_corpus, train_label_names, test_label_names = train_test_split(np.array(data_df['Article'].apply(lambda x:np.str_(x))),
+np.array(data_df['Target Name']), 
+test_size=0.20, 
+random_state=42)
 
 train_corpus.shape, test_corpus.shape
 ```
@@ -295,51 +267,6 @@ tsd = dict(Counter(test_label_names))
   - Recall
   - F1 Score
 
-## A Brief Example
-
-- We will come back to our newsgroups example for the algorithms and methods mentioned above in a bit. 
-- Let's use a Breast Cancer dataset to portray how evaluation of models works
-- Dataset has already been coded for features, as well as if they have breast cancer (1) or not (0)
-- Therefore, we are doing binary classification and logistic regression is a very popular and easy algorithm for this task
-
-## A Brief Example
-
-```{python}
-##python chunk
-from sklearn.datasets import load_breast_cancer
-
-# load data
-data = load_breast_cancer()
-X = data.data
-y = data.target
-print(X.shape, data.feature_names)
-```
-
-## Build the data
-
-- Split the data into testing and training data
-
-```{python}
-##python chunk
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
-print(X_train.shape, X_test.shape)
-```
-
-## Train the model
-
-- Apply logistic regression to the features and data
-
-```{python}
-##python chunk
-from sklearn import linear_model
-
-#create a blank model with your algorithm
-logistic = linear_model.LogisticRegression(solver = 'lbfgs', max_iter = 10000)
-
-#fit it to the training data
-logistic.fit(X_train,y_train)
-```
-
 ## Confusion Matrices
 
 - Confusion matrices are a great way to see how your model predicted categories 
@@ -348,63 +275,25 @@ logistic.fit(X_train,y_train)
 
 ## Confusion Matrices
 
-```{r eval = T}
-##r chunk
-source_python("model_evaluation_utils.py")
-```
-
-```{python}
-##python chunk
-#predict the testing dataset 
-y_pred = logistic.predict(X_test)
-
-#compare that to the real labels
-#remember this function is in the extra file 
-display_confusion_matrix(true_labels=y_test, predicted_labels=y_pred, classes=[0, 1])
-```
-
-## Confusion Matrices
-
-```{r echo = FALSE, fig.align='center'}
+```{r echo = FALSE, out.width = "75%", out.align='center'}
 knitr::include_graphics("confusion.png")
 ```
 
 ## Confusion Matrices
 
-- True positive: instances breast cancer was indicated and it's actually breast cancer 
-- False positive: instances breast cancer was indicated and it's NOT breast cancer
-- True negative: instances that breast cancer was NOT indicated and it's NOT breast cancer
-- False negative: instances that breast cancer was NOT indicated and it's breast cancer
+- True positive: instances TARGET CATEGORY was indicated and it's actually TARGET CATEGORY 
+- False positive: instances TARGET CATEGORY was indicated and it's NOT TARGET CATEGORY
+- True negative: instances that TARGET CATEGORY was NOT indicated and it's NOT TARGET CATEGORY
+- False negative: instances that TARGET CATEGORY was NOT indicated and it's TARGET CATEGORY
 
-```{python}
-##python chunk
-display_confusion_matrix(true_labels=y_test, predicted_labels=y_pred, classes=[0, 1])
-```
-
-## Model Performance
+## Model Performance - Accuracy
 
 - From these true/false positives and negatives, we can calculate model performance
 - Accuracy: Overall proportion of correct predictions in the model
 
 $$ \frac{TP + TN}{TP + FP + TN + FN} $$
 
-## Accuracy 
-
-```{python}
-##python chunk
-positive_class = 1
-TP = 70
-FP = 4
-TN = 39
-FN = 1
-
-fw_acc = round(metrics.accuracy_score(y_true=y_test, y_pred=y_pred), 5)
-mc_acc = round((TP + TN) / (TP + TN + FP + FN), 5)
-print('Framework Accuracy:', fw_acc)
-print('Manually Computed Accuracy:', mc_acc)
-```
-
-## Model Performance
+## Model Performance - Precision
 
 - Precision: 
   - Also called positive predictive value
@@ -412,17 +301,7 @@ print('Manually Computed Accuracy:', mc_acc)
   
 $$ \frac{TP}{TP + FP} $$ 
 
-## Precision
-
-```{python}
-##python chunk
-fw_prec = round(metrics.precision_score(y_true=y_test, y_pred=y_pred), 5)
-mc_prec = round((TP) / (TP + FP), 5)
-print('Framework Precision:', fw_prec)
-print('Manually Computed Precision:', mc_prec)
-```
-
-## Model Performance
+## Model Performance - Recall
 
 - Recall: 
   - Also called sensitivity
@@ -430,41 +309,22 @@ print('Manually Computed Precision:', mc_prec)
 
 $$ \frac{TP}{TP + FN} $$ 
 
-## Recall
-
-```{python}
-##python chunk
-fw_rec = round(metrics.recall_score(y_true=y_test, y_pred=y_pred), 5)
-mc_rec = round((TP) / (TP + FN), 5)
-print('Framework Recall:', fw_rec)
-print('Manually Computed Recall:', mc_rec)
-```
-
-## Model Performance
+## Model Performance - F1 Score
 
 - F1 Score: harmonic mean of the precision and recall scores 
 
-$$ \frac{2 \times Precision \times Recall}{Precision + Recall} $$ 
+$$ \frac{2 \times Precision \times Recall}{Precision + Recall} $$
 
-## F1 Score
+## General Processing Pipeline
 
-```{python}
-##python chunk
-fw_f1 = round(metrics.f1_score(y_true=y_test, y_pred=y_pred), 5)
-mc_f1 = round((2*mc_prec*mc_rec) / (mc_prec+mc_rec), 5)
-print('Framework F1-Score:', fw_f1)
-print('Manually Computed F1-Score:', mc_f1)
-```
+- First, import the packages for your chosen algorithm
+- Create a blank model
+- Fit the data to the model using the training data
+- Predict the categories for the testing data
+- Calculate your model performance on the the testing data prediction
 
-## Visualization ROC Curve
-
-- ROC: Receiver Operating Characteristic Curve
-- Presents the relationship between True Positives and False Positives
-- Want curves that are close to true positives!
-
-```{python}
-##python chunk
-plot_model_roc_curve(clf=logistic, features=X_test, true_labels=y_test)
+```{r echo = FALSE, out.align='center'}
+knitr::include_graphics("blueprint.jpg")
 ```
 
 ## Example BOW Method
@@ -501,12 +361,6 @@ cv_train_features
 print('BOW model:> Train features shape:', cv_train_features.shape, ' Test features shape:', cv_test_features.shape)
 ```
 
-## Features - Now What?
-
-```{r echo = FALSE, fig.align='center'}
-knitr::include_graphics("blueprint.jpg")
-```
-
 ## Logistic Regression
 
 - Logistic regression is a popular technique for machine learning and classification tasks
@@ -515,17 +369,9 @@ knitr::include_graphics("blueprint.jpg")
 - Transforms linear regression to the logit
 - Each category will be classified by looking at their predicted probability of being in that category (the odds)
 
-```{r echo = FALSE, fig.align='center'}
+```{r echo = FALSE, out.width = "75%", out.align='center'}
 knitr::include_graphics("logistic_regression.png")
 ```
-
-## General Processing Pipeline
-
-- First, import the packages for your chosen algorithm
-- Create a blank model
-- Fit the data to the model using the training data
-- Predict the categories for the testing data
-- Calculate your model performance on the the testing data prediction
 
 ## LR in Python
 
@@ -533,7 +379,6 @@ knitr::include_graphics("logistic_regression.png")
 ##python chunk
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
-from sklearn.metrics import accuracy_score
 
 #blank model
 lr = LogisticRegression(penalty='l2', solver='lbfgs', multi_class='ovr',
@@ -546,7 +391,6 @@ lr.fit(cv_train_features, train_label_names)
 y_pred = lr.predict(cv_test_features)
 
 #print out results
-print('accuracy %s' % accuracy_score(test_label_names, y_pred))
 print(classification_report(test_label_names, y_pred))
 ```
 
@@ -556,7 +400,7 @@ print(classification_report(test_label_names, y_pred))
 - Feature contribution is then added to each category prediction
 - Then sums the likelihood of each category for each instance, highest one wins
 
-```{r echo = FALSE, fig.align='center'}
+```{r echo = FALSE, out.width = "75%", out.align='center'}
 knitr::include_graphics("naive_bayes_bargraph.png")
 ```
 
@@ -579,7 +423,6 @@ mnb.fit(cv_train_features, train_label_names)
 y_pred = mnb.predict(cv_test_features)
 
 #print out results
-print('accuracy %s' % accuracy_score(test_label_names, y_pred))
 print(classification_report(test_label_names, y_pred))
 ```
 
@@ -589,7 +432,7 @@ print(classification_report(test_label_names, y_pred))
 - Support vectors are the data points closest to the hyperplane
 - Hyperplane is the decision plane that separates the set of categories
 
-```{r echo = FALSE, fig.align='center'}
+```{r echo = FALSE, out.width = "75%", out.align='center'}
 knitr::include_graphics("svm_pic.png")
 ```
 
@@ -599,12 +442,11 @@ knitr::include_graphics("svm_pic.png")
 ##python chunk
 from sklearn.svm import LinearSVC
 
-svm = LinearSVC(penalty='l2', C=1, random_state=42)
+svm = LinearSVC(penalty='l2', C=1, random_state=42, max_iter = 10000)
 svm.fit(cv_train_features, train_label_names)
 y_pred = svm.predict(cv_test_features)
 
 #print out results
-print('accuracy %s' % accuracy_score(test_label_names, y_pred))
 print(classification_report(test_label_names, y_pred))
 ```
 
@@ -641,7 +483,6 @@ lr = LogisticRegression(penalty='l2', solver='lbfgs', multi_class='ovr',
                         max_iter=1000, C=1, random_state=42)
 lr.fit(tv_train_features, train_label_names)
 y_pred = lr.predict(tv_test_features)
-print('accuracy %s' % accuracy_score(test_label_names, y_pred))
 print(classification_report(test_label_names, y_pred))
 ```
 
@@ -651,7 +492,6 @@ print(classification_report(test_label_names, y_pred))
 ##python chunk
 mnb.fit(tv_train_features, train_label_names)
 y_pred = mnb.predict(tv_test_features)
-print('accuracy %s' % accuracy_score(test_label_names, y_pred))
 print(classification_report(test_label_names, y_pred))
 ```
 
@@ -662,7 +502,6 @@ print(classification_report(test_label_names, y_pred))
 svm = LinearSVC(penalty='l2', C=1, random_state=42)
 svm.fit(tv_train_features, train_label_names)
 y_pred = svm.predict(tv_test_features)
-print('accuracy %s' % accuracy_score(test_label_names, y_pred))
 print(classification_report(test_label_names, y_pred))
 ```
 
@@ -671,6 +510,7 @@ print(classification_report(test_label_names, y_pred))
 ```{python}
 ##python chunk
 #note I had to upgrade sklearn to .22 for this
+from sklearn import metrics
 metrics.confusion_matrix(test_label_names, y_pred)
 metrics.plot_confusion_matrix(svm, #model classifier
                               X = tv_test_features, #features
@@ -688,13 +528,13 @@ plt.show()
 
 ## Example visualization
 
-```{r pic1, echo=FALSE, fig.align="center"}
+```{r pic1, echo=FALSE, out.width = "75%", out.align="center"}
 knitr::include_graphics("nn.gif")
 ```
 
 ## Features in word2vec
 
-```{r pic2, echo=FALSE, fig.align="center"}
+```{r pic2, echo=FALSE, out.width = "75%", out.align="center"}
 knitr::include_graphics("cbo_vs_skipgram.png")
 ```
 
@@ -765,7 +605,6 @@ lr = LogisticRegression(penalty='l2', solver='lbfgs', multi_class='ovr',
                         max_iter=1000, C=1, random_state=42)
 lr.fit(avg_wv_train_features, train_label_names)
 y_pred = lr.predict(avg_wv_test_features)
-print('accuracy %s' % accuracy_score(test_label_names, y_pred))
 print(classification_report(test_label_names, y_pred))
 ```
 
@@ -787,7 +626,6 @@ avg_wv_test_features = avg_wv_test_features + 4
 mnb = MultinomialNB(alpha=1)
 mnb.fit(avg_wv_train_features, train_label_names)
 y_pred = mnb.predict(avg_wv_test_features)
-print('accuracy %s' % accuracy_score(test_label_names, y_pred))
 print(classification_report(test_label_names, y_pred))
 ```
 
@@ -799,7 +637,6 @@ svm.fit(avg_wv_train_features, train_label_names)
 y_pred = svm.predict(avg_wv_test_features)
 
 #print out results
-print('accuracy %s' % accuracy_score(test_label_names, y_pred))
 print(classification_report(test_label_names, y_pred))
 ```
 

@@ -39,7 +39,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Nyms
 
-- Include the homonyms and hypernyms of the random word from above. 
+- Include the hyponyms and hypernyms of the random word from above. 
 
 ```{python}
 ##python chunk

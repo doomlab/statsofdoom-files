@@ -1,0 +1,550 @@
+---
+title: "ANOVA: Analysis of Variance"
+author: "Erin M. Buchanan"
+date: "Last Updated: `r Sys.Date()`"
+output: 
+  slidy_presentation:
+    incremental: true 
+---
+
+## Comparing Means
+
+- In the last section, we covered how to compare two means with t-tests.
+- However, you can only compare two means at a time with t-tests.
+- Further, you can only have one predictor variable - that's the two groups/measurements. 
+
+## Analysis of Variance: ANOVA
+
+- Compares several means at the same time. 
+- Can be used when you have more than one independent variable
+- ANOVA is also a special form of regression, often called the general linear model. 
+
+## Why not use t-Tests?
+
+- If we want to compare three or more means why don't we compare pairs of means with t-tests?
+
+    - Cannot examine several independent variables.
+    - Inflates the Type I error rate.
+    
+```{r, echo = FALSE, out.width="75%", fig.align='center'}
+knitr::include_graphics("pictures/1.png")
+```
+
+## Type I Error 
+
+- Formula = $1 - (1-\alpha)^c$
+
+    - Alpha = type I error rate = .05 usually *(that's why the last slide had .95)*
+    - C = number of comparisons
+
+- Therefore, if you have:
+
+    - Three groups - three comparisons = `r round(1-(1-.05)^3, 3)`
+    - Four groups - six comparisons = `r round(1-(1-.05)^6, 3)`
+    - Five groups - ten comparisons = `r round(1-(1-.05)^10, 3)`
+
+## Regression v ANOVA
+
+- ANOVA in Regression:
+
+    - Used to assess whether the regression model is good at predicting an outcome.
+
+- ANOVA in Experiments:
+
+    - Used to see whether experimental manipulations lead to differences in performance on an outcome (DV).
+    - By manipulating a predictor variable can we cause (and therefore predict) a change in behavior?
+
+- Actually can be the same question!
+
+## ANOVA: Understanding the NHST
+
+- H0: There are no differences in means.
+- H1: There are differences in the means.
+- ANOVA is an Omnibus test
+
+    - It test for an overall difference between groups.
+    - It tells us that the group means are different.
+    - It doesn't tell us exactly which means differ.
+    
+## ANOVA: Understanding the NHST
+
+- We compare the amount of variability explained by the Model *(experiment)*, to the error in the model *(individual differences)*
+- This ratio is called the F-ratio.
+- If the model explains a lot more variability than it can't explain, then the experimental manipulation has had a significant effect on the outcome *(DV)*.
+
+## ANOVA: F-ratio
+
+- Variance created by our manipulation *(IV levels)*
+
+    - Good variance *(systematic variance)*
+
+- Variance created by unknown factors
+
+    - Bad variance *(unsystematic variance)*
+
+## ANOVA: F-ratio
+
+- We calculate how much variability there is between scores: total sum of squares $SS_T$. This value is then divided into: 
+  
+    - We then calculate how much of this variability can be explained by the model we fit to the data: model sum of squares $SS_M$
+    - How much cannot be explained: residual sum of squares $SS_R$
+
+- If the experiment is successful, then the model will explain more variance than it can't after accounting for differences in group sizes in these calculations
+
+## ANOVA: Example
+
+- Testing the effects of Viagra on Libido using three groups:
+
+    - Placebo (Sugar Pill)
+    - Low Dose Viagra
+    - High Dose Viagra
+
+- The Outcome/Dependent Variable (DV) was an objective measure of Libido.
+
+## The Data
+
+```{r message=FALSE}
+library(rio)
+master <- import("data/viagra.sav")
+str(master)
+master$dose <- factor(master$dose, 
+                      levels = c(1,2,3),
+                      labels = c("Placebo", "Low Dose", "High Dose"))
+```
+
+## Calculate $SS_T$
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("pictures/4.png")
+```
+
+## Visualize $SS_T$:
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("pictures/5.png")
+```
+
+## $SS_T$ df 
+
+- Degrees of Freedom (df) are the number of values that are free to vary.
+- In general, the df are one less than the number of values used to calculate the SS.
+
+    - $df_T$ = (N-1) = 15-1 = 14
+    
+## Calculate $SS_M$
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("pictures/6.png")
+```
+
+## Visualize $SS_M$
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("pictures/7.png")
+```
+
+## $SS_M$ df
+
+- How many values did we use to calculate $SS_M$?
+
+    - We used the 3 means (levels).
+    - $df_M$ = (k-1) = 3-1 = 2
+    
+## Calculate $SS_R$
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("pictures/8.png")
+```
+
+## Visualize $SS_R$
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("pictures/9.png")
+```
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("pictures/10.png")
+```
+
+## $SS_R$ df
+
+- How many values did we use to calculate $SS_R$?
+
+    - We used the 5 scores for each of the SS for each group.
+    
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("pictures/11.png")
+```
+
+## Double Check
+
+```{r, echo = FALSE, out.width="50%", fig.align='center'}
+knitr::include_graphics("pictures/12.png")
+```
+
+## Calculate Mean Squared Error
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("pictures/13.png")
+```
+
+## Calculate the F-Ratio
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("pictures/14.png")
+```
+
+## Construct a Summary Table
+
+```{r, echo = FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("pictures/15.png")
+```
+
+## F-values
+
+- Since all these formulas are based on variances, the *F*-statistic is never negative.
+- Think about the logic of model divided by error: 
+
+    - If your values are small you are saying model = error = just a bunch of noise because people are different
+    - If your values are large then model > error, which means you are finding an effect.
+
+## Assumptions
+
+- Data screening: accuracy, missing, outliers
+- Normality 
+- Linearity *(it is called the general linear model!)*
+- Homogeneity - Levene's *(new!)*
+- Homoscedasticity *(still a form of regression)*
+- **Note:** You can do the normal screening we've already done and add Levene's test.
+
+## Assumptions
+
+- ANOVA is often called a "robust test"
+- Robustness is the ability to still give you accurate results even though the assumptions are not quite met.
+
+    - Tests are robust with equal sample sizes in groups
+    - When sample sizes are sufficiently large
+    
+## Assumptions
+
+- Levene's Test
+
+    - Levene's test is an ANOVA using variances as a testing point, instead of the means. 
+    - Tells you if variances are equal across groups. 
+    - You DO NOT want this test to be significant, and remember our data screening $\alpha$, p < .001 is bad. 
+    
+## ANOVA: Analysis
+
+- We are going to use the `ezANOVA` function in the `ez` library. This package can analyze many types of ANOVA, run the assumption tests, and give you effect size all at once.
+- First, you must add a participant number if you do not already have one in the dataset.
+
+    - It is advantageous to wait to add one until the end of data screening (or you would need to drop that column for every assumption test). 
+    - Also make sure the IV is factored, or it will not give you Levene's test.
+    
+## ANOVA: Analysis
+
+- You will get a warning - just ignore it: "Warning converting partno to a factor for ANOVA". 
+
+```{r echo=TRUE}
+library(ez)
+
+## you must have a participant number for ezANOVA
+master$partno <- 1:nrow(master)
+options(scipen = 20)
+ezANOVA(data = master,
+        dv = libido,
+        between = dose,
+        wid = partno,
+        type = 3, 
+        detailed = T)
+```
+
+## ANOVA: Levene's
+
+- Levene's test is not significant, $F(2,12) = 0.12, p = .890$
+
+```{r echo = T, message=FALSE, warning=FALSE}
+ezANOVA(data = master,
+        dv = libido,
+        between = dose,
+        wid = partno,
+        type = 3, 
+        detailed = T)$`Levene's Test for Homogeneity of Variance`
+```
+
+## ANOVA: Levene's
+
+- What do you do if homogeneity test was significant? *(Levene's)*
+- Run a Welch correction on the ANOVA using the oneway function.
+
+```{r}
+## running a one way anova - if Levene's Test is significant
+oneway.test(libido ~ dose, data = master)
+```
+
+## ANOVA: F-Statistic
+
+- There was a significant effect of Viagra on levels of libido, $F(2, 12) = 5.12, p = .025, \eta^2= .46$
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ezANOVA(data = master,
+        dv = libido,
+        between = dose,
+        wid = partno,
+        type = 3, 
+        detailed = T)$ANOVA
+```
+
+## ANOVA: Effect Size
+
+- In ANOVA, there are two effect sizes - one for the overall *(omnibus)* test and one for the follow up tests *(coming next)*.
+
+- F-test
+      
+    - $R^2$ or $\eta^2$ or $ges^2$ 
+    - $\omega^2$
+    
+## ANOVA: Effect Size
+
+- Proportion of variability accounted for by an effect
+- Useful when you have more than two means, gives you the total good variance with 3+ means
+- Can only be positive
+- Range from .00 - 1.00
+- Small = .01, medium = .06, large = .15
+
+## ANOVA: Effect Size
+
+- $R^2$ - more traditionally listed with regression
+- $\eta^2$ - more traditionally listed with ANOVA
+- $ges^2$ - a newer effect size suggested to correct for ANOVA overestimation
+- These are all equal in a one-way between subjects ANOVA
+- $\frac{SS_M}{SS_T}$
+
+## ANOVA: Effect Size
+
+- $\omega^2$ is a suggested correction for the overestimation of the other statistics
+- Omega squared is an $R^2$ style effect size *(variance accounted for)* that estimates effect size on population parameters 
+- $\frac{SS_M - df_M \times MS_R}{SS_T + MS_R}$
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(MOTE)
+effect <- omega.F(dfm = 2, #this is dfn in the anova
+                  dfe = 12, #this is dfd in the anova
+                  Fvalue = 5.12, #this is F
+                  n = 15, #look at the number of rows in your dataset
+                  a = .05) #leave this as .05
+effect$omega
+```
+
+## Post Hocs and Trends: Why Use Follow-Up Tests?
+
+- The F-ratio tells us only that the experiment was successful, and group means were different.
+- It does not tell us specifically which group means differ from which.
+- We need additional tests to find out where the group differences lie.
+
+## Post Hocs and Trends: How?
+
+- Multiple t-tests
+
+    - We saw earlier that this path is a bad idea for type I error
+
+- Orthogonal Contrasts/Comparisons
+
+    - Hypothesis driven
+    - Planned a priori
+
+- Post Hoc Tests
+
+    - Not Planned (a posteriori)
+    - Compare all pairs of means
+    - But this is just a bunch of t-tests, so we have to correct for type I error issues
+
+- Trend Analysis
+
+## Post Hoc Tests
+
+- Compare each mean against all others.
+- In general terms they use a stricter criterion to accept an effect as significant.
+- TEST = t.test or F.test
+- CORRECTION = None, Bonferroni(*), Tukey, SNK, Scheffe
+
+## Post Hoc Tests
+
+- For all of these post hocs, we are going to use t-test to calculate the if the differences between means is significant.
+- We are going to run the Bonferroni and compare to no correction to talk about how these corrections work. 
+
+## Post Hoc Tests: Bonferroni
+
+- Restricted sets of contrasts - these tests are better with smaller families of hypotheses *(i.e. less comparisons)*.
+- These tests adjust the required *p* value needed for significance. 
+- Bonferroni - the overall $\alpha$ error rate is related to the number of comparisons
+- Therefore, it's easy to correct for the problem by dividing alpha by c to control where the new $\alpha$ = $\frac{\alpha}{c}$
+- The output you see has corrected the *p* value to account for this new $\alpha$, so you can remember your old cut off score. 
+- Other types of restricted contrasts:
+
+    - Sidak-Bonferroni
+    - Holm
+    - Dunnett's test
+    
+## Post Hoc Tests: Comparison
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+## post hoc tests - p.value adjustment "none"
+pairwise.t.test(master$libido,
+                master$dose,
+                p.adjust.method = "none", 
+                paired = F, 
+                var.equal = T)
+```
+
+```{r, echo = FALSE, out.width="75%", fig.align='center'}
+knitr::include_graphics("pictures/16.png")
+```
+
+## Post Hoc Tests: Bonferroni
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+## post hoc tests - p.value adjustment "bonferroni"
+pairwise.t.test(master$libido,
+                master$dose,
+                p.adjust.method = "bonferroni", 
+                paired = F, 
+                var.equal = T)
+```
+
+```{r, echo = FALSE, out.width="75%", fig.align='center'}
+knitr::include_graphics("pictures/17.png")
+```
+
+## Post Hoc Tests: Effect Size
+
+- Because we have calculated every pairwise combination, we can use $d_s$ to calculate the effect sizes for each combination.
+
+```{r, echo = FALSE, out.width="75%", fig.align='center'}
+knitr::include_graphics("pictures/18.png")
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+## get numbers for effect size
+M <- tapply(master$libido, master$dose, mean)
+N <- tapply(master$libido, master$dose, length)
+STDEV <- tapply(master$libido, master$dose, sd)
+
+## placebo to low
+effect1 <- d.ind.t(m1 = M[1], m2 = M[2],
+                 sd1 = STDEV[1], sd2 = STDEV[2],
+                 n1 = N[1], n2 = N[2], a = .05)
+effect1$d
+
+## placebo to high
+effect2 = d.ind.t(m1 = M[1], m2 = M[3],
+                 sd1 = STDEV[1], sd2 = STDEV[3],
+                 n1 = N[1], n2 = N[3], a = .05)
+effect2$d
+
+## low to high
+effect3 = d.ind.t(m1 = M[2], m2 = M[3],
+                  sd1 = STDEV[2], sd2 = STDEV[3],
+                  n1 = N[2], n2 = N[3], a = .05)
+effect3$d
+```
+
+## ANOVA: Visualization
+
+```{r echo=TRUE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+library(ggplot2)
+
+cleanup <- theme(panel.grid.major = element_blank(), 
+                panel.grid.minor = element_blank(), 
+                panel.background = element_blank(), 
+                axis.line.x = element_line(color = "black"),
+                axis.line.y = element_line(color = "black"),
+                legend.key = element_rect(fill = "white"),
+                text = element_text(size = 15))
+
+bargraph <- ggplot(master, aes(dose, libido))
+bargraph +
+  cleanup +
+  stat_summary(fun.y = mean, 
+               geom = "bar", 
+               fill = "White", 
+               color = "Black") +
+  stat_summary(fun.data = mean_cl_normal, 
+               geom = "errorbar", 
+               width = .2, 
+               position = "dodge") +
+  xlab("Dosage of Drug") +
+  ylab("Average Libido")
+```
+
+## Trend Analysis
+
+```{r, echo = FALSE, out.width="75%", fig.align='center'}
+knitr::include_graphics("pictures/19.png")
+```
+
+## Trend Analysis
+
+- Quadratic Trend = a curve across levels
+- Cubic Trend = two changes in direction of trend
+- Quartic Trend = three changes in direction of trend
+- These analyses only make sense with a somewhat "continuous" IV
+
+## Trend Analysis
+
+- There was a significant linear trend, $t(12) = 3.16, p = .008, R^2 = .46$, indicating that as the dose of Viagra increased, libido increased as well.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+## trend analysis
+k = 3 ## set to the number of groups
+master$dose2 <- master$dose #this changes the variable
+contrasts(master$dose2) <- contr.poly(k) ## note this does change the original dataset
+output <- aov(libido ~ dose2, data = master)
+summary.lm(output)
+```
+
+## Trend Analysis: Visualization
+
+```{r echo=TRUE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+doseline <- ggplot(master, aes(dose2, libido))
+doseline +
+  stat_summary(fun.y = mean, ## adds the points
+               geom = "point") +
+  stat_summary(fun.y = mean, ## adds the line
+               geom = "line",
+               aes(group=1)) +
+  stat_summary(fun.data = mean_cl_normal, ## adds the error bars
+               geom = "errorbar", 
+               width = .2) +
+  xlab("Dose of Viagra") +
+  ylab("Average Libido") + 
+  cleanup
+```
+
+## Power: One Way Between Subjects
+
+- We used $f^2$ for regression, however, this analysis uses $f$.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(pwr)
+eta = .46
+f_eta = sqrt(eta / (1-eta))
+
+pwr.anova.test(k = 3, #levels 
+               n = NULL, #leave to get sample size per group
+               f = f_eta, #f from eta
+               sig.level = .05, #alpha
+               power = .80) #power
+```
+
+## Summary
+
+- You made it! Here's what we covered:
+
+    - F statistics
+    - The logic of ANOVA
+    - The overall ANOVA
+    - Post hoc tests
+    - Trend analysis
+    - Effect sizes
+    - Visualizations

@@ -1,0 +1,463 @@
+---
+title: "Correlation"
+author: "Erin M. Buchanan"
+date: "Last Updated: `r Sys.Date()`"
+output: 
+  slidy_presentation:
+    incremental: true 
+---
+
+## What is a Correlation?
+
+- **Definition:** It is a way of measuring the extent to which two variables are related.
+- Correlation indicates the direction and strength of the relationship across variables. 
+
+    - Direction: none, positive, negative
+    - Strength: none (0) to perfect (1 or -1)
+
+## Visualizing Correlation
+
+- No relationship
+
+```{r, echo = FALSE, out.width="75%", fig.align='center'}
+knitr::include_graphics("pictures/1.png")
+```
+
+## Visualizing Correlation
+
+- Positive relationship
+
+```{r, echo = FALSE, out.width="75%", fig.align='center'}
+knitr::include_graphics("pictures/2.png")
+```
+
+## Visualizing Correlation
+
+- Negative relationship
+
+```{r, echo = FALSE, out.width="75%", fig.align='center'}
+knitr::include_graphics("pictures/3.png")
+```
+
+## Using Scatterplots 
+
+- **Plotting reminder:**
+
+- ggplot(data, aes(X, Y, color/fill = categorical)
+
+    - ,+ cleanup coding
+    - ,+ geom_point() to get the dots
+    - ,+ geom_smooth() to get a line
+    - ,+ xlab/ylab
+
+- We can additionally control the length of the X and Y axes with `coord_cartesian()`.
+
+    - coord_cartesian(xlim = NULL, ylim = NULL)
+    - coord_cartesian(xlim = c(0,100), ylim = c(0,101))
+
+## Using Scatterplots
+
+```{r}
+library(rio)
+library(ggplot2)
+cleanup <- theme(panel.grid.major = element_blank(), 
+                panel.grid.minor = element_blank(), 
+                panel.background = element_blank(), 
+                axis.line.x = element_line(color = "black"),
+                axis.line.y = element_line(color = "black"),
+                legend.key = element_rect(fill = "white"),
+                text = element_text(size = 15))
+exam <- import("data/exam_data.csv")
+liar <- import("data/liar_data.csv")
+```
+
+## Using Scatterplots
+
+```{r echo=TRUE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+#from chapter 5 notes
+scatter <- ggplot(exam, aes(Anxiety, Exam))
+scatter +
+  geom_point() +
+  xlab("Anxiety Score") +
+  ylab("Exam Score") +
+  cleanup
+```
+
+## Using Scatterplots
+
+```{r echo=TRUE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+#from chapter 5 notes + coord_cartesian
+scatter <- ggplot(exam, aes(Anxiety, Exam))
+scatter +
+  geom_point() +
+  xlab("Anxiety Score") +
+  ylab("Exam Score") +
+  cleanup + 
+  coord_cartesian(xlim = c(50,100), ylim = c(0,100))
+  #just example numbers, you would want to use the real scale of the data
+```
+
+## Modeling Relationships
+
+- Remember, our all-in-one statistical equation:
+  
+    - $Outcome_i = Model + Error_i$
+
+- We have previously defined our model as the Mean and the Standard Deviation or Standard Error.
+- We used the SE to determine if our model "fit" well. 
+
+## Modeling Relationships
+
+- Now, we can use:
+
+  - $Outcome_i = \beta X_i + Error_i$
+
+- Correlation is a type of simple standardized regression, which is what this equation represents.
+- When you have one X and one Y variable, *r* and $\beta$ are equal. 
+- Now we are using *r* or $\beta$ to determine the strength of the model.
+- Traditionally you don't see the error values reported (sometimes you see CI).
+    
+## Measuring Relationships
+
+- How do we measure the direction and strength of the relationship of variables? 
+- We need to see whether as one variable increases, the other increases, decreases or stays the same.
+- This relationship can be found by calculating the covariance.
+
+    - We look at how much each score deviates from the mean.
+    - If both variables deviate from the mean by the same amount, they are likely to be related.
+
+## Revision of Variance
+
+- The **variance** tells us by how much scores deviate from the mean for a single variable.
+- We also described the variance as the sum of squares divided by degrees of freedom.
+
+$$SD^2 = \frac {\sum(X_i-\bar{X})^2}{N-1}$$
+
+- Or we could write it like this:
+
+$$SD^2 = \frac {\sum(X_i-\bar{X})(X_i-\bar{X})}{N-1}$$
+
+## Revision of Variance
+
+- **Covariance** is similar - it tells is by how much scores on two variables differ from their respective means.
+
+$$Cov(x,y) = \frac {\sum(X_i-\bar{X})(Y_i-\bar{Y})}{N-1} $$
+
+## Revision of Variance: Calculating Variance 
+
+```{r}
+var(exam$Revise)
+var(exam$Exam)
+```
+
+## Revision of Variance: Calculating Covariance
+
+```{r}
+cov(exam$Revise, exam$Exam)
+plot(exam$Revise, exam$Exam)
+```
+
+## Problems with Covariance
+
+- It depends upon the units of measurement.
+- One solution: standardize it!
+
+    - Divide by the standard deviations of both variables.
+
+- The standardized version of covariance is known as the correlation coefficient.
+
+    - It is relatively unaffected by units of measurement.
+
+## The Correlation Coefficient
+
+$$r = \frac{Cov(x,y)}{S_xS_y}$$
+
+$$r = \frac{\sum(X_i-\bar{X})(Y_i-\bar{Y})}{(N-1)S_xS_y} $$
+
+- We can just look at *r* to determine the strength of relationship.
+- We can also calculate the confidence interval or standard error for *r*. It has traditionally not been quite as popular because of the annoyance of calculating it. *R* makes this easy!
+- We can use this confidence interval to assess model fit. 
+
+## The Correlation Coefficient
+
+- It varies between -1 and +1
+
+    - 0 = no relationship
+
+- It is an effect size
+
+    - .1 = small effect
+    - .3 = medium effect
+    - .5 = large effect
+    - Remember, that these are guidelines.
+
+## The Correlation Coefficient
+    
+- Coefficient of determination, $r^2$
+
+    - By squaring the value of *r* you get the proportion of variance in one variable shared by the other.
+
+## R versus r
+
+- $R$ = correlation coefficient for 3+ variables (you will see this in the regression chapter).
+- $r$ = correlation coefficient for 2 variables.
+- $r^2$ = coefficient of determination for 2 variables.
+- $R^2$ = coefficient of determination for 3+ variables.
+- In reality, we often use $R^2$ for anything effect size related, even if it's only 2.
+
+## Correlation: Example
+
+- The correlation between exam revisions and exam anxiety is **positive** and **medium**. 
+
+```{r}
+cor(exam$Revise, exam$Exam)
+```
+
+## Correlation: Example
+
+- Correlation is an effect size and can be used for statistical testing. What should I check for data screening? 
+
+    - Accuracy
+    - Missing (pairwise exclusion may be useful)
+    - Outliers
+    - Normality
+    - Linearity
+    - Homogeneity
+    - Homoscedasticity
+
+## Correlation: Understanding the NHST
+
+- Remember that we discussed NHST as a framework for understanding the results of a statistical test. 
+- For correlation, we might consider using:
+
+    - H0: The correlation between exam performance and exam revisions is zero. 
+    - H1: The correlation between exam performance and exam revisions is not zero. 
+
+## Correlation: Understanding the NHST
+
+- We can use many different forms of this type of set up:
+
+    - H0: The correlation between exam performance and exam revisions is less than .1 
+    - H1: The correlation between exam performance and exam revisions is greater than .1
+    
+## Correlation: Understanding the NHST
+    
+- The main "rule" is that the two hypotheses are opposites and cover the entire range of possibilities. For example, here's an incompatible set up:
+
+    - H0: The correlation between exam performance and exam revisions is zero.  
+    - H1: The correlation between exam performance and exam revisions is greater than .1
+    - What do you do if the relationship is negative? 
+  
+## Correlation: How to Calculate
+
+- We've already used `cor()` during data screening. 
+- But what about *p* values for our statistical test? What does a *p* value tell us again?
+- Also, what about confidence intervals and other types of correlation? 
+
+## Correlation: How to Calculate
+
+- **cor() function will calculate:** 
+    
+    - Pearson, Spearman, Kendall
+    - Multiple correlations at once
+    - No p-values 
+    - No confidence intervals 
+    
+## Correlation: How to Calculate
+
+- Note: here we have gender as a numeric value, we will come back to that issue in a little bit. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+cor(exam[ , -1], 
+    use="pairwise.complete.obs", 
+    method = "pearson")
+
+cor(exam[ , -1], 
+    use="pairwise.complete.obs", 
+    method = "kendall")
+```
+
+## Correlation: How to Calculate
+
+- **rcorr() function will calculate:**
+
+    - Pearson, Spearman
+    - Multiple correlations at once
+    - Includes p values
+    - No confidence intervals
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(Hmisc)
+rcorr(as.matrix(exam[ , -1]), type = "pearson")
+```
+
+## Correlation: How to Calculate
+
+- **cor.test() function will calculate:**
+
+    - Pearson, Spearman, Kendall
+    - One correlation at a time
+    - Includes p values
+    - Include the confidence interval 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+cor.test(exam$Revise,
+         exam$Exam,
+         method = "pearson")
+```
+
+## Correlation Interpretation
+
+- **The third-variable problem:**
+
+    - In any correlation, causality between two variables cannot be assumed because there may be other measured or unmeasured variables that potentially affect the results.
+
+- **Direction of causality:**
+
+    - Correlation coefficients say nothing about which variable causes the other to change.
+
+## Nonparametric Correlation
+
+- **Spearman's Rho**: Pearson's correlation on the ranked data.
+- **Kendall's Tau**: A different version of Spearman's that handles small samples and tied ranks better. 
+
+## Correlation: Example
+
+- Dataset consisting of the World's Best Liar Competition:
+
+    - 68 contestants
+    - Measures
+    
+        - Where they were placed in the competition (first, second, third, etc.)
+        - Creativity questionnaire (maximum score 60)
+        - If they had competed in the competition before
+
+```{r}
+str(liar)
+```
+
+## Correlation: Example
+
+- Because this dataset has true ordinal data (first, second, etc.), the non-parametric statistics are more appropriate. 
+
+- **Spearman**
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+with(liar, cor.test(Creativity, Position, method = "spearman"))
+```
+
+- **Kendall**
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+with(liar, cor.test(Creativity, Position, method = "kendall"))
+```
+
+## Correlation: Example
+
+- All values must be numeric to be able to do any of these correlations.
+- Therefore, if you have any variables that import with labels, you will have defactor them using `as.numeric()`.
+- What type of correlation should we use with **binary** predictors? 
+
+    - When using correlation on binary outcomes, you are essentially creating a standardized difference between the group means.
+    - *t*-tests will give you equivalent answers and may be more interpretable. 
+
+## Correlation: Biserial
+
+- Point or Point Biserial is correlation a binary variable.
+- Which is which?
+
+    - Point Biserial = true dichotomy, no underlying continuum
+    - Biserial = not quite discrete but has been split like pass/fail 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+liar$Novice2 <- as.numeric(as.factor(liar$Novice))
+str(liar) #we had to factor because of the character variable
+with(liar, cor.test(Creativity, Novice2))
+plot(liar$Creativity, liar$Novice2)
+```
+
+## Comparing Correlations
+
+- How can I tell if these two correlation coefficients are significantly different?
+
+    - Install package **cocor** to be able to compare them!
+
+- **First,** you have to decide if the correlations are independent or dependent
+
+    - **Independent correlations**: the correlations come from separate groups of people, but are on the same variables
+    - **Dependent correlation**: the correlations are from the same people, but are different variables (overlapping or not)
+
+## Independent Correlations
+
+- There's no split/subset function within cocor.
+- Therefore, you have to split up the dataset on your independent variable, and then put it back together in `list` format.
+- Subset the data, then create a list.
+
+    - cocor(~ X + Y | X + Y, data = data)
+    - Fill in X and Y with your variables you want to correlate (on these they are likely to be the same).
+    - Data = new list we just created. 
+    
+## Independent Correlations
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(cocor)
+new <- subset(liar, Novice == "First Time")
+old <- subset(liar, Novice == "Had entered Competition Before")
+ind_data <- list(new, old)
+cocor(~Creativity + Position | Creativity + Position,
+      data = ind_data)
+```
+
+## Dependent Correlations
+
+- `cocor(~ X + Y | Y + Z, data = data)` - Overlapping correlation
+- Fill in X, Y, Z with your variables you want to correlate
+- You can also have `X + Y | Q + Z` - Non-overlapping correlation
+- Data is the dataframe with all of the columns
+
+## Dependent Correlations
+
+```{r}
+cocor(~Revise + Exam | Revise + Anxiety, 
+      data = exam)
+```
+
+## Partial and Semi-Partial Correlations
+
+- **Partial correlation:**
+
+    - Measures the relationship between two variables, controlling for the effect that a third variable has on them both.
+
+- **Semi-partial correlation:**
+
+    - Measures the relationship between two variables controlling for the effect that a third variable has on only one of the others.
+
+## Partial and Semi-Partial Correlations
+
+```{r, echo = FALSE, out.width="75%", fig.align='center'}
+knitr::include_graphics("pictures/9.png")
+```
+
+## Partial Correlations
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(ppcor)
+pcor(exam[ , -c(1)], method = "pearson")
+```
+
+## Semipartial Correlations
+
+- Notice how the top and bottom half of the correlation matrix are not equal. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+spcor(exam[ , -c(1)], method = "pearson")
+```
+
+## Summary
+
+- What have we learned?
+
+    - There are way more correlations than just Pearson
+    - We can compare correlations
+    - We can somewhat control for the third variable problem with partial and semi-partial correlations
+    - Correlation more than an effect size

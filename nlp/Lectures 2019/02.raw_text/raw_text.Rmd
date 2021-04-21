@@ -247,7 +247,8 @@ clean_content = BeautifulSoup(content)
 clean_text = clean_content.get_text()
 #print(clean_text[:1000])
 re.search("In this guide", clean_text)
-clean_text = clean_text[495:]
+re.search("Enjoy!", clean_text)
+clean_text = clean_text[495:4831]
 print(clean_text)
 ```
 
@@ -360,6 +361,11 @@ len(list(spacy_processed.sents))
 ```{python}
 ##python chunk
 print([word.text for word in spacy_processed][:500])
+##another example
+#saved_list = []
+#for word in spacy_processed:
+#  print(word.text)
+#  saved_list.append(word.text)
 ```
 
 ## Removing symbols
@@ -496,7 +502,9 @@ stri_replace_all_regex(str = wordlist,
 from textblob import Word
 wordlist = ["thse", "wods", "mispelled"]
 
-[Word(word).correct() for word in wordlist]
+#you must give it a tokenized list 
+#if you give it a long string, you'll get single letters back
+[Word(token).correct() for token in wordlist]
 ```
 
 ## Stemming
@@ -527,6 +535,7 @@ from nltk.stem import LancasterStemmer
 ps = PorterStemmer()
 ls = LancasterStemmer()
 
+#be sure to give it a tokenized list
 [ps.stem(word) for word in wordlist]
 [ls.stem(word) for word in wordlist]
 ```

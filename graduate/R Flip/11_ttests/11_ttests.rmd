@@ -1,0 +1,330 @@
+---
+title: "Comparing Two Means"
+author: "Erin M. Buchanan"
+date: "Last Updated: `r Sys.Date()`"
+output: 
+  slidy_presentation:
+    incremental: true 
+---
+
+## Experiments
+
+- **Simple experiments:**
+
+    - One IV that's binary with two options
+    - One DV that's interval/ratio/continuous
+
+- **For example:** manipulation of the independent variable involves having an experimental condition and a control.
+
+    - This situation can be analyzed with a t-test.
+    - We can also use t-tests to analyze any binary independent variable. 
+    - The t-test is a simple regression model with one categorical predictor.
+
+## Experiments
+
+- Don't make a continuous variable categorical just so you can do a t-test.
+- People used to split variables into high versus low or simply split down the middle. 
+      
+    - You separate the people who are close together and lump them with people who are not really like them.
+    - Effect sizes get smaller.
+    - You will also decrease power and see Type II errors.
+
+## Experiments
+
+- **Reminder:**
+
+    - When you manipulate the levels of the IV, you are working with experimental research.  
+    - If you just are examining two naturally occurring categories, then quasi-experimental/correlational.
+
+## Experiments
+
+- Between subjects / Independent designs
+
+    - Expose different groups to different experimental manipulations.
+
+- Repeated measures / within subjects / dependent designs
+
+    -  Take a single group of people and expose them to different experimental manipulations at different points in time. 
+
+## The t-test 
+
+- **Independent t-test:**
+
+    - Compares two means based on independent data
+    - Used when different participants were assigned to each condition of the study
+    
+- **Dependent t-test:**
+
+    - Compares two means based on related data.
+    - Used when the same participants took part in both conditions of the study
+
+## Independent: Example
+
+- Are invisible people mischievous? 
+- Manipulation
+
+    - Placed participants in an enclosed community riddled with hidden cameras.
+    - 12 participants were given an invisibility cloak.
+    - 12 participants were not given an invisibility cloak.
+
+- Outcome measured how many mischievous acts participants performed in a week.
+    
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(rio)
+longdata <- import("data/invisible.csv")
+str(longdata)
+```
+
+## Independent: Understanding the NHST
+
+- H0: The no cloak and cloak groups would have the same mean. 
+- H1: The no cloak and cloak groups would have different means.
+
+```{r}
+M <- tapply(longdata$Mischief, longdata$Cloak, mean)
+STDEV <- tapply(longdata$Mischief, longdata$Cloak, sd)
+N <- tapply(longdata$Mischief, longdata$Cloak, length)
+
+M;STDEV;N
+```
+
+## Independent: Understanding the NHST
+
+- Our means appear slightly different. What might have caused those differences? 
+    
+    - Variance created by our manipulation: The cloak **(systematic variance)**
+    - Variance created by unknown factors **(unsystematic variance)**
+
+```{r, echo = FALSE, out.width="50%", fig.align='center'}
+knitr::include_graphics("pictures/1.png")
+```
+
+## Independent: Understanding the NHST
+
+- If the samples come from the same population, then we expect their means to be roughly equal.
+- Although it is possible for their means to differ by chance alone, here, we would expect large differences between sample means to occur very infrequently.
+- We compare the difference between the sample means that we collected to the difference between the sample means that we would expect to obtain if there were no effect **(i.e. if the null hypothesis were true)**.
+    
+## Independent: Understanding the NHST
+
+- We use the standard error as a gauge of the variability between sample means. - If the difference between the samples we have collected is larger than what we would expect based on the standard error then we can assume one of two interpretations: 
+     
+    - There is no effect and sample means in our population fluctuate a lot and we have, by chance, collected two samples that are atypical of the population from which they came *(Type 1 error)*.
+    - The two samples come from different populations but are typical of their respective parent population. In this scenario, the difference between samples represents a genuine difference between the samples *(and so the null hypothesis is incorrect)*.
+
+## Independent: Understanding the NHST
+
+- As the observed difference between the sample means gets larger, the more confident we become that the second explanation is correct (i.e., that the null hypothesis should be rejected). 
+- If the null hypothesis is incorrect, then we gain confidence that the two sample means differ because of the different experimental manipulation imposed on each sample.
+
+## Independent: Formulas
+
+- Embedded in the formula are all the things we've discussed for model fit: the means, degrees of freedom, standard deviation, standard error
+
+$$ t = \frac {\bar{X}_1 - \bar{X}_2}{\sqrt {\frac {s^2_p}{n_1} + \frac {s^2_p}{n_2}}}$$
+
+$$ s^2_p = \frac {(n_1-1)s^2_1 + (n_2-1)s^2_2} {n_1+n_2-2}$$
+
+## Independent: Data Screening
+
+- Accuracy
+- Missing - just exclude them!
+- Outliers: We only have one continuous measure to screen, therefore, outliers can be screened by *Z*-scores. 
+- Assumptions:
+
+    - Linearity
+    - Normality
+    - Homogeneity: Equal variances between groups
+
+## Independent: Analysis
+
+- No differences between groups was found: $t(22) = 1.71, p = .101$
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+t.test(Mischief ~ Cloak, 
+       data = longdata, 
+       var.equal = TRUE, #assume equal variances
+       paired = FALSE) #independent
+```
+
+## Independent: No Homogeneity
+
+- The most common problem is homogeneity ... where the group variance is not equal between groups.
+- You can easily adjust for variances using the Welch *(or Satterthwaite)* approximation to the degrees of freedom 
+- Set `var.equal = FALSE` to use this adjustment. 
+- For other issues you can try the Wilcoxon Signed-Rank Test.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+t.test(Mischief ~ Cloak, 
+       data = longdata, 
+       var.equal = FALSE, #assume equal variances
+       paired = FALSE) #independent
+```
+    
+## Independent: Effect Size
+
+- Effect size options:
+
+    - Cohen's d for independent t = $d_s$
+    - Hedges' g
+    - Glass' $\Delta$
+    - r
+
+## Independent: Effect Size
+
+- While our statistical test indicated no differences, the effect size indicates a medium difference between means. 
+- This difference in interpretation is likely due to low power with a small sample size. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(MOTE)
+effect <- d.ind.t(m1 = M[1], m2 = M[2],        
+                  sd1 = STDEV[1], sd2 = STDEV[2],        
+                  n1 = N[1], n2 = N[2], a = .05)
+effect$d
+```
+
+## Independent: Power
+
+- So, how many people would I need to power this test? 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(pwr)
+pwr.t.test(n = NULL, #leave NULL
+           d = effect$d, #effect size
+           sig.level = .05, #alpha
+           power = .80, #power 
+           type = "two.sample", #independent
+           alternative = "two.sided") #two tailed test
+```
+
+## Dependent: Example
+
+- Are invisible people mischievous?
+- Manipulation
+
+    - Placed participants in an enclosed community riddled with hidden cameras.
+    - For first week participants normal behavior was observed. 
+    - For the second week, participants were given an invisibility cloak.
+
+- Outcome: We measured how many mischievous acts participants performed in week 1 and week 2.
+    
+- **Note:** Same data, but instead the study is dependent. Let's see what happens to our t-test. You would not change the analysis this way, but this example shows how the type of experiment and statistical test can affect power and results. 
+
+## Dependent: Understanding the NHST
+
+- The logic of this test is roughly the same, but you have to consider the matched nature of dependent results.
+- We are going to use the standard error of the differences rather than standard error.
+- The standard error of the differences is calculated by subtracting the two sets of scores and calculating standard deviation on that difference score. 
+
+$$t = \frac {\bar{D} - \mu_D}{S_D/\sqrt N}$$
+
+## Dependent: Data Screening
+
+- The data screening can be treated in the same fashion. 
+- However, homogeneity between groups is not examined, because you do not have separate groups!
+- The variance is calculated on **one difference** score, so there is not homogeneity concern. 
+- When other assumptions are not met, you can use a Mann-Whitney Test or the Wilcoxon rank-sum test.
+
+## Dependent: Analysis
+
+- The cloak and no cloak conditions were different: $t(11) = 3.80, p = .003$.
+- Why is this result different than independent t? 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+t.test(Mischief ~ Cloak, 
+       data = longdata, 
+       var.equal = TRUE, #ignored in dependent t
+       paired = TRUE) #dependent t
+```
+
+## Dependent: Effect Size
+
+- Cohen's d: Based on averages 
+
+    - $d_{av}$ looks at both SDs without controlling for r
+    - $d_{rm}$ looks at both SDs and controls for r
+
+- Cohen's d: Based on differences $d_z$
+- Which one should I use?
+
+## Dependent: Effect Size
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+effect2 <- d.dep.t.avg(m1 = M[1], m2 = M[2],
+                       sd1 = STDEV[1], sd2 = STDEV[2],  
+                       n = N[1], a = .05)
+effect2$d
+
+#remember independent t
+effect$d
+```
+
+## Dependent: Effect Size
+
+- If we were to use $d_z$, we would overestimate the effect size.
+- You do not normally have to calculate both, just showing how these are different. 
+
+- Create difference scores, calculate the difference score measures. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+diff <- longdata$Mischief[longdata$Cloak == "Cloak"] - longdata$Mischief[longdata$Cloak == "No Cloak"]
+
+effect2.1 = d.dep.t.diff(mdiff = mean(diff, na.rm = T), 
+                         sddiff = sd(diff, na.rm = T),
+                         n = length(diff), a = .05)
+effect2.1$d
+```
+
+## Dependent: Power
+
+- The test type will affect power, as our independent results suggested we needed 66 or more people.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+pwr.t.test(n = NULL, 
+           d = effect2$d, 
+           sig.level = .05,
+           power = .80, 
+           type = "paired", 
+           alternative = "two.sided")
+```
+
+## t-test: Visualization
+
+- Bar charts in ggplot2 with only one x variable (the different levels of your IV) and one y variable.
+    
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(ggplot2)
+
+cleanup <- theme(panel.grid.major = element_blank(), 
+                panel.grid.minor = element_blank(), 
+                panel.background = element_blank(), 
+                axis.line.x = element_line(color = "black"),
+                axis.line.y = element_line(color = "black"),
+                legend.key = element_rect(fill = "white"),
+                text = element_text(size = 15))
+
+bargraph <- ggplot(longdata, aes(Cloak, Mischief))
+
+bargraph +
+  cleanup +
+  stat_summary(fun.y = mean, 
+               geom = "bar", 
+               fill = "White", 
+               color = "Black") +
+  stat_summary(fun.data = mean_cl_normal, 
+               geom = "errorbar", 
+               width = .2, 
+               position = "dodge") +
+  xlab("Invisible Cloak Group") +
+  ylab("Average Mischief Acts")
+```
+
+## Summary
+
+- In this lecture, you've learned:
+
+    - All things t-tests
+    - The logic of t-tests
+    - Independent and dependent t-tests
+    - Effect sizes for t-tests
+    - Power for t-tests

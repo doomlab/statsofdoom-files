@@ -1,0 +1,473 @@
+---
+title: "Regression: Mediation and Moderation"
+author: "Erin M. Buchanan"
+date: "Last Updated: `r Sys.Date()`"
+output: 
+  slidy_presentation:
+    incremental: true 
+---
+
+##  What is Mediation?
+
+- Refers to a situation when the relationship between a predictor variable and outcome variable can be explained by their relationship to a third variable (the mediator).
+
+```{r, echo = FALSE, out.width="75%", fig.align='left'}
+knitr::include_graphics("pictures/1.png")
+```
+
+## Baron & Kenny (1986)
+
+- **Mediation** is tested through three regression models:
+
+    - Predicting the outcome from the predictor variable.
+    - Predicting the mediator from the predictor variable. 
+    - Predicting the outcome from both the predictor variable and the mediator. 
+
+## Baron & Kenny (1986)
+
+- **Four conditions of mediation:**
+
+    - The predictor must significantly predict the outcome variable.*
+    - The predictor must significantly predict the mediator.
+    - The mediator must significantly predict the outcome variable.
+    - The predictor variable must predict the outcome variable less strongly in model 3 than in model 1.
+
+## Baron & Kenny (1986): Limitations
+
+- How much of a reduction in the relationship between the predictor and outcome is necessary to infer mediation? 
+- People tend to look for a change in significance, which can lead to the 'all or nothing' thinking that p-values encourage. 
+- Two solutions:
+  
+    - The Sobel test
+    - Bootstrapping the indirect effect and confidence intervals 
+    
+## Sobel Test
+
+- An alternative is to estimate the indirect effect and its significance using the Sobel test (Sobel, 1982). 
+- If the Sobel test is significant, there is significant mediation
+- We are going to use the Aroian Test version of Sobel which corrects for the standard error of the a and b paths.
+    
+## Bootstrapping
+
+- **What is bootstrapping?**
+
+    - A procedure where you run an analysis many times to create an average effect and confidence interval of the effect. 
+    - Bootstrapped datasets are created by randomly picking a sample from your dataset with replacement
+    - Think about this like the lottery, if they put the balls back.
+    - If the confidence interval of the indirect (mediation) effect does not cross zero, then that implies that mediation has occurred. 
+
+## Mediation: Data Screening
+
+- Mediation models usually occur in stages - meaning separate models are run with different IV / DV combinations. 
+- Sometimes people call these "steps", but do not confuse this with hierarchical regression. 
+- So, what does that do for data screening?
+
+    - Screen both the IV and the Mediator at the same time predicting the DV.
+    - This way you are screening the final anticipated stage of the mediation model and are screening all the variables. 
+    - You can also use the fake regression procedure to do all three variables at once. 
+
+## Mediation: Example
+
+- Does Facebook use mediate the relationship between previous knowledge and exam scores?
+- Implying that the overuse of Facebook prevents people from studying, so they do differently on their exam? 
+- Important not to have missing data, so you are comparing models that all use the same data points. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(rio)
+master <- import("data/mediation.sav")
+str(master)
+
+summary(master)
+master <- na.omit(master)
+```
+
+## Mediation: c Path
+
+- The c path: X --> Y: $$b = 0.32, t(237) = 3.63, p < .001$$
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+model1 <- lm(exam ~ previous, data = master)
+summary(model1)
+```
+
+## Mediation: a Path
+
+- The a path: X --> M: $$b = -0.09, t(237) = -2.17, p = .031$$
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+model2 <- lm(facebook ~ previous, data = master)
+summary(model2)
+```
+
+## Mediation: b, c' Path
+
+- Add in the b and c' paths: X + M --> Y
+- b Path: $$b = -0.61, t(237) = -4.77, p < .001$$ 
+- c' Path: $$b = 0.26, t(237) = 3.09, p = .002$$
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+model3 <- lm(exam ~ previous + facebook, data = master)
+summary(model3)
+```
+
+## Mediation: Interpretation
+
+- Previous experience positively impacts exam scores (c path = 0.32).
+- Previous experience negatively impacts Facebook time (a path = -0.09).
+- Controlling for previous experience, Facebook time negatively impacts exam scores (b path = -0.61).
+- Controlling for Facebook scores, previous experience positively impacts exam scores (c' path = 0.26).
+- So, did mediation happen? Is a change from 0.31 to 0.26 important?
+
+## Mediation: Sobel Test
+
+- The Aroian Test: $Z = \frac{a \times b}{\sqrt{b^2 \times SD_a^2 + a^2 \times SD_b^2 + SD_a^2 \times SD_b^2}}$
+- If the indirect effect is larger than the error, we would conclude that the addition of the M variable changed the c path. 
+
+    - Fill in the correct coefficient numbers
+    - Note if you use this code provided and fill in X and M in the correct order, you will not need to change the Sobel code.
+    
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+#aroian sobel
+a <- coef(model2)[2]
+b <- coef(model3)[3]
+SEa <- summary(model2)$coefficients[2,2]
+SEb <- summary(model3)$coefficients[3,2]
+zscore <- (a*b)/(sqrt((b^2*SEa^2)+(a^2*SEb^2)+(SEa^2*SEb^2)))
+zscore
+#two tailed test 
+pnorm(abs(zscore), lower.tail = F)*2
+```
+
+## Mediation: Sobel Test
+
+- Z = 1.93, p = .053
+- We would conclude that no mediation had occurred.
+
+## Mediation: All Together + Bootstrapping
+
+```{r}
+#devtools::install_github("doomlab/MeMoBootR")
+library(MeMoBootR)
+
+#no missing data allowed
+med_results <- mediation1(y = "exam",
+                          x = "previous", 
+                          m = "facebook", 
+                          df = master)
+```
+
+## Mediation: MeMoBootR
+
+- The MeMoBootR package gives you data screening, each step of the mediation, and the bootstrapping results!
+- The data screening does not include accuracy or missing data, so that should be completed first. 
+
+```{r}
+head(med_results$datascreening$fulldata)
+med_results$datascreening$correl
+med_results$datascreening$linearity
+med_results$datascreening$normality
+med_results$datascreening$homogen
+```
+
+## Mediation: MeMoBootR
+
+- For each of our stages of mediation, you can print out the models:
+
+```{r}
+summary(med_results$model1)
+summary(med_results$model2)
+summary(med_results$model3)
+```
+
+## Mediation: MeMoBootR
+
+- Next, you can get the Sobel test results:
+
+```{r}
+med_results$indirect.effect
+med_results$z.score
+med_results$p.value
+```
+
+## Mediation: MeMoBootR
+
+- Last, let's get the bootstrapped results: 
+
+  - The indirect effect would be reported as: $0.06, 95\% CI[-0.01, 0.12]$
+
+```{r}
+med_results$boot.results
+med_results$boot.ci
+med_results$diagram
+```
+
+## Moderation
+
+- The combined effect of two variables on another is known conceptually as **moderation**, and in statistical terms as an **interaction effect**.
+
+- Do violent video games make people aggressive? 
+
+    - DV: Aggression
+    - IV:
+    
+        - Callous unemotional traits 
+        - Number of hours spent playing video games per week
+        - Interaction
+
+## Conceptual Moderation Model
+
+- If callous-unemotional traits were a moderator then we're saying that the strength or direction of the relationship between game playing and aggression depends on the strength of callous-unemotional traits.
+
+```{r, echo = FALSE, out.width="75%", fig.align='left'}
+knitr::include_graphics("pictures/4.png")
+```
+
+## Conceptual Moderation Model
+
+- If the X variable was categorical, you are basically checking if the separate groups (levels) have different slopes for the non-categorical variable. 
+
+```{r, echo = FALSE, out.width="75%", fig.align='left'}
+knitr::include_graphics("pictures/5.png")
+```
+
+## Conceptual Moderation Model
+
+- However, if X is continuous, we have to find a new way to figure out the shape of the interaction.  
+
+```{r, echo = FALSE, out.width="75%", fig.align='left'}
+knitr::include_graphics("pictures/6.png")
+```
+
+## Statistical Moderation Model
+
+```{r, echo = FALSE, out.width="75%", fig.align='left'}
+knitr::include_graphics("pictures/7.png")
+```
+
+## Centering variables
+
+- The interaction term makes the *b*s for the main predictors uninterpretable in many situations.
+- Centering refers to the process of transforming a variable into deviations around a fixed point.
+- Centering solves two problems: 
+
+    - Interpretation
+    - Multicollinearity
+    
+## Centering variables
+
+- Easiest way to center to make them useful:
+
+    - Score - Mean for that variable.
+    - What does that do?
+    
+- Centered variables for main effects have two interpretations
+
+    - Effect of that predictor at the mean value for the sample
+    - Average effect of the predictor across a range of scores for the other predictor 
+    
+## Moderation: Simple Slopes
+
+- If the interaction is significant, then you usually ignore the main effects (each variable by itself).
+- So what do I do if my interaction is significant? **A simple slope analysis**
+- If variables are categorical, then you are simply looking at the differences across one variable or another 
+
+## Moderation: Simple Slopes
+
+- For continuous variables, you "create" low, average, and high groups.
+
+    - Low groups are people who are one SD below the mean
+    - Average groups are people are at the mean
+    - High groups are people who are one SD above the mean 
+    - However, creating groups is backwards from what you think. 
+
+## Moderation: Simple Slopes
+
+- We are examining the interaction between hours of video games and unemotional traits to predict aggression
+- Think about which variable you want to know the differences in (i.e., low, average, high).
+- So at different levels of callousness, we want to examine the relationship between hours of video games and aggression.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+master <- import("data/moderation.sav")
+str(master)
+```
+    
+## Moderation: Centering
+
+- Center your variables using scale()
+
+    - Using scale = F turns off dividing by SD, which would create z-scores.
+    - You can use z-score centering if you wanted the coefficients to be beta. It is likely easier to interpret the b values though. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+#center the X and M variable (NOT THE DV)
+#when you create these use the final dataset 
+master$zvid = scale(master$Vid_Games, scale = F) #mean center, not z score
+master$zcal = scale(master$CaUnTs, scale = F)
+```
+
+## Moderation: Running
+
+- For data screening, we would screen the model with the interaction, and all other considerations are the same as regression.
+- Run the model:
+
+    - You do not have to create an interaction column, to multiply does that automatically for you.
+    - Also includes the main effects of each variable by itself. 
+    
+```{r message=FALSE, warning=FALSE}
+#run the model to see if the moderation is significant
+#use the z score variables!
+#be sure to do X*M so the graph is right 
+modmodel <- lm(Aggression ~ zvid*zcal, data = master)
+```
+
+## Moderation: Interpretation 
+
+- Overall model is significant, $F(3, 438) = 88.46, p < .001, R^2 = .38$
+- Interaction effect is significant, $b = 0.03, t(438) = 3.88, p < .001$
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+summary(modmodel)
+```
+
+## Moderation: Simple Slopes
+
+- So, how do we create groups when we have a continuous variable?
+
+    - Most people look at "low" as one SD below the mean and "high" as one SD above the mean.
+    - Lots of combinations are possible though. 
+
+## Moderation: Simple Slopes
+
+- Create the low and high versions of the M variable (callousness in this example)
+
+    - Low created by ADDING a SD
+    - High created by SUBTRACTING a SD
+    - The rule is that we have to bring them to the middle because we centered so that zero is the middle
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+#create the low and high z score variables 
+master$zcallow <- master$zcal + sd(master$zcal) #bring them up
+master$zcalhigh <- master$zcal - sd(master$zcal) #bring them down
+summary(master)
+```
+
+## Moderation: Simple Slopes
+
+- Then run the model with the new low and high versions of the variable. 
+- What do I do with that?
+- You look at the other variable because the coefficients for M and X*M will not change. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+#run the models
+#be sure to X*M
+modmodellow <- lm(Aggression ~ zvid*zcallow, data = master)
+modmodelhigh <- lm(Aggression ~ zvid*zcalhigh, data = master)
+
+```
+
+## Moderation: Simple Slopes
+
+- At low levels of callousness, video game hours is unrelated to aggression, b = -0.09 ...
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+summary(modmodellow) #low slope
+```
+
+## Moderation: Simple Slopes
+
+- At average levels of callousness, hours of video games predicts increasing aggression, b = 0.17 ...
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+summary(modmodel) #average slope
+```
+
+## Moderation: Simple Slopes
+
+- At high levels of callousness, the strength of hours of video games predicting aggression is the strongest, b = 0.43 ... 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+summary(modmodelhigh) #high slope
+```
+
+## Moderation: Simple Slopes
+
+- Significant interactions will create fan effects of slopes that either get stronger/weaker in strength or switch directions. 
+- Here, we find that increasing levels of callousness leads to increasing effects of video game time on aggression. 
+
+## Moderation: Graphing
+
+- We can use the ggplot to create a graph of the moderation effect.
+- But we are going to manually draw the lines on a scatterplot graph. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(ggplot2)
+cleanup <- theme(panel.grid.major = element_blank(), 
+                panel.grid.minor = element_blank(), 
+                panel.background = element_blank(), 
+                axis.line.x = element_line(color = "black"),
+                axis.line.y = element_line(color = "black"),
+                legend.key = element_rect(fill = "white"),
+                text = element_text(size = 15))
+
+modgraph <- ggplot(master, aes(zvid, Aggression))
+
+##change Cal to the new moderator label
+##change xlab for the new X label
+modgraph + 
+  xlab("Centered Video Games") + 
+  geom_point(color = "gray") +
+  geom_abline(aes(intercept = modmodellow$coefficients[1],
+                  slope = modmodellow$coefficients[2], 
+                  linetype = "-1SD Cal"), size = 1) +
+  geom_abline(aes(intercept = modmodel$coefficients[1],
+                  slope = modmodel$coefficients[2], 
+                  linetype = "Average Cal"), size = 1) +
+  geom_abline(aes(intercept = modmodelhigh$coefficients[1],
+                  slope = modmodelhigh$coefficients[2], 
+                  linetype = "+1SD Cal"), size = 1) +
+  scale_linetype_manual(values = c("dotted", "dashed", "solid"),
+                        breaks = c("-1SD Cal", "Average Cal", "+1SD Cal"),
+                        name = "Simple Slope") +
+  cleanup 
+```
+
+## Moderation: MeMoBootR
+
+- We can use the `MeMoBootR` to complete the entire processing, including data screening for us! 
+- You would enter the raw variables, as the centering is completed for you. 
+
+```{r}
+mod_model <- moderation1(y = "Aggression",
+                         x = "Vid_Games",
+                         m = "CaUnTs",
+                         df = master)
+```
+
+## Moderation: MeMoBootR
+
+```{r}
+#data screening
+head(mod_model$datascreening$fulldata)
+#mod_model$datascreening$correl
+#mod_model$datascreening$linearity
+#mod_model$datascreening$normality
+#mod_model$datascreening$homogen
+
+#models
+summary(mod_model$model1)
+#summary(mod_model$model1low)
+#summary(mod_model$model1high)
+mod_model$interpretation
+
+#graphs
+mod_model$graphslopes
+```
+
+## Summary
+
+- In this lecture, we have covered:
+
+    - Mediation
+    - Moderation
+    - Special packages for these models
+    - Follow ups for these models 

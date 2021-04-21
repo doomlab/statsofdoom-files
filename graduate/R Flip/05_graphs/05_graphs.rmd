@@ -1,0 +1,620 @@
+---
+title: "Data Visualization"
+author: "Erin M. Buchanan"
+date: "Last Updated: `r Sys.Date()`"
+output: 
+  slidy_presentation:
+    incremental: true 
+---
+
+## Programming Suggestion
+
+- We will be using `ggplot2` to create our data visualizations.
+- The code can get very long, so you should use code stacking!
+- Stacking your code can help you troubleshoot and see what is going on easier. 
+
+```{r eval = F}
+textline +
+  stat_summary(fun = mean,
+               geom = "point") +
+  stat_summary(fun = mean,
+               geom = "line", 
+               aes(group = Group)) +
+  stat_summary(fun.data = mean_cl_normal,
+               geom = "errorbar",
+               width = .2) + 
+  xlab("Measurement Time") +
+  ylab("Mean Grammar Score") +
+  cleanup +
+  scale_color_manual(name = "Texting Option",
+                     labels = c("All the texts", "None of the texts"),
+                     values = c("Black", "Grey")) +
+  scale_x_discrete(labels = c("Baseline", "Six Months"))
+```
+
+## Outline
+
+- Reminder how to import files
+- Two key issues for data format: factors, format
+- Graphs:
+      
+    - Histograms
+    - Scatterplots
+    - Bar Graphs
+    - Line Graphs
+
+## Working with Files
+
+- Let's load SPSS file "ChickFlick.sav".
+- Note that I have this saved in a `data` folder that is in the same folder as my Markdown file.
+- Remember that the `rio` library can usually interpret these files without much work using the `import()` function. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(rio)
+chickflick <- import("data/ChickFlick.sav")
+str(chickflick)
+```
+
+## Factor Categorical Variables
+
+- We saw on the previous slide that the `gender` and `film` variables have embedded data from SPSS. 
+- However, this does not translate to a factor variable, which is useful for making plots. 
+
+```{r}
+table(chickflick$gender)
+
+table(chickflick$film)
+```
+
+## How to Factor
+        
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+chickflick$gender <- factor(chickflick$gender, #the variable you want to factor
+                            levels = c(1,2), #the information already in the data
+                            labels = c("Male", "Female")) #the labels for those levels
+
+table(chickflick$gender)
+```
+
+## Data Structure Format
+
+- **Wide** datasets: rows are *participants*, and columns are variables. 
+  
+    - Each participant gets one row, while each variable gets one column.
+
+- **Long** datasets: rows are *assessments*, and columns are variables.
+
+  - Each time point or repeated assessment gets a separate row, while each column still represents a variable. 
+  
+
+## Rearrange Data: Wide to Long
+
+- I wanted to test the Disney philosophy that 'Wishing upon a star makes all your dreams come true'.
+- Measured the success of 250 people using a composite measure involving their salary, quality of life and how close their life matches their aspirations.
+- Success was measured using a standardized technique ranging from 0 Complete failure to 4 = Complete success
+- Participants were randomly allocated to either: Wish upon a star or work as hard as they can for next 5 years.
+- Success was measured again after 5 years.
+
+```{r}
+library(reshape) #note: you could also use pivot_longer in tidyverse
+cricket <- import("data/Jiminy Cricket.csv")
+head(cricket)
+```
+
+## Rearrange Data: Wide to Long
+
+- `id = c("column", "column")` - constant variables you do not want to change. These will stay their own column but get repeated when necessary.
+- `measured = c("column", "column")` - dependent variables you want to combine into one column.
+
+```{r}
+longcricket <- melt(cricket,  #name of dataset
+                    id = c("ID", "Strategy"), 
+                    measured = c("Success_Pre", "Success_Post"))
+#you can actually leave measured blank
+head(longcricket)
+```
+
+## Rearrange Data: Wide to Long
+
+- Unfortunately, our melted columns become `variable` and `value`, which are not very useful names.
+- We should rename them for clarity!
+
+```{r}
+colnames(longcricket)[3:4] #just to figure out which ones
+colnames(longcricket)[3:4] <- c("Time", "Score")
+```
+
+## The Art of Presenting Data
+
+- Graphs should (Tufte, 2001):
+
+    - Show the data.
+    - Induce the reader to think about the data being presented (rather than some other aspect of the graph).
+    - Avoid distorting the data.
+    - Present many numbers with minimum ink.
+    - Make large data sets (assuming you have one) coherent.
+    - Encourage the reader to compare different pieces of data.
+    - Reveal data.
+
+## Why is this Graph Bad?
+
+```{r, echo = FALSE, out.width="35%", fig.align='center'}
+knitr::include_graphics("pictures/badgraph.png")
+```
+
+## Other Bad Design Choices
+
+- 3D charts need to be well-made (check out `plotly`). 
+- Patterns *(depending)*
+- Cylindrical bars
+- Bad axis labels
+- Overlays
+
+## Why is this Graph Better?
+
+```{r, echo = FALSE, out.width="35%", fig.align='center'}
+knitr::include_graphics("pictures/bettergraph.png")
+```
+
+## Do Not Deceive the Reader!
+
+```{r, echo = FALSE, out.width="50%", fig.align='center'}
+knitr::include_graphics("pictures/deception.png")
+```
+
+## Plotting in R
+
+- The great thing about `ggplot2` is that it is very flexible and well documented!
+- The bad thing about `ggplot2` is that there's a lot going on. 
+- You may also need `Hmisc` for your error bars. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(ggplot2)
+```
+
+## Working with ggplot2
+
+- How ggplot works: First you define the basic structure of a plot you want.
+
+```{r eval = F}
+#an example 
+myGraph <- ggplot(dataset,
+                  aes(x_axis, y_axis, 
+                      color = legend_var, 
+                      fill = legend_var))
+```
+
+## Working with ggplot2
+
+- Now we have myGraph saved with all the variables, but no visualization.
+- Next, you can add options to create new layers on the graph.
+
+```{r eval = F}
+#an example part 2
+myGraph + 
+  geom_bar() +
+  geom_point() +
+  xlab("X Axis Label") + 
+  ylab("Y Axis Label")
+```
+
+## Histograms
+
+- Histograms plot:
+
+    - The continuous score (x-axis)
+    - The frequency (y-axis)
+
+- Histograms help us to identify:
+
+    - The shape of the distribution. Measured using **Skew, Kurtosis, or the Spread or variation in scores.**
+                 
+- Unusual scores
+
+## Histogram: Example 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+crickethist <- ggplot(data = cricket, #dataset
+                      aes(x = Success_Pre) #only define X axis 
+                      )
+crickethist
+```
+
+## Histogram: Example
+
+- Our current plot is blank, let's add the histogram bars:
+
+```{r echo=TRUE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+crickethist + 
+  geom_histogram()
+```
+
+## Histogram: Example
+
+- Make the bins different:
+
+```{r echo=TRUE,  fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+crickethist + 
+  geom_histogram(binwidth = 1)
+```
+
+## Histogram: Example
+
+- You can change the color:
+  
+    - Color is the outline of the bars
+    - Fill is the interior of the bars 
+
+```{r echo=TRUE,  fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+crickethist + 
+  geom_histogram(binwidth = 1, color = 'purple', fill = 'magenta')
+```
+
+## Histogram: Example
+
+- Let's add some labels:
+
+```{r echo=TRUE,  fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+crickethist + 
+  geom_histogram(binwidth = 1, color = 'purple', fill = 'magenta') + 
+  xlab("Success Pre Test") + 
+  ylab("Frequency")
+```
+
+## Histogram: Example 2
+
+- This dataset includes festival attendees who indicated their hygiene score on each day of the festival from  0 (eau de toilet) to 4 (eau de toilette) 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+festival <- import("data/festival.csv")
+str(festival)
+```
+
+## Histogram: Example 2
+
+- In the previous example, we added things one at a time just as an example
+- You can run the whole graph at once! 
+
+- Create the plot object:
+
+```{r echo=TRUE,  fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+festivalhist <- ggplot(data = festival, aes(x = day1)) 
+festivalhist + 
+  geom_histogram(binwidth = 1, color = 'blue') + 
+  xlab("Day 1 of Festival Hygiene") +
+  ylab("Frequency") +
+  theme_bw() #theme_classic() also good!
+```
+
+## Focus on these Facets
+
+- All graphs should have:
+
+    - X and Y axis labels.
+    - The use of titles depends on where the graph is used.
+    - Labels for the legend, facets, other group markers.
+    - Error bars when appropriate.
+    - Readable/cleaned up!
+
+## Clean Up?
+
+- `theme_bw()` and `theme_classic()` are great, easy themes to make graphs presentable.
+- Another important facet may be the font size, as it appears to be pretty small on the default.
+- Additionally, we will want to eliminate that default gray background that is included with legends. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+cleanup <- theme(panel.grid.major = element_blank(), #no grid lines
+                panel.grid.minor = element_blank(), #no grid lines
+                panel.background = element_blank(), #no background
+                axis.line.x = element_line(color = 'black'), #black x axis line
+                axis.line.y = element_line(color = 'black'), #black y axis line
+                legend.key = element_rect(fill = 'white'), #no legend background
+                text = element_text(size = 15)) #bigger text size
+```
+
+## Clean Up?
+
+- Save that code and then you can just do graph + cleanup.
+
+```{r echo=TRUE,  fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+festivalhist + 
+  geom_histogram(binwidth = 1, color = 'blue') + 
+  xlab("Day 1 of Festival Hygiene") +
+  ylab("Frequency") +
+  cleanup
+```
+
+## Scatterplots
+
+- Simple scatter: X and Y are continuous variables
+- Grouped scatter: X and Y are continuous variables with legend for a third variable (generally categorical).
+
+## Scatterplots: Example
+
+- Anxiety and Exam Performance: 103 students who rated their exam anxiety, time spent revising their exam, exam performance, and gender. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+exam <- import("data/Exam Anxiety.csv")
+str(exam)
+```
+
+## Scatterplots: Example
+
+- Gender is currently a continuous variable, so we should factor that variable to appropriately label it on a graph when used. 
+
+```{r}
+table(exam$Gender)
+exam$Gender <- factor(exam$Gender,
+                     levels = c(1,2),
+                     labels = c("Male", "Female"))
+table(exam$Gender)
+```
+
+## Simple Scatterplot
+
+```{r echo=TRUE,  fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+scatter <- ggplot(exam, aes(Anxiety, Exam))
+scatter +
+  geom_point() +
+  xlab("Anxiety Score") +
+  ylab("Exam Score") +
+  cleanup
+```
+
+## Simple Scatterplot with Regression Line
+
+```{r echo=TRUE,  fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+scatter + geom_point()+
+  geom_smooth(method = 'lm', color = 'black', fill = 'blue') +
+  xlab('Anxiety Score')+
+  ylab('Exam Score')+
+  cleanup
+```
+
+## Grouped Scatterplot
+
+- How to control the colors and fill with legends.
+
+    - scale_fill_manual(name, labels, values)
+    - scale_color_manual(name, labels, values)
+
+## Grouped Scatterplot with Regression Line
+
+```{r echo=TRUE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+scatter2 <- ggplot(exam, aes(Anxiety, Exam, 
+                             color = Gender, fill = Gender)) #why both?
+scatter2 +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  xlab("Anxiety Score") +
+  ylab("Exam Score") +
+  cleanup + 
+  scale_fill_manual(name = "Gender of Participant",
+                    labels = c("Men", "Women"),
+                    values = c("purple", "grey")) +
+  scale_color_manual(name = "Gender of Participant",
+                     labels = c("Men", "Women"),
+                     values = c("purple", "grey10"))
+
+```
+
+## `GGally` for Multiple Visualization
+
+- `GGally` has a plotting function that uses `ggplot2` as a back end. 
+- The function `ggpairs` allows you to create a scatterplot matrix for any numerical variables in a dataset. 
+
+```{r}
+library(GGally)
+ggpairs(data = exam[ , -1], #no participant variable
+        title = "Exam Anxiety, Scores, and Gender")
+```
+
+## Bar Graphs 
+
+- Bar graphs are often used to display mean scores to allow comparison between groups.
+- Error bars can be added to display the precision of the mean:
+    
+    - The confidence interval 
+    - The standard deviation
+    - The standard error 
+
+## Bar Graph: One Independent Variable
+
+- Is there such a thing as a 'chick flick'? 
+
+    - Twenty men and twenty women were assigned to watch one of two movies:  A 'chick flick' (Bridget Jones's Diary) or the control movie (Memento).
+    - Physiological arousal was used as an indicator of how much they enjoyed the film.
+
+## Bar Chart: One Independent Variable
+
+- Be sure to convert all factor variables, otherwise they will be treated as continuous (or you'll get strange errors!).
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+str(chickflick) #already fixed gender
+chickflick$film <- factor(chickflick$film,
+                    levels = c(1,2),
+                    labels = c("Bridget Jones", "Memento"))
+```
+
+## Bar Chart: One Independent Variable Example
+
+- To add the mean, displayed as bars, we can add this as a layer to bar using the  `stat_summary()` function:
+
+```{r echo=TRUE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+chickbar <- ggplot(chickflick, aes(film, arousal))
+chickbar + 
+  stat_summary(fun = mean,
+               geom = "bar",
+               fill = "White", 
+               color = "Black") +
+  cleanup
+```
+
+## Bar Chart: One Independent Variable Example
+
+- To add error bars, add these as a layer using `stat_summary()`:
+
+```{r echo=TRUE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+chickbar + 
+  stat_summary(fun = mean,
+               geom = "bar",
+               fill = "White", 
+               color = "Black") +
+  stat_summary(fun.data = mean_cl_normal, 
+               geom = "errorbar", 
+               position = position_dodge(width = 0.90), 
+               width = 0.2) +
+  cleanup
+```
+
+## Bar Chart: One Independent Variable Example
+
+- Now, add the rest of things we've been doing:
+
+```{r echo=TRUE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+chickbar + 
+  stat_summary(fun = mean,
+               geom = "bar",
+               fill = "White", 
+               color = "Black") +
+  stat_summary(fun.data = mean_cl_normal, 
+               geom = "errorbar", 
+               position = position_dodge(width = 0.90), 
+               width = 0.2) +
+  xlab("Movie Watched by Participant") +
+  ylab("Arousal Level") +
+  cleanup +
+  scale_x_discrete(labels = c("Girl Film", "Guy Film"))
+
+```
+
+## Bar Chart: Two Independent Variables
+
+```{r echo=TRUE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+chickbar2 <- ggplot(chickflick, aes(film, arousal, fill = gender))
+chickbar2 +
+  stat_summary(fun = mean,
+               geom = "bar",
+               position = "dodge") +
+  stat_summary(fun.data = mean_cl_normal,
+               geom = "errorbar", 
+               position = position_dodge(width = 0.90),
+               width = .2) +
+  xlab("Film Watched") +
+  ylab("Arousal Level") + 
+  cleanup +
+  scale_fill_manual(name = "Gender of Participant", 
+                    labels = c("Boys", "Girls"),
+                    values = c("Gray30", "Gray"))
+```
+
+## Line Graphs
+
+- When to use a line graph:
+
+    - With data that X is categorical, but is considered "mildly continuous"
+    - Usually with repeated measures data over time 
+    - The example here is not quite appropriate for a line graph but does include repeated measures data for practicing restructuring data. 
+    
+## Line Graphs: One Independent Variable
+
+- How to cure hiccups? Participants included 15 participants who tried four hiccup cures. 
+- The dependent variable included the number of hiccups in the minute after each procedure.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+hiccups <- import("data/Hiccups.csv")
+str(hiccups)
+```
+
+## Line Graphs: One Independent Variable
+
+- These data are in the wrong format for `ggplot2` to use. 
+- We need all of the scores stacked up in a single column and then another variable that specifies the type of intervention.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+longhiccups <- melt(hiccups, 
+                    measured = c("Baseline", "Tongue", "Carotid", "Other"))
+str(longhiccups)
+colnames(longhiccups) <- c("Intervention", "Hiccups")
+```
+
+## Line Graphs: One Independent Variable
+
+```{r echo=TRUE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+hiccupline <- ggplot(longhiccups, aes(Intervention, Hiccups))
+hiccupline +
+  stat_summary(fun = mean, ##adds the points
+               geom = "point") +
+  stat_summary(fun = mean, ##adds the line
+               geom = "line",
+               aes(group=1)) + ##necessary for mapping line to dots
+  stat_summary(fun.data = mean_cl_normal, ##adds the error bars
+               geom = "errorbar", 
+               width = .2) +
+  xlab("Intervention Type") +
+  ylab("Number of Hiccups") + 
+  cleanup
+```
+
+## Line Graphs: Two Independent Variables
+
+- Is text-messaging bad for your grammar? Participants included 50 children who were split into two groups (between-subjects): text-messaging allowed or text-messaging forbidden. 
+- In a second variable (repeated measures), each child was measured at two points in time: at baseline and six months later. 
+- The dependent variable was the percent correct score on a grammar test.
+
+## Line Graphs: Two Independent Variables
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+texting <- import("data/Texting.xlsx")
+str(texting)
+```
+
+## Line Graphs: Two Independent Variables
+
+- Two issues to clean up: 
+    
+    - Correctly label the groups into a factor variable.
+    - Restructure the data so the repeated measures variable is in long format.
+    - When you restructure the data, you should also rename the columns 
+
+```{r echo=TRUE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+texting$Group <- factor(texting$Group,
+                       levels = c(1,2),
+                       labels = c("Texting Allowed", "No Texting Allowed"))
+longtexting <- melt(texting,
+                   id = c("Group"),
+                   measured = c("Baseline", "Six_months"))
+str(longtexting)
+colnames(longtexting) <- c("Group", "Time", "Grammar_Score")
+```
+
+## Line Graphs: Two Independent Variables
+
+```{r echo=TRUE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+textline <- ggplot(longtexting, aes(Time, Grammar_Score, color = Group))
+textline +
+  stat_summary(fun = mean,
+               geom = "point") +
+  stat_summary(fun = mean,
+               geom = "line", 
+               aes(group = Group)) + #Group is the variable name
+  stat_summary(fun.data = mean_cl_normal,
+               geom = "errorbar",
+               width = .2) + 
+  xlab("Measurement Time") +
+  ylab("Mean Grammar Score") +
+  cleanup +
+  scale_color_manual(name = "Texting Option",
+                     labels = c("All the texts", "None of the texts"),
+                     values = c("Black", "Grey")) +
+  scale_x_discrete(labels = c("Baseline", "Six Months"))
+```
+
+## Summary
+
+- In this lecture, you have learned:
+
+    - How to clean up your data for visualizations: `factor()` and `melt()`
+    - Ideas for good visualizations
+    - Histograms, scatterplots, bar charts, and line graphs
+    - `ggplot2` structure and how to get started

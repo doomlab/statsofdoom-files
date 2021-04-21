@@ -360,7 +360,7 @@ for sentence, pos_tag in sample_text:
 - Some other tags include:
   - NORP for nationalities, religious, political groups
   - FACILITY for buildings airports highways
-  - GRE for countries
+  - GPE for countries
   - PRODUCT for objects, foods, etc. 
   - EVENT for hurricanes, battles, wars, sporting events
   - WORK_OF_ART for songs, books, paintings

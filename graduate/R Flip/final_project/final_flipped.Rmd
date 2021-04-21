@@ -1,0 +1,63 @@
+---
+title: "Final Project"
+author: "STUDENT NAME(S)"
+date: "2/12/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Goals
+
+The goal of this project is to allow you to practice your analysis, theoretical, and computational skills on a new question. We will be using data from the Reproducibility Project: Psychology, which was an attempt to replicate experiments in Psychology. You can work in groups of up to three people for this project. 
+
+1) Read about the project at https://osf.io/447b3/ (the first 28 pages). 
+2) Pick a study to examine: https://osf.io/ezcuj/wiki/Replicated%20Studies/ 
+  - You can consider examining this file: https://osf.io/fgjvw/, which has all of the datasets listed out with the titles and the descriptors to help sort through a topic you might find interesting. Also, not all datasets are good datasets! 
+3) Read the paper for the replication, specifically focusing on the "target of the study" listed on the replication page. If you have trouble finding the article full-text, please contact me. Try using Google Scholar on the original citation listed in the wiki. 
+4) Go to the project page and download the data from the project. Make sure it's raw data that you can import into R.  
+5) Generate a hypothesis about the data using one of the analyses we've discussed (correlation, regression, t-tests, ANOVA).
+6) Use the data screening we've discussed on the data you are using for the hypothesis (i.e., not the whole dataset).
+7) Run the analysis that will answer your hypothesis test.
+8) Fill in the following report based on your results. 
+
+## Citation of the Study
+
+## Summary of the Study
+
+Replace this text with your own text. You should summarize the section of the study that was replicated. What did they do? What were they trying to test? This section should be 1-2 paragraphs (more than a couple sentences, less than a sage, use your own words).
+
+## Your Hypothesis
+
+Given the available data, what is your hypothesis you would like to test on the data? 
+
+## The Data
+
+Import the data from the project here. You should reduce your data down to only the columns necessary for your analysis. 
+
+```{r}
+
+```
+
+## Data Screening
+
+Do a complete data screening on the data provided from the project. You can add R chunks here to help separate out the different sections. You should comment in each section if the assumption has been met, what you did to fix errors, etc. 
+
+```{r}
+
+```
+
+## The Analysis
+
+Include your analysis for your hypothesis. 
+
+```{r}
+
+```
+
+## Summarize
+
+In this section, you should write a summary of the results. Include your hypothesis, any issues you found in data screening, the type of test performed to answer your hypothesis, and the results of your test. Did it support your hypothesis? 
+

@@ -1,7 +1,7 @@
 ---
 title: "Sentiment Analysis"
 author: "Erin M. Buchanan"
-date: "02/06/2020"
+date: "`r Sys.Date()`"
 output: 
   slidy_presentation:
     increment: TRUE
@@ -188,14 +188,14 @@ predicted_sentiments = ['positive' if score >= 0.1 else 'negative' for score in 
 
 ## Example using TextBlob
 
-- How well did we do? Don't forget this function is in the separate provided `.py` file. 
+- How well did we do? 
 
 ```{python}
 ##python chunk
 from sklearn.metrics import classification_report
-classification_report(y_true=example_test_sentiments,
+print(classification_report(y_true=example_test_sentiments,
                       y_pred=predicted_sentiments, 
-                      labels=['positive', 'negative'])
+                      labels=['positive', 'negative']))
 ```
 
 ## Popular lexicons
@@ -204,12 +204,6 @@ classification_report(y_true=example_test_sentiments,
   - A popular lexicon because of it's simplicity
   - Does consider emoticons and !!, so best not to clean those out of the text first
   - Words are scored from -5 to 5 and the final output is a score based on the summation of the words
-  - You need to install it first!
-
-```{r eval = F}
-##r chunk
-py_install("afinn", pip = T)
-```
 
 ## Example using AFINN
 
@@ -244,9 +238,9 @@ predicted_sentiments = ['positive' if score >= 1.0 else 'negative' for score in 
 
 ```{python}
 ##python chunk
-classification_report(y_true=example_test_sentiments,
+print(classification_report(y_true=example_test_sentiments,
                       y_pred=predicted_sentiments, 
-                      labels=['positive', 'negative'])
+                      labels=['positive', 'negative']))
 ```
 
 ## Popular lexicons
@@ -341,9 +335,9 @@ for review, sentiment in zip(test_reviews[sample_review_ids], test_sentiments[sa
 ##python chunk
 predicted_sentiments = [analyze_sentiment_sentiwordnet_lexicon(review, verbose=False) for review in example_test_reviews]
 
-classification_report(y_true=example_test_sentiments,
+print(classification_report(y_true=example_test_sentiments,
                       y_pred=predicted_sentiments, 
-                      labels=['positive', 'negative'])
+                      labels=['positive', 'negative']))
 ```
 
 ## Popular lexicons
@@ -408,9 +402,9 @@ for review, sentiment in zip(test_reviews[sample_review_ids], test_sentiments[sa
 ##python chunk
 predicted_sentiments = [analyze_sentiment_vader_lexicon(review, threshold=0.4, verbose=False) for review in example_test_reviews]
 
-classification_report(y_true=example_test_sentiments,
+print(classification_report(y_true=example_test_sentiments,
                       y_pred=predicted_sentiments, 
-                      labels=['positive', 'negative'])
+                      labels=['positive', 'negative']))
 ```
 
 ## Supervised Learning Approach
@@ -471,9 +465,9 @@ lr_bow_model = lr.fit(cv_train_features, train_sentiments)
 lr_bow_predictions = lr_bow_model.predict(cv_test_features)
 
 #model performance
-classification_report(y_true=test_sentiments, 
+print(classification_report(y_true=test_sentiments, 
                       y_pred=lr_bow_predictions,
-                      labels=['positive', 'negative'])
+                      labels=['positive', 'negative']))
 ```
 
 ## Logistic Regression TF-IDF
@@ -487,9 +481,9 @@ lr_tfidf_model = lr.fit(tv_train_features, train_sentiments)
 lr_tfidf_predictions = lr_tfidf_model.predict(tv_test_features)
 
 #model performance
-classification_report(y_true=test_sentiments,
+print(classification_report(y_true=test_sentiments,
                       y_pred=lr_tfidf_predictions,
-                      labels=['positive', 'negative'])
+                      labels=['positive', 'negative']))
 ```
 
 ## Learn More
@@ -561,9 +555,6 @@ knitr::include_graphics("lsacompare.png")
 - Can also be used as an unsupervised classification technique
 
 ## Get Started
-```{r eval = F}
-py_install("pyLDAvis", pip = T)
-```
 
 ```{python}
 ##python chunk 

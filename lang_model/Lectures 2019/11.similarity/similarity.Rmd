@@ -1,7 +1,7 @@
 ---
 title: "Similarity Measures"
 author: "Erin M. Buchanan"
-date: "01/15/2020"
+date: "Last Knitted: `r Sys.Date()`"
 output:
   slidy_presentation:
     increment: yes
@@ -82,8 +82,8 @@ knitr::include_graphics("google.png")
 ##r chunk
 library(stringdist)
 
-words1 <- c("believe", "cat")
-words2 <- c("beleive", "hat")
+words1 <-  c("believe", "cat")
+words2 <-  c("beleive", "hat")
 
 stringdist(words1, words2, method = "hamming")
 stringdist(words1, words2, method = "lv")
@@ -133,10 +133,10 @@ knitr::include_graphics("associationtable.png")
 ##r chunk
 #collocate table for cellar (Y) and door (X)
 #common to put collexeme on X, lexeme on Y
-a = 228
-b = 210170 - a
-c = 4026 - a   
-d = 560000000-a-b-c
+a <- 228
+b <- 210090 - a
+c <- 4026 - a   
+d <- 560000000-a-b-c
 #P(XY|X) probability of combination given door
 a/(b+a) * 100
 #P(XY|Y) probability of combination given cellar
@@ -158,10 +158,14 @@ a/(c+a) * 100
 
 ```{r cando, include = T}
 ##r chunk
-he = c(33582, 1229276, 4104220, (560000000 - 33582 - 1229276 - 4104220)) 
-she = c(14180, 1229276, 2153862, (560000000 - 14180 - 1229276 - 2153862))
-he_she = as.data.frame(rbind(he,she))
-colnames(he_she) = c("a", "b", "c", "d")
+#a = combination he can and she can
+#b = second word by itself "can"
+#c = first word by itself "he or she"
+#d = everything 
+he <- c(62336, 2530685-62336, 6466824-62336, (560000000 - 62336 - 2530685 - 6466824)) 
+she <- c(25148, 2530685-25148,  3188019-25148, (560000000 - 25148 -  3188019 - 2153862))
+he_she <- as.data.frame(rbind(he,she))
+colnames(he_she) <- c("a", "b", "c", "d")
 he_she
 ```
 
@@ -172,7 +176,7 @@ he_she
 
 ```{r attraction, include=T}
 ##r chunk
-attraction = he_she$a/(he_she$a+he_she$c)*100
+attraction <- he_she$a/(he_she$a+he_she$c)*100
 attraction
 rownames(he_she)
 ```
@@ -184,7 +188,7 @@ rownames(he_she)
 
 ```{r reliance, include=T}
 ##r chunk
-reliance = he_she$a/(he_she$a+he_she$b)*100
+reliance <- he_she$a/(he_she$a+he_she$b)*100
 reliance
 rownames(he_she)
 ```
@@ -194,11 +198,11 @@ rownames(he_she)
 ```{r deltaP, include = T}
 ##r chunk
 #similar to attraction
-dp_YX = he_she$a / (he_she$a + he_she$c) - he_she$b / (he_she$b + he_she$d)
+dp_YX <- he_she$a / (he_she$a + he_she$c) - he_she$b / (he_she$b + he_she$d)
 dp_YX
 
 #similar to reliance
-dp_XY = he_she$a / (he_she$a + he_she$b) - he_she$c / (he_she$c + he_she$d)
+dp_XY <- he_she$a / (he_she$a + he_she$b) - he_she$c / (he_she$c + he_she$d)
 dp_XY
 ```
 
@@ -218,12 +222,12 @@ dp_XY
 ##r chunk
 library(Rling)
 #expected frequency
-aExp = (he_she$a + he_she$b)*(he_she$a + he_she$c)/
+aExp <- (he_she$a + he_she$b)*(he_she$a + he_she$c)/
   (he_she$a + he_she$b + he_she$c + he_she$d)
 #p values
-pvF = pv.Fisher.collostr(he_she$a, he_she$b, he_she$c, he_she$d)
+pvF <- pv.Fisher.collostr(he_she$a, he_she$b, he_she$c, he_she$d)
 #log based on expected frequency
-logpvF = ifelse(he_she$a < aExp, log10(pvF), -log10(pvF))
+logpvF <- ifelse(he_she$a < aExp, log10(pvF), -log10(pvF))
 logpvF
 ```
 
@@ -235,8 +239,8 @@ logpvF
 
 ```{r LL, include=T}
 ##r chunk
-LL = LL.collostr(he_she$a, he_she$b, he_she$c, he_she$d)
-LL1 = ifelse(he_she$a < aExp, -LL, LL)
+LL <- LL.collostr(he_she$a, he_she$b, he_she$c, he_she$d)
+LL1 <- ifelse(he_she$a < aExp, -LL, LL)
 LL1
 ```
 
@@ -246,7 +250,7 @@ LL1
 
 ```{r pmi, include = T}
 ##r chunk
-PMI = log(he_she$a / aExp)^2
+PMI <- log2(he_she$a / aExp)
 PMI
 ```
 
@@ -256,7 +260,7 @@ PMI
 
 ```{r OR, include = T}
 ##r chunk
-logOR = log(he_she$a*he_she$d/(he_she$b*he_she$c))
+logOR <- log(he_she$a*he_she$d/(he_she$b*he_she$c))
 logOR
 ```
 
@@ -378,24 +382,6 @@ movie_recommender("Shanghai Calling", #name of film must be in dataset
                   df["title"].values, #all film names
                   doc_sim_df #pd dataframe of similarity values
                   )
-```
-
-## Use the BM25 measure
-
-- Instead of cosine, let's try the BM25 similarity measure
-- ...on part of the dataset, because it's slow!
-
-```{python}
-##Python chunk
-from gensim.summarization.bm25 import get_bm25_weights
-
-doc_sim = get_bm25_weights(norm_corpus[0:100].tolist(), n_jobs = 1)
-doc_sim_df = pd.DataFrame(doc_sim)
-doc_sim_df.head()
-
-movie_recommender("Spectre",
-                  df["title"].values[0:100],
-                  doc_sim_df)
 ```
 
 ## Summary

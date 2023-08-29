@@ -1,7 +1,7 @@
 ---
 title: "word2vec"
 author: "Erin M. Buchanan"
-date: "01/22/2020"
+date: "Last Knitted: `r Sys.Date()`"
 output:
   slidy_presentation:
     increment: yes
@@ -108,7 +108,6 @@ from nltk.corpus import abc
 ```{python}
 ##python chunk
 model = gensim.models.Word2Vec(abc.sents())
-X = list(model.wv.vocab)
 model.wv.most_similar('science')
 ```
 
@@ -179,7 +178,7 @@ token_data[0:2]
 ##python chunk
 model = gensim.models.Word2Vec(
         token_data,
-        size=100, #smaller size for smaller data
+        vector_size=100, #smaller size for smaller data
         window=6,
         min_count=2,
         workers=4)
@@ -199,7 +198,7 @@ model.wv.most_similar("duty")
 ##python chunk
 model2 = gensim.models.Word2Vec(
         token_data,
-        size=100, #smaller size for smaller data
+        vector_size=100, #smaller size for smaller data
         window=6,
         min_count=2,
         workers=4,
@@ -308,8 +307,8 @@ tokenized_test = [nltk.tokenize.word_tokenize(text)
 ##python chunk
 # build word2vec model
 w2v_model = gensim.models.Word2Vec(tokenized_train, 
-                                   size=100, window=6,
-                                   min_count=2, iter=5, workers=4)
+                                   vector_size=100, window=6,
+                                   min_count=2, epochs=5, workers=4)
 ```
 
 ## How to get features?
@@ -324,7 +323,7 @@ w2v_model = gensim.models.Word2Vec(tokenized_train,
 ```{python}
 ##python chunk
 def document_vectorizer(corpus, model, num_features):
-    vocabulary = set(model.wv.index2word)
+    vocabulary = set(model.wv.index_to_key)
     
     def average_word_vectors(words, model, vocabulary, num_features):
         feature_vector = np.zeros((num_features,), dtype="float64")
@@ -414,8 +413,8 @@ print(classification_report(y_test, y_pred,target_names=my_tags))
 from gensim.models.fasttext import FastText
 
 #build a fast test model
-ft_model = FastText(tokenized_train, size=100, window=6, 
-                    min_count=2, iter=5, workers=4)
+ft_model = FastText(tokenized_train, vector_size=100, window=6, 
+                    min_count=2, epochs=5, workers=4)
 ```
 
 ## Extract the features
@@ -444,126 +443,8 @@ print('accuracy %s' % accuracy_score(y_pred, y_test))
 print(classification_report(y_test, y_pred,target_names=my_tags))
 ```
 
-## doc2vec
-
-- Paragraph vector (doc2vec) is built on the concepts of word2vec 
-- Word2vec examines words in a dimensional space
-- Doc2vec examines documents in a dimensional space
-  - Additionally, there are extensions of CBOW and Skip-Gram 
-
-## Encoding types
-
-- PV-DM: distributed memory of paragraph vectors
-- A take on CBOW that randomly samples consecutive words in a document and try to predict a new word based on context and paragraph
-
-```{r pic1doc, echo=FALSE, fig.height=4, fig.align="center"}
-knitr::include_graphics("paragraph-dm.png")
-```
-
-## Encoding types
-
-- DBOW: distributed bag of words
-- Works much like a Skip Gram model 
-
-```{r pic2doc, echo=FALSE, fig.height=4, fig.align="center"}
-knitr::include_graphics("paragraph-bow.png")
-```
-
-## How to build a model
-
-Doc2Vec(
-
-- dm: 0 for distributed bag of words, 1 for distributed memory
-- vector_size: number of dimensional feature vectors
-- min_count: number of times a word has to appear to be included
-- negative: number of noise words
-- hs: negative sampling will be used
-- sample: the threshold for how high-frequency words will be randomly sampled
-- workers: number of cores 
-
-)
-
-## Let's build!
-
-- We have to create a special type of python object called a `TaggedDocument`
-- This function allows us to tag each document with a paragraph label
-- Do not confuse this with the classification label 
-
-```{python}
-##python chunk
-from gensim.models import Doc2Vec
-from gensim.models.doc2vec import TaggedDocument
-from sklearn import utils
-
-def label_sentences(corpus, label_type):
-    labeled = []
-    for i, v in enumerate(corpus):
-        label = label_type + '_' + str(i)
-        labeled.append(TaggedDocument(v.split(), [label]))
-    return labeled
-```
-
-## Build the model
-
-```{python}
-##python chunk
-#apply our labeling function
-X_train_tagged = label_sentences(X_train, 'Train')
-X_test_tagged = label_sentences(X_test, 'Test')
-
-#build a blank distributed memory model
-model_dbow = Doc2Vec(dm=0, vector_size=100, 
-                    negative=5, hs=0, alpha = .065,
-                    min_count=2, sample = 0, workers=4)
-                    
-#build the vocabulary for the model
-#why do we build on all data?
-all_data = X_train_tagged + X_test_tagged
-model_dbow.build_vocab([x for x in all_data])
-```
-
-## Train the model
-
-- In these models, because they are somewhat randomly sampled, you will run training several times to help create the appropriate weights
-
-```{python}
-##python chunk
-for epoch in range(30):
-    model_dbow.train(utils.shuffle([x for x in X_train_tagged]), total_examples=len(X_train_tagged), epochs=1)
-    model_dbow.alpha -= 0.002
-    model_dbow.min_alpha = model_dbow.alpha
-```
-
-## How to get features?
-
-- We can simply return the finalized vectors of weights from this model for each document to use in our classification algorithm
-
-```{python}
-##python chunk
-def get_vectors(model, corpus_size, vectors_size, vectors_type):
-    vectors = np.zeros((corpus_size, vectors_size))
-    for i in range(0, corpus_size):
-        prefix = vectors_type + '_' + str(i)
-        vectors[i] = model.docvecs[prefix]
-    return vectors
-    
-train_vectors_dbow = get_vectors(model_dbow, len(X_train_tagged), 100, 'Train')
-test_vectors_dbow = get_vectors(model_dbow, len(X_test_tagged), 100, 'Test')
-```
-
-## Let's try that log again 
-
-```{python}
-##python chunk
-logreg = LogisticRegression(solver='lbfgs', multi_class='ovr', max_iter=10000)
-logreg = logreg.fit(train_vectors_dbow, y_train)
-y_pred = logreg.predict(test_vectors_dbow)
-print('accuracy %s' % accuracy_score(y_pred, y_test))
-print(classification_report(y_test, y_pred,target_names=my_tags))
-```
-
 ## Summary
 
 - We have begun to learn a bit about language model representation using a neural network that may, more accurately, represent how the brain processes language
-- We ended showing how you can use those models to predict and classify data, extending to FastText and doc2vec
+- We ended showing how you can use those models to predict and classify data, extending to FastText 
 - There are many pretrained models but for specific lexicons, you will want to build your own 

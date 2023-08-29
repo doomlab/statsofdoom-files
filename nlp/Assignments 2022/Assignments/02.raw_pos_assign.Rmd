@@ -1,0 +1,69 @@
+---
+title: 'Processing Raw Text + Part of Speech Tagging'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Be sure to list the group members at the top! This assignment is the first component for your class project. Be sure all group members contribute, *and* each group member must submit the assignment individually. 
+
+You can use either *R* or Python or both for this assignment. You should use the code and packages we used in class assignments, but these can be a mix and match of each computing language. You will add the appropriate type of code chunk for each section depending on the language you pick for that section. 
+
+## Libraries / R Setup
+
+- In this section, include the libraries you need for the *R* questions.  
+
+```{r}
+##r chunk
+
+```
+
+- In this section, include import functions to load the packages you will use for Python.
+
+```{python}
+##python chunk
+
+```
+
+## Import Subtitles
+
+Import your subtitle data for the movie or TV show that you selected in the course proposal. 
+
+## Data Cleaning
+
+Clean and format your subtitles so that you end up with a dataframe or vector that is one line of subtitles for each row (i.e., each spoken section, not each sentence). 
+
+## Data Normalization
+
+In this section, you should normalize your data with the following steps:
+
+- Lower case
+- Remove any weird symbols or other unique formatting
+
+We will use other data clean up techniques in later sections, as part of speech tagging requires full words and stopwords.
+
+## Part of Speech Tagging
+
+Select *two* automatic part of speech taggers and tag your subtitles saving the output in a dataframe. You should use the universal part of speech tagset to be able to compare the taggers directly. 
+
+From these two taggers, calculate a frequency table of the tags (i.e., create output that shows the total number of nouns, adjectives, adverbs, etc.). You can use the `table()` function in *R* or `nltk`'s `FreqDist` or the counter library. Answer the following questions:
+
+- What are the most common part of speech?
+- Do you appear to have more "action" (verbs), "actors" (nouns), or "description" (adjectives and adverbs)? Note here "actor" does not mean literal actor on the screen, but the noun that is "acting" out the verb. 
+- Explain any differences you see in the two part of speech taggers.
+- Which part of speech tagger would you recommend?
+
+Next, calculate a conditional frequency table of the individual words and their part of speech (i.e., each column should be part of speech, while the rows are individual words). Answer the following questions:
+
+- What are the most common nouns/actors in your text?
+- What are the most common verbs/actions in your text? 
+- What are the most common adjectives/adverbs/descriptions in your text?
+- What words appear to have many parts of speech (i.e., they are not only one part of speech but several)?
+
+## Interpretation
+
+- Pretend you've never seen the movie or TV show listed. If you only looked at this analysis, what we you be able to determine about the show without watching or reading the subtitles? 

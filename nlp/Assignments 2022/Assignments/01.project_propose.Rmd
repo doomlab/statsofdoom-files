@@ -1,0 +1,23 @@
+---
+title: 'Course Project Proposal'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Be sure to list the group members at the top!
+
+## Topic
+
+- Pick a movie that you would interested in analyzing. You can also use **two** one-hour long TV shows or **four** half-hour long TV shows. 
+- Search for the subtitles for that movie or TV shows. Please note some of the subtitle websites are junk, do not download anything from a popup! Podnapsi appears to be an ok site. 
+- Find the subtitles for your project.
+- List your movie/show here (note that each group should have a different set of subtitles, I will coordinate). If you have picked a TV show, list the specific episodes. 
+
+## Problem or Question
+
+What is your interest in analyzing the subtitles for this movie/show? What questions you might you answer given this dataset? It's ok if you aren't sure right now, just put down some ideas. 

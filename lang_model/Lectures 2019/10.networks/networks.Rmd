@@ -1,7 +1,7 @@
 ---
 title: "Network Models and Information Theory"
 author: "Erin M. Buchanan"
-date: "01/08/2020"
+date: "Last Knitted: `r Sys.Date()`"
 output:
   slidy_presentation:
     increment: yes
@@ -14,8 +14,8 @@ options(scipen = 999)
 ## Language Topics Discussed
 
 - Network science applied to cognitive science
-- Example: Verbal fluency
 - Example: NASA Metadata
+- But note: this can be applied to any text data in which *n*-gram connections are interesting 
 
 ## Cognitive Science
 
@@ -57,14 +57,11 @@ knitr::include_graphics("local_cluster.png")
 - Macroscopic Network Measures are often used to talk about the overall organization of a network.
 - Small world structure (S): will have high local clustering coefficients and short path lengths when compared to a random network
   - This idea is sometimes related to efficiency - as things are very closely related, you don't have to go very far to relay/transmit information. 
-- Assortivity (A): correlation between pairs of node degrees, where zero indicates uncorrelated networks, and higher values indicate more clustering of sections
 
 ## Let's Try Examples
 
 ```{r}
 #r chunk
-#install.packages(c("memnet", "jsonlite", "dplyr", "tidytext", "widyr", "ggplot2", "igraph", "ggraph", "tidyr"))
-library(memnet)
 library(jsonlite)
 library(dplyr)
 library(tidytext)
@@ -75,106 +72,6 @@ library(ggraph)
 library(tidyr)
 ```
 
-## Verbal Fluency
-
-- Verbal fluency is the ability to successfully retrieve information from memory
-- In a verbal fluency task, you are often ask to name all the things you can think of in a category
-  - For example, name all the animals you can think of in a minute
-  - This information can be interpreted as the semantic network (and potentially the winding path that spreading activation takes)
-
-## Example Data
-
-```{r}
-##r chunk
-data("animal_fluency")
-head(animal_fluency)
-```
-
-## Example Data
-
-- We will pull the ages from the list names and can compare between ages to view network differences 
-
-```{r}
-##r chunk
-#get the ages which are the list names
-age <- as.numeric(names(animal_fluency))
-```
-
-## Network Types in memnet
-
-- A community graph adds edges for words that occur within X words of each other (can be set in the code, default is 1 with other co-occurrence rules)
-- A threshold graph adds edges for words that are adjacent
-- A random walk graph adds edges for words that are within a window size of one to each other 
-
-## Older Networks 
-
-- Note: the age split here is somewhat arbitrary to produce a nice split in the data
-
-```{r}
-##r chunk
-# infer networks for age > 70
-net_comunity <- community_graph(animal_fluency[age > 70])
-net_threshold <- threshold_graph(animal_fluency[age > 70])
-net_rw <- rw_graph(animal_fluency[age > 70])
-```
-
-## Younger Networks
-
-```{r}
-##r chunk
-net_comunity2 <- community_graph(animal_fluency[age <= 60])
-net_threshold2 <- threshold_graph(animal_fluency[age <= 60])
-net_rw2 <- rw_graph(animal_fluency[age <= 60])
-```
-
-## Plots - Community
-
-```{r}
-##r chunk - cex controls size of text
-network_plot(edg_to_adj(net_comunity), nod_cex = 2, lab_cex = 1)
-network_plot(edg_to_adj(net_comunity2), nod_cex = 2, lab_cex = 1)
-```
-
-## Plots - Threshold
-
-```{r}
-##r chunk - cex controls size of text
-network_plot(edg_to_adj(net_threshold), nod_cex = 2, lab_cex = 1)
-network_plot(edg_to_adj(net_threshold2), nod_cex = 2, lab_cex = 1)
-```
-
-## Plots - Random Walk 
-
-```{r}
-##r chunk - cex controls size of text
-network_plot(edg_to_adj(net_rw), nod_cex = 2, lab_cex = .5, lab_lwd = 1, lab_grid_size = 70)
-network_plot(edg_to_adj(net_rw2), nod_cex = 2, lab_cex = .5, lab_lwd = 1, lab_grid_size = 70)
-```
-
-## Network Statistics
-
-V = number of nodes
-E = number of edges
-K = degree
-C = Clustering coefficient
-L = shortest path
-S = Small world
-A = assortivity
-
-```{r}
-##r chunk - can do other networks in the same way to compare
-network_stats(edg_to_adj(net_comunity))
-network_stats(edg_to_adj(net_comunity2))
-```
-
-## Something else fun
-
-```{r}
-##r chunk
-#k is the number of hops
-neighborhood_plot(edg_to_adj(net_comunity), k = 3, node = 'cat', nod_cex = 2, lab_cex = 1)
-neighborhood_plot(edg_to_adj(net_comunity2), k = 3, node = 'cat', nod_cex = 2, lab_cex = 1)
-```
 
 ## Example: NASA's metadata
 
@@ -439,6 +336,67 @@ keyword_cors %>%
   geom_node_text(aes(label = name), repel = TRUE,
                  point.padding = unit(0.2, "lines")) +
   theme_void()
+```
+
+## Network Statistics
+
+- To calculate network statistics, we need to turn our summary table into a long version of the table with all the pairs represented in each row (i.e., one row for each pair combination). 
+
+```{r}
+filtered_pairs <- title_word_pairs %>%
+  filter(n >= 100)
+
+filtered_long <- filtered_pairs[rep(seq_along(filtered_pairs$n), 
+                                    filtered_pairs$n), 1:2]
+
+head(filtered_pairs)
+
+head(filtered_long)
+```
+
+## Network Statistics
+
+- Here we find degree (k), or how many edges each node has
+
+```{r}
+degree_calc <- graph.edgelist(as.matrix(filtered_long), directed = T)
+# extract degree centrality
+degree_summary <- igraph::degree(degree_calc)
+degree_summary
+```
+
+## Network Statistics
+
+- What is the central node with the most connections?
+
+```{r}
+head(degree_summary[order(degree_summary, decreasing = T)])
+```
+
+## Network Statistics
+
+- Betweenness represents how many of the L paths a node is in.
+- Therefore, values with high betweenness represent high flow between other nodes. 
+- Low betweenness indicates that nodes are only connected to a few paths. 
+
+```{r}
+betweenness_calc <- igraph::betweenness(degree_calc)
+
+head(betweenness_calc)
+```
+
+## Network Statistics
+
+- Closeness represents the average distance from this node to all other nodes, which gives you an idea of the clustering (short path lengths = small world structure with high clustering)
+
+```{r}
+closeness_calc <- igraph::closeness(degree_calc)
+
+head(closeness_calc)
+```
+
+```{r}
+head(closeness_calc[order(closeness_calc, decreasing = T)])
 ```
 
 ## What have you learned?

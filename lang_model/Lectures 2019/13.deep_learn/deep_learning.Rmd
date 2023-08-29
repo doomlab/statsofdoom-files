@@ -1,7 +1,7 @@
 ---
 title: "Deep Learning"
 author: "Erin M. Buchanan"
-date: "02/05/2020"
+date: "Last Knitted: `r Sys.Date()`"
 output:
   slidy_presentation:
     increment: yes
@@ -74,9 +74,11 @@ knitr::include_graphics("recurrent.jpeg")
 
 ## Set up
 
-- Install keras `py_install("keras")`
-- Also pretty sure you will need tensorflow: in the terminal type `pip install tensorflow` or `pip3 install tensorflow`
+- Install keras `py_install("keras")` if you have conda + reticulate
+- Install tensorflow `py_install("tensorflow")` for conda + reticulate
 - You may have to install with administrative capabilities
+- This code will not run on the server due to space/capabilities
+- This code also does not currently run on M1 Macs (12/2021) as there's a numpy/tensforflow bug 
 
 ## A Keras Example
 
@@ -108,10 +110,11 @@ batch_size = 32 #size of training batches
 
 ```{python}
 ##python chunk
+#ignore warning
+import numpy as np
 (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=max_features)
 
 #randomly sample for this example only to run in class time
-import numpy as np
 index = np.random.choice(x_train.shape[0], 1000, replace=False)  
 x_train = x_train[index]
 y_train = y_train[index]
@@ -152,7 +155,9 @@ print('x_test shape:', x_test.shape)
 ##python chunk
 model = Sequential()
 model.add(Embedding(max_features, 128))
-model.add(LSTM(128, dropout=0.2, recurrent_dropout=0.2))
+
+# this is the section that doesn't play nice on certain combinations of tensorflow + keras
+model.add(LSTM(128, dropout=0.2, recurrent_dropout=0.2)) 
 model.add(Dense(1, activation='sigmoid'))
 ```
 

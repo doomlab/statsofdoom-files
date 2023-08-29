@@ -1,7 +1,7 @@
 ---
 title: "Logistic Regression"
 author: "Erin M. Buchanan"
-date: "01/29/2020"
+date: "Last Knitted: `r Sys.Date()`"
 output:
   slidy_presentation:
     increment: yes
@@ -121,7 +121,6 @@ table(doenLaten$Aux)
 
 ```{r, message=FALSE}
 ##r chunk
-#install.packages("rms") #if you have not used it before
 library(rms)
 #you can also use glm() for log regression but rms has cool options
 head(doenLaten)
@@ -131,7 +130,7 @@ head(doenLaten)
 
 ```{r}
 ##r chunk
-model = lrm(Aux ~ Causation + EPTrans + Country, #model formula like lm()
+model <- lrm(Aux ~ Causation + EPTrans + Country, #model formula like lm()
             data = doenLaten)
 model
 ```
@@ -232,10 +231,10 @@ table(doenLaten$Aux, doenLaten$Country)
 
 ```{r}
 ##r chunk
-model1 = glm(Aux ~ Causation + EPTrans + Country, #model formula like lm()
+model1 <- glm(Aux ~ Causation + EPTrans + Country, #model formula like lm()
              family = binomial,
              data = doenLaten)
-model2 = glm(Aux ~ Causation + EPTrans*Country, #model formula like lm()
+model2 <- glm(Aux ~ Causation + EPTrans*Country, #model formula like lm()
              family = binomial,
              data = doenLaten)
 anova(model1, model2, test = "Chisq")
@@ -275,7 +274,8 @@ influencePlot(model1)
 ## Assumptions
 
 - Observations are independent
-- No multicollinearity (remember VIF > 5 or 10 is bad)
+- No multicollinearity (VIF > 5 or 10 is bad)
+  - VIF: variance inflation factor 
 - Overprediction (complete/quasi complete separation)
 
 ```{r}

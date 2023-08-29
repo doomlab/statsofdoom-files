@@ -1,7 +1,7 @@
 ---
 title: "Cluster Analysis"
 author: "Erin M. Buchanan"
-date: "11/20/2019"
+date: "Last Knitted: `r Sys.Date()`"
 output:
   slidy_presentation:
     increment: yes
@@ -9,6 +9,14 @@ output:
 
 ```{r echo = F}
 options(scipen = 999)
+```
+
+```{python echo = F}
+import platform
+if platform.system() == "Windows":
+  import os
+os.environ['MPLCONFIGDIR'] = 'C:/Users/EBuchanan.HU/Documents/tmp/'
+os.environ['SCIKIT_LEARN_DATA'] = "C:/Users/EBuchanan.HU/py_stuff"
 ```
 
 ## Language Topics Discussed
@@ -59,7 +67,7 @@ knitr::include_graphics("collinsq.jpg")
 
 - Not all information can be represented that way
 - Conjoint frequency – how frequently two words co-occur together 
-- Relatedness effect – don’t reject all untrue statements equally slowly 
+- Relatedness effect – don't reject all untrue statements equally slowly 
     - A pine is a church is slower than a pine is a flower
 - Prototypicality effect – we are faster for items that are more typical of a category
 
@@ -127,16 +135,16 @@ table(caus$Cx)
 ```{r}
 ##r chunk
 ##split the data
-caus.split = split(caus, caus$Cx)
+caus.split <- split(caus, caus$Cx)
 
 ##remove the splitting variable
-caus.split = lapply(caus.split, function(x) x = x[ , -1])
+caus.split <- lapply(caus.split, function(x) x = x[ , -1])
 
 ##create the vectors
-caus.split.bp = lapply(caus.split, bp)
+caus.split.bp <- lapply(caus.split, bp)
 
 ##put back together in one data frame
-caus.bp = do.call(rbind, caus.split.bp)
+caus.bp <- do.call(rbind, caus.split.bp)
 ```
 
 ## Verb Profiles
@@ -160,7 +168,7 @@ knitr::include_graphics("distance.png")
 
 ```{r}
 ##r chunk
-caus.dist = dist(caus.bp, method = "euclidean") 
+caus.dist <- dist(caus.bp, method = "euclidean") 
 #change method to maximum or manhattan 
 caus.dist
 ```
@@ -187,9 +195,8 @@ caus.dist
 
 ```{r}
 ##r chunk
-#install.packages("cluster")
 library(cluster)
-caus.hc = hclust(caus.dist, method = "ward.D2")
+caus.hc <- hclust(caus.dist, method = "ward.D2")
 ```
 
 ## Plot it
@@ -198,7 +205,6 @@ caus.hc = hclust(caus.dist, method = "ward.D2")
 ##r chunk
 plot(caus.hc, hang = -1)
 ```
-
 
 ## Interpretation
 
@@ -248,12 +254,12 @@ rect.hclust(caus.hc, k = 3)}
 ```{r}
 ##r chunk
 #save the clusters
-clustercut = cutree(caus.hc, k = 2)
-cluster1 = caus.bp[ names(clustercut[clustercut == 1]), ] #notice rows
-cluster2 = caus.bp[ names(clustercut[clustercut == 2]), ]
+clustercut <- cutree(caus.hc, k = 2)
+cluster1 <- caus.bp[ names(clustercut[clustercut == 1]), ] #notice rows
+cluster2 <- caus.bp[ names(clustercut[clustercut == 2]), ]
 
 #create the differences
-differences = colMeans(cluster1) - colMeans(cluster2)
+differences <- colMeans(cluster1) - colMeans(cluster2)
 ```
 
 ## Snake Plots
@@ -292,9 +298,8 @@ text(sort(differences),
 
 ```{r}
 ##r chunk
-#install.packages("pvclust")
 library(pvclust)
-caus.pvc = pvclust(t(caus.bp), #this function clusters by columns, so flip matrix
+caus.pvc <- pvclust(t(caus.bp), #this function clusters by columns, so flip matrix
                    method.hclust = "ward.D2",
                    method.dist = "euclidean"
                    )
@@ -321,7 +326,6 @@ library(reticulate)
 py_config()
 caus_data <- caus.bp #dots are problematic in python
 cluster_labels <- rownames(caus.bp)
-#py_install("scipy")
 ```
 
 ```{python}

@@ -1,7 +1,7 @@
 ---
 title: "Correspondence Analysis"
 author: "Erin M. Buchanan"
-date: "11/11/2019"
+date: "Last Knitted: `r Sys.Date()`"
 output:
   slidy_presentation:
     increment: yes
@@ -11,6 +11,14 @@ output:
 options(scipen = 999)
 ```
 
+```{python echo = F}
+import platform
+if platform.system() == "Windows":
+  import os
+os.environ['MPLCONFIGDIR'] = 'C:/Users/EBuchanan.HU/Documents/tmp/'
+os.environ['SCIKIT_LEARN_DATA'] = "C:/Users/EBuchanan.HU/py_stuff"
+```
+
 ## Language Topics Discussed
 
 - A reanalysis of color terms and categories
@@ -18,13 +26,13 @@ options(scipen = 999)
 ```{r}
 ##r chunk
 library(reticulate)
-py_config()
-#py_install("prince")
 ```
 
 ## Basic Color Terms
 
-- Berlin and Kay (1969) proposed a theory about our linguistic interpretations of colors, mainly that color vocabulary falls into universal categories:
+- Berlin and Kay (1969) proposed a theory about our linguistic interpretations of colors, mainly that color vocabulary falls into universal categories
+- Berlin and Kay's work proposed that the specific color terms present in a culture are predictable by the number of terms they have. 
+- Everyone has black/white color words, then adds red, then yellow or green
 
 ```{r berlinkay, echo=FALSE, out.width="100%", fig.align="center"}
 knitr::include_graphics("berlinkay.png")
@@ -49,7 +57,7 @@ head(colreg)
 
 ```{r}
 ##r chunk
-cs_example = colreg[1:2, 1:2]
+cs_example <- colreg[1:2, 1:2]
 cs_example
 ```
 
@@ -59,22 +67,22 @@ $$E = \frac{Row*Column}{N}$$
 
 ```{r}
 ##r chunk
-cs_example_e = cs_example
-rows = rowSums(cs_example)
-columns = colSums(cs_example)
+cs_example_e <- cs_example
+rows <- rowSums(cs_example)
+columns <- colSums(cs_example)
 
-cs_example_e[1,1] = rows[1]*columns[1]/sum(cs_example)
-cs_example_e[1,2] = rows[1]*columns[2]/sum(cs_example)
-cs_example_e[2,1] = rows[2]*columns[1]/sum(cs_example)
-cs_example_e[2,2] = rows[2]*columns[2]/sum(cs_example)
+cs_example_e[1,1] <- rows[1]*columns[1]/sum(cs_example)
+cs_example_e[1,2] <- rows[1]*columns[2]/sum(cs_example)
+cs_example_e[2,1] <- rows[2]*columns[1]/sum(cs_example)
+cs_example_e[2,2] <- rows[2]*columns[2]/sum(cs_example)
 cs_example_e
 ```
 
-## Using chisq.test
+## Using `chisq.test`
 
 ```{r}
 ##r chunk
-cs_test = chisq.test(cs_example)
+cs_test <- chisq.test(cs_example)
 cs_test$expected
 cs_example
 ```
@@ -95,11 +103,11 @@ cs_test$statistic
 
 ## Residuals 
 
-- Residuals are (O-E)/sqrt(E), whereas standardized residuals are standardized format akin to z-scores (O-E)/ sqrt(var(residuals))
+- Residuals are $\frac{O-E}{\sqrt E}$, whereas standardized residuals are standardized format akin to z-scores 
 
 ```{r}
 ##r chunk
-cs_test$residuals #(cs_example - cs_example_e) /sqrt(cs_example_e)
+cs_test$residuals #(cs_example - cs_example_e) / sqrt(cs_example_e)
 cs_test$stdres
 ```
 
@@ -137,7 +145,7 @@ mosaicplot(colreg, #data frame
 ```{r}
 ##r chunk
 library(ca)
-sca_model = ca(colreg)
+sca_model <- ca(colreg)
 ```
 
 ## What's in the output?
@@ -149,7 +157,7 @@ summary(sca_model)
 
 ## Inertia
 
-- Top part is the table of inertias, which explain how much variation is accounted for by each dimension
+- Top part is the table of inertias, which explain how much variance is accounted for by each dimension
 - These are similar to eigenvalues that we will cover more with factor analyses 
 
 ## Inertia
@@ -235,7 +243,7 @@ ax.get_figure()
 
 ## 3D Plots in R
 
-```{r}
+```{r eval = F}
 ##r chunk
 plot3d.ca(sca_model, #model
        labels = c(1,1)) #see both row and column labels
@@ -262,7 +270,7 @@ head(chairs)
 ```{r}
 ##r chunk
 library(FactoMineR)
-mca_model = MCA(chairs[ , -c(1:3)], #dataset minus the first columns
+mca_model <- MCA(chairs[ , -c(1:3)], #dataset minus the first columns
                 graph = FALSE)
 summary(mca_model)
 ```
@@ -310,7 +318,7 @@ dimdesc(mca_model)
 
 ```{r}
 ##r chunk
-mca_model2 = MCA(chairs[ , -c(1,2)], 
+mca_model2 <- MCA(chairs[ , -c(1,2)], 
                  quali.sup = 1, #supplemental variable
                  graph = FALSE)
 ```

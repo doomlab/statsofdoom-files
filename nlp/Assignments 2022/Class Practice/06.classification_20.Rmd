@@ -1,0 +1,120 @@
+---
+title: 'Classification'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Please do not reorder the assignment - fill in each chunk as requested. 
+
+## Load the libraries + functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+```{r libaries}
+##r chunk
+```
+
+Load the Python libraries or functions that you will use for that section. 
+
+```{python}
+##python chunk
+
+```
+
+## The Data
+
+The dataset is a set of Youtube comments that have been coded as:
+  - 1: spam youtube messages 
+  - 0: good youtube messages
+  - This data is stored in the `CLASS` column
+
+Import the data using either R or Python. I put a Python chunk here because you will need one to import the data, but if you want to first import into R, that's fine. 
+
+```{python}
+##python chunk
+
+```
+
+## Clean up the data (text normalization)
+
+Use one of our clean text functions to clean up the `CONTENT` column in the dataset. 
+
+```{python}
+##python chunk
+
+```
+
+## Split the data
+
+Split the data into testing and training data.
+
+```{python}
+##python chunk
+
+```
+
+## Process the data
+
+For word2vec, create the tokenized vectors of the text.
+
+```{python}
+##python chunk
+
+```
+
+## TF-IDF
+
+Create a TF-IDF matrix.
+
+```{python}
+##python chunk
+
+```
+
+## Word2Vec
+
+Build the word2vec model.
+
+```{python}
+##python chunk
+
+```
+
+## Convert the model
+
+Convert the word2vec model into a set of features to use in our classifier. 
+
+```{python}
+##python chunk
+
+```
+
+## Build a classifier model
+
+In class, we used a few algorithms to test which model might be the best. Pick *one* of the algorithms to use here (logistic regression, naive bayes, support vector machine). 
+
+Run your algorithm on both the TF-IDF matrix and the output from word2vec. 
+
+```{python}
+##python chunk
+
+```
+
+## Examine the results
+
+Print out the accuracy, recall, and precision of both of your models.
+
+```{python}
+##python chunk
+
+```
+
+## Interpretation 
+
+- Where you able to predict the spam messages from the real comments?
+- Which model provided you with a better prediction?

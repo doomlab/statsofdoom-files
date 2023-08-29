@@ -1,0 +1,40 @@
+---
+title: 'Final Report'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instructions
+
+The final document should be a knitted HTML/PDF/Word document from a Markdown file. You will turn in the knitted document. Be sure to spell and grammar check your work! For summary sections, do not simply copy your answers from the assignment. Write a coherent report of the analyses you did and the results you found. The following sections should be included (and make sure each section is clearly labeled): 
+
+## Introduction
+
+Introduce your movie or TV show. Explain to the reader what the show is about, who are the main characters, and give a brief description of why you were interested in analyzing this set of text. (1-2 paragraphs)
+
+Include your visualization from your executive session assignment and use this figure to help describe the summary to the reader. You can export the graphic from the assignment and use markdown to include it. Check out `knitr` and `include_graphics()` to import it into this document. 
+
+## Raw Processing and Part of Speech Analysis
+
+Summarize your results from the raw text and part of speech analysis section. What parts of the analysis did you struggle with? Do you have suggestions on better ways to implement what you did? What type of normalization procedure should one use for a NLP analysis? Did you have any surprises on the most common words or other parts of the analysis? (2 paragraphs)
+
+## NER and Parsing Analysis
+
+Summarize your results from the named entity recognition and parsing analysis section. Do you think WordNet would be a viable solution for solving the ambiguity/polysemy problem? What kinds of results did you see from spacy for entities? Are there obvious things missing that you might consider training your own model? What else might you do with these techniques? (2 paragraphs)
+
+## Classification and Sentiment Analysis
+
+Summarize your results from the classification and sentiment analysis section. What are other things you might considering classifying from your text? Do you believe the sentiment analysis provided accurate results given your interpretation of the movie? What other analyses might you try to display sentiment? (2 paragraphs)
+
+## Final Analysis
+
+Include a summary of your own proposed analyses from the last executive session here. Explain the analysis and results. (2 paragraphs)
+
+## Wrap Up
+
+Include a conclusion paragraph about the usefulness of NLP techniques to analyze text. Do we need complex models to transform and understand text? (1 paragraph)

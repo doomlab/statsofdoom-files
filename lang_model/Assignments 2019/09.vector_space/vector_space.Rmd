@@ -25,6 +25,7 @@ Load the Python libraries or functions that you will use for that section.
 
 ```{python}
 ##python chunk
+
 ```
 
 ## The Data
@@ -34,22 +35,24 @@ You will want to use some books from Project Gutenberg to perform a Latent Seman
 ```{r project_g}
 ##r chunk
 ##pick some titles from project gutenberg
-titles = c("Twenty Thousand Leagues under the Sea", "The War of the Worlds",
+titles <- c("Twenty Thousand Leagues under the Sea", "The War of the Worlds",
             "Pride and Prejudice", "Great Expectations")
 
+my_mirror <- "http://mirrors.xmission.com/gutenberg/ (Links to an external site.)"
+
 ##read in those books
-books = gutenberg_works(title %in% titles) %>%
-  gutenberg_download(meta_fields = "title") %>% 
+books <- gutenberg_works(title %in% titles) %>%
+  gutenberg_download(meta_fields = "title", mirror = my_mirror) %>%
   mutate(document = row_number())
 
-create_chapters = books %>% 
+create_chapters <- books %>% 
   group_by(title) %>%
   mutate(chapter = cumsum(str_detect(text, regex("\\bchapter\\b", ignore_case = TRUE)))) %>% 
   ungroup() %>%
   filter(chapter > 0) %>%
   unite(document, title, chapter) 
 
-by_chapter = create_chapters %>% 
+by_chapter <- create_chapters %>% 
   group_by(document) %>% 
   summarise(text=paste(text,collapse=' '))
 
@@ -104,14 +107,7 @@ Create the dictionary and term document matrix in Python.
 
 ```
 
-Find the most likely number of dimensions using the coherence functions from the lecture. 
-
-```{python}
-##python chunk
-
-```
-
-Create the LSA model in Python with the optimal number of dimensions from the previous step.
+Create the LSA model in Python with 2 to 4 dimensions (up to you!). 
 
 ```{python}
 ##python chunk
@@ -120,7 +116,11 @@ Create the LSA model in Python with the optimal number of dimensions from the pr
 
 ## Interpretation
 
-Interpret your space - can you see the differences between books/novels? Explain the results from your analysis (more than one sentence please). 
+QUESTION: Interpret your space - can you see the differences between books/novels? Explain the results from your *R* analysis, referencing the pictures and calculations you used to explore the space. 
+ANSWER:
+
+QUESTION: What do the dimensions tell you about the semantic space? 
+ANSWER:
   
 
 

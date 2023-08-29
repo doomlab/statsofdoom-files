@@ -11,14 +11,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## The Model
 
-Since the deep models take a long time to run and often require a lot of computer power, we will just detail where you might use a deep learning model in your own work. 
+Since the deep models take a long time to run and often require a lot of computer power, we will just detail where you might use a deep learning model in your own work. Be sure to use your own examples that are not copied from online sources. Each question should be answered with a few sentences. 
 
-In this section, detail a classification task you might use a deep learning model for:
-  - What are the class labels? (i.e. what are the groups?)
-  - What would you use to predict the labels? Explain how text is involved in the prediction.
-  - What type of model would you use (RNN, CNN, mix of both)?
-  - How many layers would you include in your model?
-  - What type of layers do you think might be effective to help you predict your classes? 
+QUESTIONS:
+
+- What is a task that you might use a deep learning network for in your research, job, or a topic that interests you?
+
+- What are the class labels that you would predict? 
+
+- What would you use to predict those categories? Explain how a text source is involved as part of the prediction. 
+
+- What type of model would you use (RNN, CNN, mixed)? Why would you chose that type of model? 
+
+- How many layers would you consider using in your model, and what type of layers do you think might be effective to help you predict your classes? 
   
 
 

@@ -9,27 +9,50 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Load the Libraries + Functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+We will use Jane Austen's books for this example - you should pick one book to compare several words in! 
+
+```{r libraries}
+##r chunk
+library(janeaustenr) # you may need to install this package 
+DF <- austen_books()
+
+table(DF$book)
+
+# change this code 
+DF <- subset(DF, book == "Emma")
+```
+
+The python section will load the libraries below.
+
 ## Create the Data
 
-- One of the corpora here: https://corpus.byu.edu/corpora.asp 
 - Collect two bigrams that you can compare using the association measures listed (does not have to be X-Y, Z-Y, but that would help you compare them)
 - Create a dataframe like the one from lecture of those bigrams
 
 ```{r createdata}
 ##r chunk
 
+# an example of how to calculate make this your own example
+# note that the \\b means word boundary which keeps you from getting partial matches 
+# the ^ in the last one says NOT x or y
+  
+  # a is all the pair combinations X (can) - Y (he)
+  length(grep("\\bhe can\\b", DF$text))
+  # b is the X (can) but not Y (he) all the times minus the pairing
+  length(grep("\\bcan\\b", DF$text)) - length(grep("\\bhe can\\b", DF$text))
+  # c is not X (can) but Y (he) all the times minus the pairing
+  length(grep("\\bhe\\b", DF$text)) - length(grep("\\bhe can\\b", DF$text))
+  # d is everything else so no he or can 
+  length(grep("[^\\bhe\\b|\\bcan\\b]", DF$text))
+
+# a b c d
+first_pair <- c()
+second_pair <- c()
 ```
-
-## Load the Libraries + Functions
-
-Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
-
-```{r libraries}
-##r chunk
-
-```
-
-The python section will load the libraries below.
 
 ## Attraction and Reliance
 
@@ -76,11 +99,13 @@ Calculate the OR for your bigrams.
 
 ## Interpret your results
 
-Given the statistics you have calculated above, what is the relation of your bigrams? Write a short summary of the results, making sure to answer the following: 
+QUESTION: Given the statistics you have calculated above, what is the relation of your bigrams? Write a short summary of the results, making sure to answer the following: 
 
 - Are they related?
 - Do they attract or repel each other?
 - Are there differences between the separate bigrams?
+
+ANSWER: 
 
 ## Python Application
 
@@ -119,4 +144,6 @@ Using our moving recommender - pick a single article (under `TITLE`) and recomme
 
 ```
 
+QUESTION: Interpret your results. Do you think the recommender matched our article to similar articles? 
+ANSWER:
 

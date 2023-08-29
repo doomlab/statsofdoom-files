@@ -54,19 +54,21 @@ Include Bartlett's test and the KMO statistic to determine if you have adequate 
 
 ```
 
-Include Bartlett's test and the KMO statistic from Python. Do they appear to match? 
+Include Bartlett's test and the KMO statistic from Python. 
 
 ```{python}
 ##python chunk
 
 ```
 
+QUESTION: Interpret both KMO and Barlett's test. What do they tell you about the screening for your EFA? 
+ANSWER: 
+
 ## How many factors?
 
 - Explore how many factors you should use.
   - Include a parallel analysis and scree plot.
   - Sum the Kaiser criterion.
-  - Go with the smaller number of items or the most agreement between different criteria. 
 
 ```{r howmany}
 ##r chunk
@@ -80,9 +82,12 @@ Include Bartlett's test and the KMO statistic from Python. Do they appear to mat
 
 ```
 
+QUESTION: Interpret the results from these diagnostic tests for the number of factors. What does the parallel analysis suggest? How does that compare to the scree plot and Kaiser criterion results? How many factors should you use? 
+ANSWER: 
+
 ## Simple structure - run the EFA
 
-- Run the EFA in both R and Python
+- Run the EFA in both R and Python.
   - Include the saved `fa` code, but then be sure to print out the results, so the summary is on your report.
   - Plot the results from your analysis. 
 
@@ -95,14 +100,23 @@ Include Bartlett's test and the KMO statistic from Python. Do they appear to mat
 ##plot the results
 ```
 
-- For Python, run the factor analysis and print out the loadings. Do they appear to have the same results?
+- For Python, run the factor analysis and print out the loadings. 
 
 ```{python}
 ##python chunk
 
 ```
 
+QUESTION: Interpret the results from your EFA. How do the items group together? What do those results imply? What where the bad items? Were you able to achieve simple structure? 
+ANSWER: 
+
 ## Adequate solution
 
-- Examine the fit indice(s). Are they any good? How might you interpret them?
-- Examine the results - what do they appear to tell you? Are there groupings of variables in these analyses that might explain different structures/jargons/registers in language we find in Congress? 
+QUESTION: Examine the fit indice(s). Are they any good? How might you interpret them?
+ANSWER: 
+
+QUESTION: Examine the results - what do they appear to tell you? Are there groupings of variables in these analyses that might explain different structures/jargons/registers in language we find in Congress? 
+ANSWER: 
+
+QUESTION: What other information might you include in this analysis to better understand the dynamics of Congress and their speech? 
+ANSWER: 

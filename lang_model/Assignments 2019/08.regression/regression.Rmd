@@ -56,6 +56,9 @@ Since we are using frequencies, we should consider the non-normality of frequenc
 
 ```
 
+QUESTION: Interpret your results from these histograms. Should you use the regular frequency or the transformed frequency? Describe the histograms and interpret (i.e., more than a few words for answers here).
+ANSWER:
+
 ## Create Your Linear Model
 
 See if you can predict response latencies (DV) with the following IVs: subtitle frequency, length, POS, and bigram frequency. 
@@ -66,41 +69,53 @@ See if you can predict response latencies (DV) with the following IVs: subtitle 
 
 ## Interpret Your Model
 
+### Overall Model 
+
+QUESTION: Interpret your model in this step. Can you predict response latencies? Provide evidence the model is better than a random guess. 
+
+- Is the overall model statistically significant?
+- What is the practical importance of the overall model? 
+
+ANSWER:
+
 ### Coefficients
 
-- Which coefficients are statistically significant? 
-- What do they suggest predicts response latency? (i.e., give the non-stats interpretation of the coefficients)
-- Which coefficients appear to predict the most variance? Calculate the $pr^2$ values below:
+QUESTION: Which coefficients are statistically significant? What do they suggest predicts response latency? (i.e., give the non-stats interpretation of the coefficients)
+ANSWER:
+
+Calculate the $pr^2$ values below:
 
 ```{r pr2}
 
 ```
 
-- What do the dummy coded POS values mean? Calculate the means of each group below to help you interpret:
+QUESTION: Which coefficients appear to predict the most variance? 
+ANSWER: 
+
+What do the dummy coded POS values mean? Calculate the means of each group below to help you interpret:
 
 ```{r posmeans}
 
 ```
 
-### Overall Model
-
-- Is the overall model statistically significant?
-- What is the practical importance of the overall model? 
+QUESTION: Interpret the dummy coded results.
+ANSWER: 
 
 ## Diagnostic Tests
 
 ### Outliers
 
 Create an influence plot of the model using the `car` library. 
-- Which data points appear to have the most influence on the model?
 
 ```{r influence}
 
 ```
 
+QUESTION: Which data points appear to have the most influence on the model?
+ANSWER: 
+
 ### Additivity
 
-Do we have additivity in our model?
 - Show that the correlations between predictors is less than .9.
 - Show the VIF values. 
 
@@ -108,49 +123,61 @@ Do we have additivity in our model?
 
 ```
 
+QUESTION: Do we have additivity in our model? Explain how the VIF and correlation values support your answer. 
+ANSWER: 
+
 ### Linearity
 
-Is the model linear? 
-- Include a plot and interpret the output.
+Include a diagnostic plot for linearity. 
 
 ```{r qqplot}
 
 ```
 
+QUESTION: Does the data/model meet the linearity assumption? Explain how you came to this conclusion. 
+ANSWER: 
+
 ### Normality 
 
-Are the errors normally distributed?
-- Include a plot and interpret the output. 
+Include a diagnostic plot for normality of the residuals. 
 
 ```{r normal}
 
 ```
 
+QUESTION: Does the data/model meet the normality assumption? Explain how you came to this conclusion. 
+ANSWER: 
+
 ### Homoscedasticity/Homogeneity
 
-Do the errors meet the assumptions of homoscedasticity and homogeneity?
-- Include a plot and interpret the output (either plot option). 
+Include a diagnostic plot for homoscedasticity. 
 
 ```{r homogs}
 
 ```
+
+QUESTION: Does the data/model meet the homoscedasticity assumption? Explain how you came to this conclusion. 
+ANSWER: 
+
 
 ### Bootstrapping 
 
 Use the function provided from class (included below) and the `boot` library to bootstrap the model you created 1000 times. 
 - Include the estimates of the coefficients from the bootstrapping.
 - Include the confidence intervals for at least one of the predictors (not the intercept).
-- Do our estimates appear stable, given the bootstrapping results? 
 
 Use the following to randomly sample 500 rows of data - generally, you have to have more bootstraps than rows of data, so this code will speed up your assignment. In the `boot` function use: `data = DF[sample(1:nrow(DF), 500, replace=FALSE),]` for the data argument changing DF to the name of your data frame.
 
 ```{r boot}
-bootcoef = function(formula, data, indices){
+bootcoef <- function(formula, data, indices){
   d = data[indices, ] #randomize the data by row
   model = lm(formula, data = d) #run our model
   return(coef(model)) #give back coefficients
 }
 ```
+
+QUESTION: Interpret the results of the bootstrapping. Do you get similiar results to the overall model when sampling a smaller set? 
+ANSWER: 
 
 
 

@@ -1,0 +1,144 @@
+---
+title: 'Word2Vec'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load the libraries + functions
+
+Load all the libraries or functions that you will use to for the rest of the assignment. It is helpful to define your libraries and functions at the top of a report, so that others can know what they need for the report to compile correctly.
+
+```{r libaries}
+##r chunk
+```
+
+Load the Python libraries or functions that you will use for that section. 
+
+```{python}
+##python chunk
+
+```
+
+## The Data
+
+The dataset is a set of Youtube comments that have been coded as:
+
+  - 1: spam youtube messages 
+  - 0: good youtube messages
+  - This data is stored in the `CLASS` column.
+
+Import the data in either R or Python. Convert your dataframe into a Python `pandas` dataframe for this assignment. 
+
+```{python}
+##python chunk
+
+```
+
+## Clean up the data
+
+Use one of our clean text functions to clean up the `CONTENT` column in the dataset. 
+
+```{python}
+##python chunk
+
+```
+
+## Split the data
+
+Split the data into testing and training data.
+
+```{python}
+##python chunk
+
+```
+
+## Process the data
+
+For FastText and word2vec, create the tokenized vectors of the text.
+
+```{python}
+##python chunk
+
+```
+
+## Word2Vec
+
+Build the word2vec model.
+
+```{python}
+##python chunk
+
+```
+
+## Convert the model
+
+Convert the model into a set of features to use in our classifier. 
+
+```{python}
+##python chunk
+
+```
+
+## Build a classifier model
+
+In class, we used logistic regression to classify the data. You can use any machine learning algorithm you want here, and build a classification model. 
+
+```{python}
+##python chunk
+
+```
+
+## Examine the results
+
+Print out the accuracy, recall, and precision of your model.
+
+```{python}
+##python chunk
+
+```
+
+## Build a FastText model
+
+Using the same data, build a FastText model.
+
+```{python}
+##python chunk
+
+```
+
+## Extract the features
+
+Convert the FastText model into features for prediction.
+
+```{python}
+##python chunk
+
+```
+
+## Build a classifier model
+
+Using the same machine learning algorithm as above, build a classifier model that uses the FastText data to predict the categories.
+
+```{python}
+##python chunk
+
+```
+
+## Examine the results
+
+Print out the accuracy, recall, and precision of your model.
+
+```{python}
+##python chunk
+
+```
+
+## Interpretation 
+
+- Where you able to predict the spam messages from the real comments? 
+- Which model provided you with a better prediction?

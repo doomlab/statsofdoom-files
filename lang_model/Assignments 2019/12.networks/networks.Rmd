@@ -90,10 +90,37 @@ Include a network plot of the correlation data, and you can change the correlati
 
 ```
 
-## Interpretation
+QUESTION: What do the simple statistics and network plots tell you about the book you selected? Interpret your output in a few sentences summarizing your visualizations. 
+ANSWER: 
 
-What do the simple statistics and network plots tell you about the book you selected? Interpret your output in a few sentences summarizing your visualizations. 
+## Network Statistics
 
+Calculate the degree of connectedness for each node (k).
+
+```{r}
+
+```
+
+QUESTION: Which node has the highest degree of connectedness?
+ANSWER: 
+
+Calculate the betweenness for each node.
+
+```{r}
+
+```
+
+QUESTION: Which node has the highest level of betweenness?  
+ANSWER: 
+
+Calculate the closeness for each node.
+
+```{r}
+
+```
+
+QUESTION: Do you think your network has small world structure? Give a few reasons why yes or no. 
+ANSWER: 
 
 
 

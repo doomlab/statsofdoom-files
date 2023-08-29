@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Human Language"
 author: "Erin M. Buchanan"
-date: "10/30/2019"
+date: "Last Knitted: `r Sys.Date()`"
 output: 
   slidy_presentation:
     increment: TRUE
@@ -9,6 +9,14 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{python echo = F}
+import platform
+if platform.system() == "Windows":
+  import os
+os.environ['MPLCONFIGDIR'] = 'C:/Users/EBuchanan.HU/Documents/tmp/'
+os.environ['SCIKIT_LEARN_DATA'] = "C:/Users/EBuchanan.HU/py_stuff"
 ```
 
 ## What is this course about?
@@ -30,12 +38,6 @@ knitr::opts_chunk$set(echo = TRUE)
 - You should read the syllabus for course policies and other important information. 
 - You will use Canvas for all course related activities. 
 - Let's check those things out now.
-
-## Writing
-
-- You will be expected to write reports with code and text embedded. 
-- You will want to embed or otherwise cite your sources for material you are referencing.
-- Please use APA style on how to citations (search Purdue OWL for tips).
 
 ## Human Language
 
@@ -61,12 +63,12 @@ Things to think about:
 
 ## Defining Human Language
 
-Hockett's Feature Design: communalities between languages that define language as separate from other communication systems (i.e., animals)
+- Hockett's Feature Design: communalities between languages that define language as separate from other communication systems (i.e., animals)
 
-- Semanticity: symbols are tied to meaning
-- Arbitrariness: symbols are arbitrary (not tied to meaning)
-- Discreteness: symbols can be broken down and recombined (morphemes)
-- Productivity: users can create and understand novel text (creativity)
+  - Semanticity: symbols are tied to meaning
+  - Arbitrariness: symbols are arbitrary (not tied to meaning)
+  - Discreteness: symbols can be broken down and recombined (morphemes)
+  - Productivity: users can create and understand novel text (creativity)
 
 ## Parts to Human Language
 

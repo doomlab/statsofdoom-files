@@ -1,0 +1,32 @@
+---
+title: 'Final Project Pitch'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Be sure to list the group members at the top!
+
+## Topic
+
+Define your topic - you can use this as your potential title for your white paper.
+
+## Problem or Question
+
+Single statement describing either the project you are tackling with this project or the research question you are planning on answering. 
+
+## Related Background
+
+Two sources that are relevant for your project.
+
+## Data
+
+Two to four bullet points describing the data you are using and the method you plan on using.
+
+## Importance
+
+Two to four bullet points describing why this project matters and what the potential implications are of the findings are.

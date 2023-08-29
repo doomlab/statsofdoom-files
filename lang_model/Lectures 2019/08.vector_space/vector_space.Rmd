@@ -1,7 +1,7 @@
 ---
 title: "Latent Semantic Analysis"
 author: "Erin M. Buchanan"
-date: "12/11/2019"
+date: "Last Knitted: `r Sys.Date()`"
 output:
   slidy_presentation:
     increment: yes
@@ -9,6 +9,14 @@ output:
 
 ```{r echo = F}
 options(scipen = 999)
+```
+
+```{python echo = F}
+import platform
+if platform.system() == "Windows":
+  import os
+os.environ['MPLCONFIGDIR'] = 'C:/Users/EBuchanan.HU/Documents/tmp/'
+os.environ['SCIKIT_LEARN_DATA'] = "C:/Users/EBuchanan.HU/py_stuff"
 ```
 
 ## Language Topics Discussed
@@ -32,7 +40,8 @@ options(scipen = 999)
 
 ## Distributional Models 
 
-- Hyperspace Analogue to Language: Burgess & Lund (1996) - a moving window hypothesis   - Gradually "learns" by including text-representation as it scans across a document
+- Hyperspace Analogue to Language: Burgess & Lund (1996) - a moving window hypothesis   
+  - Gradually "learns" by including text-representation as it scans across a document
   - Used to predict: semantic task performance, problem solving, similarity, priming
   - Similar models include COALS: Correlated Occurrence Analogue
 to Lexical Semantics
@@ -73,7 +82,7 @@ knitr::include_graphics("TXD.png")
 
 ```{r exam_answers, echo = TRUE}
 ##r chunk
-exam_answers = read.csv("exam_answers.csv", 
+exam_answers <- read.csv("exam_answers.csv", 
                         header = F, stringsAsFactors = F)
 ```
 
@@ -97,7 +106,7 @@ library(ngram)
 #            remove.numbers = FALSE, #take out numbers
 #            fix.spacing = TRUE) #fix trailing spaces
 
-exam_answers$processed = apply(exam_answers, 1, preprocess)
+exam_answers$processed <- apply(exam_answers, 1, preprocess)
 ```
 
 ## Load Semantic Space
@@ -142,7 +151,7 @@ coherence(exam_answers$processed[5],
 #Import the pdf of the book 
 #In general the text documents you want to analyze
 library(pdftools)
-book = pdf_text("PSYCHOLOGY_OF_LANGUAGE.pdf")
+book <- pdf_text("PSYCHOLOGY_OF_LANGUAGE.pdf")
 ```
 
 ## How to Make a Semantic Space 
@@ -154,7 +163,7 @@ book = pdf_text("PSYCHOLOGY_OF_LANGUAGE.pdf")
 ##r chunk
 library(tm)
 #Create a corpus from a vector of documents
-book_corpus = Corpus(VectorSource(book)) 
+book_corpus <- Corpus(VectorSource(book)) 
 ```
 
 ## How to Make a Semantic Space 
@@ -162,16 +171,16 @@ book_corpus = Corpus(VectorSource(book))
 - When you perform these analyses, you usually have to edit the text. 
 - Therefore, we are going to lower case the words, take out the punctuation, and remove English stop words (like the, an, a).
 
-``````{r make_space3, echo = TRUE, eval = FALSE}
+```{r make_space3, echo = TRUE, eval = FALSE}
 ##r chunk
 #Lower case all words
-book_corpus = tm_map(book_corpus, tolower) 
+book_corpus <- tm_map(book_corpus, tolower) 
 
 #Remove punctuation for creating spaces
-book_corpus = tm_map(book_corpus, removePunctuation) 
+book_corpus <- tm_map(book_corpus, removePunctuation) 
 
 #Remove stop words
-book_corpus = tm_map(book_corpus, 
+book_corpus <- tm_map(book_corpus, 
                      function(x) removeWords(x, stopwords("english")))
 ```
 
@@ -182,7 +191,7 @@ book_corpus = tm_map(book_corpus,
 ```{r make_space4, echo = TRUE, eval = FALSE}
 ##r chunk
 #Create the term by document matrix
-book_mat = as.matrix(TermDocumentMatrix(book_corpus))
+book_mat <- as.matrix(TermDocumentMatrix(book_corpus))
 ```
 
 ## How to Make a Semantic Space
@@ -195,7 +204,7 @@ book_mat = as.matrix(TermDocumentMatrix(book_corpus))
 library(lsa)
 
 #Weight the semantic space
-book_weight = lw_logtf(book_mat) * gw_idf(book_mat)
+book_weight <- lw_logtf(book_mat) * gw_idf(book_mat)
 ```
 
 ## How to Make a Semantic Space
@@ -206,10 +215,10 @@ book_weight = lw_logtf(book_mat) * gw_idf(book_mat)
 ```{r make_space6, echo = TRUE, eval = FALSE}
 ##r chunk
 #Run the SVD
-book_lsa = lsa(book_weight)
+book_lsa <- lsa(book_weight)
 
 #Convert to textmatrix for coherence
-book_lsa = as.textmatrix(book_lsa)
+book_lsa <- as.textmatrix(book_lsa)
 ```
 
 ## Space Choice Matters
@@ -268,10 +277,10 @@ choose.target("information", #choose word
 ```{r student-space, echo = TRUE, warning = FALSE}
 ##r chunk
 library(tm)
-exam_corpus = Corpus(VectorSource(exam_answers$processed))
-exam_corpus = tm_map(exam_corpus, tolower)
-exam_corpus = tm_map(exam_corpus, removePunctuation)
-exam_corpus = tm_map(exam_corpus, function(x) removeWords(x, stopwords("english")))
+exam_corpus <- Corpus(VectorSource(exam_answers$processed))
+exam_corpus <- tm_map(exam_corpus, tolower)
+exam_corpus <- tm_map(exam_corpus, removePunctuation)
+exam_corpus <- tm_map(exam_corpus, function(x) removeWords(x, stopwords("english")))
 #exam_corpus = tm_map(exam_corpus, stemDocument, language = "english")
 ```
 
@@ -279,10 +288,10 @@ exam_corpus = tm_map(exam_corpus, function(x) removeWords(x, stopwords("english"
 
 ```{r student-space2, echo = TRUE, warning = FALSE}
 ##r chunk
-exam_mat = as.matrix(TermDocumentMatrix(exam_corpus))
-exam_weight = lw_logtf(exam_mat) * gw_idf(exam_mat)
-exam_lsa = lsa(exam_weight)
-exam_lsa = as.textmatrix(exam_lsa)
+exam_mat <- as.matrix(TermDocumentMatrix(exam_corpus))
+exam_weight <- lw_logtf(exam_mat) * gw_idf(exam_mat)
+exam_lsa <- lsa(exam_weight)
+exam_lsa <- as.textmatrix(exam_lsa)
 #save(exam_lsa, file = "exam_lsa.rda")
 ```
 
@@ -306,7 +315,7 @@ plot_neighbors("attention", n = 10,
 ```{r student_multiselect, echo = T}
 ##r chunk
 #use a multiselect for lists of words
-list1 = c("object", "insignificant", "attention", "endogenous")
+list1 <- c("object", "insignificant", "attention", "endogenous")
 
 #plot all the words selected
 plot_wordlist(list1, #put in the list above 

@@ -1,11 +1,19 @@
 ---
 title: "Frequency and Response Latencies with Regression"
 author: "Erin M. Buchanan"
-date: "01/16/2019"
+date: "Last Knitted: `r Sys.Date()`"
 output:
   slidy_presentation:
     increment: yes
 ---
+
+```{python echo = F}
+import platform
+if platform.system() == "Windows":
+  import os
+os.environ['MPLCONFIGDIR'] = 'C:/Users/EBuchanan.HU/Documents/tmp/'
+os.environ['SCIKIT_LEARN_DATA'] = "C:/Users/EBuchanan.HU/py_stuff"
+```
 
 ## Language Topics Discussed
 
@@ -151,7 +159,7 @@ table(ELP$POS)
 
 - Generally, nouns would be considered the comparison group, so let's rearrange them so they are "first". 
 ```{r pos2, echo = T}
-ELP$POS = factor(ELP$POS, #the column you want to update
+ELP$POS <- factor(ELP$POS, #the column you want to update
                  #the values in the data in the order you want
                  levels = c("NN", "JJ", "VB"), 
                  #give them better labels if you want
@@ -178,7 +186,7 @@ hist(ELP$SUBTLWF, breaks = 100)
 ## Dealing with Non-Normal Data
 
 ```{r freq2, echo = T}
-ELP$Log_SUB = log(ELP$SUBTLWF)
+ELP$Log_SUB <- log(ELP$SUBTLWF)
 hist(ELP$Log_SUB)
 ```
 
@@ -191,7 +199,7 @@ hist(ELP$Log_SUB)
   - data = name of data frame
 
 ```{r lm, echo = T}
-model = lm(Mean_RT ~ Length + Log_SUB + POS,
+model <- lm(Mean_RT ~ Length + Log_SUB + POS,
            data = ELP)
 ```
 
@@ -252,8 +260,8 @@ confint(model)
 
 $$ \frac{t_{x_i}}{\sqrt{t_{x_i}^2 + df_{res}}} $$
 ```{r prs, echo = T}
-t = summary(model)$coefficients[-1 , 3]
-pr = t / sqrt(t^2 + model$df.residual)
+t <- summary(model)$coefficients[-1 , 3]
+pr <- t / sqrt(t^2 + model$df.residual)
 pr^2
 ```
 
@@ -280,7 +288,7 @@ summary(model)$r.squared
 - Outliers and influential observations: data points that have large residuals or are otherwise odd in relation to the rest of the data
 - Assumptions of parametric regression:
   - Independence
-  - DV is response scale 
+  - DV is at least interval or better yet ratio scale
   - Additivity (no multicollinearity)
   - Linearity
   - Normality
@@ -358,7 +366,7 @@ plot(model, which = 1)
 - First, build a function that saves the numbers you want:
 
 ```{r boot, echo = T}
-bootcoef = function(formula, data, indices){
+bootcoef <- function(formula, data, indices){
   d = data[indices, ] #randomize the data by row
   model = lm(formula, data = d) #run our model
   return(coef(model)) #give back coefficients
@@ -371,7 +379,7 @@ bootcoef = function(formula, data, indices){
 
 ```{r boot2, echo = T, message = F}
 library(boot)
-model.boot = boot(formula = Mean_RT ~ Length + Log_SUB + POS,
+model.boot <- boot(formula = Mean_RT ~ Length + Log_SUB + POS,
                   data = ELP,
                   statistic = bootcoef,
                   R = 1000)

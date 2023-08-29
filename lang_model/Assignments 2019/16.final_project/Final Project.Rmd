@@ -11,7 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Objective
 
-This project should allow you to apply the information you've learned in the course to a new dataset. While the structure of the final project will be more of a research project, you can use this knowledge to appropriately answer questions in all fields, along with the practical skills of writing a report that others can read. The dataset must be related to language or language processing in some way. You must use an analysis we learned in class. 
+This project should allow you to apply the information you've learned in the course to a new dataset. The structure of the final project will be similar to a white paper. The goal of this project is for you to learn how to identify and address a problem with text data and communicate your findings in  report that others can read. The dataset must be related to language or language processing in some way. You must use an analysis we learned in class. 
+
+NOTE: Be sure to check your Turn It In Report. If sections (phrases, sentences, or paragraphs) are highlighted of your words that indicate they are taken from somewhere else, you will receive a zero for that section. 
 
 ## Instructions
 
@@ -19,28 +21,42 @@ The final document should be a knitted HTML/PDF/Word document from a Markdown fi
 
 ### Introduction
 
-Introduce your research topic. What is the background knowledge that someone would need to understand the field or area that you have decided to investigate? In this section, you should include sources that help explain the background area and cite them in APA style. 5-10 articles across the paper would be appropriate - be sure to include these! They are part of the grade! 
+Introduce your research topic (the problem) and briefly review related work. Be sure to answer these two questions: (1) Why does this topic matter and (2) What is the background knowledge that someone would need to understand the field or area that you have decided to investigate? In this section, you should include sources that help explain the background area and cite them. This section should be 3-5 paragraphs.
 
-### Hypothesis / Problem Statement
+### Research Question
 
-What is the data that you are using for you project? What is your hypothesis as to the outcome of the analysis? Why is the problem important for us to study or answer? 
+Define what the problem is and what the goal of the analysis is. Then, specify at least one research question that you answer with your analysis. This section should be a full paragraph.
 
-### Statistical Analysis Plan
+### Method 
 
-Explain the statistical analysis that you are using - you can assume some statistical background, but not to the specific design you are mentioning. For example, the person would know what a mean is, but not the more complex analyses. 
+Explain the data you have selected to study. You can find data through many available corpora or other datasets online (ask for help here for sure!). How was the data collected? Who/what is in the data? Identify what the variables are for the analysis. How do these variables fit into your research question?
 
-### Method - Data - Variables
+Describe how you are analyzing the data and why. Here you basically want to justify how your analytic plan will answer your research question. Length of this section will vary, but you should describe your data and analytic plan well enough that someone without a strong background in analytics could understand it.
 
-Explain the data you have selected to study. You can find data through many available corpora or other datasets online (ask for help here for sure!). How was the data collected? Who/what is in the data? Identify what the independent and dependent variables are for the analysis. How do these independent and dependent variables fit into the analyses you selected?
+### Analysis
 
-### Statistical Analysis Results
+Analyze the data given your statistical plan. Report the appropriate statistics for that analysis (see lecture notes). Include figures! Include the R-chunks so we can see the analyses you ran and output from the study. Note what you are doing in each step. Length of this section will vary, but you should describe your results well enough that someone without a strong background in analytics could understand it.
 
-Analyze the data given your statistical plan. Report the appropriate statistics for that analysis (see lecture notes). Include figures! Include the R-chunks so we can see the analyses you ran and output from the study. Note what you are doing in each step. 
+### Discussion
 
-### Interpret and Discuss
+Summarize the results from your study in as plain of language as possible. How does this relate to previous literature? What have we learned from you doing this analysis/study?
 
-Summarize the results from your study in as plain of language as possible. How does this relate to previous literature? Where the results supportive of your hypotheses? What have we learned from you doing this analysis/study?
+Describe the implications of your study and what the practical applications of the findings might be. Here you want to consider what actions might your readers (or company) take based on your conclusions.
+
+### Credit Guidelines
+
+If working in a group, specify what each member of the group did. For each of the steps below, specify who did the work. If more than one member worked on the step, put names of everyone who worked on it.
+
+- Developed Research Question
+- Acquired Data
+- Analyzed Data
+- Researched Related Work
+- Wrote Introduction
+- Wrote Method
+- Wrote Analysis/Results
+- Wrote Discussion
+- Revisions/Edits
 
 ### References
 
-Include your references in APA style.
+Include your references here (APA style preferred, but do the best you can).

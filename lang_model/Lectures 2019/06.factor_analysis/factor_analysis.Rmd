@@ -1,7 +1,7 @@
 ---
 title: "Register Variation and Exploratory Factor Analysis"
 author: "Erin M. Buchanan"
-date: "12/04/2019"
+date: "Last Knitted: `r Sys.Date()`"
 output:
   slidy_presentation:
     increment: yes
@@ -9,6 +9,14 @@ output:
 
 ```{r echo = F}
 options(scipen = 999)
+```
+
+```{python echo = F}
+import platform
+if platform.system() == "Windows":
+  import os
+os.environ['MPLCONFIGDIR'] = 'C:/Users/EBuchanan.HU/Documents/tmp/'
+os.environ['SCIKIT_LEARN_DATA'] = "C:/Users/EBuchanan.HU/py_stuff"
 ```
 
 ## Language Topics Discussed
@@ -118,11 +126,8 @@ reg_bnc_py.drop(['Reg'], axis = 1, inplace = True)
 
 ```{r}
 ##r chunk 
-correlations = cor(reg_bnc[ , -1 ])
+correlations <- cor(reg_bnc[ , -1 ])
 cortest.bartlett(correlations, n = nrow(reg_bnc)) 
-
-#for python
-#py_install("factor_analyzer")
 ```
 
 ## Correlations - Python
@@ -198,7 +203,7 @@ knitr::include_graphics("scree.png")
 
 ```{r}
 ##r chunk 
-number_items = fa.parallel(reg_bnc[, -1], ##dataset
+number_items <- fa.parallel(reg_bnc[, -1], ##dataset
                            fm = "ml", ##type of math
                            fa = "both") #look at both efa/pca
 ```
@@ -283,7 +288,7 @@ knitr::include_graphics("rotate.png")
 
 ```{r}
 ##r chunk 
-EFA_fit = fa(reg_bnc[, -1], #data
+EFA_fit <- fa(reg_bnc[, -1], #data
              nfactors = 2, #number of factors
              rotate = "oblimin", #rotation
              fm = "ml") #math

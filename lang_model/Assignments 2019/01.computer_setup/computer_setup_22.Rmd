@@ -1,0 +1,120 @@
+---
+title: 'Set Up Your Virtual Machine'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+#do not change this
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Virtual Machine Set Up Guide
+
+Go to: https://rstudio.thedoomlab.com/auth-sign-in
+
+Your log in is:
+
+  -	Username: firstname_lastname
+  -	Password: firstnameidnumber
+  -	Fill in first and last name with your first and last name, while ID number is your HU ID number.
+
+### Python Set Up
+
+- Click on terminal and run the following lines:
+  
+  - pip3 install prince
+  - pip3 install factor-analyzer
+  - pip3 install nltk
+  - pip3 install gensim
+  - python3 -m nltk.downloader abc
+  - pip3 install pyLDAvis
+
+### Turn off Miniconda
+
+###################################################
+###################################################
+###################################################
+###################################################
+########### IMPORTANT BE SURE TO SAY NO ########### 
+###################################################
+###################################################
+###################################################
+###################################################
+
+When you run py_config() the first time, it will ask you to install miniconda. Say no! We already have python3 installed on the server. 
+
+```{r}
+##r chunk
+library(reticulate)
+py_config()
+#SAY NO SAY NO SAY NO
+```
+
+### Let's do some R
+
+- In this chunk, we will load a dataset - use `data(rock)` to load it. 
+- Use the `head()` function to print out the first six rows of the dataset. 
+
+```{r an_r_section}
+##r chunk
+
+```
+
+### Call a dataset in Python
+
+- First, load the `sklearn` library, it has several sample datasets. You load python packages by using `import PACKAGE`. Note that you install and call this package different names (scikit-learn = sklearn).
+- Next, import the datasets part of sklearn by doing `from PACKAGE import FUNCTION`. Therefore, you should use `from sklearn.datasets import fetch_california_housing`. 
+- Then call the `housing` dataset by doing: `housing = fetch_california_housing()`.
+- To print out the first six rows, use the `.head()` function: `df_housing.head()`, after converting the file with `pandas` (code included below).
+
+```{python}
+##python chunk
+##TYPE HERE##
+
+
+##convert to pandas
+import pandas as pd
+df_housing = pd.DataFrame(data = housing.data, 
+                         columns = housing.feature_names)
+
+```
+
+QUESTION: Check out the environment windows - you should have one for R and one for Python. What differences do you see? 
+ANSWER: 
+
+## Print out Python information in R
+
+- You can have the two environments interact. To print out information from Python in R: `py$VARNAME`.
+- Normally, to print out R dataset columns, you do `DATAFRAME$COLUMN`. 
+- First, figure out the column names from your data frame using `colnames()`.
+- Print out the first 10 rows of one of the columns in *R* below. 
+
+```{r}
+##r chunk
+
+
+```
+
+## Print our R in Python
+
+- When using R in Python, instead of `$`, we use `.` like this: `r.VARNAME`. 
+- To print out a single column, you use `DATAFRAME["COLUMNNAME"]` or `DATAFRAME.COLUMNNAME`. 
+- First, figure out the column names using `DATAFRAME.columns`.
+- Then print out the first 10 rows of that column in python below. 
+
+```{python}
+##python chunk
+
+```
+
+## Get started with PyCharm!
+
+- Great job! Here's what you learned:
+  - You know how to install and load the libraries in both languages.
+  - You know how to load built in datasets in both languages.
+  - You know how to print out data from one language to another. 
+- Turn this document in for credit --> hit KNIT --> turn in the HTML file.
+- Be sure to fill in your name at the top!
+- Be sure to answer the embedded questions!

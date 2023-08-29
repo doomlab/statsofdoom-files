@@ -18,6 +18,10 @@ Load all the libraries or functions that you will use to for the rest of the ass
 
 ```
 
+```{python}
+## python chunk
+```
+
 ## The Data
 
 The data is from a publication that I worked on in graduate school - focusing on the differences in semantic (meaning) and associative (context) memory. You can view the article if you are interested [here](https://www.aggieerin.com/pubs/maki%2008.pdf) - this dataset is a different one but based on the same ideas. Each of the measures provided is a type of distance measure - figuring out how related word-pairs are by examining their features or some other relation between them. They fall into three theoretical categories:
@@ -31,25 +35,28 @@ The main goal is to examine if the clusters match what is expected based on theo
 The original dataset includes word pairs as the rows and distance measures as the columns. We want to cluster on the distance measures, so you will want to:
 
 - Load the data.
-- Use rownames(dataframe_name) = paste(dataframe_name[ , 1], dataframe_name[ , 2]) to set the rownames as the word-pairs from the data.
+- Set the rownames as the word-pairs from the data.
 - Delete column 1 and 2 from the data.
 - Flip the data using `t()`, as the clustering variables should be rows in the dataframe.
 
 ```{r loaddata}
 ##r chunk
 
+# set row names 
+rownames(dataframe_name) <- paste(dataframe_name[ , 1], dataframe_name[ , 2])
 ```
 
 ## Create Distances
 
 While the data set includes popular distance measures, we still need to figure out how these distance measures are related to each other. Create distance measures in Euclidean distance. 
 
-In looking at the distances - what seems immediately obvious about one of the variables? 
-
 ```{r distances}
 ##r chunk
 
 ```
+
+QUESTION: What patterns appear within the distances in the variables? 
+ANSWER: 
 
 ## Create Cluster
 
@@ -61,11 +68,12 @@ In looking at the distances - what seems immediately obvious about one of the va
 
 ```
 
+QUESTION: Interpret the dendogram. What do you see within this plot?  
+ANSWER: 
+
 ## Try Again
 
-Clearly there's one variable that is pretty radically different.
-
-- Remove that variable from the original dataset.
+- Remove the `jcn` variable from the original dataset.
 - Rerun the distance and cluster measures below.
 - Create a new plot of the cluster analysis (the branches may be hard to see but they are clearly separating out more).
 
@@ -73,6 +81,9 @@ Clearly there's one variable that is pretty radically different.
 ##r chunk
 
 ```
+
+QUESTION: Interpret this updated dendogram. What do you see within this plot?  
+ANSWER: 
 
 ## Silhouette
 
@@ -83,44 +94,49 @@ Clearly there's one variable that is pretty radically different.
 
 ```
 
+QUESTION: How many clusters should you use based on these results? Explain why you picked that number of clusters.  
+ANSWER: 
+
 ## Examine those results
 
 - Replot the dendogram with cluster markers based on the highest silhouette value.
-- Interpret the results - do these match the theoretical listings we expected?
 
 ```{r replot}
 ##r chunk
 
 ```
 
+QUESTION: Interpret the results - do these match the theoretical listings we expected? Explain the results you see based on the number of clusters.
+ANSWER: 
+
 ## Snake Plots
 
-Make a snake plot of the results by plotting a random subset of 25 word pairs. In the notes we used the behavioral profile data, in this example you can use the original dataset without the bad variable. 
-  - Use something like random_data = dataframe[ , sample(1:ncol(dataframe), 25)].
-  - Then calculate the snake plot on that smaller dataset. 
-
-What word pairs appear to be most heavily tied to each cluster? Are there any interesting differences you see given the top and bottom most distinguishing pairs? 
-  - Note: you can run this a few times to see what you think over a wide variety of plots. Please detail you answer including the pairs, since the knitted version will be a different random run. 
+Make a snake plot of the results by plotting a random subset of 10 word pairs. In the notes we used the behavioral profile data, in this example you can use the original dataset without the bad variable. Then calculate the snake plot on that smaller dataset. 
 
 ```{r snakeplot}
 ##r chunk
-
+random_data <- dataframe[ , sample(1:ncol(dataframe), 10)]
 ```
+
+QUESTION: What word pairs appear to be most heavily tied to each cluster? Are there any interesting differences you see given the top and bottom most distinguishing pairs? Note: you can run this a few times to see what you think over a wide variety of plots. Please detail you answer including the pairs, since the knitted version will be a different random run.
+ANSWER: 
 
 ## Bootstrapping
 
 - Use `pvclust` to validate your solution on the dataframe without the bad variable.
 - Plot the pv cluster. 
-- How well do our clusters appear to work? 
 
 ```{r pvc}
 ##r chunk
 
 ```
 
+QUESTION: Interpret the results from your bootstrapped cluster analysis. How well do our clusters appear to work? 
+ANSWER: 
+
 ## Working with Python
 
-- Load the Python libraries and import the dataset from R without the bad variable you eliminated above. 
+- Import the dataset from R without the bad variable you eliminated above. 
 
 ```{python load_everything}
 ##python chunk 
@@ -134,6 +150,9 @@ What word pairs appear to be most heavily tied to each cluster? Are there any in
 
 ```
 
+QUESTION: How does this dendogram compare to the results found in your R analysis?  
+ANSWER: 
+
 - Calculate the silhouette silhouette distances for 2 to n-1 clusters.
 
 ```{python silhouette2}
@@ -141,8 +160,8 @@ What word pairs appear to be most heavily tied to each cluster? Are there any in
 
 ```
 
+QUESTION: Are the results the same for the silhouette scores?
+ANSWER: 
 
-## Interpretation
-
-- Do the results appear the same for R and Python for silhouette scores?
-- Which do you feel was easier to use? 
+QUESTION: Which of the set of packages was easier for you to use? 
+ANSWER: 

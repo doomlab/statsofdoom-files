@@ -18,6 +18,11 @@ Load all the libraries or functions that you will use to for the rest of the ass
 
 ```
 
+```{python}
+##python chunk
+
+```
+
 ## Simple Correspondence Analysis
 
 ### The Data
@@ -38,6 +43,9 @@ Import the data and create a mosaic plot to visualize the differences in usage a
 
 ```
 
+QUESTION: Write a summary paragraph of the interpretation of your mosiac plot. You should detail which words are more or less frequent that expected, how the terms appear to go together, and provide this analysis in plain English.
+ANSWER: 
+
 ### The Analysis
 
 Run a simple correspondence analysis on the data. 
@@ -47,7 +55,8 @@ Run a simple correspondence analysis on the data.
 
 ```
 
-What do the inertia values tell you about the dimensionality of the data?
+QUESTION: What do the inertia values tell you about the dimensionality of the data?
+ANSWER: 
 
 Create a 2D plot of the data. 
 
@@ -56,7 +65,8 @@ Create a 2D plot of the data.
 
 ```
 
-What can you tell about the word usage from examining this plot? 
+QUESTION: What can you tell about the word usage from examining this plot? Provide an interpretation of the clustering and groupings that appear to occur in the data. 
+ANSWER: 
 
 ## Multiple Correspondence Analysis
 
@@ -68,7 +78,7 @@ The data included is from a large project examining the definitions of words, th
 - POS_Translated: these features were then translated into a root form, and this column denotes the part of speech for the translated word.
 - A1 and A2: the type of affix that was used in the feature. For example, ducks would be translated to duck, and the difference is a numerical marker for the affix of s.
 
-Run a multiple correspondence analysis on the data, excluding the cue column. 
+Run a multiple correspondence analysis on the data, *excluding* the cue column. 
 
 ```{r}
 ##r chunk
@@ -82,27 +92,21 @@ Plot the variables in a 2D graph. Use `invis = "ind"` rather than `col.ind = "gr
 
 ```
 
-Use the `dimdesc` function to show the usefulness of the variables and to help you understand the results. Remember that the markdown preview doesn't show you the whole output, use the console or knit to see the complete results. 
-
-```{r}
-##r chunk
-
-```
-
-What are the largest predictors (i.e., R^2 over .25) of the first dimension? 
-
-Looking at the category output for dimension one, what types of features does this appear to represent? (Try looking at the largest positive estimates to help distinguish what is represented by this dimension). 
+QUESTION: What clusters do you see involved in this graph? Are there some predictors that are separated from the rest?
+ANSWER:
 
 ### Simple Categories
 
-To view simple categories like we did in the lecture, try picking a view words out of the dataset that might be considered similar. I've shown how to do this below with three words, but feel free to pick your own. Change the words and the `DF` to your dataframe name. We will overlay those as supplemental variables. 
+To view simple categories like we did in the lecture, try picking a few words out of the dataset that might be considered similar. I've shown how to do this below with three words, but *you must change these to be your own*.  Change the words and the `DF` to your dataframe name. We will overlay those as supplemental variables. 
+
+You will not get credit for this section if you do not change the words into your *own* words - remember, not the ones you found on some previous assignment. Use the viewer or print out the `cue` column to view the options. 
 
 ```{r}
 ##r chunk
-#pick any several interesting words 
-words = c("mom", "family", "relative")
+#pick a few several interesting words 
+words <- c("mom", "family", "relative")
 
-mca_model2 = MCA(DF[DF$cue %in% words , ], 
+mca_model2 <- MCA(DF[DF$cue %in% words, ], 
                  quali.sup = 1, #supplemental variable
                  graph = FALSE)
 ```
@@ -114,12 +118,18 @@ Create a 2D plot of your category analysis.
 
 ```
 
+QUESTION: Interpret your plot. What features appear to be associated with each category term? 
+ANSWER:
+
 Add the prototype ellipses to the plot. 
 
 ```{r}
 ##r chunk
 
 ```
+
+QUESTION: Interpret your plot. Do these items have distinct prototypes? 
+ANSWER:
 
 Create a 95% CI type plot for the category.
 
@@ -128,7 +138,8 @@ Create a 95% CI type plot for the category.
 
 ```
 
-What can you tell about the categories from these plots? Are they distinct or overlapping? 
+QUESTION: Interpret your plot. Do these items appear to be in overlapping categories or are they similar. 
+ANSWER:
 
 ## Run a MCA in Python
 
@@ -141,7 +152,7 @@ In this section, run the same MCA from above in Python. Include the MCA code and
 
 ## Plot the Results
 
-Plot the results of your MCA using Python in the section below. I have included Python code below that will help if you are completing this assignment on the cloud. 
+Plot the results of your MCA using Python in the section below. I have included Python code below that will help if you are completing this assignment on the cloud.
 
 ```{python}
 ##python chunk
@@ -152,4 +163,5 @@ matplotlib.use('Agg')
 
 ## Explore the differences
 
-Do the R and Python results from the MCA show you the answer? Do you detect any differences between the outputs? 
+QUESTION: Do the R and Python results from the MCA show you the answer? Do you detect any differences between the outputs? You should provide a paragraph here in plain English exploring both the inertia and MCA plot results. 
+ANSWER: 

@@ -28,55 +28,81 @@ The data is from the COCA: Corpus of Contemporary American English investigating
   - Reg: Spok for spoken conversations, Mag for magazine articles. 
   - Permitter: semantic class of the clause subject, Anim for animate, Inanim for inanimate and Undef for undefined.
   - Imper: yes for the imperative, no for not.
-  - *Note*: Year is in the dataset, which would be awesome but gave me trouble. You can try adding it if you want. 
 
 ## Sample Size Requirements
 
-- Is the split between your choosen verbs even enough to think you could predict them?
+- Print a table of the dependent variable. 
 
 ```{r samplesize}
 
 ```
 
-## Running a Binary Logistic Regression
+QUESTION: Do you have enough of each verb in each category to try to predict their choice? (more than yes/no answer)
+ANSWER: 
 
-- Run the logistic regression using the `rms` package. 
-  - Use the $\chi^2$ test - is the overall model predictive of verb choice? Is it significant?
-  - What is Nagelkerke's pseudo-$R^2$? What does it tell you about goodness of fit?
-  - What is the C statistic? How well are we predicting?
+## Overall Model
+
+- Run the logistic regression using the `rms` package.
 
 ```{r runrms}
 
 ```
 
+QUESTION: Is the overall model predictive of verb choice? Explain how you determined this answer. 
+ANSWER: 
+
+QUESTION: What is Nagelkerke's pseudo-$R^2$? What does it tell you about goodness of fit?
+ANSWER:
+
+QUESTION: What is the C statistic? How well are we predicting?
+ANSWER:
+
 ## Coefficients
 
-- Explain each coefficient - are they significant? What do they imply if they are significant (i.e., which verb does it predict)?
-    - Reg:
-    - Permitter: 
-    - Imper: 
+QUESTION: Explain each coefficient - are they significant? What do they imply if they are significant (i.e., which verb does it predict)?
+
+ANSWER: 
+    
+  - Reg:
+  - Permitter: 
+  - Imper: 
 
 ## Interactions
 
 - Add the interaction between Imper and Reg by doing `Imper*Reg`, but remember you will need to do a `glm` model.
-- Use the `anova` function to answer if the addition of the interaction was significant.
-  - Is the interaction useful?
-- Use the `visreg` library and funtion to visualize the interaction.
-  - How would you explain that interaction? 
-  
 
 ```{r interaction}
 
 ```
 
+- Use the `anova` function to answer if the addition of the interaction was significant.
+
+```{r anova}
+
+```
+
+QUESTION: Is the interaction useful?
+ANSWER: 
+
+- Use the `visreg` library and funtion to visualize the interaction.
+
+```{r}
+
+```
+
+QUESTION: How would you explain that interaction? 
+ANSWER: 
+
 ## Outliers
 
 - Use the `car` library and the `influencePlot()` to create a picture of the outliers. 
-  - Are there major outliers for this data?
 
 ```{r outliers}
 
 ```
+
+QUESTION: Are there major outliers for this data?
+ANSWER: 
 
 ## Assumptions
 
@@ -86,4 +112,5 @@ The data is from the COCA: Corpus of Contemporary American English investigating
 
 ```
 
-No Python in this section! You will use the functions from this week in a few assignments coming up!
+QUESTION: Do you meet the assumption of additivity? 
+ANSWER: 

@@ -39,7 +39,7 @@ Independent variables:
 
 ## Conditional inference model
 
-- Add a random number generator to start the model.
+- Add a random number generator to start the model using your HU ID.
 - Use `ctree()` to create a conditional inference model. 
 
 ```{r cimodel}
@@ -58,8 +58,13 @@ Independent variables:
 
 ## Interpret the categories 
 
-- Write out an interpretation of the results from the model. You can interpret the branches of the tree to determine what featurally defines each category.
+- QUESTION: Write out an interpretation of the results from the model. You can interpret the branches of the tree to determine what featurally defines each category.
 - With only two categories, you will see the proportion split as the output in the bar graph - look for the group with the larger proportion. 
+- This section should be one or two paragraphs fully describing the tree results. 
+- ANSWER: 
+
+- QUESTION: What other variables could you potentially use to further understand the split in usage for these two nouns?
+- ANSWER: 
 
 ## Conditional inference model predictiveness
 
@@ -69,6 +74,9 @@ Independent variables:
 ##r chunk
 
 ```
+
+- QUESTION: What do the classification results indicate? 
+- ANSWER: 
 
 ## Random forests
 
@@ -83,7 +91,8 @@ Independent variables:
 
 - Calculate the variable importance from the random forest model.
 - Include a dot plot of the importance values. 
-- Which variables were the most important?
+- QUESTION: Which variables were the most important?
+- ANSWER: 
 
 ```{r forestimportance}
 ##r chunk
@@ -93,7 +102,8 @@ Independent variables:
 ## Forest model predictiveness
 
 - Include the percent correct for the random forest model. 
-- Did it do better than the conditional inference tree?
+- QUESTION: Did it do better than the conditional inference tree?
+- ANSWER: 
 
 ```{r forestpredict}
 ##r chunk
@@ -128,6 +138,9 @@ Independent variables:
 
 ```
 
+- QUESTION: What's the problem with using the Python package for this model?
+- ANSWER: 
+
 ## Confusion Matrix
 
 ```{python confusion_matrix}
@@ -135,9 +148,15 @@ Independent variables:
 
 ```
 
+- QUESTION: What does the confusion matrix imply about your results from the python model?
+- ANSWER: 
+
 ## Thought questions
 
-- Are the models easier to create using R or Python (your own thoughts, they can be different than what I said in the lecture)?
-- Which model gave you a better classification of the categories?
-- What other variables might be useful in understanding the category membership of geek versus nerd? Basically, what could we add to the model to improve it (there's no one right answer here - it's helpful to think about what other facets we have not measured)?
+- QUESTION: Are the models easier to create using R or Python (your own thoughts, they can be different than what I said in the lecture)?
+- ANSWER: 
+
+- QUESTION: Which model gave you a better classification of the categories?
+- ANSWER: 
+
   

@@ -1,0 +1,59 @@
+---
+title: 'Classification + Sentiment Assignment'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Be sure to list the group members at the top! This assignment is the first component for your class project. Be sure all group members contribute, *and* each group member must submit the assignment individually. 
+
+You can use either *R* or Python or both for this assignment. You should use the code and packages we used in class assignments, but these can be a mix and match of each computing language. You will add the appropriate type of code chunk for each section depending on the language you pick for that section. 
+
+## Libraries / R Setup
+
+- In this section, include the libraries you need for the *R* questions.  
+
+```{r}
+##r chunk
+
+```
+
+- In this section, include import functions to load the packages you will use for Python.
+
+```{python}
+##python chunk
+
+```
+
+## Import Subtitles
+
+- Import your subtitle data for the movie or TV show that you selected in the course proposal - use the clean version from the previous assignment.
+
+## Classification
+
+- Pick several nouns and/or verbs from your previous assignment. Create a column in the dataframe that indicates if that line from the movie/TV show includes that word or does not include that word. You can use 0 and 1 or any labels that make sense to you. Remember, we covered regular expression detection and deletion in the raw text assignments! 
+- Once you have created this column, use string replacement to delete that word from your subtitles. We will take the word out to see if we can predict when it is used - if you leave it in, it's a perfect predictor! 
+- Use *two* feature extraction methods and *two* machine learning algorithms to determine if you can predict when your noun or verb will be used. You should include four different classification reports below. 
+
+### Interpretation
+
+- Can you predict when the noun or verb will occur? Remember 50/50 is chance!
+- What combination of feature extraction and algorithm created the best prediction for your word choice?
+- Print out ten examples of misclassified spoken sections. Do you see any pattern that may help inform a better process to predict word choice?
+
+## Sentiment 
+
+- Use *one* of the unsupervised lexicon techniques to create sentiment scores for your movie/TV show. 
+- What is the overall sentiment of your movie/TV show? How would you interpret the scores provided? 
+- Using the movie reviews mini dataset provided online, create a sentiment tagging model (one feature extraction method + one algorithm). 
+- With this new model, create sentiment scores for your movie/TV show. 
+- What is the overall sentiment using the new model of sentiment tagging? How would you interpret the scores provided?
+
+## Interpretation
+
+- Using classification techniques, can we reasonably predict word context? 
+- Does the sentiment analysis match your expectation? Or does the analysis indicate more positive/negative that you expected? 

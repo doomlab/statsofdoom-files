@@ -1,0 +1,25 @@
+---
+title: 'Executive 3: Pitch Your Analysis'
+author: "STUDENT NAME"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Be sure to list the group members at the top! This part of the project allows you to answer your own questions not covered in one of our assignments. Do not make this analysis extraordinarily complicated! You will just pitch your idea in this session, you will run the analysis in the final report. 
+
+## Subtitles
+
+What subtitles are you using for this project?
+
+## Problem or Question
+
+What question or hypothesis do you want to answer with your subtitles? 
+
+## Answer the Question
+
+You can use any analysis we have done in class, extend to a new analysis type, or expand a previous analysis. In this section, explain how you will answer the question you proposed above. 
+

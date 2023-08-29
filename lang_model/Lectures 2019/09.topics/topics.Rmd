@@ -1,7 +1,7 @@
 ---
 title: "Topics Models"
 author: "Erin M. Buchanan"
-date: "12/18/2019"
+date: "Last Knitted: `r Sys.Date()`"
 output:
   slidy_presentation:
     increment: yes
@@ -9,6 +9,14 @@ output:
 
 ```{r echo = F}
 options(scipen = 999)
+```
+
+```{python echo = F}
+import platform
+if platform.system() == "Windows":
+  import os
+os.environ['MPLCONFIGDIR'] = 'C:/Users/EBuchanan.HU/Documents/tmp/'
+os.environ['SCIKIT_LEARN_DATA'] = "C:/Users/EBuchanan.HU/py_stuff"
 ```
 
 ## Language Topics Discussed
@@ -144,7 +152,7 @@ import_weight = tapply(import_mat$v/row_sums(import_mat)[import_mat$i],
                        mean) *
   log2(nDocs(import_mat)/col_sums(import_mat > 0))
 
-#ignore very frequent and 0 terms
+#take very frequent and above 0 terms
 import_mat = import_mat[ , import_weight >= .10]
 import_mat = import_mat[ row_sums(import_mat) > 0, ]
 ```
@@ -152,7 +160,7 @@ import_mat = import_mat[ row_sums(import_mat) > 0, ]
 ## Parameters and terms 
 
 - Alpha: a measure of the number of topics; low scores indicate a few dominant topics per document, high scores indicate more
-- Beta: a measure of the number of words, low scores indicate each topic only composes of a few words
+- Beta: relationship of the word to the topic (much like regression beta)
 - Gamma: probability of that topic in that document
 - Entropy: a measure of randomness
 
@@ -367,7 +375,7 @@ library(reticulate)
 ```{python}
 ##python chunk
 import pyLDAvis
-import pyLDAvis.gensim  # don't skip this
+import pyLDAvis.gensim_models  # don't skip this
 import matplotlib.pyplot as plt
 
 import gensim
@@ -433,7 +441,9 @@ lda_model = gensim.models.ldamodel.LdaModel(corpus = doc_term_matrix, #TDM
                                            chunksize = 100,
                                            passes = 10,
                                            alpha = 'auto',
-                                           per_word_topics = True)
+                                           per_word_topics = True,
+                                           minimum_phi_value=.01)
+#minimum value should be examined, this is not a default
 ```
 
 ## View the Topics
@@ -447,7 +457,7 @@ print(lda_model.print_topics())
 
 ```{python}
 ##python chunk
-vis = pyLDAvis.gensim.prepare(lda_model, doc_term_matrix, dictionary, n_jobs = 1)
+vis = pyLDAvis.gensim_models.prepare(lda_model, doc_term_matrix, dictionary, n_jobs = 1)
 pyLDAvis.save_html(vis, 'LDA_Visualization.html') ##saves the file
 ```
 
